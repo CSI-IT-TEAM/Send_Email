@@ -324,10 +324,10 @@ namespace Send_Email
                 }
 
                 string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10min to 29:59:59 is yellow and then less than 30 min is red" +
+                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and then less than 30 min is red" +
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59:59 is yellow and then less than 5 min is red" +
+                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and then less than 5 min is red" +
                               "</p>"
                               ;
 
