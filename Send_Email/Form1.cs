@@ -212,8 +212,8 @@ namespace Send_Email
                         rowValue += "<tr>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +                                        
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                            // "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
                                             dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
                                         "</td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'" +
@@ -281,8 +281,8 @@ namespace Send_Email
                             rowValue += "<tr>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                           //  "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
                                             dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
                                         "</td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'" +
@@ -323,12 +323,22 @@ namespace Send_Email
                     }
                 }
 
-                string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
+                string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
+                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10min to 29:59:59 is yellow and then less than 30 min is red" +
+                               "</p>" +
+                              "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
+                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59:59 is yellow and then less than 5 min is red" +
+                              "</p>"
+                              ;
+
+                string html = text +
+                            "<br>" +
+                            "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
                                   "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
                                      "<th style='color:#ffffff' align='center' width='100' >Ranking</th>" +
                                      "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +                                     
                                      "<th style='color:#ffffff' align='center' width='200'>Total Downtime</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime Average</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +                                   
                                      "<th style='color:#ffffff' align='center' width='100'>Line</th>" +                                    
