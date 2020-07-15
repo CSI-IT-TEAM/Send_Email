@@ -196,6 +196,7 @@
             this.gvwBase1 = new JPlatform.Client.Controls6.GridViewEx();
             this.panel1 = new System.Windows.Forms.Panel();
             this.cmdRunAndon = new System.Windows.Forms.Button();
+            this.tmrLoad2 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -1713,6 +1714,10 @@
             this.cmdRunAndon.UseVisualStyleBackColor = true;
             this.cmdRunAndon.Click += new System.EventHandler(this.cmdRunAndon_Click);
             // 
+            // tmrLoad2
+            // 
+            this.tmrLoad2.Interval = 60000;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2046,6 +2051,7 @@
         private JPlatform.Client.Controls6.GridViewEx gvwBase1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button cmdRunAndon;
+        private System.Windows.Forms.Timer tmrLoad2;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

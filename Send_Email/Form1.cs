@@ -413,8 +413,9 @@ namespace Send_Email
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
             RunProduction("Q1");
-            Run("Q1");
             RunAndon("Q1");
+            Run("Q1");
+            
 
         }
 
