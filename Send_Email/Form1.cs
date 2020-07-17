@@ -14,7 +14,7 @@ using System.Drawing.Imaging;
 using System.Data.OracleClient;
 
 using JPlatform.Client.Controls6;
-
+using System.Reflection;
 
 namespace Send_Email
 {
@@ -32,6 +32,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
+            this.Text = "20200716105000";
         }
 
         DataTable dtEmail;
@@ -324,10 +325,10 @@ namespace Send_Email
                 }
 
                 string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and then less than 30 min is red" +
+                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and then less than 5 min is red" +
+                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
                               "</p>"
                               ;
 
@@ -340,11 +341,11 @@ namespace Send_Email
                                      "<th style='color:#ffffff' align='center' width='200'>Total Downtime</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +                                   
-                                     "<th style='color:#ffffff' align='center' width='100'>Line</th>" +                                    
-                                     "<th style='color:#ffffff' align='center' width='200'>Downtime</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Calling Times</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200' >Downtime Average</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200' >Downtime Average by Line</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
@@ -515,6 +516,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
@@ -551,6 +553,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return false;
             }
         }
