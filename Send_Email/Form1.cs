@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using JPlatform.Client.Controls6;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using System.Net.Mail;
-using System.Runtime.InteropServices;
-using Outlook = Microsoft.Office.Interop.Outlook;
-using System.IO;
-using System.Drawing.Imaging;
 using System.Data.OracleClient;
-
-using JPlatform.Client.Controls6;
-using System.Reflection;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Windows.Forms;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace Send_Email
 {
@@ -32,22 +24,38 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200716105000";
+            this.Text = "20200721150000";
         }
 
         DataTable dtEmail;
         bool _isRun = false;
         int _start_column = 0;
 
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
-
-
-        #region Email Production
+        private void tmrLoad_Tick(object sender, EventArgs e)
+        {
+            RunProduction("Q1");
+            RunAndon("Q1");
+            Run("Q1");
+        }
 
         private void cmdRunProd_Click(object sender, EventArgs e)
         {
             RunProduction("Q");
         }
+
+        private void cmdRunAndon_Click(object sender, EventArgs e)
+        {
+            RunAndon("Q");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Run("Q");
+        }
+
+        #region Email Production
 
         private void RunProduction(string argType)
         {
@@ -67,14 +75,26 @@ namespace Send_Email
                 mailItem.Subject = "Productivity achievement ratio at this time";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
-                
-                foreach (DataRow row in dtEmail.Rows)
-                {
-                    Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
 
-                    oRecip.Resolve();
+                //Get List Send email 
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
                 }
-                
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
@@ -162,12 +182,8 @@ namespace Send_Email
 
         #endregion
 
-
         #region Email ANDON
-        private void cmdRunAndon_Click(object sender, EventArgs e)
-        {
-            RunAndon("Q");
-        }
+        
 
         private void RunAndon(string argType)
         {
@@ -183,18 +199,35 @@ namespace Send_Email
         {
             try
             {
+               
+
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 mailItem.Subject = "Andon information of yesterday";
-
+                string str = app.Name;
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                foreach (DataRow row in dtEmail.Rows)
+                //Get List Send email
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
                 {
-                    Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
-
-                    oRecip.Resolve();
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
                 }
+
+                if (chkTest.Checked)
+                {
+                    for(int i=0;i< _emailTest.Length;i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                
+
+
 
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
@@ -403,22 +436,78 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion        
 
+        #region Email Bottom Inventory
 
-        private void button1_Click(object sender, EventArgs e)
+        private void CreateMailItem2()
         {
-            Run("Q");
+            try
+            {
+                //Outlook.MailItem mailItem = (Outlook.MailItem)
+                // this.Application.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Chart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid1.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPicGrid2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = "Bottom Inventory Set Analysis";
+
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                //Get List Send email Test
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+                string imgChart = "imgChart", imgGrid1 = "imgGrid1", imgGrid2 = "imgGrid2", imgGrid3 = "imgGrid3", imgGrid4 = "imgGrid4";
+                oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
+                oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
+                oAttachPicGrid2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid2);
+                oAttachPicGrid3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid3);
+                oAttachPicGrid4.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid4);
+                mailItem.HTMLBody = String.Format(
+                    "<body>" +
+                          "<img src=\"cid:{0}\">" +
+                        "<br><img src=\"cid:{1}\">" +
+                        "<br><img src=\"cid:{2}\">" +
+                        "<br><img src=\"cid:{3}\">" +
+                        "<br><img src=\"cid:{4}\">" +
+                    "</body>",
+                    imgChart, imgGrid1, imgGrid2, imgGrid3, imgGrid4);
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
         }
 
-        private void tmrLoad_Tick(object sender, EventArgs e)
-        {
-            RunProduction("Q1");
-            RunAndon("Q1");
-            Run("Q1");
-            
-
-        }
+        
 
         private void Run(string argType)
         {
@@ -444,7 +533,6 @@ namespace Send_Email
             catch {lblStatus.Text = DateTime.Now.ToString() + "Do not Send!"; }
             finally { _isRun = false; }
         }
-
 
         private bool LoadData(string typeSearch)
         {
@@ -641,7 +729,6 @@ namespace Send_Email
 
         #endregion
 
-
         private void CaptureControl(Control control, string nameImg)
         {
             //  MemoryStream ms = new MemoryStream();
@@ -656,59 +743,7 @@ namespace Send_Email
             //ms.Close();
         }
         
-        private void CreateMailItem2()
-        {
-            try
-            {
-                //Outlook.MailItem mailItem = (Outlook.MailItem)
-                // this.Application.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Application app = new Outlook.Application();
-                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Chart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid1.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "Bottom Inventory Set Analysis";
-                
-
-                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
-                
-                foreach (DataRow row in dtEmail.Rows)
-                {
-                    Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
-                    
-                    oRecip.Resolve();
-                }
-                
-                oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
-                mailItem.Body = "This is the message.";
-                string imgChart = "imgChart", imgGrid1 = "imgGrid1", imgGrid2 = "imgGrid2", imgGrid3 = "imgGrid3", imgGrid4 = "imgGrid4";
-                oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
-                oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
-                oAttachPicGrid2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid2);
-                oAttachPicGrid3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid3);
-                oAttachPicGrid4.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid4);
-                mailItem.HTMLBody = String.Format(
-                    "<body>" +
-                          "<img src=\"cid:{0}\">" +
-                        "<br><img src=\"cid:{1}\">" +
-                        "<br><img src=\"cid:{2}\">" +
-                        "<br><img src=\"cid:{3}\">" +
-                        "<br><img src=\"cid:{4}\">" +
-                    "</body>",
-                    imgChart, imgGrid1, imgGrid2, imgGrid3, imgGrid4);
-                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
-                mailItem.Send();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-
-
-        }
+        
 
         public DataSet SEL_LOAD_DATA(string V_P_WORK_TYPE, string V_P_DATE, string V_P_COMP, string V_P_SET_YN)
         {
@@ -814,7 +849,9 @@ namespace Send_Email
             }
         }
 
-#region No use
+        #endregion
+
+        #region No use
 
 
 
