@@ -30,7 +30,7 @@ namespace Send_Email
         DataTable dtEmail;
         bool _isRun = false;
         int _start_column = 0;
-
+        //"jungbo.shim@dskorea.com" "nguyen.it@changshininc.com",
         readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -61,12 +61,15 @@ namespace Send_Email
         {
             DataSet dsData = SEL_PROD_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
             if (dsData == null) return;
-            DataTable dtData = dsData.Tables[0];
-            DataTable dtEmail = dsData.Tables[1];
-            CreateMailProduction(dtData, dtEmail);
+
+            DataTable dtDate = dsData.Tables[0];
+            DataTable dtData = dsData.Tables[1];
+            DataTable dtEmail = dsData.Tables[2];
+            
+            CreateMailProduction(dtDate, dtData, dtEmail);
         }
 
-        private void CreateMailProduction(DataTable dtData, DataTable dtEmail)
+        private void CreateMailProduction(DataTable dtDate, DataTable dtData, DataTable dtEmail)
         {
             try
             {
@@ -104,28 +107,59 @@ namespace Send_Email
                 foreach (DataRow row in dtData.Rows)
                 {
                     rowValue += "<tr>" +
-                                         "<td align='center' >" + row["RN"].ToString() + " </td>" +
+                                         
+                                        // "<td align='center' >" + row["RN"].ToString() + " </td>" +
+                                        
                                          "<td align='center'>" + row["PLANT"].ToString() + "</td>" +
                                          "<td align='center'>" + row["MLINE"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D6_BG_COLOR"].ToString() + "' style='color:" + row["D6_FORE_COLOR"].ToString() + "' align='right'>" + row["D6"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D5_BG_COLOR"].ToString() + "' style='color:" + row["D5_FORE_COLOR"].ToString() + "' align='right'>" + row["D5"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D4_BG_COLOR"].ToString() + "' style='color:" + row["D4_FORE_COLOR"].ToString() + "' align='right'>" + row["D4"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D3_BG_COLOR"].ToString() + "' style='color:" + row["D3_FORE_COLOR"].ToString() + "' align='right'>" + row["D3"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D2_BG_COLOR"].ToString() + "' style='color:" + row["D2_FORE_COLOR"].ToString() + "' align='right'>" + row["D6"].ToString() + "</td>" +
+                                         "<td bgcolor='" + row["D1_BG_COLOR"].ToString() + "' style='color:" + row["D1_FORE_COLOR"].ToString() + "' align='right'>" + row["D1"].ToString() + "</td>" +
                                          "<td align='right' >" + row["TARGET"].ToString() + "</td>" +
                                          "<td align='right'>" + row["RPLAN"].ToString() + "</td>" +
                                          "<td align='right'>" + row["ACT"].ToString() + "</td>" +
-                                         "<td bgcolor='" + row["BG_COLOR"].ToString() + "' style='color:" + row["FORE_COLOR"].ToString() + "' align='right' >" + row["RATIO"].ToString() + " </td>" +
+                                         "<td bgcolor='" + row["TODAY_BG_COLOR"].ToString() + "' style='color:" + row["TODAY_FORE_COLOR"].ToString() + "' align='right' >" + row["RATIO"].ToString() + " </td>" +
                                     "</tr>";
                 }
 
-                string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='600'>" +
-                                  "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
-                                     "<th style='color:#ffffff' align='center' width='70' >Ranking</th>" +
-                                     "<th style='color:#ffffff' align='center' width='70'>Plant</th>" +
-                                     "<th style='color:#ffffff' align='center' width='70'>Mini Line</th>" +
-                                     "<th style='color:#ffffff' align='center' width='70' >Daily Plan</th>" +
-                                     "<th style='color:#ffffff' align='center' width='70'>Real Plan</th>" +
-                                     "<th style='color:#ffffff' align='center' width='70'>Actual</th>" +                                     
-                                     "<th style='color:#ffffff' align='center' width='70'>Ratio(%)</th>" +
+                string strDate = "";
+                foreach (DataRow row in dtDate.Rows)
+                {
+                    strDate += "<th bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '70' >" + row["YMD"].ToString() + " </th >";
+                }
+
+
+                    string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000'>" +
+                                  "<tr bgcolor='#ffe5cc'>" +
+                                     " <th rowspan = '2' align='center' width='70'>Plant</th>" +
+                                     " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
+                                     " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Previous Day Performance</th>" +
+                                     " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '4' align='center'>Today Performance</th>" +
+                                  "</tr>" +
+                                  "<tr>" +
+                                     strDate +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Daily Plan</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Real Plan</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Actual</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Ratio(%)</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
+
+                //string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='600'>" +
+                //                  "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
+                //                     "<th style='color:#ffffff' align='center' width='70'>Plant</th>" +
+                //                     "<th style='color:#ffffff' align='center' width='70'>Mini Line</th>" +
+                //                     "<th style='color:#ffffff' align='center' width='70' >Daily Plan</th>" +
+                //                     "<th style='color:#ffffff' align='center' width='70'>Real Plan</th>" +
+                //                     "<th style='color:#ffffff' align='center' width='70'>Actual</th>" +                                     
+                //                     "<th style='color:#ffffff' align='center' width='70'>Ratio(%)</th>" +
+                //                  "</tr>" +
+                //                    rowValue +
+                //              "</table>";
 
 
 
@@ -147,25 +181,28 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_PRODUCTION";
+                string process_name = "P_SEND_EMAIL_PROD";
 
-                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.ReDim_Parameter(5);
                 MyOraDB.Process_Name = process_name;
 
                 MyOraDB.Parameter_Name[0] = "V_P_TYPE";
                 MyOraDB.Parameter_Name[1] = "V_P_DATE";
                 MyOraDB.Parameter_Name[2] = "CV_1";
-                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+                MyOraDB.Parameter_Name[3] = "CV_2";
+                MyOraDB.Parameter_Name[4] = "CV_EMAIL";
 
                 MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
                 MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
 
                 MyOraDB.Parameter_Values[0] = V_P_TYPE;
                 MyOraDB.Parameter_Values[1] = V_P_DATE;
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
 
 
                 MyOraDB.Add_Select_Parameter(true);
@@ -225,9 +262,6 @@ namespace Send_Email
                         oRecip.Resolve();
                     }
                 }
-                
-
-
 
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
@@ -245,43 +279,28 @@ namespace Send_Email
                     {
                         rowValue += "<tr>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
-                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +                                        
-                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
-                                            // "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() + "</td>" +                     
+                                        "<td rowspan='" + strRowSpan + "' align ='center' " +
+                                            "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
+                                                dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() + 
                                         "</td>" +
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() +
-                                        "</td>" +
-
-                                      //  "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RECEIVE_LINE"].ToString() + "</td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center' " +
+                                            "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() + 
+                                         "</td>" +
+                                        
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR3"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR3"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() +
-                                        "</td>" +
+                                        //Mline
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MACHINE_CNT_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["RECEIVE_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
 
-                                       // "<td rowspan='" + strRowSpan + "' align ='center' >" + dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-
-                                        "<td  align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
-                                        "</td>" +
-
-                                       // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
-
-                                        "<td align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
-                                        "</td>" +
-
-
-                                     //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
-                                   
                                    "</tr>";
                     }
                     // bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'
@@ -290,78 +309,51 @@ namespace Send_Email
                         if (dtData.Rows[iRow]["PLANT"].ToString() == dtData.Rows[iRow - 1]["PLANT"].ToString())
                         {
                             rowValue += "<tr>" +
-                                        //"<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
-                                        //"<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
-                                        //"<td align='right' >" + dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() + "</td>" +
-                                        //"<td align='right'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-                                         "<td  align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
-                                        "</td>" +
-
-                                        // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
-
-                                        "<td align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
-                                        "</td>" +
-                                   //     "<td bgcolor='" + row["BG_COLOR"].ToString() + "' style='color:" + row["FORE_COLOR"].ToString() + "' align='right' >" + row["RATIO"].ToString() + " </td>" +
-                                   "</tr>";
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MACHINE_CNT_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["RECEIVE_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
+                                    "</tr>";
                         }
                         else
                         {
                             rowValue += "<tr>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
-                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
-                                           //  "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center' " +
+                                            "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
+                                                dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
                                         "</td>" +
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() +
-                                        "</td>" +
-
-                                        //  "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RECEIVE_LINE"].ToString() + "</td>" +
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center' " +
+                                            "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() +
+                                         "</td>" +
+                                         
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR3"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR3"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() +
-                                        "</td>" +
+                                        //Mline
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["MACHINE_CNT_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["RECEIVE_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+                                        "<td align ='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
 
-                                        // "<td rowspan='" + strRowSpan + "' align ='center' >" + dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-
-                                        "<td  align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
-                                        "</td>" +
-
-                                        // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
-                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
-
-                                        "<td align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
-                                        "</td>" +
-
-
-                                   //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
-
-                                   "</tr>"; ;
+                                   "</tr>";
 
                         }
                     }
                 }
 
                 string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
+                                    "Total Downtime time = under 96 minutes is green and from 96 min to 120 min is yellow and more than 120 min is red" +
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
+                                    "Total average receive = under 2 minutes is green and from 2 min to 5 min is yellow and more than 5 min is red" +
                               "</p>"
                               ;
 
@@ -369,16 +361,20 @@ namespace Send_Email
                             "<br>" +
                             "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
                                   "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
-                                     "<th style='color:#ffffff' align='center' width='100' >Ranking</th>" +
-                                     "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +                                     
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200' >Downtime Average by Line</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Ranking</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Machine Total</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Time Receive Andon Total(Min)</th>" +
+                                     "<th style='color:#ffffff' align='center' width='150'>Total Calling Times(Andon)</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Time Average Receive(Min)</th>" +
+                                     //Mline
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='70'>Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='70'>Machine Total</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Time Receive Andon Total(Min)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='150'>Calling Times by Line(Andon)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200' >Time Average Receive(Min)</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
@@ -853,6 +849,210 @@ namespace Send_Email
 
         #region No use
 
+
+        private void CreateMailAndon_BAK(DataTable dtData, DataTable dtEmail)
+        {
+            try
+            {
+
+
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                mailItem.Subject = "Andon information of yesterday";
+                string str = app.Name;
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+
+                string rowValue = "";
+
+                string strRowSpan = "";
+
+
+                for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
+                {
+                    strRowSpan = dtData.Rows[iRow]["MLINE_CNT"].ToString();
+                    if (iRow == 0)
+                    {
+                        rowValue += "<tr>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + "MC Total" + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + "MC DT" + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
+                                        "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() +
+                                        "</td>" +
+
+
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
+
+                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR3"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR3"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() +
+                                        "</td>" +
+
+
+                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+
+                                        "<td  align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
+                                        "</td>" +
+
+                                        // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+
+                                        "<td align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
+                                        "</td>" +
+
+
+                                   //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
+
+                                   "</tr>";
+                    }
+                    // bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'
+                    if (iRow > 0)
+                    {
+                        if (dtData.Rows[iRow]["PLANT"].ToString() == dtData.Rows[iRow - 1]["PLANT"].ToString())
+                        {
+                            rowValue += "<tr>" +
+                                        //"<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                        //"<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
+                                        //"<td align='right' >" + dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() + "</td>" +
+                                        //"<td align='right'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() + "</td>" +
+                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                         "<td  align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
+                                        "</td>" +
+
+                                        // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+
+                                        "<td align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
+                                        "</td>" +
+                                   //     "<td bgcolor='" + row["BG_COLOR"].ToString() + "' style='color:" + row["FORE_COLOR"].ToString() + "' align='right' >" + row["RATIO"].ToString() + " </td>" +
+                                   "</tr>";
+                        }
+                        else
+                        {
+                            rowValue += "<tr>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["RANKING"].ToString() + " </td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                            //  "bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE"].ToString() +
+                                        "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR2"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR2"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() +
+                                        "</td>" +
+
+                                        //  "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["DOWNTIME_LINE_AVG"].ToString() + "</td>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["CALLING_TIMES_LINE"].ToString() + "</td>" +
+
+                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR3"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR3"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() +
+                                        "</td>" +
+
+                                        // "<td rowspan='" + strRowSpan + "' align ='center' >" + dtData.Rows[iRow]["AVERAGE_ELAPSE_LINE"].ToString() + "</td>" +
+                                        "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+
+                                        "<td  align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR4"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR4"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() +
+                                        "</td>" +
+
+                                        // "<td align='center'>" + dtData.Rows[iRow]["DOWNTIME_MLINE"].ToString() + "</td>" +
+                                        "<td align='center'>" + dtData.Rows[iRow]["CALLING_TIMES_MLINE"].ToString() + "</td>" +
+
+                                        "<td align ='center'" +
+                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR5"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR5"].ToString() + "'>" +
+                                            dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
+                                        "</td>" +
+
+
+                                   //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
+
+                                   "</tr>"; ;
+
+                        }
+                    }
+                }
+
+                string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
+                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
+                               "</p>" +
+                              "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
+                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
+                              "</p>"
+                              ;
+
+                string html = text +
+                            "<br>" +
+                            "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
+                                  "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
+                                     "<th style='color:#ffffff' align='center' width='100' >Ranking</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Machine Total</th>" +
+                                     "<th style='color:#ffffff' align='center' width='100'>Machine D/T(Min)</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Time Receive Andon Total(Min)</th>" +
+                                     // "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Total Calling Times(Andon)</th>" +
+                                     "<th style='color:#ffffff' align='center' width='200'>Time Average Receive(Min)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Machine Total</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Time Receive Andon Total(Min)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line(Andon)</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200' >Time Average Receive(Min)</th>" +
+                                  "</tr>" +
+                                    rowValue +
+                              "</table>";
+
+
+
+                mailItem.HTMLBody = html;
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+
+
+        }
 
 
         private void DrawControlToBitmap(Control control)
