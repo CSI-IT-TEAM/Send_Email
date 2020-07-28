@@ -24,7 +24,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200721150000";
+            this.Text = "20200727163000";
         }
 
         DataTable dtEmail;
@@ -370,8 +370,8 @@ namespace Send_Email
                                             dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
                                         "</td>" +
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                            
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
@@ -448,8 +448,8 @@ namespace Send_Email
                                             dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() +
                                         "</td>" +
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                        "<td rowspan='" + strRowSpan + "' align ='center'>" +
+                                            
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
@@ -467,13 +467,13 @@ namespace Send_Email
                 }
 
                 string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Down time = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
+                                    "Total Downtime per Line & Downtime by line = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
+                                    "Total average measure & Downtime average by line = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
                               "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Machine Downtime time = under 96 minutes is green and from 96 min to 120 min is yellow and more than 120 min is red" +
+                                    "Machine D/T(Min) = under 96 minutes is green and from 96 min to 120 min is yellow and more than 120 min is red" +
                               "</p>"
                               ;
 
@@ -488,9 +488,9 @@ namespace Send_Email
                                      "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
                                      "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime Average</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
+                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
                                      "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
                                      "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
                                   "</tr>" +
