@@ -24,7 +24,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200727163000";
+            this.Text = "20200729080000";
         }
 
         DataTable dtEmail;
@@ -556,7 +556,7 @@ namespace Send_Email
 
         #region Email Bottom Inventory
 
-        private void CreateMailItem2()
+        private void CreateMailBottomInventory()
         {
             try
             {
@@ -644,7 +644,7 @@ namespace Send_Email
                 CaptureControl(grdBase2, "Grid2");
                 CaptureControl(grdBase3, "Grid3");
                 CaptureControl(grdBase4, "Grid4");
-                CreateMailItem2();
+                CreateMailBottomInventory();
             }
             catch {lblStatus.Text = DateTime.Now.ToString() + "Do not Send!"; }
             finally { _isRun = false; }
