@@ -24,7 +24,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200729080000";
+            this.Text = "20200730090000";
         }
 
         DataTable dtEmail;
@@ -375,10 +375,10 @@ namespace Send_Email
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWN_TIME"].ToString() +
-                                        "</td>" +
+                                        //"<td rowspan='" + strRowSpan + "' align ='center'" +
+                                        //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                        //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
+                                        //"</td>" +
 
                                    //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
 
@@ -453,10 +453,10 @@ namespace Send_Email
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
-                                        "<td rowspan='" + strRowSpan + "' align ='center'" +
-                                             "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
-                                            dtData.Rows[iRow]["DOWN_TIME"].ToString() +
-                                        "</td>" +
+                                        //"<td rowspan='" + strRowSpan + "' align ='center'" +
+                                        //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                        //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
+                                        //"</td>" +
 
                                   
 
@@ -492,7 +492,7 @@ namespace Send_Email
                                      "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
                                      "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
                                      "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
-                                     "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                     //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
