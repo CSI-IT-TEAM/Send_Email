@@ -471,9 +471,6 @@ namespace Send_Email
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
                                     "Total average measure & Downtime average by line = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
-                              "</p>" +
-                              "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Machine D/T(Min) = under 96 minutes is green and from 96 min to 120 min is yellow and more than 120 min is red" +
                               "</p>"
                               ;
 
