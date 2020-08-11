@@ -24,7 +24,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200730090000";
+            this.Text = "20200808163000";
         }
 
         DataTable dtEmail;
@@ -141,6 +141,7 @@ namespace Send_Email
                                        "<td align='right'>" + dtData.Rows[iRow]["RPLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["ACT"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right' >" + dtData.Rows[iRow]["RATIO"].ToString() + " </td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["REASON_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["REASON_FORE_COLOR"].ToString() + "' align='left' >" + dtData.Rows[iRow]["REASON"].ToString() + " </td>" +
                                   "</tr>";
                     }
                     else
@@ -159,6 +160,7 @@ namespace Send_Email
                                        "<td align='right'>" + dtData.Rows[iRow]["RPLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["ACT"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right' >" + dtData.Rows[iRow]["RATIO"].ToString() + " </td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["REASON_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["REASON_FORE_COLOR"].ToString() + "' align='left' >" + dtData.Rows[iRow]["REASON"].ToString() + " </td>" +
                                   "</tr>";
                         }
                         else
@@ -176,6 +178,7 @@ namespace Send_Email
                                        "<td align='right'>" + dtData.Rows[iRow]["RPLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["ACT"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right' >" + dtData.Rows[iRow]["RATIO"].ToString() + " </td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["REASON_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["REASON_FORE_COLOR"].ToString() + "' align='left' >" + dtData.Rows[iRow]["REASON"].ToString() + " </td>" +
                                   "</tr>";
                         }
                            
@@ -189,20 +192,20 @@ namespace Send_Email
                     strDate += "<th bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '70' >" + row["YMD"].ToString() + " </th >";
                 }
 
-
-                    string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000'>" +
+                   string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
                                   "<tr bgcolor='#ffe5cc'>" +
                                      " <th rowspan = '2' align='center' width='70'>Plant</th>" +
                                      " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
-                                     " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day performace</th>" +
-                                     " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '4' align='center'> Before lunch on today performace</th>" +
+                                     " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day performance</th>" +
+                                     " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '4' align='center'> Before lunch on today performance</th>" +
+                                     " <th rowspan = '2' align='center' bgcolor = '#000000' style = 'color:#ffffff' width='200'>Reason of underproduction</th>" +
                                   "</tr>" +
                                   "<tr>" +
                                      strDate +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Daily Plan</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Real Plan</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Actual</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='70'>Ratio(%)</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Real Plan</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Actual</th>" +
+                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Ratio(%)</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
@@ -467,10 +470,16 @@ namespace Send_Email
                 }
 
                 string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Downtime by line = under 10 minutes is green and from 10 min to 29:59 is yellow and more than 30 min is red" +
+                                    "Total Downtime per Line & Downtime by line = under 10 minutes is <b style='color:green'>green </b> " +
+                                    "and from 10 min to 29:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
+                                    "and from 30 min to 59:59 min is <b style='color:orange'>orange</b> " +
+                                    "and then more than 1 hour is <b style='color:red'>red</b>" +
                                "</p>" +
                               "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average by line = under 2 minutes is green and from 2 min to 4:59 is yellow and more than 5 min is red" +
+                                    "Total average measure & Downtime average by line = under 2 minutes is <b style='color:green'>green </b> " +
+                                    "and from 2 min to 4:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
+                                    "and from 5 min to 09:59 is <b style='color:orange'>orange</b> " +
+                                    "and then more than 10 min is <b style='color:red'>red</b>" +
                               "</p>"
                               ;
 
@@ -484,10 +493,10 @@ namespace Send_Email
                                      "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
                                      "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='100'>Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
-                                     "<th bgcolor='#f5b038' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
+                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='100'>Line</th>" +
+                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
+                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
+                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
                                      "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
                                      //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
                                   "</tr>" +
