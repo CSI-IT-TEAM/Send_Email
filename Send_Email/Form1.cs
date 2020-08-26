@@ -5,6 +5,7 @@ using System.Data.OracleClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -24,7 +25,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200808163000";
+            this.Text = "20200826143000";
         }
 
         DataTable dtEmail;
@@ -36,8 +37,11 @@ namespace Send_Email
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
             RunProduction("Q1");
+
+            RunEScan("Q1");
             RunAndon("Q1");
             Run("Q1");
+            
         }
 
         private void cmdRunProd_Click(object sender, EventArgs e)
@@ -55,43 +59,49 @@ namespace Send_Email
             Run("Q");
         }
 
-        #region Email Production
+        private void cmdRunEscan_Click(object sender, EventArgs e)
+        {
+            RunEScan("Q");
+        }
 
-        private void RunProduction(string argType)
+        #region Email E-SCAN
+
+        private void RunEScan(string argType)
         {
             try
             {
                 if (_isRun2) return;
 
                 _isRun2 = true;
-                DataSet dsData = SEL_PROD_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
+                DataSet dsData = SEL_ESCAN_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
 
-                DataTable dtDate = dsData.Tables[0];
-                DataTable dtData = dsData.Tables[1];
+                DataTable dtData = dsData.Tables[0];
+                DataTable dtData2 = dsData.Tables[1];
                 DataTable dtEmail = dsData.Tables[2];
 
-                CreateMailProduction(dtDate, dtData, dtEmail);
+                WriteLog("RunEScan Data: " + dtData.Rows.Count.ToString() + " " + dtData2.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                CreateMailEScan(dtData, dtData2, dtEmail);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                throw;
+                WriteLog("RunEScan: " + ex.ToString());
             }
             finally
             {
                 _isRun2 = false;
             }
-            
+
         }
 
-        private void CreateMailProduction(DataTable dtDate, DataTable dtData, DataTable dtEmail)
+        private void CreateMailEScan(DataTable dtData, DataTable dtData2, DataTable dtEmail)
         {
             try
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                mailItem.Subject = "Productivity achievement ratio at this time";
+                mailItem.Subject = "Current Status of E-SCAN";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -118,10 +128,243 @@ namespace Send_Email
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
 
+                string rowValue = "", rowValue2 = "";
+
+                //Long Thanh
+                for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
+                {
+                    if (iRow == 0|| dtData.Rows[iRow]["DATE"].ToString() != dtData.Rows[iRow - 1]["DATE"].ToString())
+                    {
+                        rowValue += "<tr>" +
+                                     " <td align='center'>" + dtData.Rows[iRow]["DATE"].ToString() + "</td>";                          
+                    }
+
+                    rowValue += "<td bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' " +
+                                    "style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "' align='right'>" +
+                                    dtData.Rows[iRow]["SCAN_QTY"].ToString() +
+                                "</td>" +
+                                "<td bgcolor='" + dtData.Rows[iRow]["BG_COLOR"].ToString() + "' " +
+                                    "style='color:" + dtData.Rows[iRow]["FORE_COLOR"].ToString() + "' align='right'>" +
+                                    dtData.Rows[iRow]["E_SCAN_QTY"].ToString() +
+                                "</td>" ;
+                    if (iRow + 1 >= dtData.Rows.Count || dtData.Rows[iRow]["DATE"].ToString() != dtData.Rows[iRow + 1]["DATE"].ToString())
+                    {
+                        rowValue += "</tr>";
+                    }                 
+                }
+
+                string strHeader = GetHeader(dtData);
+                string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
+                                 strHeader +
+                                 rowValue +
+                             "</table>";
+
+                //Tan Phu
+                for (int iRow = 0; iRow < dtData2.Rows.Count; iRow++)
+                {
+                    if (iRow == 0 || dtData2.Rows[iRow]["DATE"].ToString() != dtData2.Rows[iRow - 1]["DATE"].ToString())
+                    {
+                        rowValue2 += "<tr>" +
+                                     " <td align='center'>" + dtData2.Rows[iRow]["DATE"].ToString() + "</td>";
+                    }
+
+                    rowValue2 += "<td bgcolor='" + dtData2.Rows[iRow]["BG_COLOR"].ToString() + "' " +
+                                    "style='color:" + dtData2.Rows[iRow]["FORE_COLOR"].ToString() + "' align='right'>" +
+                                    dtData2.Rows[iRow]["SCAN_QTY"].ToString() +
+                                "</td>" +
+                                "<td bgcolor='" + dtData2.Rows[iRow]["BG_COLOR"].ToString() + "' " +
+                                    "style='color:" + dtData2.Rows[iRow]["FORE_COLOR"].ToString() + "' align='right'>" +
+                                    dtData2.Rows[iRow]["E_SCAN_QTY"].ToString() +
+                                "</td>";
+                    if (iRow + 1 >= dtData2.Rows.Count || dtData2.Rows[iRow]["DATE"].ToString() != dtData2.Rows[iRow + 1]["DATE"].ToString())
+                    {
+                        rowValue2 += "</tr>";
+                    }
+                }
+
+                string strHeader2 = GetHeader(dtData2);
+                string html2 = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
+                                 strHeader2 +
+                                 rowValue2 +
+                             "</table>";
+
+                mailItem.HTMLBody = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
+                                      "Control limit = result &plusmn;10%<br>" +
+                                      "Within control limit is green<br>" +
+                                      "Lower or higher control limit is red" +
+                                    "</p>" +
+                                    "<b style='font-family:Times New Roman; font-size:22px; font-style:Italic'>Long Thanh</b>" +
+                                    "<br>" +
+                                    html +
+                                    "<br>" +
+                                    "<b style='font-family:Times New Roman; font-size:22px; font-style:Italic;'>Tan Phu</b>" +
+                                    "<br>" +
+                                    html2;
+                                    
+                                      
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailEScan " + ex.ToString());
+            }
+        }
+
+        
+
+        private string GetHeader(DataTable argTable)
+        {
+            string[] selectedColumns = new[] { "LINE", "ORD" };
+            DataTable dtHeader = new DataView(argTable).ToTable(true, selectedColumns);
+
+            dtHeader = dtHeader.Select("", "ORD").Distinct().CopyToDataTable();
+        
+            string strHeaderRow1 = "", strHeaderRow2 = "";
+            foreach(DataRow row in dtHeader.Rows)
+            {
+                strHeaderRow1 += " <th colspan = '2' align='center'>" + row["LINE"].ToString() + "</th>";
+                strHeaderRow2 += " <th bgcolor='#ff9900' style='color:#ffffff' align='center' width = '80' >Scan</th>" +
+                                 " <th bgcolor='#366cc9' style='color:#ffffff' align='center' width = '80' >E-Scan</th>";
+            }
+
+            string strHtml = "<tr bgcolor='#ffe5cc'>" +
+                                " <th rowspan = '2' align='center' width = '150'>Date</th>" +
+                                 strHeaderRow1 +
+                             "</tr>" +
+                             "<tr>" +
+                                 strHeaderRow2 +
+                             "</tr>" ;
+
+
+            return strHtml;
+        }
+
+        public DataSet SEL_ESCAN_DATA(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_ESCAN";
+
+                MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+                MyOraDB.ShowErr = true;
+                MyOraDB.ReDim_Parameter(6);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_LOC";
+                MyOraDB.Parameter_Name[2] = "V_P_DATE";
+                MyOraDB.Parameter_Name[3] = "CV_1";
+                MyOraDB.Parameter_Name[4] = "CV_2";
+                MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = V_P_DATE;
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+
+
+                MyOraDB.Add_Select_Parameter(true);
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_ESCAN: null");
+                    }
+                    return null;
+                }                    
+                    
+                return ds_ret;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Email Production
+
+        private void RunProduction(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                DataSet dsData = SEL_PROD_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
+                if (dsData == null) return;
+
+                DataTable dtDate = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtDate.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                CreateMailProduction(dtDate, dtData, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+            
+        }
+
+        private void CreateMailProduction(DataTable dtDate, DataTable dtData, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                mailItem.Subject = "Productivity achievement ratio at this time";
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+                
+                //Get List Send email 
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                {
+                    
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+               
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+
                 string rowValue = "";
 
                 string strRowSpan = "";
-
 
                 for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
                 {
@@ -185,7 +428,6 @@ namespace Send_Email
                     }
                 }    
 
-
                 string strDate = "";
                 foreach (DataRow row in dtDate.Rows)
                 {
@@ -222,7 +464,7 @@ namespace Send_Email
                 //                    rowValue +
                 //              "</table>";
 
-
+               
 
                 mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -230,7 +472,9 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                WriteLog("CreateMailProduction: " + ex.ToString());
+
+
             }
 
 
@@ -243,7 +487,6 @@ namespace Send_Email
             try
             {
                 string process_name = "P_SEND_EMAIL_PROD";
-
                 MyOraDB.ReDim_Parameter(5);
                 MyOraDB.Process_Name = process_name;
 
@@ -267,13 +510,23 @@ namespace Send_Email
 
 
                 MyOraDB.Add_Select_Parameter(true);
+                
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
-                if (ds_ret == null) return null;
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_PROD: null");
+                    }
+                    return null;
+                }
+
                 return ds_ret;
             }
-            catch
+            catch (Exception ex)
             {
+                WriteLog("SEL_PROD_DATA: " + ex.ToString());
                 return null;
             }
         }
@@ -282,7 +535,6 @@ namespace Send_Email
 
         #region Email ANDON
         
-
         private void RunAndon(string argType)
         {
             DataSet dsData = SEL_ANDON_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
@@ -461,8 +713,6 @@ namespace Send_Email
                                         //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
                                         //"</td>" +
 
-                                  
-
                                    "</tr>"; ;
 
                         }
@@ -503,19 +753,14 @@ namespace Send_Email
                                     rowValue +
                               "</table>";
 
-
-
-
                 mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                WriteLog("CreateMailAndon: " + ex.ToString());
             }
-
-
         }
        
 
@@ -973,6 +1218,19 @@ namespace Send_Email
 
         #endregion
 
+
+        private void WriteLog(string argText)
+        {
+
+            txtLog.BeginInvoke(new Action(() =>
+            {
+                txtLog.Text += argText + "\r\n";
+                txtLog.SelectionStart = txtLog.TextLength;
+                txtLog.ScrollToCaret();
+                txtLog.Refresh();
+            }));
+        }
+
         #region No use
 
         private void CreateMailAndon_BAK(DataTable dtData, DataTable dtEmail)
@@ -1192,7 +1450,7 @@ namespace Send_Email
 
         }
 
-
+        
 
         private void SaveControlImage(Control theControl)
         {
