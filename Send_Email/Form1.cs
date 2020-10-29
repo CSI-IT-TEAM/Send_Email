@@ -37,19 +37,23 @@ namespace Send_Email
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
-        readonly string[] _emailTest = {  "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
+            //12h
             RunToPo("Q1");
             RunToPoIe("Q1");
             RunProduction("Q1");
             
+            //7h
             RunEScan("Q1");
             RunAndon("Q1");
             Run("Q1");
-            
+
+            //16h
+            RunCutting("Q1");
         }
 
         private void cmdRunProd_Click(object sender, EventArgs e)
@@ -1810,29 +1814,33 @@ namespace Send_Email
                 string[] ColumHead = new string[dtHeader.Rows.Count];
 
                 TableHeader = "<tr> " +
-                                 "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Rank</td>" +
+                                // "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Rank</td>" +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '80'>Plant</td>" +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Line</td>" +
-                                 "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '140'>Style</td>" +
-                                 // "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' >Component</td > " +
+                                 "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '80'>Stitching Line</td>" +
+                                 "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '120'>Stitching Input</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPC<br>(D-D +2H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPA<br>(D-D +6H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPA2<br>(D-D +10H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPO<br>(D-D +16H)</td > " +
-                                 "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '3' align = 'center' >Stitching</td > " +
+                                                                
+                                 
+                                 
+
+                                 
                               "</tr> " +
                               "<tr> " +
-                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '80' >Fast</td > " +
-                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '80' >Slow</td > " +
-                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '80' >Fast</td > " +
-                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '80' >Slow</td > " +
-                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '80' >Fast</td > " +
-                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '80' >Slow</td > " +
-                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '80' >Fast</td > " +
-                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '80' >Slow</td > " +
-                                 "<td bgcolor = '#ff3399' style = 'color:#ffffff' align = 'center' width = '100' >Assembly Date</td > " +
-                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Input Date</td > " +
-                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Input Time</td > " +
+                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
+                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
+                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
+                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
+                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
+                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
+                                 "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
+                                 "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
+                                 //"<td bgcolor = '#ff3399' style = 'color:#ffffff' align = 'center' width = '100' >Assembly Date</td > " +
+                                 //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Input Date</td > " +
+                                 //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Input Time</td > " +
                               //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Date</td > " +
                               //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Time</td > " +
                               "</tr> ";
@@ -1845,12 +1853,12 @@ namespace Send_Email
                 {
                     string deptName = dtData.Rows[iRow]["LINE_NAME"].ToString();
                     string mline = dtData.Rows[iRow]["MLINE_CD"].ToString();
-                    string StyleCd = dtData.Rows[iRow]["STYLE_CD"].ToString();
+                    string cLine = dtData.Rows[iRow]["UPS_LINE"].ToString();
                  //   string Component = dtData.Rows[iRow]["PART_NM"].ToString();
 
-                    string AssYmdQty = dtData.Rows[iRow]["ASY_YMD"].ToString();
+                  //  string AssYmdQty = dtData.Rows[iRow]["ASY_YMD"].ToString();
                     string UpsYmdQty = dtData.Rows[iRow]["UPS_YMD"].ToString();
-                    string UpsHmsQty = dtData.Rows[iRow]["UPS_HMS"].ToString();
+                   // string UpsHmsQty = dtData.Rows[iRow]["UPS_HMS"].ToString();
                     string UpsBColor = ColorNull(dtData.Rows[iRow]["UPS_BCOLOR"].ToString());
                     string UpsFColor = ColorNull(dtData.Rows[iRow]["UPS_FCOLOR"].ToString());                  
 
@@ -1885,15 +1893,18 @@ namespace Send_Email
                     string UpoSlowQty = dtData.Rows[iRow]["UPO_SLOW"].ToString();
                     string UpoFastQty = dtData.Rows[iRow]["UPO_FAST"].ToString();
                     string UpoSlowBColor = ColorNull(dtData.Rows[iRow]["UPO_BCOLOR_S"].ToString());
-                    string UpoSlowFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_S"].ToString()) == "YELLOW" ? "BLACK" : "WHITE";
+                    string UpoSlowFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_S"].ToString()) ;
                     string UpoFastBColor = ColorNull(dtData.Rows[iRow]["UPO_BCOLOR_F"].ToString());
-                    string UpoFastFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_F"].ToString()) == "YELLOW" ? "BLACK" : "WHITE";
+                    string UpoFastFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_F"].ToString());
 
-                    rowspan3 = $"<td  bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htDept[deptName]}' >{(++iRanking).ToString()}</td>";
+                    rowspan3 = $"<td  bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htDept[deptName]}' >{++iRanking}</td>";
                     rowspan = $"<td  bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htDept[deptName]}' >{deptName}</td>";
                     ;
                     rowspan2 = $"<td bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htLine[deptName + mline]}'>{mline.TrimStart('0')}</td>";
 
+
+                    if (deptName == "LEAN L" && mline == "005" )
+                    { }
 
 
                     if (iRow > 0 && deptName == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
@@ -1910,14 +1921,15 @@ namespace Send_Email
 
 
                     TableRow += "<tr>" +
-                                   rowspan3 +
+                                 //  rowspan3 +
                                    rowspan +
                                    rowspan2 +
                                    //$"<td bgcolor='WHITE' style='color:BLACK' align='center'>{(iRow+1).ToString()}</td>" +
                                    //$"<td bgcolor='WHITE' style='color:BLACK' align='left'>&nbsp;{deptName}</td>" +
                                    //$"<td bgcolor='WHITE' style='color:BLACK' align='center'>{mline}</td>" +
-                                   $"<td bgcolor='WHITE' style='color:BLACK' align='center'>{StyleCd}</td>" +
-                                 //  $"<td bgcolor='WHITE' style='color:BLACK' align='left'>{Component}</td>" +
+                                   $"<td bgcolor='WHITE' style='color:BLACK' align='center'>{cLine}</td>" +
+                                   //  $"<td bgcolor='WHITE' style='color:BLACK' align='left'>{Component}</td>" +
+                                   $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsYmdQty}</td>" +
                                    $"<td bgcolor='{UpcFastBColor}' style='color:{UpcFastFColor }' align='center'>{UpcFastQty}</td>" +
                                    $"<td bgcolor='{UpcSlowBColor}' style='color:{UpcSlowFColor}' align='center'>{UpcSlowQty}</td>" +
                                    $"<td bgcolor='{UpaFastBColor}' style='color:{UpaFastFColor}' align='center'>{UpaFastQty}</td>" +
@@ -1926,9 +1938,15 @@ namespace Send_Email
                                    $"<td bgcolor='{Upa2SlowBColor}' style='color:{Upa2SlowFColor}' align='center'>{Upa2SlowQty}</td>" +
                                    $"<td bgcolor='{UpoFastBColor}' style='color:{UpoFastFColor}' align='center'>{UpoFastQty}</td>" +
                                    $"<td bgcolor='{UpoSlowBColor}' style='color:{UpoSlowFColor}' align='center'>{UpoSlowQty}</td>" +
-                                   $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{AssYmdQty}</td>" +
-                                   $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsYmdQty}</td>" +
-                                   $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsHmsQty}</td>" +
+                                   
+                                   
+                                   
+                                   
+                                   
+                                   
+                                 //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{AssYmdQty}</td>" +
+                                   
+                                 //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsHmsQty}</td>" +
                                // $"<td bgcolor='{FgaBColor}' style='color:{FgaFColor}' align='center'>{FgaYmdQty}</td>" +
                                //    $"<td bgcolor='{FgaBColor}' style='color:{FgaFColor}' align='center'>{FgaHmsQty}</td>" +
 
@@ -1937,7 +1955,7 @@ namespace Send_Email
 
                 return "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
                           "<b style='background-color:yellow; color:black' >Color explanation</b><br>" +
-                            "In comparison with pace maker<br>" +
+                            "In comparison with stitching input<br>" +
                             "When faster or slower<br>" +
                             "Green&nbsp;&nbsp;: 1 hour<br>" +
                             "Yellow&nbsp;: from 2 hours to 3 hours<br>" +
