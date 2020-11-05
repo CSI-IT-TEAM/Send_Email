@@ -30,7 +30,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20200924130000";
+            this.Text = "20201029140000";
         }
 
         DataTable dtEmail;
@@ -1750,7 +1750,7 @@ namespace Send_Email
                 _isRun2 = true;
                 DataSet dsData = SEL_CUTTING_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
-
+               
                 DataTable dtHeader = dsData.Tables[1];
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtEmail = dsData.Tables[2];
@@ -1975,7 +1975,7 @@ namespace Send_Email
         public DataSet SEL_CUTTING_DATA(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
-            MyOraDB.ShowErr = true;
+            //MyOraDB.ShowErr = true;
             DataSet ds_ret;
             try
             {
