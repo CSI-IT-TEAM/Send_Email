@@ -30,7 +30,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20201029140000";
+            this.Text = "20201110133000";
         }
 
         DataTable dtEmail;
@@ -1953,13 +1953,20 @@ namespace Send_Email
                                "</tr>";
                 }
 
+                //"<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
+                //          "<b style='background-color:yellow; color:black' >Color explanation</b><br>" +
+                //            "In comparison with stitching input<br>" +
+                //            "When faster or slower<br>" +
+                //            "Green&nbsp;&nbsp;: 1 hour<br>" +
+                //            "Yellow&nbsp;: from 2 hours to 3 hours<br>" +
+                //            "Red&nbsp;&nbsp;&nbsp;&nbsp;: more than 4 hours" +
+                //       "</p>"
+
                 return "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
                           "<b style='background-color:yellow; color:black' >Color explanation</b><br>" +
-                            "In comparison with stitching input<br>" +
-                            "When faster or slower<br>" +
-                            "Green&nbsp;&nbsp;: 1 hour<br>" +
-                            "Yellow&nbsp;: from 2 hours to 3 hours<br>" +
-                            "Red&nbsp;&nbsp;&nbsp;&nbsp;: more than 4 hours" +
+                            "Compare to real LT of standard Lt is 70%~150% then  Green<br>" +
+                            "50%~70% or 150%~200% is Yellow<br>" +
+                            "Less than 50% or  over 200% is Red<br>" +
                        "</p>" +
                        "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' >" +
                             TableHeader + TableRow +
