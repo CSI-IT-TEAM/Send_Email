@@ -30,7 +30,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20201201080000";
+            this.Text = "20201201112000";
         }
 
         DataTable dtEmail;
@@ -329,7 +329,10 @@ namespace Send_Email
                                       "&nbsp;&nbsp;&nbsp;Less than 95: grey<br>" +
                                       "* System will inform everyday and W/S have to check and update<br>" +
                                       "* IE will inform to workshop if continue red color for 3 days<br>" +
-                                      "* If within 1 weeks, there are plant to change model, it will be allowed to keep manpower<br>" +
+                                      "* If within 1 weeks, there are plant to change model, it will be allowed to keep manpower<br><br>" +
+                                      "Remark:<br>" +
+                                      "● Support include indirect / OH (Material handler, Office, W/H worker …)<br>" +
+                                      "● TL / GL for line include in line<br>" +
                                "</p>" +
                               "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' >" +
                                     HtmlTableHeader +
