@@ -321,7 +321,7 @@ namespace Send_Email
                 string html = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
                                       "<b style='background-color:black; color:yellow' >Formular and staffing ratio color explanation</b><br>" +
                                       "&nbsp;&nbsp;&nbsp;Balance = PO Actual + Relief – TO<br>" +
-                                      "&nbsp;&nbsp;&nbsp;Staffing Ratio = (TO + Balance) / TO<br>" +
+                                      "&nbsp;&nbsp;&nbsp;Staffing Ratio = (PO + Relief) / TO<br>" +
                                       "&nbsp;&nbsp;&nbsp;More than 105: red<br>" +
                                       "&nbsp;&nbsp;&nbsp;103 ~ 105: yellow<br>" +
                                       "&nbsp;&nbsp;&nbsp;97 ~ 103: green<br>" +
