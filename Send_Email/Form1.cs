@@ -1,4 +1,5 @@
-﻿using JPlatform.Client.Controls6;
+﻿using DevExpress.Utils;
+using JPlatform.Client.Controls6;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,18 +27,20 @@ namespace Send_Email
             grdBase3.Size = new Size(1950, 1200);
             grdBase4.Size = new Size(1950, 1000);
 
+            grdBaseNpi.Size = new Size(4000, 700);
+
             panel1.Size = new Size(1950, 1100);
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20201201112000";
+            this.Text = "20201202112000";
         }
 
         DataTable dtEmail;
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
-        readonly string[] _emailTest = { "dien.it@changshininc.com" };
+        readonly string[] _emailTest = {   "dien.it@changshininc.com" };
 
 
 
@@ -92,6 +95,13 @@ namespace Send_Email
         {
             RunCutting("Q");
         }
+
+        private void cmdNpi_Click(object sender, EventArgs e)
+        {
+            RunNPI("Q");
+            //RunNPI2();
+        }
+
         #endregion Event
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
@@ -100,7 +110,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                mailItem.Subject = "Cutting current situation in front of input stitching line";
+                mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -1696,8 +1706,6 @@ namespace Send_Email
             //ms.Close();
         }
         
-        
-
         public DataSet SEL_LOAD_DATA(string V_P_WORK_TYPE, string V_P_DATE, string V_P_COMP, string V_P_SET_YN)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -2094,6 +2102,634 @@ namespace Send_Email
 
         #endregion
 
+
+
+        #region Email NPI Capture
+
+        private void RunNPI2()
+        {
+            
+            fn_BindingHeader(); 
+            fn_BindingData();
+            CaptureControl(grdBaseNpi, "GridNpi");
+            CreateMailNpi();
+        }
+
+        private void CreateMailNpi()
+        {
+            try
+            {
+                //Outlook.MailItem mailItem = (Outlook.MailItem)
+                // this.Application.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\GridNpi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+
+                mailItem.Subject = "NPI";
+
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                //Get List Send email Test
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+                string imgGrid1 = "imgGrid1";
+                  oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
+                //oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x00390040", imgGrid1);
+
+                
+
+                mailItem.HTMLBody = String.Format(
+                    "<body>" +
+                          "<img src=\"cid:{0}\">" +
+                    "</body>",
+                     imgGrid1);
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+
+
+        }
+
+        public DataSet SEL_NPI_DATA2(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_NPI_TEST";
+                MyOraDB.ReDim_Parameter(6);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_FACTORY";
+                MyOraDB.Parameter_Name[2] = "V_P_PLANT";
+                MyOraDB.Parameter_Name[3] = "V_P_FROM";
+                MyOraDB.Parameter_Name[4] = "V_P_TO";
+                MyOraDB.Parameter_Name[5] = "CV_1";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "2110";
+                MyOraDB.Parameter_Values[2] = "ALL";
+                MyOraDB.Parameter_Values[3] = DateTime.Now.ToString("yyyyMMdd");
+                MyOraDB.Parameter_Values[4] = DateTime.Now.AddDays(-60).ToString("yyyyMMdd"); ;
+                MyOraDB.Parameter_Values[5] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("SEL_NPI_DATA2: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_NPI_DATA2: " + ex.ToString());
+                return null;
+            }
+        }
+
+        private void fn_BindingHeader()
+        {
+            try
+            {
+                DataSet ds = SEL_NPI_DATA2("H");
+                if (ds != null &&  ds.Tables[0].Rows.Count > 0)
+                {
+                    DataTable dt = ds.Tables[0];
+                    grdViewNpi.Bands.Clear();
+                    grdViewNpi.Columns.Clear();
+
+                    GridBandEx gridBand1 = new GridBandEx();
+                    GridBandEx gridBand2 = new GridBandEx();
+                    GridBandEx gridBand3 = new GridBandEx();
+                    GridBandEx gridBand4 = new GridBandEx();
+                    GridBandEx gridBand5 = new GridBandEx();
+                    GridBandEx gridBand6 = new GridBandEx();
+                    GridBandEx gridBand7 = new GridBandEx();
+
+                    BandedGridColumnEx column_Band1 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band2 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band3 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band4 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band5 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band6 = new BandedGridColumnEx();
+                    BandedGridColumnEx column_Band7 = new BandedGridColumnEx();
+                    column_Band1.Caption = "PLANT";
+                    column_Band1.FieldName = "PLANT_NM";
+                    column_Band1.Name = "PLANT_NM";
+                    column_Band1.Visible = true;
+                    column_Band1.Width = 60;
+
+                    column_Band2.Caption = "LINE";
+                    column_Band2.FieldName = "LINE_CD";
+                    column_Band2.Name = "LINE_CD";
+                    column_Band2.Visible = true;
+                    column_Band2.Width = 60;
+
+                    column_Band3.Caption = "CATEGORY";
+                    column_Band3.FieldName = "CATEGORY_NAME";
+                    column_Band3.Name = "CATEGORY_NAME";
+                    column_Band3.Visible = true;
+                    column_Band3.Width = 150;
+
+                    column_Band4.Caption = "TD_CODE";
+                    column_Band4.FieldName = "TD_CODE";
+                    column_Band4.Name = "TD_CODE";
+                    column_Band4.Visible = true;
+                    column_Band4.Width = 90;
+
+                    column_Band5.Caption = "STYLE_CODE";
+                    column_Band5.FieldName = "STYLE_CODE";
+                    column_Band5.Name = "STYLE_CODE";
+                    column_Band5.Visible = true;
+                    column_Band5.Width = 120;
+
+                    column_Band6.Caption = "MODEL_NAME";
+                    column_Band6.FieldName = "MODEL_NAME";
+                    column_Band6.Name = "MODEL_NAME";
+                    column_Band6.Visible = true;
+                    column_Band6.Width = 320;
+
+                    column_Band7.Caption = "PROD_DATE";
+                    column_Band7.FieldName = "PROD_DATE";
+                    column_Band7.Name = "PROD_DATE";
+                    column_Band7.Visible = true;
+                    column_Band7.Width = 120;
+
+                    //6 Fixed band
+                    gridBand1.Caption = "Plant";
+                    gridBand1.Name = "gridBand1";
+                    gridBand1.VisibleIndex = 0;
+                    gridBand1.Columns.Add(column_Band1);
+                    gridBand1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand2.Caption = "Line";
+                    gridBand2.Name = "gridBand2";
+                    gridBand2.VisibleIndex = 1;
+                    gridBand2.Columns.Add(column_Band2);
+                    gridBand2.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand3.Caption = "Category";
+                    gridBand3.Name = "gridBand3";
+                    gridBand3.VisibleIndex = 2;
+                    gridBand3.Columns.Add(column_Band3);
+                    gridBand3.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand4.Caption = "TD Code";
+                    gridBand4.Name = "gridBand4";
+                    gridBand4.VisibleIndex = 3;
+                    gridBand4.Columns.Add(column_Band4);
+                    gridBand4.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand5.Caption = "Style Code";
+                    gridBand5.Name = "gridBand5";
+                    gridBand5.VisibleIndex = 4;
+                    gridBand5.Columns.Add(column_Band5);
+                    gridBand5.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand6.Caption = "Model Name";
+                    gridBand6.Name = "gridBand6";
+                    gridBand6.VisibleIndex = 5;
+                    gridBand6.Columns.Add(column_Band6);
+                    gridBand6.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gridBand7.Caption = "Prod Date";
+                    gridBand7.Name = "gridBand7";
+                    gridBand7.VisibleIndex = 6;
+                    gridBand7.Columns.Add(column_Band7);
+                    gridBand7.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    grdViewNpi.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { column_Band1, column_Band2, column_Band3, column_Band4, column_Band5, column_Band6, column_Band7 });
+                    grdViewNpi.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBand1, gridBand2, gridBand3, gridBand4, gridBand5, gridBand6, gridBand7 });
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        //2 band chung cặp
+                        //  GridBandEx first_Band = new GridBandEx();
+                        GridBandEx second_Band = new GridBandEx();
+                        GridBandEx third_Band = new GridBandEx();
+                        BandedGridColumnEx column_Band = new BandedGridColumnEx();
+
+                        //first_Band.Caption = dt.Rows[i]["NPI_CODE"].ToString();
+                        //first_Band.Name = string.Concat("first_Band", i);
+                        //first_Band.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                        //first_Band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                        //first_Band.VisibleIndex = i;
+
+                        second_Band.Caption = dt.Rows[i]["NPI_DATE"].ToString();
+                        second_Band.Name = string.Concat("second_Band", i);
+                        second_Band.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                        second_Band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                        second_Band.VisibleIndex = i;
+                        second_Band.RowCount = 2;
+                        third_Band.Caption = dt.Rows[i]["NPI_NAME"].ToString();
+                        third_Band.Name = string.Concat("third_Band", i);
+                        third_Band.VisibleIndex = i;
+                        third_Band.AppearanceHeader.Options.UseTextOptions = true;
+                        third_Band.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                        third_Band.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                        third_Band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                        third_Band.RowCount = 20;
+                        third_Band.VisibleIndex = i;
+
+                        column_Band.Caption = dt.Rows[i]["NPI_CODE"].ToString();
+                        column_Band.FieldName = dt.Rows[i]["NPI_CODE"].ToString();
+                        column_Band.Name = dt.Rows[i]["NPI_CODE"].ToString();
+                        column_Band.Visible = true;
+                        column_Band.Width = 85;
+                        third_Band.Columns.Add(column_Band);
+                        grdViewNpi.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { column_Band });
+                        //first_Band.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { second_Band });
+                        second_Band.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { third_Band });
+                        grdViewNpi.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { second_Band });
+                        grdViewNpi.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+                    }
+
+                    for (int i = 0; i < grdViewNpi.Columns.Count; i++)
+                    {
+                        if (i >= 7)
+                        {
+                            grdViewNpi.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 14, FontStyle.Bold);
+                        }
+                        grdViewNpi.Columns[i].AppearanceHeader.Font = new Font("Calibri", 14, FontStyle.Bold);
+                        grdViewNpi.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 14, FontStyle.Bold);
+                        grdViewNpi.Columns[i].AppearanceCell.Font = new Font("Calibri", 14);
+                        grdViewNpi.Columns[i].AppearanceCell.Options.UseTextOptions = true;
+                        grdViewNpi.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+            }
+        }
+
+        private void fn_BindingData()
+        {
+            try
+            {
+                DataSet ds = SEL_NPI_DATA2("Q");
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    DataTable dt = ds.Tables[0];
+                    DataTable dtPivot = Pivot(dt, dt.Columns["NPI_CODE"], dt.Columns["VALUE1"]);
+                    DataTable dtSource = dtPivot.Copy();
+                    grdBaseNpi.DataSource = dtSource;
+
+                    for (int i = 0; i < grdViewNpi.Columns.Count; i++)
+                    {
+                        grdViewNpi.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                        if (i >= 7)
+                        {
+                            grdViewNpi.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
+                        }
+
+                    }
+
+                    grdViewNpi.Columns["CATEGORY_NAME"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
+                    grdViewNpi.Columns["MODEL_NAME"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
+
+                    grdViewNpi.OptionsBehavior.Editable = false;
+                    grdViewNpi.OptionsBehavior.ReadOnly = true;
+                }
+                else
+                {
+                    grdBaseNpi.DataSource = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                 WriteLog(ex.Message);
+            }
+        }
+
+        DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
+        {
+            // find primary key columns 
+            //(i.e. everything but pivot column and pivot value)
+            DataTable temp = dt.Copy();
+            temp.Columns.Remove(pivotColumn.ColumnName);
+            temp.Columns.Remove(pivotValue.ColumnName);
+            string[] pkColumnNames = temp.Columns.Cast<DataColumn>()
+            .Select(c => c.ColumnName)
+            .ToArray();
+
+            // prep results table
+            DataTable result = temp.DefaultView.ToTable(true, pkColumnNames).Copy();
+            result.PrimaryKey = result.Columns.Cast<DataColumn>().ToArray();
+            dt.AsEnumerable()
+            .Select(r => r[pivotColumn.ColumnName].ToString())
+            .Distinct().ToList()
+            .ForEach(c => result.Columns.Add(c, pivotValue.DataType));
+            //.ForEach(c => result.Columns.Add(c, pivotColumn.DataType));
+
+            // load it
+            foreach (DataRow row in dt.Rows)
+            {
+                // find row to update
+                DataRow aggRow = result.Rows.Find(
+                pkColumnNames
+                .Select(c => row[c])
+                .ToArray());
+                // the aggregate used here is LATEST 
+                // adjust the next line if you want (SUM, MAX, etc...)
+                aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
+
+
+            }
+
+            return result;
+        }
+
+        private void grdViewNpi_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                if (e.Column.AbsoluteIndex >= 7)
+                {
+                    string ValueCell = grdViewNpi.GetRowCellValue(e.RowHandle, grdViewNpi.Columns[e.Column.FieldName]).ToString();
+                    if (ValueCell.Length > 1)
+                    {
+                        ValueCell = ValueCell.Substring(0, 1);
+                    }
+                    switch (ValueCell)
+                    {
+                        case "Y":
+                            e.Appearance.BackColor = Color.Yellow;
+                            e.Appearance.ForeColor = Color.Yellow;
+                            break;
+                        case "G":
+                            e.Appearance.BackColor = Color.Green;
+                            e.Appearance.ForeColor = Color.Green;
+                            break;
+                        case "R":
+                            e.Appearance.BackColor = Color.Red;
+                            e.Appearance.ForeColor = Color.Red;
+                            break;
+                        case "S":
+                            e.Appearance.BackColor = Color.Silver;
+                            e.Appearance.ForeColor = Color.Silver;
+                            break;
+                        case "B":
+                            e.Appearance.BackColor = Color.Black;
+                            e.Appearance.ForeColor = Color.Black;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region Email NPI
+
+        private void RunNPI(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                DataSet dsData = SEL_NPI_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
+                if (dsData == null) return;
+
+                DataTable dtData = dsData.Tables[0];
+                DataTable dtHeader = dsData.Tables[1];
+                DataTable dtData2 = dsData.Tables[2];
+                DataTable dtHeader2 = dsData.Tables[3];             
+                DataTable dtExplain = dsData.Tables[4];
+                DataTable dtEmail = dsData.Tables[5];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                string html = GetHtmlBodyNpi(dtHeader, dtData);
+
+                string html2 = GetHtmlBodyNpi(dtHeader2, dtData2);
+
+                string subject = dtExplain.Rows[0]["SUBJECT"].ToString();
+                CreateMail(subject, html + "<br>" + html2, dtEmail);
+                WriteLog("RunNPI: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+
+        }
+
+        private string GetHtmlBodyNpi(DataTable dtHeader, DataTable dtData)
+        {
+            try
+            {
+                string TableHeader = "";
+
+                int i = 0;
+                int npiCode = 0;
+                string HeaderRow1 = "", HeaderRow2 = "";
+
+                int[] colWidth = { 55, 50, 55, 70, 66, 55, 70, 80, 70, 80, 65, 65, 60, 70, 65, 55, 75, 55 };
+
+                foreach (DataRow row in dtHeader.Rows)
+                {
+                    
+                    int.TryParse(row["NPI_CODE"].ToString(), out npiCode);
+                    if (npiCode >= 10)
+                    {
+
+                        HeaderRow1 += $"<td bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
+                        HeaderRow2 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
+                        i++;
+                    }
+                        
+                    else
+                        HeaderRow1 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
+
+                    
+                }
+
+
+
+                TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " +
+                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> " ;
+
+                //Row
+                string TableRow = "", rowspan = "", rowspan2 = "", rowspan3 = "";
+
+                for (int iRowData = 0; iRowData < dtData.Rows.Count; iRowData++)
+                {
+                    string plantNm = dtData.Rows[iRowData]["PLANT_NM"].ToString();
+                    string lineCd = dtData.Rows[iRowData]["LINE_CD"].ToString();
+                    string category = dtData.Rows[iRowData]["CATEGORY_NAME"].ToString();
+                    string tdCode = dtData.Rows[iRowData]["TD_CODE"].ToString();
+                    string modelName = dtData.Rows[iRowData]["MODEL_NAME"].ToString();
+                    string styleCode = dtData.Rows[iRowData]["STYLE_CODE"].ToString();
+                    string prodDate = dtData.Rows[iRowData]["PROD_DATE"].ToString();
+                    string backColor = dtData.Rows[iRowData]["BCOLOR"].ToString();
+
+                    string plantNm_prev = "";
+                    string lineCd_prev = "";
+                    string category_prev = "";
+                    string tdCode_prev = "";
+                    string modelName_prev = "";
+                    string styleCode_prev = "";
+                    string prodDate_prev = "";
+
+                    if (iRowData>0)
+                    {
+                        plantNm_prev = dtData.Rows[iRowData - 1]["PLANT_NM"].ToString();
+                        lineCd_prev = dtData.Rows[iRowData - 1]["LINE_CD"].ToString();
+                        category_prev = dtData.Rows[iRowData - 1]["CATEGORY_NAME"].ToString();
+                        tdCode_prev = dtData.Rows[iRowData - 1]["TD_CODE"].ToString();
+                        modelName_prev = dtData.Rows[iRowData - 1]["MODEL_NAME"].ToString();
+                        styleCode_prev = dtData.Rows[iRowData - 1]["STYLE_CODE"].ToString();
+                        prodDate_prev = dtData.Rows[iRowData - 1]["PROD_DATE"].ToString();
+                    }                   
+
+                    if (plantNm != plantNm_prev || lineCd != lineCd_prev || category != category_prev || tdCode != tdCode_prev ||
+                        modelName != modelName_prev || styleCode != styleCode_prev || prodDate != prodDate_prev)
+                    {
+                        if (iRowData > 0) TableRow += "</tr> ";
+                        TableRow += "<tr> " + 
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center'>{"&nbsp " + plantNm + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + lineCd + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + category + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + tdCode + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + styleCode + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + modelName + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + prodDate + "&nbsp"}</td>" +
+                                $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>" 
+                              ;
+                    }
+                    else
+                    {
+                        TableRow += $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center'></td>";
+                    }
+                }
+
+                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' with = '5000' >" +
+                            TableHeader + TableRow +
+                       "</table>";
+            }
+            catch (Exception ex)
+            {
+                WriteLog("GetHtmlBodyCutting: " + ex.ToString());
+                return "";
+            }
+        }
+
+        public DataSet SEL_NPI_DATA(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_NPI";
+                MyOraDB.ReDim_Parameter(9);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_LOC";
+                MyOraDB.Parameter_Name[2] = "V_P_DATE";
+                MyOraDB.Parameter_Name[3] = "CV_1";
+                MyOraDB.Parameter_Name[4] = "CV_2";
+                MyOraDB.Parameter_Name[5] = "CV_3";
+                MyOraDB.Parameter_Name[6] = "CV_4";
+                MyOraDB.Parameter_Name[7] = "CV_EXPLAIN";
+                MyOraDB.Parameter_Name[8] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[6] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[7] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[8] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = V_P_DATE;
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+                MyOraDB.Parameter_Values[6] = "";
+                MyOraDB.Parameter_Values[7] = "";
+                MyOraDB.Parameter_Values[8] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_NPI: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+
+        #endregion
+
+
+
         private string ColorNull(string argColor)
         {
             return argColor == "" ? "WHITE" : argColor;
@@ -2111,6 +2747,7 @@ namespace Send_Email
             }));
         }
 
+       
 
         private void checkRunning()
         {

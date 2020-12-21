@@ -29,26 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.ConstantLine constantLine2 = new DevExpress.XtraCharts.ConstantLine();
-            DevExpress.XtraCharts.HatchFillOptions hatchFillOptions2 = new DevExpress.XtraCharts.HatchFillOptions();
-            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY2 = new DevExpress.XtraCharts.SecondaryAxisY();
-            DevExpress.XtraCharts.Series series7 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel4 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView4 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series8 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel5 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView5 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series9 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel6 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView6 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series10 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView4 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.Series series11 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView5 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.Series series12 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView6 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle2 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram4 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.ConstantLine constantLine4 = new DevExpress.XtraCharts.ConstantLine();
+            DevExpress.XtraCharts.HatchFillOptions hatchFillOptions4 = new DevExpress.XtraCharts.HatchFillOptions();
+            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY4 = new DevExpress.XtraCharts.SecondaryAxisY();
+            DevExpress.XtraCharts.Series series19 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel10 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView10 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series20 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel11 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView11 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series21 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel12 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView12 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series22 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView10 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.Series series23 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView11 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.Series series24 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView12 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle4 = new DevExpress.XtraCharts.ChartTitle();
             this.button1 = new System.Windows.Forms.Button();
             this.chart2 = new DevExpress.XtraCharts.ChartControl();
             this.tmrLoad = new System.Windows.Forms.Timer(this.components);
@@ -214,24 +214,56 @@
             this.cmdPoTo = new System.Windows.Forms.Button();
             this.cmdPoToIe = new System.Windows.Forms.Button();
             this.cmdCutting = new System.Windows.Forms.Button();
+            this.cmdNpi = new System.Windows.Forms.Button();
+            this.grdBaseNpi = new JPlatform.Client.Controls6.GridControlEx();
+            this.grdViewNpi = new JPlatform.Client.Controls6.BandedGridViewEx();
+            this.repositoryItemCheckEditEx29 = new JPlatform.Client.Controls6.RepositoryItemCheckEditEx();
+            this.repositoryItemLookUpEditEx65 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx66 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx67 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx68 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx69 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx70 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemButtonEditEx37 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx38 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx39 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemLookUpEditEx71 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemButtonEditEx40 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx41 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx42 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.repositoryItemLookUpEditEx72 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx73 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemButtonEditEx43 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx44 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemButtonEditEx45 = new JPlatform.Client.Controls6.RepositoryItemButtonEditEx();
+            this.repositoryItemLookUpEditEx74 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx75 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx76 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx77 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx78 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx79 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemLookUpEditEx80 = new JPlatform.Client.Controls6.RepositoryItemLookUpEditEx();
+            this.repositoryItemCheckEditEx30 = new JPlatform.Client.Controls6.RepositoryItemCheckEditEx();
+            this.gridViewEx1 = new JPlatform.Client.Controls6.GridViewEx();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series20)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series21)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -377,6 +409,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdBaseNpi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdViewNpi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx65)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx66)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx67)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx68)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx69)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx70)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx37)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx38)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx39)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx71)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx40)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx41)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx42)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx72)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx73)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx43)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx44)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx45)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx74)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx75)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx76)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx77)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx78)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx79)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx80)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx30)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewEx1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -395,62 +458,62 @@
             this.chart2.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
             this.chart2.CacheToMemory = true;
             this.chart2.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram2.AxisX.DateTimeScaleOptions.AutoGrid = false;
-            xyDiagram2.AxisX.DateTimeScaleOptions.GridAlignment = DevExpress.XtraCharts.DateTimeGridAlignment.Day;
-            xyDiagram2.AxisX.Label.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram2.AxisX.Label.Font = new System.Drawing.Font("DotumChe", 7.5F, System.Drawing.FontStyle.Bold);
-            xyDiagram2.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
-            xyDiagram2.AxisX.Label.ResolveOverlappingOptions.MinIndent = 0;
-            xyDiagram2.AxisX.Tickmarks.Length = 6;
-            xyDiagram2.AxisX.Tickmarks.MinorVisible = false;
-            xyDiagram2.AxisX.Title.Text = "Date";
-            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
-            constantLine2.AxisValueSerializable = "100";
-            constantLine2.Color = System.Drawing.Color.Red;
-            constantLine2.LineStyle.Thickness = 3;
-            constantLine2.Name = "";
-            constantLine2.Visible = false;
-            xyDiagram2.AxisY.ConstantLines.AddRange(new DevExpress.XtraCharts.ConstantLine[] {
-            constantLine2});
-            xyDiagram2.AxisY.CrosshairAxisLabelOptions.BackColor = System.Drawing.Color.White;
-            xyDiagram2.AxisY.Interlaced = true;
-            xyDiagram2.AxisY.InterlacedFillStyle.FillMode = DevExpress.XtraCharts.FillMode.Hatch;
-            hatchFillOptions2.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            hatchFillOptions2.HatchStyle = System.Drawing.Drawing2D.HatchStyle.SmallConfetti;
-            xyDiagram2.AxisY.InterlacedFillStyle.Options = hatchFillOptions2;
-            xyDiagram2.AxisY.Label.Font = new System.Drawing.Font("DotumChe", 9F, System.Drawing.FontStyle.Bold);
-            xyDiagram2.AxisY.Label.TextPattern = "{V:#,0}";
-            xyDiagram2.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram2.AxisY.Title.Text = "Quantity (Prs)";
-            xyDiagram2.AxisY.Title.TextColor = System.Drawing.Color.Blue;
-            xyDiagram2.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram2.DefaultPane.BorderVisible = false;
-            xyDiagram2.EnableAxisXScrolling = true;
-            xyDiagram2.PaneDistance = 0;
-            secondaryAxisY2.AxisID = 0;
-            secondaryAxisY2.DateTimeScaleOptions.AutoGrid = false;
-            secondaryAxisY2.DateTimeScaleOptions.GridSpacing = 10D;
-            secondaryAxisY2.Label.Visible = false;
-            secondaryAxisY2.Name = "Secondary AxisY 1";
-            secondaryAxisY2.NumericScaleOptions.AutoGrid = false;
-            secondaryAxisY2.NumericScaleOptions.GridSpacing = 10D;
-            secondaryAxisY2.Title.Text = "%";
-            secondaryAxisY2.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            secondaryAxisY2.VisibleInPanesSerializable = "-1";
-            secondaryAxisY2.VisualRange.Auto = false;
-            secondaryAxisY2.VisualRange.AutoSideMargins = false;
-            secondaryAxisY2.VisualRange.MaxValueSerializable = "130";
-            secondaryAxisY2.VisualRange.MinValueSerializable = "0";
-            secondaryAxisY2.VisualRange.SideMarginsValue = 5D;
-            secondaryAxisY2.WholeRange.Auto = false;
-            secondaryAxisY2.WholeRange.AutoSideMargins = false;
-            secondaryAxisY2.WholeRange.MaxValueSerializable = "130";
-            secondaryAxisY2.WholeRange.MinValueSerializable = "0";
-            secondaryAxisY2.WholeRange.SideMarginsValue = 5D;
-            xyDiagram2.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
-            secondaryAxisY2});
-            this.chart2.Diagram = xyDiagram2;
+            xyDiagram4.AxisX.DateTimeScaleOptions.AutoGrid = false;
+            xyDiagram4.AxisX.DateTimeScaleOptions.GridAlignment = DevExpress.XtraCharts.DateTimeGridAlignment.Day;
+            xyDiagram4.AxisX.Label.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram4.AxisX.Label.Font = new System.Drawing.Font("DotumChe", 7.5F, System.Drawing.FontStyle.Bold);
+            xyDiagram4.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
+            xyDiagram4.AxisX.Label.ResolveOverlappingOptions.MinIndent = 0;
+            xyDiagram4.AxisX.Tickmarks.Length = 6;
+            xyDiagram4.AxisX.Tickmarks.MinorVisible = false;
+            xyDiagram4.AxisX.Title.Text = "Date";
+            xyDiagram4.AxisX.VisibleInPanesSerializable = "-1";
+            constantLine4.AxisValueSerializable = "100";
+            constantLine4.Color = System.Drawing.Color.Red;
+            constantLine4.LineStyle.Thickness = 3;
+            constantLine4.Name = "";
+            constantLine4.Visible = false;
+            xyDiagram4.AxisY.ConstantLines.AddRange(new DevExpress.XtraCharts.ConstantLine[] {
+            constantLine4});
+            xyDiagram4.AxisY.CrosshairAxisLabelOptions.BackColor = System.Drawing.Color.White;
+            xyDiagram4.AxisY.Interlaced = true;
+            xyDiagram4.AxisY.InterlacedFillStyle.FillMode = DevExpress.XtraCharts.FillMode.Hatch;
+            hatchFillOptions4.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            hatchFillOptions4.HatchStyle = System.Drawing.Drawing2D.HatchStyle.SmallConfetti;
+            xyDiagram4.AxisY.InterlacedFillStyle.Options = hatchFillOptions4;
+            xyDiagram4.AxisY.Label.Font = new System.Drawing.Font("DotumChe", 9F, System.Drawing.FontStyle.Bold);
+            xyDiagram4.AxisY.Label.TextPattern = "{V:#,0}";
+            xyDiagram4.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            xyDiagram4.AxisY.Title.Text = "Quantity (Prs)";
+            xyDiagram4.AxisY.Title.TextColor = System.Drawing.Color.Blue;
+            xyDiagram4.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram4.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram4.DefaultPane.BorderVisible = false;
+            xyDiagram4.EnableAxisXScrolling = true;
+            xyDiagram4.PaneDistance = 0;
+            secondaryAxisY4.AxisID = 0;
+            secondaryAxisY4.DateTimeScaleOptions.AutoGrid = false;
+            secondaryAxisY4.DateTimeScaleOptions.GridSpacing = 10D;
+            secondaryAxisY4.Label.Visible = false;
+            secondaryAxisY4.Name = "Secondary AxisY 1";
+            secondaryAxisY4.NumericScaleOptions.AutoGrid = false;
+            secondaryAxisY4.NumericScaleOptions.GridSpacing = 10D;
+            secondaryAxisY4.Title.Text = "%";
+            secondaryAxisY4.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            secondaryAxisY4.VisibleInPanesSerializable = "-1";
+            secondaryAxisY4.VisualRange.Auto = false;
+            secondaryAxisY4.VisualRange.AutoSideMargins = false;
+            secondaryAxisY4.VisualRange.MaxValueSerializable = "130";
+            secondaryAxisY4.VisualRange.MinValueSerializable = "0";
+            secondaryAxisY4.VisualRange.SideMarginsValue = 5D;
+            secondaryAxisY4.WholeRange.Auto = false;
+            secondaryAxisY4.WholeRange.AutoSideMargins = false;
+            secondaryAxisY4.WholeRange.MaxValueSerializable = "130";
+            secondaryAxisY4.WholeRange.MinValueSerializable = "0";
+            secondaryAxisY4.WholeRange.SideMarginsValue = 5D;
+            xyDiagram4.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
+            secondaryAxisY4});
+            this.chart2.Diagram = xyDiagram4;
             this.chart2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Right;
             this.chart2.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
             this.chart2.Legend.BackColor = System.Drawing.Color.Transparent;
@@ -474,60 +537,60 @@
             this.chart2.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
                 new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Green, System.Drawing.Color.Green),
                 new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Red, System.Drawing.Color.Red)}));
-            series7.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedBarSeriesLabel4.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel4.Font = new System.Drawing.Font("DotumChe", 9F);
-            stackedBarSeriesLabel4.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel4.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
-            stackedBarSeriesLabel4.Shadow.Visible = true;
-            stackedBarSeriesLabel4.TextPattern = "{V:#,0}";
-            series7.Label = stackedBarSeriesLabel4;
-            series7.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series7.Name = "Finished Sole Inventory";
-            series7.View = stackedBarSeriesView4;
-            series8.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedBarSeriesLabel5.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel5.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel5.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
-            stackedBarSeriesLabel5.Shadow.Visible = true;
-            stackedBarSeriesLabel5.TextPattern = "{V:#,0}";
-            series8.Label = stackedBarSeriesLabel5;
-            series8.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series8.Name = "Stockfit Incoming Set";
-            stackedBarSeriesView5.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            series8.View = stackedBarSeriesView5;
-            stackedBarSeriesLabel6.TextPattern = "{V:#,0}";
-            series9.Label = stackedBarSeriesLabel6;
-            series9.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series9.Name = "Bottom Set";
-            stackedBarSeriesView6.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesView6.Color = System.Drawing.Color.YellowGreen;
-            series9.View = stackedBarSeriesView6;
-            series10.Name = "Target Finished Sole Inventory";
-            stackedLineSeriesView4.Color = System.Drawing.Color.DodgerBlue;
-            stackedLineSeriesView4.LineStyle.Thickness = 3;
-            series10.View = stackedLineSeriesView4;
-            series11.Name = "Target Stockfit Incoming Set";
-            stackedLineSeriesView5.Color = System.Drawing.Color.Tomato;
-            stackedLineSeriesView5.LineStyle.Thickness = 3;
-            series11.View = stackedLineSeriesView5;
-            series12.Name = "Target Bottom Set";
-            stackedLineSeriesView6.Color = System.Drawing.Color.DarkOliveGreen;
-            stackedLineSeriesView6.LineStyle.Thickness = 3;
-            series12.View = stackedLineSeriesView6;
+            series19.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedBarSeriesLabel10.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel10.Font = new System.Drawing.Font("DotumChe", 9F);
+            stackedBarSeriesLabel10.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel10.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
+            stackedBarSeriesLabel10.Shadow.Visible = true;
+            stackedBarSeriesLabel10.TextPattern = "{V:#,0}";
+            series19.Label = stackedBarSeriesLabel10;
+            series19.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            series19.Name = "Finished Sole Inventory";
+            series19.View = stackedBarSeriesView10;
+            series20.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedBarSeriesLabel11.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel11.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel11.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
+            stackedBarSeriesLabel11.Shadow.Visible = true;
+            stackedBarSeriesLabel11.TextPattern = "{V:#,0}";
+            series20.Label = stackedBarSeriesLabel11;
+            series20.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            series20.Name = "Stockfit Incoming Set";
+            stackedBarSeriesView11.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            series20.View = stackedBarSeriesView11;
+            stackedBarSeriesLabel12.TextPattern = "{V:#,0}";
+            series21.Label = stackedBarSeriesLabel12;
+            series21.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            series21.Name = "Bottom Set";
+            stackedBarSeriesView12.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesView12.Color = System.Drawing.Color.YellowGreen;
+            series21.View = stackedBarSeriesView12;
+            series22.Name = "Target Finished Sole Inventory";
+            stackedLineSeriesView10.Color = System.Drawing.Color.DodgerBlue;
+            stackedLineSeriesView10.LineStyle.Thickness = 3;
+            series22.View = stackedLineSeriesView10;
+            series23.Name = "Target Stockfit Incoming Set";
+            stackedLineSeriesView11.Color = System.Drawing.Color.Tomato;
+            stackedLineSeriesView11.LineStyle.Thickness = 3;
+            series23.View = stackedLineSeriesView11;
+            series24.Name = "Target Bottom Set";
+            stackedLineSeriesView12.Color = System.Drawing.Color.DarkOliveGreen;
+            stackedLineSeriesView12.LineStyle.Thickness = 3;
+            series24.View = stackedLineSeriesView12;
             this.chart2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series7,
-        series8,
-        series9,
-        series10,
-        series11,
-        series12};
+        series19,
+        series20,
+        series21,
+        series22,
+        series23,
+        series24};
             this.chart2.Size = new System.Drawing.Size(1391, 204);
             this.chart2.TabIndex = 197;
-            chartTitle2.Font = new System.Drawing.Font("Calibri", 30.25F, System.Drawing.FontStyle.Bold);
-            chartTitle2.Text = "Bottom Inventory Set Analysis";
+            chartTitle4.Font = new System.Drawing.Font("Calibri", 30.25F, System.Drawing.FontStyle.Bold);
+            chartTitle4.Text = "Bottom Inventory Set Analysis";
             this.chart2.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle2});
+            chartTitle4});
             // 
             // tmrLoad
             // 
@@ -1897,11 +1960,280 @@
             this.cmdCutting.UseVisualStyleBackColor = true;
             this.cmdCutting.Click += new System.EventHandler(this.cmdCutting_Click);
             // 
+            // cmdNpi
+            // 
+            this.cmdNpi.Location = new System.Drawing.Point(127, 79);
+            this.cmdNpi.Name = "cmdNpi";
+            this.cmdNpi.Size = new System.Drawing.Size(96, 23);
+            this.cmdNpi.TabIndex = 208;
+            this.cmdNpi.Text = "Run NPI";
+            this.cmdNpi.UseVisualStyleBackColor = true;
+            this.cmdNpi.Click += new System.EventHandler(this.cmdNpi_Click);
+            // 
+            // grdBaseNpi
+            // 
+            this.grdBaseNpi.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grdBaseNpi.Font = new System.Drawing.Font("Calibri", 15.75F);
+            this.grdBaseNpi.Location = new System.Drawing.Point(47, 544);
+            this.grdBaseNpi.LookAndFeel.SkinName = "Office 2010 Blue";
+            this.grdBaseNpi.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.grdBaseNpi.MainView = this.grdViewNpi;
+            this.grdBaseNpi.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grdBaseNpi.Name = "grdBaseNpi";
+            this.grdBaseNpi.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEditEx29,
+            this.repositoryItemLookUpEditEx65,
+            this.repositoryItemLookUpEditEx66,
+            this.repositoryItemLookUpEditEx67,
+            this.repositoryItemLookUpEditEx68,
+            this.repositoryItemLookUpEditEx69,
+            this.repositoryItemLookUpEditEx70,
+            this.repositoryItemButtonEditEx37,
+            this.repositoryItemButtonEditEx38,
+            this.repositoryItemButtonEditEx39,
+            this.repositoryItemLookUpEditEx71,
+            this.repositoryItemButtonEditEx40,
+            this.repositoryItemButtonEditEx41,
+            this.repositoryItemButtonEditEx42,
+            this.repositoryItemButtonEdit5,
+            this.repositoryItemLookUpEditEx72,
+            this.repositoryItemLookUpEditEx73,
+            this.repositoryItemButtonEditEx43,
+            this.repositoryItemButtonEditEx44,
+            this.repositoryItemButtonEditEx45,
+            this.repositoryItemLookUpEditEx74,
+            this.repositoryItemLookUpEditEx75,
+            this.repositoryItemLookUpEditEx76,
+            this.repositoryItemLookUpEditEx77,
+            this.repositoryItemLookUpEditEx78,
+            this.repositoryItemLookUpEditEx79,
+            this.repositoryItemLookUpEditEx80,
+            this.repositoryItemCheckEditEx30});
+            this.grdBaseNpi.Size = new System.Drawing.Size(370, 169);
+            this.grdBaseNpi.TabIndex = 209;
+            this.grdBaseNpi.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.grdViewNpi,
+            this.gridViewEx1});
+            // 
+            // grdViewNpi
+            // 
+            this.grdViewNpi.ActionMode = JPlatform.Client.Controls6.ActionMode.View;
+            this.grdViewNpi.Appearance.BandPanel.Options.UseTextOptions = true;
+            this.grdViewNpi.Appearance.BandPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.grdViewNpi.Appearance.Row.Font = new System.Drawing.Font("DotumChe", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grdViewNpi.Appearance.Row.Options.UseFont = true;
+            this.grdViewNpi.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.grdViewNpi.GridControl = this.grdBaseNpi;
+            this.grdViewNpi.Name = "grdViewNpi";
+            this.grdViewNpi.OptionsBehavior.Editable = false;
+            this.grdViewNpi.OptionsBehavior.ReadOnly = true;
+            this.grdViewNpi.OptionsSelection.MultiSelect = true;
+            this.grdViewNpi.OptionsView.ColumnAutoWidth = false;
+            this.grdViewNpi.OptionsView.ShowColumnHeaders = false;
+            this.grdViewNpi.OptionsView.ShowGroupPanel = false;
+            this.grdViewNpi.OptionsView.ShowIndicator = false;
+            this.grdViewNpi.RowHeight = 40;
+            this.grdViewNpi.SaveSPName = null;
+            this.grdViewNpi.ViewSPName = null;
+            this.grdViewNpi.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.grdViewNpi_RowCellStyle);
+            // 
+            // repositoryItemCheckEditEx29
+            // 
+            this.repositoryItemCheckEditEx29.Caption = "Check";
+            this.repositoryItemCheckEditEx29.Name = "repositoryItemCheckEditEx29";
+            this.repositoryItemCheckEditEx29.ValueChecked = "Y";
+            this.repositoryItemCheckEditEx29.ValueUnchecked = "N";
+            // 
+            // repositoryItemLookUpEditEx65
+            // 
+            this.repositoryItemLookUpEditEx65.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx65.Name = "repositoryItemLookUpEditEx65";
+            this.repositoryItemLookUpEditEx65.NullText = "";
+            this.repositoryItemLookUpEditEx65.ShowCodeColumn = false;
+            // 
+            // repositoryItemLookUpEditEx66
+            // 
+            this.repositoryItemLookUpEditEx66.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx66.Name = "repositoryItemLookUpEditEx66";
+            this.repositoryItemLookUpEditEx66.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx67
+            // 
+            this.repositoryItemLookUpEditEx67.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx67.Name = "repositoryItemLookUpEditEx67";
+            // 
+            // repositoryItemLookUpEditEx68
+            // 
+            this.repositoryItemLookUpEditEx68.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx68.Name = "repositoryItemLookUpEditEx68";
+            // 
+            // repositoryItemLookUpEditEx69
+            // 
+            this.repositoryItemLookUpEditEx69.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx69.Name = "repositoryItemLookUpEditEx69";
+            // 
+            // repositoryItemLookUpEditEx70
+            // 
+            this.repositoryItemLookUpEditEx70.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx70.Name = "repositoryItemLookUpEditEx70";
+            // 
+            // repositoryItemButtonEditEx37
+            // 
+            this.repositoryItemButtonEditEx37.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx37.Name = "repositoryItemButtonEditEx37";
+            // 
+            // repositoryItemButtonEditEx38
+            // 
+            this.repositoryItemButtonEditEx38.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx38.Name = "repositoryItemButtonEditEx38";
+            // 
+            // repositoryItemButtonEditEx39
+            // 
+            this.repositoryItemButtonEditEx39.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx39.Name = "repositoryItemButtonEditEx39";
+            // 
+            // repositoryItemLookUpEditEx71
+            // 
+            this.repositoryItemLookUpEditEx71.BindingField = "OBS_ID";
+            this.repositoryItemLookUpEditEx71.BizComponentID = "P_COM0016";
+            this.repositoryItemLookUpEditEx71.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx71.Name = "repositoryItemLookUpEditEx71";
+            this.repositoryItemLookUpEditEx71.NullText = "Choose DPO";
+            // 
+            // repositoryItemButtonEditEx40
+            // 
+            this.repositoryItemButtonEditEx40.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx40.Name = "repositoryItemButtonEditEx40";
+            // 
+            // repositoryItemButtonEditEx41
+            // 
+            this.repositoryItemButtonEditEx41.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx41.Name = "repositoryItemButtonEditEx41";
+            // 
+            // repositoryItemButtonEditEx42
+            // 
+            this.repositoryItemButtonEditEx42.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx42.Name = "repositoryItemButtonEditEx42";
+            // 
+            // repositoryItemButtonEdit5
+            // 
+            this.repositoryItemButtonEdit5.AutoHeight = false;
+            this.repositoryItemButtonEdit5.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit5.Name = "repositoryItemButtonEdit5";
+            // 
+            // repositoryItemLookUpEditEx72
+            // 
+            this.repositoryItemLookUpEditEx72.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx72.Name = "repositoryItemLookUpEditEx72";
+            this.repositoryItemLookUpEditEx72.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx73
+            // 
+            this.repositoryItemLookUpEditEx73.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx73.Name = "repositoryItemLookUpEditEx73";
+            // 
+            // repositoryItemButtonEditEx43
+            // 
+            this.repositoryItemButtonEditEx43.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx43.Name = "repositoryItemButtonEditEx43";
+            // 
+            // repositoryItemButtonEditEx44
+            // 
+            this.repositoryItemButtonEditEx44.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx44.Name = "repositoryItemButtonEditEx44";
+            // 
+            // repositoryItemButtonEditEx45
+            // 
+            this.repositoryItemButtonEditEx45.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEditEx45.Name = "repositoryItemButtonEditEx45";
+            // 
+            // repositoryItemLookUpEditEx74
+            // 
+            this.repositoryItemLookUpEditEx74.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx74.Name = "repositoryItemLookUpEditEx74";
+            this.repositoryItemLookUpEditEx74.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx75
+            // 
+            this.repositoryItemLookUpEditEx75.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx75.Name = "repositoryItemLookUpEditEx75";
+            this.repositoryItemLookUpEditEx75.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx76
+            // 
+            this.repositoryItemLookUpEditEx76.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx76.Name = "repositoryItemLookUpEditEx76";
+            this.repositoryItemLookUpEditEx76.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx77
+            // 
+            this.repositoryItemLookUpEditEx77.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx77.Name = "repositoryItemLookUpEditEx77";
+            this.repositoryItemLookUpEditEx77.NullText = "";
+            // 
+            // repositoryItemLookUpEditEx78
+            // 
+            this.repositoryItemLookUpEditEx78.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx78.Name = "repositoryItemLookUpEditEx78";
+            // 
+            // repositoryItemLookUpEditEx79
+            // 
+            this.repositoryItemLookUpEditEx79.BizComponentID = "L_COM0050";
+            this.repositoryItemLookUpEditEx79.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx79.Name = "repositoryItemLookUpEditEx79";
+            // 
+            // repositoryItemLookUpEditEx80
+            // 
+            this.repositoryItemLookUpEditEx80.BizComponentID = "L_COM0050";
+            this.repositoryItemLookUpEditEx80.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditEx80.Name = "repositoryItemLookUpEditEx80";
+            // 
+            // repositoryItemCheckEditEx30
+            // 
+            this.repositoryItemCheckEditEx30.Caption = "Check";
+            this.repositoryItemCheckEditEx30.Name = "repositoryItemCheckEditEx30";
+            this.repositoryItemCheckEditEx30.ValueChecked = "Y";
+            this.repositoryItemCheckEditEx30.ValueUnchecked = "N";
+            // 
+            // gridViewEx1
+            // 
+            this.gridViewEx1.ActionMode = JPlatform.Client.Controls6.ActionMode.View;
+            this.gridViewEx1.GridControl = this.grdBaseNpi;
+            this.gridViewEx1.Name = "gridViewEx1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1367, 781);
+            this.Controls.Add(this.grdBaseNpi);
+            this.Controls.Add(this.cmdNpi);
             this.Controls.Add(this.cmdCutting);
             this.Controls.Add(this.cmdPoToIe);
             this.Controls.Add(this.cmdPoTo);
@@ -1922,23 +2254,23 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "20200715040000";
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series20)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series21)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series24)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).EndInit();
@@ -2085,6 +2417,37 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdBase1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase1)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.grdBaseNpi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdViewNpi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx29)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx65)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx66)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx67)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx68)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx69)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx70)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx37)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx38)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx39)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx71)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx40)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx41)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx42)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx72)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx73)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx43)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx44)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEditEx45)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx74)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx75)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx76)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx77)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx78)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx79)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditEx80)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx30)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewEx1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2256,6 +2619,38 @@
         private System.Windows.Forms.Button cmdPoTo;
         private System.Windows.Forms.Button cmdPoToIe;
         private System.Windows.Forms.Button cmdCutting;
+        private System.Windows.Forms.Button cmdNpi;
+        private JPlatform.Client.Controls6.GridControlEx grdBaseNpi;
+        private JPlatform.Client.Controls6.BandedGridViewEx grdViewNpi;
+        private JPlatform.Client.Controls6.RepositoryItemCheckEditEx repositoryItemCheckEditEx29;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx65;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx66;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx67;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx68;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx69;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx70;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx37;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx38;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx39;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx71;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx40;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx41;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx42;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit5;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx72;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx73;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx43;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx44;
+        private JPlatform.Client.Controls6.RepositoryItemButtonEditEx repositoryItemButtonEditEx45;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx74;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx75;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx76;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx77;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx78;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx79;
+        private JPlatform.Client.Controls6.RepositoryItemLookUpEditEx repositoryItemLookUpEditEx80;
+        private JPlatform.Client.Controls6.RepositoryItemCheckEditEx repositoryItemCheckEditEx30;
+        private JPlatform.Client.Controls6.GridViewEx gridViewEx1;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
