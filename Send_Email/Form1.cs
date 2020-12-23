@@ -2725,7 +2725,55 @@ namespace Send_Email
                 return null;
             }
         }
+        public DataSet SEL_TMD_DASH_DATA(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
 
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_TMS_ORDER";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "CV_1";
+                MyOraDB.Parameter_Name[2] = "CV_2";
+                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("SEL_CUTTING_DATA: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
         #endregion
 
 
@@ -2747,7 +2795,10 @@ namespace Send_Email
             }));
         }
 
-       
+        private void btnRunTMS_Click(object sender, EventArgs e)
+        {
+            RunTMSDash("Q");
+        }
 
         private void checkRunning()
         {
@@ -2759,8 +2810,112 @@ namespace Send_Email
 
 
 
-       
+        private void RunTMSDash(string arg_type)
+        {
+            try
+            {
+                if (_isRun2) return;
 
-        
+                _isRun2 = true;
+                DataSet dsData = SEL_TMD_DASH_DATA(arg_type);
+                if (dsData == null) return;
+
+                DataTable dtHeader = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                string html = getHTMLBodyHeaderTMSDash(dtHeader, dtData);
+
+                CreateMail("TMS MONITORING SUMMARY", html, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+
+        private string getHTMLBodyHeaderTMSDash(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string style = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashstyle.txt");
+                string header1 = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashhtml.txt");
+                string body = string.Empty;
+                object[] argsBody = new object[dtData.Columns.Count];
+                for (int i = 0; i < dtData.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dtData.Columns.Count; j++)
+                    {
+                        if (j > 0)
+                            argsBody[j - 1] = dtData.Rows[i][j].ToString();
+                    }
+                    body += string.Format(@"</tr><tr align='right' style='font-weight:bold;'>
+                               <td align='center'>{0}</td>
+                               <td align='center'>{1}</td>
+                               <td bgcolor='#fff4b0'>{2}</td>
+                               <td>{3}</td>
+                               <td bgcolor='{37}' style='color:{38}'>{4}</td>
+                               <td>{5}</td>
+                               <td>{6}</td>
+                               <td bgcolor='#fff4b0'>{7}</td>
+                               <td>{8}</td>
+                               <td>{9}</td>
+                               <td>{10}</td>
+                               <td>{11}</td>
+                               <td bgcolor='#fff4b0'>{12}</td>
+                               <td>{13}</td>
+                               <td>{14}</td>
+                               <td>{15}</td>
+                               <td>{16}</td>
+                               <td bgcolor='#fff4b0'> {17} </td>
+                               <td>{18}</td>
+                               <td>{19}</td>
+                               <td>{20}</td>
+                               <td>{21}</td>
+                               <td bgcolor='#fff4b0'>{22}</td>
+                               <td>{23}</td>
+                               <td>{24}</td>
+                               <td>{25}</td>
+                               <td>{26}</td>
+                               <td bgcolor='#fff4b0'> {27}</td>
+                               <td>{28}</td>
+                               <td>{29}</td>
+                               <td>{30}</td>
+                               <td>{31}</td>
+                               <td bgcolor='#fff4b0'  > {32} </td>
+                               <td>{33}</td>
+                               <td>{34}</td>
+                               <td>{35}</td>
+                               <td>{36} </td>
+                              </tr>", argsBody);
+
+                }
+                object[] argsHeader = new object[dtHead.Rows.Count];
+                for (int i = 0; i < argsHeader.Length; i++)
+                {
+                    argsHeader[i] = dtHead.Rows[i]["CAPTION"].ToString();
+                }
+                string end = @"</table>";
+                string remakeHeader = string.Format(header1, argsHeader);
+
+                //  string remakeBody = string.Format(body, argsBody);
+                return string.Concat(style, remakeHeader, body, end);
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+
     }
 }
