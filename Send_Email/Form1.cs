@@ -21,7 +21,6 @@ namespace Send_Email
         {
             InitializeComponent();
             
-
             grdBase1.Size = new Size(1950, 1100);
             grdBase2.Size = new Size(1950, 1100);
             grdBase3.Size = new Size(1950, 1200);
@@ -40,9 +39,9 @@ namespace Send_Email
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
-        readonly string[] _emailTest = {   "dien.it@changshininc.com" };
-
-
+        //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
+        //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -115,7 +114,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.PHUOC"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -133,7 +132,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
 
                 mailItem.HTMLBody = htmlBody;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -2828,7 +2827,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTMSDash(dtHeader, dtData);
 
-                CreateMail("TMS MONITORING SUMMARY", html, dtEmail);
+                CreateMail(Emoji.DeliveryTruck +  " TMS MONITORING SUMMARY", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -2858,11 +2857,11 @@ namespace Send_Email
                     }
                     body += string.Format(@"</tr><tr align='right' style='font-weight:bold;'>
                                <td align='center'>{0}</td>
-                               <td align='center'>{1}</td>
+                               <td align='center' bgcolor='{39}' style='color:{40}'>{1}</td>
                                <td bgcolor='#fff4b0'>{2}</td>
                                <td>{3}</td>
                                <td bgcolor='{37}' style='color:{38}'>{4}</td>
-                               <td>{5}</td>
+                               <td style='color:red'>{5}</td>
                                <td>{6}</td>
                                <td bgcolor='#fff4b0'>{7}</td>
                                <td>{8}</td>
@@ -2897,12 +2896,13 @@ namespace Send_Email
                               </tr>", argsBody);
 
                 }
-                object[] argsHeader = new object[dtHead.Rows.Count];
-                for (int i = 0; i < argsHeader.Length; i++)
+                object[] argsHeader = new object[dtHead.Rows.Count+1];
+                for (int i = 0; i < dtHead.Rows.Count; i++)
                 {
                     argsHeader[i] = dtHead.Rows[i]["CAPTION"].ToString();
                 }
-                string end = @"</table>";
+                argsHeader[6] = dtHead.Rows[0]["REMARKS"].ToString();
+                string end = @"</table><hr></body></html>";
                 string remakeHeader = string.Format(header1, argsHeader);
 
                 //  string remakeBody = string.Format(body, argsBody);
