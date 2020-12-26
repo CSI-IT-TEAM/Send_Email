@@ -41,7 +41,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com", "ngoc.it@changshininc.com", "jungbo.shim@dskorea.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -2715,7 +2715,6 @@ namespace Send_Email
                     }
                     return null;
                 }
-
                 return ds_ret;
             }
             catch (Exception ex)
@@ -2827,7 +2826,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTMSDash(dtHeader, dtData);
 
-                CreateMail(Emoji.DeliveryTruck +  " TMS MONITORING SUMMARY", html, dtEmail);
+                CreateMail(Emoji.ChartIncreasing +  " TMS MONITORING SUMMARY", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -2888,7 +2887,7 @@ namespace Send_Email
                                <td>{29}</td>
                                <td>{30}</td>
                                <td>{31}</td>
-                               <td bgcolor='#fff4b0'  > {32} </td>
+                               <td bgcolor='#fff4b0'> {32} </td>
                                <td>{33}</td>
                                <td>{34}</td>
                                <td>{35}</td>
