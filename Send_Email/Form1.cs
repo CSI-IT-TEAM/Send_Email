@@ -20,7 +20,6 @@ namespace Send_Email
         public Form1()
         {
             InitializeComponent();
-            
 
             grdBase1.Size = new Size(1950, 1100);
             grdBase2.Size = new Size(1950, 1100);
@@ -40,9 +39,7 @@ namespace Send_Email
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
-        readonly string[] _emailTest = {   "phuoc.it@changshininc.com" };
-
-
+        readonly string[] _emailTest = {   "dien.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -51,7 +48,7 @@ namespace Send_Email
             RunToPo("Q1");
             RunToPoIe("Q1");
             RunProduction("Q1");
-            
+
             //7h
             RunEScan("Q1");
             RunAndon("Q1");
@@ -123,8 +120,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC")
-                    )
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -142,7 +138,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
 
                 mailItem.HTMLBody = htmlBody;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -228,7 +224,7 @@ namespace Send_Email
                                 cntLine = dept.Count()
                             };
                 System.Collections.Hashtable ht = new System.Collections.Hashtable();
-                foreach(var row in query)
+                foreach (var row in query)
                 {
                     ht.Add(row.Name, row.cntLine);
                 }
@@ -254,10 +250,10 @@ namespace Send_Email
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Next TO</th>" +
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Staffing Ratio(%)</th>" +
                         "</tr>" +
-                        "<tr>" +                           
+                        "<tr>" +
                             strDate +
                             "<th bgcolor='#0066ff' style='color:#ffffff' align='center' width = '80'>AVG</th>" +
-                            
+
                         "</tr>";
 
                 for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
@@ -317,8 +313,8 @@ namespace Send_Email
                             : $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='left' rowspan='{ht[Plant]}' >{Plant}</td>";
                     }
 
-                    HtmlTableBody += 
-                            "<tr>" +                               
+                    HtmlTableBody +=
+                            "<tr>" +
                                 rowspan +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='left' >{Line}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{To}</td>" +
@@ -358,7 +354,7 @@ namespace Send_Email
                                     HtmlTableBody +
                               "</table>";
 
-                mailItem.HTMLBody =  html;
+                mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -432,7 +428,7 @@ namespace Send_Email
                 DataSet dsData = SEL_TO_PO_IE(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
 
-                DataTable dtData = dsData.Tables[0];               
+                DataTable dtData = dsData.Tables[0];
                 DataTable dtEmail = dsData.Tables[1];
 
                 WriteLog(dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
@@ -495,13 +491,13 @@ namespace Send_Email
 
 
                 var query2 = from row in dtData.AsEnumerable()
-                            group row by row.Field<string>("MLINE") into dept
-                            orderby dept.Key
-                            select new
-                            {
-                                Name = dept.Key,
-                                cntLine = dept.Count()
-                            };
+                             group row by row.Field<string>("MLINE") into dept
+                             orderby dept.Key
+                             select new
+                             {
+                                 Name = dept.Key,
+                                 cntLine = dept.Count()
+                             };
 
                 System.Collections.Hashtable ht = new System.Collections.Hashtable();
                 System.Collections.Hashtable ht2 = new System.Collections.Hashtable();
@@ -571,7 +567,7 @@ namespace Send_Email
                             "<tr>" +
                                 rowspan +
                                 rowspan2 +
-                               // "<td bgcolor='{0}' style='color:{1}' align='left'>{5}</td>" +
+                                // "<td bgcolor='{0}' style='color:{1}' align='left'>{5}</td>" +
                                 "<td bgcolor='{0}' style='color:{1}' align='left'>{12}</td>" +
                                 "<td bgcolor='{0}' style='color:{1}' align='right'>{6}</td>" +
                                 "<td bgcolor='{0}' style='color:{1}' align='right'>{15}</td>" +
@@ -752,8 +748,8 @@ namespace Send_Email
                                     "<b style='font-family:Times New Roman; font-size:22px; font-style:Italic;'>Tan Phu</b>" +
                                     "<br>" +
                                     HtmlTanPhu;
-                                    
-                                      
+
+
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -773,7 +769,7 @@ namespace Send_Email
             for (int iRow = 0; iRow < iRowCount; iRow++)
             {
                 string RowCurrdate = argDt.Rows[iRow]["DATE"].ToString();
-  
+
                 value[0] = RowCurrdate;
                 value[1] = argDt.Rows[iRow]["BG_COLOR"].ToString();
                 value[2] = argDt.Rows[iRow]["FORE_COLOR"].ToString();
@@ -782,7 +778,7 @@ namespace Send_Email
 
                 if (iRow == 0 || RowCurrdate != argDt.Rows[iRow - 1]["DATE"].ToString())
                 {
-                    rowValue += string.Format("<tr><td align='center' width='80'>{0}</td>", value) ;
+                    rowValue += string.Format("<tr><td align='center' width='80'>{0}</td>", value);
                 }
 
                 rowValue += string.Format(
@@ -803,7 +799,7 @@ namespace Send_Email
                     "</table>";
         }
 
-        
+
 
         private string GetHeader(DataTable argTable)
         {
@@ -811,9 +807,9 @@ namespace Send_Email
             DataTable dtHeader = new DataView(argTable).ToTable(true, selectedColumns);
 
             dtHeader = dtHeader.Select("", "ORD").Distinct().CopyToDataTable();
-        
+
             string strHeaderRow1 = "", strHeaderRow2 = "";
-            foreach(DataRow row in dtHeader.Rows)
+            foreach (DataRow row in dtHeader.Rows)
             {
                 strHeaderRow1 += " <th colspan = '2' align='center'>" + row["LINE"].ToString() + "</th>";
                 strHeaderRow2 += " <th bgcolor='#ff9900' style='color:#ffffff' align='center'  >Scan</th>" +
@@ -826,7 +822,7 @@ namespace Send_Email
                              "</tr>" +
                              "<tr>" +
                                  strHeaderRow2 +
-                             "</tr>" ;
+                             "</tr>";
             return strHtml;
         }
 
@@ -839,7 +835,7 @@ namespace Send_Email
                 string process_name = "P_SEND_EMAIL_ESCAN_TEST";
 
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
-               // MyOraDB.ShowErr = true;
+                // MyOraDB.ShowErr = true;
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 
@@ -878,8 +874,8 @@ namespace Send_Email
                         WriteLog("P_SEND_EMAIL_ESCAN: null");
                     }
                     return null;
-                }                    
-                    
+                }
+
                 return ds_ret;
             }
             catch
@@ -917,10 +913,10 @@ namespace Send_Email
             }
             finally
             {
-                
+
                 _isRun2 = false;
             }
-            
+
         }
 
         private void CreateMailProduction(DataTable dtDate, DataTable dtData, DataTable dtEmail)
@@ -932,11 +928,11 @@ namespace Send_Email
                 mailItem.Subject = "Productivity achievement ratio at this time";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
-                
+
                 //Get List Send email 
                 if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
                 {
-                    
+
                     foreach (DataRow row in dtEmail.Rows)
                     {
                         Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
@@ -952,7 +948,7 @@ namespace Send_Email
                         oRecip.Resolve();
                     }
                 }
-               
+
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
@@ -1019,9 +1015,9 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["REASON_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["REASON_FORE_COLOR"].ToString() + "' align='left' >" + dtData.Rows[iRow]["REASON"].ToString() + " </td>" +
                                   "</tr>";
                         }
-                           
+
                     }
-                }    
+                }
 
                 string strDate = "";
                 foreach (DataRow row in dtDate.Rows)
@@ -1029,24 +1025,24 @@ namespace Send_Email
                     strDate += "<th bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '70' >" + row["YMD"].ToString() + " </th >";
                 }
 
-                   string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
-                                  "<tr bgcolor='#ffe5cc'>" +
-                                     " <th rowspan = '2' align='center' width='70'>Plant</th>" +
-                                     " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
-                                     " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day performance</th>" +
-                                     " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '4' align='center'> Before lunch on today performance</th>" +                                     " <th rowspan = '2' align='center' bgcolor = '#000000' style = 'color:#ffffff' width='200'>Reason of underproduction</th>" +
-                                     
-                                  "</tr>" +
-                                  "<tr>" +
-                                     strDate +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Real Plan</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Actual</th>" +
-                                     "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Ratio(%)</th>" +
-                                  "</tr>" +
-                                  
-                                    rowValue +
-                              "</table>";
+                string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
+                               "<tr bgcolor='#ffe5cc'>" +
+                                  " <th rowspan = '2' align='center' width='70'>Plant</th>" +
+                                  " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
+                                  " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day performance</th>" +
+                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '4' align='center'> Before lunch on today performance</th>" + " <th rowspan = '2' align='center' bgcolor = '#000000' style = 'color:#ffffff' width='200'>Reason of underproduction</th>" +
+
+                               "</tr>" +
+                               "<tr>" +
+                                  strDate +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Real Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Actual</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Ratio(%)</th>" +
+                               "</tr>" +
+
+                                 rowValue +
+                           "</table>";
 
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
                 //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
@@ -1055,7 +1051,7 @@ namespace Send_Email
 
 
 
-                mailItem.HTMLBody =  html;
+                mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -1095,7 +1091,7 @@ namespace Send_Email
 
 
                 MyOraDB.Add_Select_Parameter(true);
-                
+
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
                 if (ds_ret == null)
@@ -1119,7 +1115,7 @@ namespace Send_Email
         #endregion
 
         #region Email ANDON
-        
+
         private void RunAndon(string argType)
         {
             try
@@ -1140,7 +1136,7 @@ namespace Send_Email
             }
             finally
             {
-                
+
             }
 
         }
@@ -1227,14 +1223,14 @@ namespace Send_Email
                                         "</td>" +
 
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" +
-                                            
+
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
-                                        //"<td rowspan='" + strRowSpan + "' align ='center'" +
-                                        //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
-                                        //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
-                                        //"</td>" +
+                                   //"<td rowspan='" + strRowSpan + "' align ='center'" +
+                                   //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                   //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
+                                   //"</td>" +
 
                                    //   "<td align='center'>" + dtData.Rows[iRow]["AVERAGE_ELAPSE_MLINE"].ToString() + "</td>" +
 
@@ -1305,14 +1301,14 @@ namespace Send_Email
                                         "</td>" +
 
                                         "<td rowspan='" + strRowSpan + "' align ='center'>" +
-                                            
+
                                             dtData.Rows[iRow]["MACHINE_CNT_LINE"].ToString() +
                                         "</td>" +
 
-                                        //"<td rowspan='" + strRowSpan + "' align ='center'" +
-                                        //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
-                                        //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
-                                        //"</td>" +
+                                   //"<td rowspan='" + strRowSpan + "' align ='center'" +
+                                   //     "bgcolor='" + dtData.Rows[iRow]["BG_COLOR6"].ToString() + "' style='color:" + dtData.Rows[iRow]["FORE_COLOR6"].ToString() + "'>" +
+                                   //    dtData.Rows[iRow]["DOWN_TIME"].ToString() +
+                                   //"</td>" +
 
                                    "</tr>"; ;
 
@@ -1349,7 +1345,7 @@ namespace Send_Email
                                      "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
                                      "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
                                      "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
-                                     //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                  //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
                                   "</tr>" +
                                     rowValue +
                               "</table>";
@@ -1363,7 +1359,7 @@ namespace Send_Email
                 WriteLog("CreateMailAndon: " + ex.ToString());
             }
         }
-       
+
 
         public DataSet SEL_ANDON_DATA(string V_P_TYPE, string V_P_DATE)
         {
@@ -1481,7 +1477,7 @@ namespace Send_Email
             if (!LoadData(argType))
             {
                 // MessageBox.Show("Do not Send!");
-                
+
                 _isRun = false;
                 return;
             }
@@ -1496,7 +1492,7 @@ namespace Send_Email
                 CaptureControl(grdBase4, "Grid4");
                 CreateMailBottomInventory();
             }
-            catch {lblStatus.Text = DateTime.Now.ToString() + "Do not Send!"; }
+            catch { lblStatus.Text = DateTime.Now.ToString() + "Do not Send!"; }
             finally { _isRun = false; }
         }
 
@@ -1542,7 +1538,7 @@ namespace Send_Email
             {
                 Cursor.Current = Cursors.Default;
             }
-           
+
         }
 
         private bool buildHeader_detail(DataTable dtSource, DataTable dt)
@@ -1708,13 +1704,13 @@ namespace Send_Email
             Bitmap bmp = new Bitmap(control.Width, control.Height);
             if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
             control.DrawToBitmap(bmp, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
-            bmp.Save(Path + nameImg +  @".png", System.Drawing.Imaging.ImageFormat.Png); //you could ave in BPM, PNG  etc format.
+            bmp.Save(Path + nameImg + @".png", System.Drawing.Imaging.ImageFormat.Png); //you could ave in BPM, PNG  etc format.
             //byte[] Pic_arr = new byte[ms.Length];
             //ms.Position = 0;
             //ms.Read(Pic_arr, 0, Pic_arr.Length);
             //ms.Close();
         }
-        
+
         public DataSet SEL_LOAD_DATA(string V_P_WORK_TYPE, string V_P_DATE, string V_P_COMP, string V_P_SET_YN)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -1764,7 +1760,7 @@ namespace Send_Email
             }
         }
 
-        
+
 
         private void gvwBase2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
@@ -1832,7 +1828,7 @@ namespace Send_Email
                 _isRun2 = true;
                 DataSet dsData = SEL_CUTTING_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
-               
+
                 DataTable dtHeader = dsData.Tables[1];
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtEmail = dsData.Tables[2];
@@ -1896,7 +1892,7 @@ namespace Send_Email
                 //string[] ColumHead = new string[dtHeader.Rows.Count];
 
                 TableHeader = "<tr> " +
-                                // "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Rank</td>" +
+                                 // "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Rank</td>" +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '80'>Plant</td>" +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '50'>Line</td>" +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan = '2' align = 'center' width = '80'>Stitching Line</td>" +
@@ -1905,11 +1901,11 @@ namespace Send_Email
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPA<br>(D-D +6H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPA2<br>(D-D +10H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPO<br>(D-D +16H)</td > " +
-                                                                
-                                 
-                                 
 
-                                 
+
+
+
+
                               "</tr> " +
                               "<tr> " +
                                  "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
@@ -1920,9 +1916,9 @@ namespace Send_Email
                                  "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
                                  "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
                                  "<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '120' >Slow</td > " +
-                                 //"<td bgcolor = '#ff3399' style = 'color:#ffffff' align = 'center' width = '100' >Assembly Date</td > " +
-                                 //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Input Date</td > " +
-                                 //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Input Time</td > " +
+                              //"<td bgcolor = '#ff3399' style = 'color:#ffffff' align = 'center' width = '100' >Assembly Date</td > " +
+                              //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Input Date</td > " +
+                              //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Input Time</td > " +
                               //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Date</td > " +
                               //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Time</td > " +
                               "</tr> ";
@@ -1936,13 +1932,13 @@ namespace Send_Email
                     string deptName = dtData.Rows[iRow]["LINE_NAME"].ToString();
                     string mline = dtData.Rows[iRow]["MLINE_CD"].ToString();
                     string cLine = dtData.Rows[iRow]["UPS_LINE"].ToString();
-                 //   string Component = dtData.Rows[iRow]["PART_NM"].ToString();
+                    //   string Component = dtData.Rows[iRow]["PART_NM"].ToString();
 
-                  //  string AssYmdQty = dtData.Rows[iRow]["ASY_YMD"].ToString();
+                    //  string AssYmdQty = dtData.Rows[iRow]["ASY_YMD"].ToString();
                     string UpsYmdQty = dtData.Rows[iRow]["UPS_YMD"].ToString();
-                   // string UpsHmsQty = dtData.Rows[iRow]["UPS_HMS"].ToString();
+                    // string UpsHmsQty = dtData.Rows[iRow]["UPS_HMS"].ToString();
                     string UpsBColor = ColorNull(dtData.Rows[iRow]["UPS_BCOLOR"].ToString());
-                    string UpsFColor = ColorNull(dtData.Rows[iRow]["UPS_FCOLOR"].ToString());                  
+                    string UpsFColor = ColorNull(dtData.Rows[iRow]["UPS_FCOLOR"].ToString());
 
                     //string UpsSlowQty = dtData.Rows[iRow]["UPS_SLOW"].ToString();
                     //string UpsFastQty = dtData.Rows[iRow]["UPS_FAST"].ToString();
@@ -1953,7 +1949,7 @@ namespace Send_Email
 
                     string UpcSlowQty = dtData.Rows[iRow]["UPC_SLOW"].ToString();
                     string UpcFastQty = dtData.Rows[iRow]["UPC_FAST"].ToString();
-                    string UpcSlowBColor = ColorNull(dtData.Rows[iRow]["UPC_BCOLOR_S"].ToString()) ;
+                    string UpcSlowBColor = ColorNull(dtData.Rows[iRow]["UPC_BCOLOR_S"].ToString());
                     string UpcSlowFColor = ColorNull(dtData.Rows[iRow]["UPC_FCOLOR_S"].ToString());
                     string UpcFastBColor = ColorNull(dtData.Rows[iRow]["UPC_BCOLOR_F"].ToString());
                     string UpcFastFColor = ColorNull(dtData.Rows[iRow]["UPC_FCOLOR_F"].ToString());
@@ -1961,9 +1957,9 @@ namespace Send_Email
                     string UpaSlowQty = dtData.Rows[iRow]["UPA_SLOW"].ToString();
                     string UpaFastQty = dtData.Rows[iRow]["UPA_FAST"].ToString();
                     string UpaSlowBColor = ColorNull(dtData.Rows[iRow]["UPA_BCOLOR_S"].ToString());
-                    string UpaSlowFColor = ColorNull(dtData.Rows[iRow]["UPA_FCOLOR_S"].ToString()) ;
+                    string UpaSlowFColor = ColorNull(dtData.Rows[iRow]["UPA_FCOLOR_S"].ToString());
                     string UpaFastBColor = ColorNull(dtData.Rows[iRow]["UPA_BCOLOR_F"].ToString());
-                    string UpaFastFColor = ColorNull(dtData.Rows[iRow]["UPA_FCOLOR_F"].ToString()) ;
+                    string UpaFastFColor = ColorNull(dtData.Rows[iRow]["UPA_FCOLOR_F"].ToString());
 
                     string Upa2SlowQty = dtData.Rows[iRow]["UPA2_SLOW"].ToString();
                     string Upa2FastQty = dtData.Rows[iRow]["UPA2_FAST"].ToString();
@@ -1975,7 +1971,7 @@ namespace Send_Email
                     string UpoSlowQty = dtData.Rows[iRow]["UPO_SLOW"].ToString();
                     string UpoFastQty = dtData.Rows[iRow]["UPO_FAST"].ToString();
                     string UpoSlowBColor = ColorNull(dtData.Rows[iRow]["UPO_BCOLOR_S"].ToString());
-                    string UpoSlowFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_S"].ToString()) ;
+                    string UpoSlowFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_S"].ToString());
                     string UpoFastBColor = ColorNull(dtData.Rows[iRow]["UPO_BCOLOR_F"].ToString());
                     string UpoFastFColor = ColorNull(dtData.Rows[iRow]["UPO_FCOLOR_F"].ToString());
 
@@ -1985,7 +1981,7 @@ namespace Send_Email
                     rowspan2 = $"<td bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htLine[deptName + mline]}'>{mline.TrimStart('0')}</td>";
 
 
-                    if (deptName == "LEAN L" && mline == "005" )
+                    if (deptName == "LEAN L" && mline == "005")
                     { }
 
 
@@ -2003,7 +1999,7 @@ namespace Send_Email
 
 
                     TableRow += "<tr>" +
-                                 //  rowspan3 +
+                                   //  rowspan3 +
                                    rowspan +
                                    rowspan2 +
                                    //$"<td bgcolor='WHITE' style='color:BLACK' align='center'>{(iRow+1).ToString()}</td>" +
@@ -2020,15 +2016,15 @@ namespace Send_Email
                                    $"<td bgcolor='{Upa2SlowBColor}' style='color:{Upa2SlowFColor}' align='center'>{Upa2SlowQty}</td>" +
                                    $"<td bgcolor='{UpoFastBColor}' style='color:{UpoFastFColor}' align='center'>{UpoFastQty}</td>" +
                                    $"<td bgcolor='{UpoSlowBColor}' style='color:{UpoSlowFColor}' align='center'>{UpoSlowQty}</td>" +
-                                   
-                                   
-                                   
-                                   
-                                   
-                                   
-                                 //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{AssYmdQty}</td>" +
-                                   
-                                 //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsHmsQty}</td>" +
+
+
+
+
+
+
+                               //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{AssYmdQty}</td>" +
+
+                               //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{UpsHmsQty}</td>" +
                                // $"<td bgcolor='{FgaBColor}' style='color:{FgaFColor}' align='center'>{FgaYmdQty}</td>" +
                                //    $"<td bgcolor='{FgaBColor}' style='color:{FgaFColor}' align='center'>{FgaHmsQty}</td>" +
 
@@ -2059,8 +2055,8 @@ namespace Send_Email
         public DataSet SEL_CUTTING_DATA(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
-         
-            
+
+
             DataSet ds_ret;
             try
             {
@@ -2117,8 +2113,8 @@ namespace Send_Email
 
         private void RunNPI2()
         {
-            
-            fn_BindingHeader(); 
+
+            fn_BindingHeader();
             fn_BindingData();
             CaptureControl(grdBaseNpi, "GridNpi");
             CreateMailNpi();
@@ -2163,10 +2159,10 @@ namespace Send_Email
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
                 string imgGrid1 = "imgGrid1";
-                  oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
+                oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
                 //oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x00390040", imgGrid1);
 
-                
+
 
                 mailItem.HTMLBody = String.Format(
                     "<body>" +
@@ -2244,7 +2240,7 @@ namespace Send_Email
             try
             {
                 DataSet ds = SEL_NPI_DATA2("H");
-                if (ds != null &&  ds.Tables[0].Rows.Count > 0)
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
                 {
                     DataTable dt = ds.Tables[0];
                     grdViewNpi.Bands.Clear();
@@ -2443,7 +2439,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                 WriteLog(ex.Message);
+                WriteLog(ex.Message);
             }
         }
 
@@ -2547,7 +2543,7 @@ namespace Send_Email
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtHeader = dsData.Tables[1];
                 DataTable dtData2 = dsData.Tables[2];
-                DataTable dtHeader2 = dsData.Tables[3];             
+                DataTable dtHeader2 = dsData.Tables[3];
                 DataTable dtExplain = dsData.Tables[4];
                 DataTable dtEmail = dsData.Tables[5];
 
@@ -2586,7 +2582,7 @@ namespace Send_Email
 
                 foreach (DataRow row in dtHeader.Rows)
                 {
-                    
+
                     int.TryParse(row["NPI_CODE"].ToString(), out npiCode);
                     if (npiCode >= 10)
                     {
@@ -2595,17 +2591,17 @@ namespace Send_Email
                         HeaderRow2 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
                         i++;
                     }
-                        
+
                     else
                         HeaderRow1 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
 
-                    
+
                 }
 
 
 
                 TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " +
-                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> " ;
+                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> ";
 
                 //Row
                 string TableRow = "", rowspan = "", rowspan2 = "", rowspan3 = "";
@@ -2629,7 +2625,7 @@ namespace Send_Email
                     string styleCode_prev = "";
                     string prodDate_prev = "";
 
-                    if (iRowData>0)
+                    if (iRowData > 0)
                     {
                         plantNm_prev = dtData.Rows[iRowData - 1]["PLANT_NM"].ToString();
                         lineCd_prev = dtData.Rows[iRowData - 1]["LINE_CD"].ToString();
@@ -2638,13 +2634,13 @@ namespace Send_Email
                         modelName_prev = dtData.Rows[iRowData - 1]["MODEL_NAME"].ToString();
                         styleCode_prev = dtData.Rows[iRowData - 1]["STYLE_CODE"].ToString();
                         prodDate_prev = dtData.Rows[iRowData - 1]["PROD_DATE"].ToString();
-                    }                   
+                    }
 
                     if (plantNm != plantNm_prev || lineCd != lineCd_prev || category != category_prev || tdCode != tdCode_prev ||
                         modelName != modelName_prev || styleCode != styleCode_prev || prodDate != prodDate_prev)
                     {
                         if (iRowData > 0) TableRow += "</tr> ";
-                        TableRow += "<tr> " + 
+                        TableRow += "<tr> " +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='center'>{"&nbsp " + plantNm + "&nbsp"}</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + lineCd + "&nbsp"}</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + category + "&nbsp"}</td>" +
@@ -2652,7 +2648,7 @@ namespace Send_Email
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + styleCode + "&nbsp"}</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + modelName + "&nbsp"}</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + prodDate + "&nbsp"}</td>" +
-                                $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>" 
+                                $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>"
                               ;
                     }
                     else
@@ -2725,7 +2721,6 @@ namespace Send_Email
                     }
                     return null;
                 }
-
                 return ds_ret;
             }
             catch (Exception ex)
@@ -2743,6 +2738,55 @@ namespace Send_Email
             try
             {
                 string process_name = "P_SEND_EMAIL_TMS_ORDER";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "CV_1";
+                MyOraDB.Parameter_Name[2] = "CV_2";
+                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("SEL_CUTTING_DATA: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        public DataSet SEL_TIME_CONTRAINT_DATA(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_TIME_CONTRAINT";
                 MyOraDB.ReDim_Parameter(4);
                 MyOraDB.Process_Name = process_name;
 
@@ -2834,7 +2878,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTMSDash(dtHeader, dtData);
 
-                CreateMail("NOS LINE - DAILY TMS PERFORMANCE RANKING (Outgoing In Order & Outgoing Without Order)", html, dtEmail);
+                CreateMail("TMS MONITORING SUMMARY", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -2846,6 +2890,18 @@ namespace Send_Email
             }
         }
 
+        private void btnTimeContraint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RunTimeContraint("Q");
+            }
+            catch
+            {
+
+
+            }
+        }
 
         private string getHTMLBodyHeaderTMSDash(DataTable dtHead, DataTable dtData)
         {
@@ -2864,11 +2920,11 @@ namespace Send_Email
                     }
                     body += string.Format(@"</tr><tr align='right' style='font-weight:bold;'>
                                <td align='center'>{0}</td>
-                               <td align='center'>{1}</td>
+                               <td align='center' bgcolor='{39}' style='color:{40}'>{1}</td>
                                <td bgcolor='#fff4b0'>{2}</td>
                                <td>{3}</td>
                                <td bgcolor='{37}' style='color:{38}'>{4}</td>
-                               <td>{5}</td>
+                               <td style='color:red'>{5}</td>
                                <td>{6}</td>
                                <td bgcolor='#fff4b0'>{7}</td>
                                <td>{8}</td>
@@ -2895,7 +2951,7 @@ namespace Send_Email
                                <td>{29}</td>
                                <td>{30}</td>
                                <td>{31}</td>
-                               <td bgcolor='#fff4b0'  > {32} </td>
+                               <td bgcolor='#fff4b0'> {32} </td>
                                <td>{33}</td>
                                <td>{34}</td>
                                <td>{35}</td>
@@ -2903,12 +2959,13 @@ namespace Send_Email
                               </tr>", argsBody);
 
                 }
-                object[] argsHeader = new object[dtHead.Rows.Count];
-                for (int i = 0; i < argsHeader.Length; i++)
+                object[] argsHeader = new object[dtHead.Rows.Count + 1];
+                for (int i = 0; i < dtHead.Rows.Count; i++)
                 {
                     argsHeader[i] = dtHead.Rows[i]["CAPTION"].ToString();
                 }
-                string end = @"</table>";
+                argsHeader[6] = dtHead.Rows[0]["REMARKS"].ToString();
+                string end = @"</table><hr></body></html>";
                 string remakeHeader = string.Format(header1, argsHeader);
 
                 //  string remakeBody = string.Format(body, argsBody);
@@ -2921,6 +2978,94 @@ namespace Send_Email
             }
 
         }
+
+
+        private string getHTMLBodyHeaderTimeContraint(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string sHTML = string.Empty;
+                string sHeader1 = string.Empty;
+                string sHeader2 = string.Empty;
+                string sHeader3 = string.Empty;
+                string sBody = string.Empty;
+                string sBody2 = string.Empty;
+                string sStyle = string.Empty;
+                string EndTag = string.Empty;
+                sStyle = @"<html><head>
+		                                            <style type='text/css'>
+			                                            .tg  {border-collapse:collapse;border-spacing:0;}
+                                                        .tg td{border-color:#9dcc7a;border-style:solid;border-width:1px;background-color:#ffffff;font-family:Arial, Helvetica, sans-serif ;font-size:12px;
+                                                          overflow:hidden;padding:10px 5px;word-break:normal;}
+                                                        .tg th{border-color:#9dcc7a;border-style:solid;border-width:1px;background-color:#0080a0;color: #ffffff; font-family:Arial, sans-serif;font-size:12px;
+                                                          font-weight:bold;overflow:hidden;padding:5px 10px;word-break:normal;}
+                                                        .tg .tg-0lax{text-align:center;}
+                                                        .tg .tg-1lax{text-align:left;}
+                                                        .tg .tg-2lax{text-align:right;}
+                                                        .tg .tg-total{text-align:right;background-color:yellow;color: #000000;}
+                                                        @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>";
+                string Colspan = dtHead.Rows[0]["COLSPAN"].ToString();
+                sHeader1 += string.Format(@"
+                                                    </head>
+                                                  <body>
+                                                            <div class='tg-wrap'><table class='tg'>
+                                                            <thead>
+                                                              <tr>
+                                                                <th class='tg-0lax' rowspan='2' id = 'test'>Process</th>
+                                                                <th class='tg-0lax' rowspan='2'>Model Name</th>
+                                                                <th class='tg-0lax' rowspan='2'>Style Code</th>
+                                                                <th class='tg-0lax' colspan='{0}'>Size</th>
+                                                                <th class='tg-0lax' rowspan='2'>Total</th>
+                                                                <th class='tg-0lax' rowspan='2'>Reason</th>
+				                                              </tr><tr>", Colspan);
+                for (int j = 0; j < dtHead.Rows.Count; j++)
+                {
+                    string SIZE_CODE = dtHead.Rows[j]["SIZE_CODE"].ToString();
+                    sHeader2 += string.Format(@"<th class='tg-0lax'>{0}</th>", SIZE_CODE);
+                    string iDx = (j + 5).ToString();
+                    sBody2 += @"<td class='tg-2lax'>{" + iDx + "}</td>";
+                }
+                sHeader3 = @"</tr></thead><tbody>";
+              
+                DataView view = dtData.DefaultView;
+                view.Sort = "SIZE_NO,PROC_CODE,STYLE_CODE";
+                DataTable dt = view.ToTable();
+                dt.Columns.Remove(dt.Columns["SIZE_NO"]);
+                DataTable dtGrid = Pivot(dt, dt.Columns["SIZE_CODE"], dt.Columns["QTY"]);
+                object[] argBodys = new object[dtGrid.Columns.Count];
+                for (int iRow = 0; iRow < dtGrid.Rows.Count; iRow++)
+                {
+                    for (int iCol = 0; iCol < dtGrid.Columns.Count; iCol++)
+                    {
+                        if (iCol > 0)
+                        {
+                            if (dtGrid.Columns[iCol].ColumnName.Equals("TOTAL"))
+                                argBodys[iCol - 1] = string.Format("{0:n0}", dtGrid.Rows[iRow][iCol]);
+                            else
+                                argBodys[iCol - 1] = dtGrid.Rows[iRow][iCol].ToString();
+                        }
+
+                    }
+                    sBody += string.Format(@"<tr><td class='tg-0lax'>{0}</td>
+				                       <td class='tg-1lax'>{1}</td>
+				                       <td class='tg-0lax'>{2}</td>
+				                        " + sBody2 + " <td class='tg-total'>{3}</td><td class='tg-1lax'>{4}</td></tr>", argBodys);
+                }
+
+                EndTag = @"</tbody></table></div>
+                     </body>
+                      </html>";
+                //<script type='text/javascript'>document.getElementById('test').innerHTML = 'Hello World';</script>
+                sHTML = string.Concat(sStyle, sHeader1, sHeader2, sHeader3, sBody, EndTag);
+                return sHTML;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
 
 
     }
