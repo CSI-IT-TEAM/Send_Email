@@ -39,7 +39,9 @@ namespace Send_Email
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
-        readonly string[] _emailTest = {   "dien.it@changshininc.com" };
+        //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
+        //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -53,11 +55,9 @@ namespace Send_Email
             RunEScan("Q1");
             RunAndon("Q1");
             Run("Q1");
-            RunNPI("Q1");
 
             //16h
             RunCutting("Q1");
-
         }
 
         private void cmdRunProd_Click(object sender, EventArgs e)
@@ -101,12 +101,6 @@ namespace Send_Email
             //RunNPI2();
         }
 
-        private void btnRunTMS_Click(object sender, EventArgs e)
-        {
-            RunTMSDash("Q");
-        }
-
-
         #endregion Event
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
@@ -120,7 +114,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.PHUOC"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -2848,7 +2842,10 @@ namespace Send_Email
             }));
         }
 
-        
+        private void btnRunTMS_Click(object sender, EventArgs e)
+        {
+            RunTMSDash("Q");
+        }
 
         private void checkRunning()
         {
@@ -2878,7 +2875,37 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTMSDash(dtHeader, dtData);
 
-                CreateMail("TMS MONITORING SUMMARY", html, dtEmail);
+                CreateMail(Emoji.ChartIncreasing + " TMS MONITORING SUMMARY", html, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+        private void RunTimeContraint(string arg_type)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                DataSet dsData = SEL_TIME_CONTRAINT_DATA(arg_type);
+                if (dsData == null) return;
+
+                DataTable dtHeader = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                string html = getHTMLBodyHeaderTimeContraint(dtHeader, dtData);
+
+                CreateMail(Emoji.ChartIncreasing + " TIME CONTRAINT", html, dtEmail);
             }
             catch (Exception ex)
             {
