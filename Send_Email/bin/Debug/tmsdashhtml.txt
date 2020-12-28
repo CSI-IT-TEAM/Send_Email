@@ -1,6 +1,6 @@
 <body>
     <div style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #029c3d; display: block;">
-        <span>NOS LINE - WEEKLY TMS PERFORMANCE RANKING (Outgoing In Order & Outgoing Without Order)</span><br>
+        <span>NOS LINE - DAILY TMS PERFORMANCE RANKING (Outgoing In Order & Outgoing Without Order)</span><br>
         <hr>
     {6}
     <hr>
