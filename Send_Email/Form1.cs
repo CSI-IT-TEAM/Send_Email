@@ -56,6 +56,8 @@ namespace Send_Email
             RunAndon("Q1");
             Run("Q1");
 
+            RunNPI("Q1");
+
             //16h
             RunCutting("Q1");
         }
@@ -114,7 +116,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.PHUOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -132,7 +134,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
 
                 mailItem.HTMLBody = htmlBody;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -2530,10 +2532,10 @@ namespace Send_Email
                 if (_isRun2) return;
 
                 _isRun2 = true;
-                WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                
                 DataSet dsData = SEL_NPI_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
-
+                WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtHeader = dsData.Tables[1];
                 DataTable dtData2 = dsData.Tables[2];
@@ -2548,7 +2550,10 @@ namespace Send_Email
                 string html2 = GetHtmlBodyNpi(dtHeader2, dtData2);
 
                 string subject = dtExplain.Rows[0]["SUBJECT"].ToString();
-                CreateMail(subject, html + "<br>" + html2, dtEmail);
+
+                string explain = dtExplain.Rows[0]["TXT"].ToString();
+
+                CreateMail(subject, explain + html + "<br>" + html2, dtEmail);
                 WriteLog("RunNPI: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
