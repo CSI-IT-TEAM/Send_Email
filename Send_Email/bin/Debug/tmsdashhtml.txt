@@ -1,0 +1,81 @@
+<body>
+    <div style="-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #029c3d; display: block;">
+        <span>NOS LINE - DAILY TMS PERFORMANCE RANKING (Outgoing In Order & Outgoing Without Order)</span><br>
+        <hr>
+    {6}
+    <hr>
+    </div>
+    <!-- <span class ="red">>0%</span><span class ="green">>0%</span><span class ="yellow">>0</span> -->
+<table class="tftable" border="1" width="3500" cellspacing="0" cellpadding="0">
+<thead>
+<tr style="font-weight: bold;">
+<td style="width: auto;" rowspan="3" align="center">Plant</td>
+<td style="width: auto;" rowspan="3" align="center">RANK</td>
+<td style="width: auto;" colspan="5" align="center" bgcolor="#ffe033">TOTAL OUTGOING</td>
+<td style="width: auto;" colspan="5" align="center">{0}</td>
+<td style="width: auto;" colspan="5" align="center">{1}</td>
+<td style="width: auto;" colspan="5" align="center">{2}</td>
+<td style="width: auto;" colspan="5" align="center">{3}</td>
+<td style="width: auto;" colspan="5" align="center">{4}</td>
+<td style="width: auto;" colspan="5" align="center">{5}</td>
+</tr>
+<tr style="font-weight: bold;">
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">Total Outgoing</td>
+<td style="width: auto; color: blue;" colspan="2" align="center">ORDER</td>
+<td style="width: auto; color: red;" colspan="2" align="center">NO ORDER</td>
+</tr>
+<tr style="font-weight: bold;">
+<td style="width: auto;" align="center" bgcolor="#fff4b0" >PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#fff4b0">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">PRS</td>
+<td style="width: auto;" align="center" bgcolor="#6dc4d1">%</td>
+</thead>
