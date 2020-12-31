@@ -2947,42 +2947,43 @@ namespace Send_Email
                     }
                     body += string.Format(@"</tr><tr align='right' style='font-weight:bold;'>
                                <td align='center'>{0}</td>
-                               <td align='center' bgcolor='{39}' style='color:{40}'>{1}</td>
-                               <td bgcolor='#fff4b0'>{2}</td>
-                               <td>{3}</td>
-                               <td bgcolor='{37}' style='color:{38}'>{4}</td>
-                               <td style='color:red'>{5}</td>
-                               <td>{6}</td>
-                               <td bgcolor='#fff4b0'>{7}</td>
-                               <td>{8}</td>
+                               <td align='center'>{1}</td>
+                               <td align='center' bgcolor='{40}' style='color:{41}'>{2}</td>
+                               <td bgcolor='#fff4b0'>{3}</td>
+                               <td>{4}</td>
+                               <td bgcolor='{38}' style='color:{39}'>{5}</td>
+                               <td style='color:red'>{6}</td>
+                               <td>{7}</td>
+                               <td bgcolor='#fff4b0'>{8}</td>
                                <td>{9}</td>
                                <td>{10}</td>
                                <td>{11}</td>
-                               <td bgcolor='#fff4b0'>{12}</td>
-                               <td>{13}</td>
+                               <td>{12}</td>
+                               <td bgcolor='#fff4b0'>{13}</td>
                                <td>{14}</td>
                                <td>{15}</td>
                                <td>{16}</td>
-                               <td bgcolor='#fff4b0'> {17} </td>
-                               <td>{18}</td>
+                               <td>{17}</td>
+                               <td bgcolor='#fff4b0'> {18} </td>
                                <td>{19}</td>
                                <td>{20}</td>
                                <td>{21}</td>
-                               <td bgcolor='#fff4b0'>{22}</td>
-                               <td>{23}</td>
+                               <td>{22}</td>
+                               <td bgcolor='#fff4b0'>{23}</td>
                                <td>{24}</td>
                                <td>{25}</td>
                                <td>{26}</td>
-                               <td bgcolor='#fff4b0'> {27}</td>
-                               <td>{28}</td>
+                               <td>{27}</td>
+                               <td bgcolor='#fff4b0'> {28}</td>
                                <td>{29}</td>
                                <td>{30}</td>
                                <td>{31}</td>
-                               <td bgcolor='#fff4b0'> {32} </td>
-                               <td>{33}</td>
+                               <td>{32}</td>
+                               <td bgcolor='#fff4b0'> {33} </td>
                                <td>{34}</td>
                                <td>{35}</td>
-                               <td>{36} </td>
+                               <td>{36}</td>
+                               <td>{37} </td>
                               </tr>", argsBody);
 
                 }
