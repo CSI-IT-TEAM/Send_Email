@@ -32,7 +32,7 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             tmrLoad.Enabled = true;
-            this.Text = "20201202112000";
+            this.Text = "20210102080000";
         }
 
         DataTable dtEmail;
@@ -41,7 +41,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -55,6 +55,9 @@ namespace Send_Email
             RunEScan("Q1");
             RunAndon("Q1");
             Run("Q1");
+
+            //8h
+            RunTMSDash("Q1");
 
             RunNPI("Q1");
 
@@ -2577,7 +2580,9 @@ namespace Send_Email
                 int npiCode = 0;
                 string HeaderRow1 = "", HeaderRow2 = "";
 
-                int[] colWidth = { 55, 50, 55, 70, 66, 55, 70, 80, 70, 80, 65, 65, 60, 70, 65, 55, 75, 55 };
+                // int[] colWidth = { 55, 55, 55, 60, 66, 55, 70, 80, 70, 80, 65, 65, 60, 70, 65, 55, 75, 55 };
+
+                int[] colWidth = { 67, 67, 67, 67, 67, 67, 67, 80, 67, 80, 67, 67, 67, 67, 67, 67, 75, 67 };
 
                 foreach (DataRow row in dtHeader.Rows)
                 {
@@ -2640,13 +2645,13 @@ namespace Send_Email
                     {
                         if (iRowData > 0) TableRow += "</tr> ";
                         TableRow += "<tr> " +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center'>{"&nbsp " + plantNm + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + lineCd + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + category + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + tdCode + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + styleCode + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{"&nbsp " + modelName + "&nbsp"}</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{"&nbsp " + prodDate + "&nbsp"}</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'>{plantNm }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ lineCd }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{ category }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ tdCode }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left' >{styleCode }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{ modelName }</td>" +
+                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ prodDate }</td>" +
                                 $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>"
                               ;
                     }
@@ -2728,6 +2733,9 @@ namespace Send_Email
                 return null;
             }
         }
+
+
+
         public DataSet SEL_TMD_DASH_DATA(string V_P_TYPE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
