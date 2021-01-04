@@ -2950,6 +2950,7 @@ namespace Send_Email
                 string style = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashstyle.txt");
                 string header1 = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashhtml.txt");
                 string body = string.Empty;
+                
                 object[] argsBody = new object[dtData.Columns.Count];
                 for (int i = 0; i < dtData.Rows.Count; i++)
                 {
@@ -2958,7 +2959,13 @@ namespace Send_Email
                         if (j > 0)
                             argsBody[j - 1] = dtData.Rows[i][j].ToString();
                     }
-                    body += string.Format(@"</tr><tr align='right' style='font-weight:bold;'>
+                    string body1 = string.Empty;
+                    if (!string.IsNullOrEmpty(dtData.Rows[i]["REASON"].ToString()))
+                    {
+                        body1 = string.Format("<tr style='color:red;font-weight:bold;border-style:dotted;'><td colspan = '3' align = 'center'>Reason Of Plant {0} </td><td colspan = '35'>{1}</td></tr> ", dtData.Rows[i]["PLANT"], dtData.Rows[i]["REASON"]);
+                    }
+                    body += string.Format(@"</tr>
+                               <tr align='right' style='font-weight:bold;'>
                                <td align='center'>{0}</td>
                                <td align='center'>{1}</td>
                                <td align='center' bgcolor='{40}' style='color:{41}'>{2}</td>
@@ -2997,9 +3004,8 @@ namespace Send_Email
                                <td>{35}</td>
                                <td>{36}</td>
                                <td>{37} </td>
-                               <td align='left'>{42} </td>
-                              </tr>", argsBody);
-
+                               <!--<td align='left'>{42} </td>-->
+                              </tr>" + body1, argsBody);
                 }
                 object[] argsHeader = new object[dtHead.Rows.Count + 1];
                 for (int i = 0; i < dtHead.Rows.Count; i++)
