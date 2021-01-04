@@ -2960,13 +2960,15 @@ namespace Send_Email
                             argsBody[j - 1] = dtData.Rows[i][j].ToString();
                     }
                     string body1 = string.Empty;
+                    string nRowSpan = "<td align='center'>{0}</td>";
                     if (!string.IsNullOrEmpty(dtData.Rows[i]["REASON"].ToString()))
                     {
-                        body1 = string.Format("<tr style='color:red;font-weight:bold;border-style:dotted;'><td colspan = '3' align = 'center'>Reason Of Plant {0} </td><td colspan = '35'>{1}</td></tr> ", dtData.Rows[i]["PLANT"], dtData.Rows[i]["REASON"]);
+                        nRowSpan = "<td align='center' rowspan = '2'>{0}</td>";
+                        body1 = string.Format("<tr style='color:red;font-weight:bold;border-style:dotted;'><td colspan = '2' align = 'center'>Reason Of Plant {0} </td><td colspan = '35'>{1}</td></tr> ", dtData.Rows[i]["PLANT"], dtData.Rows[i]["REASON"]);
                     }
                     body += string.Format(@"</tr>
-                               <tr align='right' style='font-weight:bold;'>
-                               <td align='center'>{0}</td>
+                               <tr align='right' style='font-weight:bold;'>"
+                                +nRowSpan+@"
                                <td align='center'>{1}</td>
                                <td align='center' bgcolor='{40}' style='color:{41}'>{2}</td>
                                <td bgcolor='#fff4b0'>{3}</td>
