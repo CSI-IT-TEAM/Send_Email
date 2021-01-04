@@ -2997,7 +2997,7 @@ namespace Send_Email
                                <td>{35}</td>
                                <td>{36}</td>
                                <td>{37} </td>
-                               <td>{42} </td>
+                               <td align='left'>{42} </td>
                               </tr>", argsBody);
 
                 }
