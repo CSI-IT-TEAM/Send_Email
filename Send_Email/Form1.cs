@@ -134,7 +134,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
 
                 mailItem.HTMLBody = htmlBody;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -2989,6 +2989,7 @@ namespace Send_Email
                                <td>{35}</td>
                                <td>{36}</td>
                                <td>{37} </td>
+                               <td>{42} </td>
                               </tr>", argsBody);
 
                 }
