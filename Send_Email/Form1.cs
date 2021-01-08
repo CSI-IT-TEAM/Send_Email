@@ -1,4 +1,5 @@
 ﻿using DevExpress.Utils;
+using DevExpress.XtraCharts;
 using JPlatform.Client.Controls6;
 using System;
 using System.Collections;
@@ -8,6 +9,7 @@ using System.Data.OracleClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -31,17 +33,23 @@ namespace Send_Email
             panel1.Size = new Size(1950, 1100);
             chart2.Size = new Size(1950, 1035);
 
+            //Phước Thêm TMS Dass
+            pnTMSDassChart.Size = new Size(1950, 900);
+            pnTMSDassGrid.Size = new Size(1500, 300);
+
+
             tmrLoad.Enabled = true;
             this.Text = "20210102080000";
         }
-
+        string[] headNames = new string[] { "COMP" };
+        string[] divNames = new string[] { "Order By Set (prs)", "Total Outgoing (prs)", "Per", "", "", "", "", "", "", "DMP-Y", "IP-Y", "PU-Y", "OS-Y", "PH-Y" };
         DataTable dtEmail;
         bool _isRun = false, _isRun2 = false;
         int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com" };
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -138,8 +146,53 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "phuoc.it@changshininc.com";
-
                 mailItem.HTMLBody = htmlBody;
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        private void CreateMailwithImage(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email 
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                string imgChart = "imgChart", imgGrid1 = "imgGrid1";
+                oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
+                oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
+                string EmbedImg = string.Format(@"<section><img src='cid:{0}'><hr><br><img src='cid:{1}'</section></body></html>", imgChart, imgGrid1);
+                mailItem.HTMLBody = htmlBody + EmbedImg;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -2442,6 +2495,84 @@ namespace Send_Email
             }
         }
 
+        /// <summary>
+        /// Gets a Inverted DataTable
+        /// </summary>
+        /// <param name="table">DataTable do invert</param>
+        /// <param name="columnX">X Axis Column</param>
+        /// <param name="nullValue">null Value to Complete the Pivot Table</param>
+        /// <param name="columnsToIgnore">Columns that should be ignored in the pivot 
+        /// process (X Axis column is ignored by default)</param>
+        /// <returns>C# Pivot Table Method  - Felipe Sabino</returns>
+        public static DataTable GetInversedDataTable(DataTable table, string columnX,
+                                                     params string[] columnsToIgnore)
+        {
+            //Create a DataTable to Return
+            DataTable returnTable = new DataTable();
+
+            if (columnX == "")
+                columnX = table.Columns[0].ColumnName;
+
+            //Add a Column at the beginning of the table
+
+            returnTable.Columns.Add(columnX);
+
+            //Read all DISTINCT values from columnX Column in the provided DataTale
+            List<string> columnXValues = new List<string>();
+
+            //Creates list of columns to ignore
+            List<string> listColumnsToIgnore = new List<string>();
+            if (columnsToIgnore.Length > 0)
+                listColumnsToIgnore.AddRange(columnsToIgnore);
+
+            if (!listColumnsToIgnore.Contains(columnX))
+                listColumnsToIgnore.Add(columnX);
+
+            foreach (DataRow dr in table.Rows)
+            {
+                string columnXTemp = dr[columnX].ToString();
+                //Verify if the value was already listed
+                if (!columnXValues.Contains(columnXTemp))
+                {
+                    //if the value id different from others provided, add to the list of 
+                    //values and creates a new Column with its value.
+                    columnXValues.Add(columnXTemp);
+                    returnTable.Columns.Add(columnXTemp);
+                }
+                else
+                {
+                    //Throw exception for a repeated value
+                    throw new Exception("The inversion used must have " +
+                                        "unique values for column " + columnX);
+                }
+            }
+
+            //Add a line for each column of the DataTable
+
+            foreach (DataColumn dc in table.Columns)
+            {
+                if (!columnXValues.Contains(dc.ColumnName) &&
+                    !listColumnsToIgnore.Contains(dc.ColumnName))
+                {
+                    DataRow dr = returnTable.NewRow();
+                    dr[0] = dc.ColumnName;
+                    returnTable.Rows.Add(dr);
+                }
+            }
+
+            //Complete the datatable with the values
+            for (int i = 0; i < returnTable.Rows.Count; i++)
+            {
+                for (int j = 1; j < returnTable.Columns.Count; j++)
+                {
+                    returnTable.Rows[i][j] =
+                      table.Rows[j - 1][returnTable.Rows[i][0].ToString()].ToString();
+                }
+            }
+
+            return returnTable;
+        }
+
         DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {
             // find primary key columns 
@@ -2535,7 +2666,7 @@ namespace Send_Email
                 if (_isRun2) return;
 
                 _isRun2 = true;
-                
+
                 DataSet dsData = SEL_NPI_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
                 if (dsData == null) return;
                 WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -2834,6 +2965,69 @@ namespace Send_Email
                 return null;
             }
         }
+
+
+        private DataSet SEL_DATA_TMS_DAAS_CHART(string WorkType, string DateF, string DateT, string LineCd)
+        {
+            System.Data.DataSet retDS;
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            MyOraDB.ReDim_Parameter(13);
+            MyOraDB.Process_Name = "LMES.P_GMES0266_Q_2";
+            MyOraDB.ShowErr = true;
+            //  for (int i = 0; i < intParm; i++)
+
+            MyOraDB.Parameter_Type[0] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[1] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[2] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[3] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[4] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[5] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[6] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[7] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[8] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[9] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[10] = (char)OracleType.VarChar;
+            MyOraDB.Parameter_Type[11] = (char)OracleType.Cursor;
+            MyOraDB.Parameter_Type[12] = (char)OracleType.Cursor;
+
+            //V_P_TYPE,V_P_OPTION
+            MyOraDB.Parameter_Name[0] = "V_P_WORK_TYPE";
+            MyOraDB.Parameter_Name[1] = "V_P_DATEF";
+            MyOraDB.Parameter_Name[2] = "V_P_DATET";
+            MyOraDB.Parameter_Name[3] = "V_P_LINE_CD";
+            MyOraDB.Parameter_Name[4] = "V_P_ERROR_CODE";
+            MyOraDB.Parameter_Name[5] = "V_P_ROW_COUNT";
+            MyOraDB.Parameter_Name[6] = "V_P_ERROR_NOTE";
+            MyOraDB.Parameter_Name[7] = "V_P_RETURN_STR";
+            MyOraDB.Parameter_Name[8] = "V_P_ERROR_STR";
+            MyOraDB.Parameter_Name[9] = "V_ERRORSTATE";
+            MyOraDB.Parameter_Name[10] = "V_ERRORPROCEDURE";
+            MyOraDB.Parameter_Name[11] = "OUT_CURSOR";
+            MyOraDB.Parameter_Name[12] = "OUT_CURSOR1";
+
+
+
+            MyOraDB.Parameter_Values[0] = WorkType;
+            MyOraDB.Parameter_Values[1] = DateF;
+            MyOraDB.Parameter_Values[2] = DateT;
+            MyOraDB.Parameter_Values[3] = LineCd;
+            MyOraDB.Parameter_Values[4] = "";
+            MyOraDB.Parameter_Values[5] = "";
+            MyOraDB.Parameter_Values[6] = "";
+            MyOraDB.Parameter_Values[7] = "";
+            MyOraDB.Parameter_Values[8] = "";
+            MyOraDB.Parameter_Values[9] = "";
+            MyOraDB.Parameter_Values[10] = "";
+            MyOraDB.Parameter_Values[11] = "";
+            MyOraDB.Parameter_Values[12] = "";
+
+            MyOraDB.Add_Select_Parameter(true);
+            retDS = MyOraDB.Exe_Select_Procedure();
+            if (retDS == null) return null;
+            return retDS;
+        }
+
         #endregion
 
 
@@ -2859,7 +3053,10 @@ namespace Send_Email
         {
             RunTMSDash("Q");
         }
-
+        private void btnRunTMSV2_Click(object sender, EventArgs e)
+        {
+            RunTMSDashv2("Q");
+        }
         private void checkRunning()
         {
             foreach (Process p in Process.GetProcessesByName("Send_Email"))
@@ -2868,7 +3065,55 @@ namespace Send_Email
             }
         }
 
+        private void RunTMSDashv2(string arg_type)
+        {
+            try
+            {
+                if (_isRun2) return;
 
+                _isRun2 = true;
+                DataSet dsData = SEL_TMD_DASH_DATA(arg_type);
+                if (dsData == null) return;
+
+                DataTable dtHeader = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                string html = getHTMLBodyHeaderTMSDashv2(dtHeader, dtData);
+                DataSet dsHead = SEL_DATA_TMS_DAAS_CHART("QH", DateTime.Now.AddDays(-6).ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), "ALL");
+                DataTable dtDays = dsHead.Tables[0];
+                DataTable dtDates = dsHead.Tables[1];
+                string DateF, DateT;
+                DateF = dtDates.Rows[0]["DATEF"].ToString();
+                DateT = dtDates.Rows[0]["DATET"].ToString();
+                DataSet ds = SEL_DATA_TMS_DAAS_CHART("Q", DateF, DateT, "ALL");
+                DataTable dtSource = new DataTable();
+                DataTable dtDataGrid = ds.Tables[0];
+                BuildHeader(dtSource, dtDays);
+                BindingDataSource(dtSource, dtDays, dtDataGrid);
+                grdBase.DataSource = dtSource;
+                Format_Grid();
+                DataTable dtChart = ds.Tables[1];
+                loadchart(dtChart);
+
+                pnTMSDassChart.Size = new Size(1700, 500);
+                pnTMSDassGrid.Size = new Size(1240, 250);
+
+                CaptureControl(pnTMSDassChart, "TMSChart");
+                CaptureControl(pnTMSDassGrid, "TMSGrid");
+                CreateMailwithImage(Emoji.ChartIncreasing + " TMS MONITORING SUMMARY", html, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
 
         private void RunTMSDash(string arg_type)
         {
@@ -2918,7 +3163,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTimeContraint(dtHeader, dtData);
 
-                CreateMail(Emoji.ChartIncreasing + " TIME CONTRAINT", html, dtEmail);
+                CreateMail(Emoji.ChartIncreasing + " TIME CONSTRAINT", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -2928,6 +3173,335 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
+        }
+
+        private void Format_Grid()
+        {
+
+            double order_qty = 0;
+            double actual_qty = 0;
+
+            #region replace
+            gvwBase.BeginUpdate();
+
+            for (int i = 0; i <= gvwBase.RowCount - 1; i++)
+            {
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "OSP")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "OS");
+                }
+
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "PHP")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "PH");
+                }
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "PUP")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "PU");
+                }
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "IPP")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "IP");
+                }
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "DMP")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "DMP");
+                }
+
+                if (gvwBase.GetRowCellValue(i, gvwBase.Columns[0]).ToString() == "TOTAL")
+                {
+                    gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "Bottom Performance");
+                }
+
+            }
+
+
+            for (int i = 0; i < gvwBase.Columns.Count; i++)
+            {
+                gvwBase.Columns[i].AppearanceCell.Options.UseTextOptions = true;
+                gvwBase.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gvwBase.Columns[i].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.True;
+                gvwBase.Columns[i].OptionsFilter.AllowFilter = false;
+                gvwBase.Columns[i].OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+                gvwBase.Columns[i].OptionsColumn.AllowEdit = false;
+
+                gvwBase.ColumnPanelRowHeight = 25;
+                gvwBase.RowHeight = 25;
+                gvwBase.Columns[i].AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+                if (i < 1)
+                {
+                    gvwBase.Columns[i].Width = 150;
+                    gvwBase.Columns[i].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+                    gvwBase.Columns[i].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                }
+
+                else
+                {
+                    gvwBase.Columns[i].Width = 60;
+                    gvwBase.Columns[i].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
+                    //  gvwBase.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+
+                    //  gvwBase.Columns[j].DisplayFormat.FormatString = "#,###";
+
+                }
+
+            }
+
+
+            for (int i = 0; i <= gvwBase.RowCount - 1; i++)
+            {
+                for (int j = 1; j <= gvwBase.Columns.Count - 1; j += 3)
+                {
+                    double.TryParse(gvwBase.GetRowCellDisplayText(i, gvwBase.Columns[j]).ToString(), out order_qty);
+                    double.TryParse(gvwBase.GetRowCellDisplayText(i, gvwBase.Columns[j + 1]).ToString(), out actual_qty);
+
+                    if (order_qty > 0 && actual_qty == 0)
+                    {
+                        gvwBase.SetRowCellValue(i, gvwBase.Columns[j + 1], "0");
+                    }
+
+
+                }
+            }
+
+
+            gvwBase.Appearance.Row.Font = new System.Drawing.Font("DotumChe", 10F, System.Drawing.FontStyle.Regular);
+            //   gvwBase.BestFitColumns();
+
+            // gvwBase.OptionsView.ColumnAutoWidth = false;
+            gvwBase.EndUpdate();
+            #endregion
+        }
+        void BuildHeader(DataTable dtSource, DataTable dtDays)
+        {
+            GridBandEx band, bandChild;
+            string col_name = "";
+            try
+            {
+                // Reset band header.
+
+                while (gvwBase.Bands.Count > 0)
+                {
+                    gvwBase.Bands.RemoveAt(0);
+                }
+                while (gvwBase.Columns.Count > 0)
+                {
+                    gvwBase.Columns.RemoveAt(0);
+                }
+
+                for (int i = 0; i < headNames.Length; i++)
+                {
+                    band = new GridBandEx();
+                    band.AppearanceHeader.Font = new System.Drawing.Font("DotumChe", 9F);
+                    if (headNames[i].Equals("COMP"))
+                    {
+                        band.Caption = "Process";
+                    }
+
+                    else
+                    {
+                        band.Caption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(headNames[i].ToLower().Replace("_", " "));
+                    }
+
+
+                    //band.MinWidth = 80;//TextRenderer.MeasureText(band.Caption, band.AppearanceHeader.Font).Width;
+                    band.AppearanceHeader.Options.UseTextOptions = true;
+                    band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+                    gvwBase.Bands.Add(band);
+
+
+                    AddColumn(band, headNames[i]);
+                    dtSource.Columns.Add(headNames[i], typeof(string));
+                }
+                for (int i = 0; i < dtDays.Rows.Count; i++)
+                {
+                    band = new GridBandEx();
+                    band.AppearanceHeader.Font = new System.Drawing.Font("DotumChe", 9F);
+                    band.Caption = dtDays.Rows[i]["DATE_STRING"].ToString();
+                    //if (i >= 3)
+                    //{
+                    //    band.MinWidth = TextRenderer.MeasureText(band.Caption, band.AppearanceHeader.Font).Width + 20;
+                    //}
+                    //band.MinWidth = 20;
+                    band.AppearanceHeader.Options.UseTextOptions = true;
+                    band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+                    for (int j = 1; j <= 3; j++)
+                    {
+
+
+                        if (j == 1) col_name = "Order";
+                        else if (j == 2) col_name = "Actual";
+                        else if (j == 3) col_name = "Percent";
+
+                        bandChild = new GridBandEx();
+                        bandChild.AppearanceHeader.Font = new System.Drawing.Font("DotumChe", 9F);
+                        bandChild.Caption = col_name;
+                        //bandChild.MinWidth = 20;
+                        bandChild.AppearanceHeader.Options.UseTextOptions = true;
+                        bandChild.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
+                        // TextRenderer.MeasureText(bandChild.Caption, bandChild.AppearanceHeader.Font).Width + 20;
+
+                        band.Children.Add(bandChild);
+
+                        AddColumn(bandChild, dtDays.Rows[i]["THEDATE"].ToString() + "_" + col_name);
+                        dtSource.Columns.Add(dtDays.Rows[i]["THEDATE"].ToString() + "_" + col_name, typeof(double));
+                    }
+                    gvwBase.Bands.Add(band);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("BuildHeader(): " + ex.Message);
+            }
+        }
+
+        void BindingDataSource(DataTable dtSource, DataTable dtDays, DataTable dtData)
+        {
+
+            double Order = 0;
+            double Actual = 0;
+            double Percent = 0;
+            double total_row = 0;
+            double total_tmp = 0;
+
+            int row_opcd = 0;
+            try
+            {
+                dtSource.Rows.Add("OSP");
+                dtSource.Rows.Add("PHP");
+                dtSource.Rows.Add("PUP");
+                dtSource.Rows.Add("IPP");
+                dtSource.Rows.Add("DMP");
+                //   dtSource.Rows.Add("TOTAL");
+
+                for (int col = 1; col <= dtSource.Columns.Count - 1; col++)
+                {
+                    for (int i = 0; i <= dtData.Rows.Count - 1; i++)
+                    {
+                        double.TryParse(dtData.Rows[i]["Order"].ToString(), out Order);
+                        double.TryParse(dtData.Rows[i]["Actual"].ToString(), out Actual);
+                        double.TryParse(dtData.Rows[i]["Percent"].ToString(), out Percent);
+
+
+                        //--tim dong opcd--
+                        for (int row = 0; row <= 4; row++)
+                        {
+                            if (dtData.Rows[i]["OP_CD"].ToString() == dtSource.Rows[row][0].ToString())
+                            {
+                                row_opcd = row;
+                                break;
+                            }
+                        }
+
+                        if (dtData.Rows[i]["D"].ToString() == dtSource.Columns[col].Caption.Split('_')[0].ToString())//date 
+                        {
+
+                            if (dtSource.Columns[col].Caption.Split('_')[1].ToString() == "Order")
+                            {
+                                dtSource.Rows[row_opcd][col] = Order;
+                            }
+                            if (dtSource.Columns[col].Caption.Split('_')[1].ToString() == "Actual")
+                            {
+                                dtSource.Rows[row_opcd][col] = Actual;
+                            }
+                            if (dtSource.Columns[col].Caption.Split('_')[1].ToString() == "Percent")
+                            {
+                                dtSource.Rows[row_opcd][col] = Percent;
+                            }
+                        }
+                    }
+
+
+                }
+
+                // --TOTAL TRONG LUOI---
+                dtSource.Rows.Add("TOTAL");
+                for (int j = 1; j <= dtSource.Columns.Count - 1; j++)
+                {
+                    if (dtSource.Columns[j].Caption.Split('_')[1].ToString() != "Percent")
+                    {
+                        total_row = 0;
+                        for (int i = 0; i <= dtSource.Rows.Count - 1; i++)
+                        {
+
+                            double.TryParse(dtSource.Rows[i][j].ToString(), out total_tmp);
+                            total_row = total_row + total_tmp;
+
+                        }
+                        dtSource.Rows[dtSource.Rows.Count - 1][j] = total_row.ToString();
+                    }
+                    else if (dtSource.Columns[j].Caption.Split('_')[1].ToString() == "Percent")
+                    {
+                        if (!string.IsNullOrEmpty(dtSource.Rows[dtSource.Rows.Count - 1][j - 2].ToString()))
+                        {
+                            if (Convert.ToDouble(dtSource.Rows[dtSource.Rows.Count - 1][j - 2]) > 0)
+                                dtSource.Rows[dtSource.Rows.Count - 1][j] = Math.Round(Convert.ToDouble(dtSource.Rows[dtSource.Rows.Count - 1][j - 1]) / Convert.ToDouble(dtSource.Rows[dtSource.Rows.Count - 1][j - 2]) * 100, 0);
+                        }
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("BindingDataSource(): " + ex.Message);
+            }
+        }
+        private void AddColumn(GridBandEx band, string fieldName)
+        {
+            BandedGridColumnEx col = new BandedGridColumnEx();
+            col.FieldName = fieldName;
+            col.Visible = true;
+            col.OptionsColumn.AllowEdit = false;
+            col.OptionsColumn.ReadOnly = true;
+            col.OptionsFilter.AllowFilter = false;
+            col.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            gvwBase.Columns.Add(col);
+            col.OwnerBand = band;
+        }
+
+        private bool loadchart(DataTable dtchart)
+        {
+            try
+            {
+                chart.DataSource = dtchart;
+                chart.Series[0].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[0].ValueDataMembers.AddRange(new string[] { "OS_PER" }); //COT Y
+
+                chart.Series[1].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[1].ValueDataMembers.AddRange(new string[] { "PH_PER" }); //COT Y
+
+
+                chart.Series[2].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[2].ValueDataMembers.AddRange(new string[] { "PU_PER" }); //COT Y
+
+
+                chart.Series[3].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[3].ValueDataMembers.AddRange(new string[] { "IP_PER" }); //COT Y
+
+                chart.Series[4].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[4].ValueDataMembers.AddRange(new string[] { "DMP_PER" }); //COT Y
+
+
+                chart.Series[5].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[5].ValueDataMembers.AddRange(new string[] { "TOTAL_PER" }); //COT Y
+
+                chart.Series[6].ArgumentDataMember = "YMD"; // cot X
+                chart.Series[6].ValueDataMembers.AddRange(new string[] { "TAR_PER" }); //COT Y
+
+
+                ((XYDiagram)chart.Diagram).AxisX.Label.Staggered = false;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void btnTimeContraint_Click(object sender, EventArgs e)
@@ -2950,7 +3524,7 @@ namespace Send_Email
                 string style = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashstyle.txt");
                 string header1 = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashhtml.txt");
                 string body = string.Empty;
-                
+
                 object[] argsBody = new object[dtData.Columns.Count];
                 for (int i = 0; i < dtData.Rows.Count; i++)
                 {
@@ -2968,7 +3542,7 @@ namespace Send_Email
                     }
                     body += string.Format(@"</tr>
                                <tr align='right' style='font-weight:bold;'>"
-                                +nRowSpan+@"
+                                + nRowSpan + @"
                                <td align='center'>{1}</td>
                                <td align='center' bgcolor='{40}' style='color:{41}'>{2}</td>
                                <td bgcolor='#fff4b0'>{3}</td>
@@ -3028,7 +3602,128 @@ namespace Send_Email
             }
 
         }
+        private string getHTMLBodyHeaderTMSDashv2(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string style = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashstylev2.txt");
+                string header1 = System.IO.File.ReadAllText(Application.StartupPath + "\\tmsdashhtmlv2.txt");
+                string body = string.Empty;
 
+                object[] argsBody = new object[dtData.Columns.Count];
+                for (int i = 0; i < dtData.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dtData.Columns.Count; j++)
+                    {
+                        if (j > 0)
+                            argsBody[j - 1] = dtData.Rows[i][j].ToString();
+                    }
+                    string body1 = string.Empty;
+                    string nRowSpan = "<td align='center'>{0}</td>";
+                    if (!string.IsNullOrEmpty(dtData.Rows[i]["REASON"].ToString()))
+                    {
+                        nRowSpan = "<td align='center' rowspan = '2'>{0}</td>";
+                        body1 = string.Format("<tr style='color:red;font-weight:bold;border-style:dotted;'><td colspan = '2' align = 'center'>Reason Of Plant {0} </td><td colspan = '35'>{1}</td></tr> ", dtData.Rows[i]["PLANT"], dtData.Rows[i]["REASON"]);
+                    }
+                    body += string.Format(@"</tr>
+                               <tr align='right' style='font-weight:bold;'><td align='center'>{0}</td>
+                               <td align='center'>{1}</td>
+                               <td align='center' bgcolor='{40}' style='color:{41}'>{2}</td>
+                               <td bgcolor='#fff4b0'>{3}</td>
+                               <td>{4}</td>
+                               <td bgcolor='{38}' style='color:{39}'>{5}</td>
+                               <td style='color:red'>{6}</td>
+                               <td>{7}</td>
+                               
+                             
+                               <td align='left'>{42} </td>
+                              </tr>", argsBody);
+                }
+                object[] argsHeader = new object[dtHead.Rows.Count + 1];
+                for (int i = 0; i < dtHead.Rows.Count; i++)
+                {
+                    argsHeader[i] = dtHead.Rows[i]["CAPTION"].ToString();
+                }
+                argsHeader[6] = dtHead.Rows[0]["REMARKS"].ToString();
+                string end = @"</table><hr>";
+                string remakeHeader = string.Format(header1, argsHeader);
+
+                string HTML = string.Concat(style, remakeHeader, body, end);
+                return HTML;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        private void gvwBase_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+            if (e.Column.ColumnHandle >= 1)
+            {
+                if (e.CellValue.ToString() == "") return;
+                e.DisplayText = double.Parse(e.CellValue.ToString()).ToString("###,##0");
+                //e.DisplayText = (((int)(Convert.ToDecimal(e.CellValue) * 100))).ToString() + "%";
+            }
+        }
+
+        private void gvwBase_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
+        {
+            try
+            {
+                double temp = 0.0;
+                if (gvwBase.GetRowCellValue(e.RowHandle, gvwBase.Columns[0]).ToString().Contains("Bottom Performance"))
+                {
+                    e.Appearance.BackColor = Color.Cyan;
+
+                }
+
+                if ((e.Column.FieldName.Contains("Percent")) && (e.CellValue != null))
+                {
+
+                    double.TryParse(e.CellValue.ToString(), out temp); //out
+
+                    if (temp > 0 && temp < 50)
+                    {
+                        e.Appearance.BackColor = Color.Black;
+                        e.Appearance.ForeColor = Color.White;
+                    }
+
+                    else if (temp >= 50 && temp < 80)
+                    {
+                        e.Appearance.BackColor = Color.Red;
+                        e.Appearance.ForeColor = Color.White;
+                    }
+                    else if (temp >= 80 && temp < 95)
+                    {
+
+                        e.Appearance.BackColor = Color.Yellow;
+                        e.Appearance.ForeColor = Color.Black;
+                    }
+                    else if (temp >= 95)
+                    {
+                        e.Appearance.BackColor = Color.LightGreen;
+                        e.Appearance.ForeColor = Color.Black;
+                    }
+
+
+                    if (e.CellValue.ToString() == "0")
+                    {
+                        e.Appearance.BackColor = Color.Red;
+                        e.Appearance.ForeColor = Color.White;
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+                
+            }
+        }
 
         private string getHTMLBodyHeaderTimeContraint(DataTable dtHead, DataTable dtData)
         {
@@ -3044,67 +3739,105 @@ namespace Send_Email
                 string EndTag = string.Empty;
                 sStyle = @"<html><head>
 		                                            <style type='text/css'>
-			                                            .tg  {border-collapse:collapse;border-spacing:0;}
-                                                        .tg td{border-color:#9dcc7a;border-style:solid;border-width:1px;background-color:#ffffff;font-family:Arial, Helvetica, sans-serif ;font-size:12px;
-                                                          overflow:hidden;padding:10px 5px;word-break:normal;}
+			                                            .tg  {font-size:12px; width:100%;border-width: 1px; border-collapse: collapse;}
+                                                        .tg td{font-size:12px;font-family:Calibri;bgcolor:#ffffff;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a;white-space: nowrap}
                                                         .tg th{border-color:#9dcc7a;border-style:solid;border-width:1px;background-color:#0080a0;color: #ffffff; font-family:Arial, sans-serif;font-size:12px;
                                                           font-weight:bold;overflow:hidden;padding:5px 10px;word-break:normal;}
                                                         .tg .tg-0lax{text-align:center;}
                                                         .tg .tg-1lax{text-align:left;}
                                                         .tg .tg-2lax{text-align:right;}
                                                         .tg .tg-total{text-align:right;background-color:yellow;color: #000000;}
-                                                        @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}</style>";
-                string Colspan = dtHead.Rows[0]["COLSPAN"].ToString();
+                                                        span {
+                                                        color: #2e5f82;
+                                                        display: inline-block;
+                                                        padding: 3px 10px;
+                                                        border-radius: 5px;
+                                                        font-family: 'Times New Roman', Times, serif;
+                                                        font-size: 25px;
+                                                        font-style: italic;
+                                                        }
+                                                         </style>";
+                string Colspan = dtData.Rows[0]["COLSPAN"].ToString();
                 sHeader1 += string.Format(@"
                                                     </head>
                                                   <body>
-                                                            <div class='tg-wrap'><table class='tg'>
+                                                    <ul> 
+                                                    <li><span>Outsole went ahead of 13 days(base on outgoing scan) in comparison with production date</span></li>
+                                                    <li><span>UV went ahead of  13 days(base on water) and 24 days(base on solvent) in comparison with production date</span></li>
+                                                    </ul>
+                                             
+                                             <hr>
+                                                            <table class='tg'>
                                                             <thead>
                                                               <tr>
-                                                                <th class='tg-0lax' rowspan='2' id = 'test'>Process</th>
-                                                                <th class='tg-0lax' rowspan='2'>Model Name</th>
+                                                                <th class='tg-0lax' rowspan='2'>Process</th>
+                                                                <th class='tg-0lax' rowspan='2'>Assembly Date</th>
+                                                                <th class='tg-0lax' rowspan='2'>Plant</th>
+                                                                <th class='tg-0lax' rowspan='2'>Assembly Line</th>
+                                                                <th class='tg-0lax' rowspan='2'>Mini Line</th>
+                                                                <th class='tg-0lax' rowspan='2'>Style Name</th>
                                                                 <th class='tg-0lax' rowspan='2'>Style Code</th>
                                                                 <th class='tg-0lax' colspan='{0}'>Size</th>
                                                                 <th class='tg-0lax' rowspan='2'>Total</th>
                                                                 <th class='tg-0lax' rowspan='2'>Reason</th>
 				                                              </tr><tr>", Colspan);
+                DataView dtView = new DataView(dtData);
+                dtView.Sort = "SIZE_NO";
+                dtHead = dtView.ToTable(true, "SIZE_CODE");
                 for (int j = 0; j < dtHead.Rows.Count; j++)
                 {
                     string SIZE_CODE = dtHead.Rows[j]["SIZE_CODE"].ToString();
                     sHeader2 += string.Format(@"<th class='tg-0lax'>{0}</th>", SIZE_CODE);
-                    string iDx = (j + 5).ToString();
+                    string iDx = (j + 10).ToString();
                     sBody2 += @"<td class='tg-2lax'>{" + iDx + "}</td>";
                 }
                 sHeader3 = @"</tr></thead><tbody>";
-              
+
                 DataView view = dtData.DefaultView;
                 view.Sort = "SIZE_NO,PROC_CODE,STYLE_CODE";
                 DataTable dt = view.ToTable();
                 dt.Columns.Remove(dt.Columns["SIZE_NO"]);
                 DataTable dtGrid = Pivot(dt, dt.Columns["SIZE_CODE"], dt.Columns["QTY"]);
+                DataView dtViewGrid = new DataView(dtGrid);
+                dtViewGrid.Sort = "PROC_CODE,FA_DATE,PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE";
+
+                dtGrid = dtViewGrid.ToTable();
                 object[] argBodys = new object[dtGrid.Columns.Count];
+
+                string ProcCodeTmp = string.Empty;
+
                 for (int iRow = 0; iRow < dtGrid.Rows.Count; iRow++)
                 {
                     for (int iCol = 0; iCol < dtGrid.Columns.Count; iCol++)
                     {
-                        if (iCol > 0)
+                        if (iCol >= 2)
                         {
                             if (dtGrid.Columns[iCol].ColumnName.Equals("TOTAL"))
-                                argBodys[iCol - 1] = string.Format("{0:n0}", dtGrid.Rows[iRow][iCol]);
+                                argBodys[iCol - 2] = string.Format("{0:n0}", dtGrid.Rows[iRow][iCol]);
                             else
-                                argBodys[iCol - 1] = dtGrid.Rows[iRow][iCol].ToString();
+                                argBodys[iCol - 2] = dtGrid.Rows[iRow][iCol].ToString();
                         }
 
                     }
-                    sBody += string.Format(@"<tr><td class='tg-0lax'>{0}</td>
-				                       <td class='tg-1lax'>{1}</td>
-				                       <td class='tg-0lax'>{2}</td>
-				                        " + sBody2 + " <td class='tg-total'>{3}</td><td class='tg-1lax'>{4}</td></tr>", argBodys);
+                    string BodyProcName = string.Empty;
+                    if (!ProcCodeTmp.Equals(dtGrid.Rows[iRow]["PROC_CODE"].ToString()))
+                    {
+                        BodyProcName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN"], dtGrid.Rows[iRow]["PROC_NAME"]);
+                        ProcCodeTmp = dtGrid.Rows[iRow]["PROC_CODE"].ToString();
+                    }
+
+                    sBody += string.Format(@"<tr>" + BodyProcName + @"
+				                        <td class='tg-0lax'>{1}</td>
+                                        <td class='tg-0lax'>{2}</td>
+                                        <td class='tg-0lax'>{3}</td>
+                                        <td class='tg-0lax'>{4}</td>
+                                        <td class='tg-1lax'>{5}</td>
+				                        <td class='tg-0lax'>{6}</td>
+				                        " + sBody2 + " <td class='tg-total'>{7}</td><td class='tg-1lax'>{8}</td></tr>", argBodys);
                 }
 
-                EndTag = @"</tbody></table></div>
-                     </body>
-                      </html>";
+                EndTag = @"</tbody></table></body></html>
+                     ";
                 //<script type='text/javascript'>document.getElementById('test').innerHTML = 'Hello World';</script>
                 sHTML = string.Concat(sStyle, sHeader1, sHeader2, sHeader3, sBody, EndTag);
                 return sHTML;
@@ -3115,6 +3848,7 @@ namespace Send_Email
             }
 
         }
+
 
 
 
