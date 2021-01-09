@@ -1229,7 +1229,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.Wheat;
-            this.lblStatus.Location = new System.Drawing.Point(922, 9);
+            this.lblStatus.Location = new System.Drawing.Point(561, 7);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(35, 13);
             this.lblStatus.TabIndex = 19;
@@ -1925,7 +1925,7 @@
             // chkTest
             // 
             this.chkTest.AutoSize = true;
-            this.chkTest.Location = new System.Drawing.Point(800, 8);
+            this.chkTest.Location = new System.Drawing.Point(439, 6);
             this.chkTest.Name = "chkTest";
             this.chkTest.Size = new System.Drawing.Size(53, 17);
             this.chkTest.TabIndex = 200;
@@ -1935,7 +1935,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(694, 7);
+            this.checkBox1.Location = new System.Drawing.Point(333, 5);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(53, 17);
             this.checkBox1.TabIndex = 201;
@@ -1945,7 +1945,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(747, 6);
+            this.checkBox2.Location = new System.Drawing.Point(386, 4);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(53, 17);
             this.checkBox2.TabIndex = 202;
@@ -1964,10 +1964,10 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(548, 30);
+            this.txtLog.Location = new System.Drawing.Point(331, 31);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(807, 151);
+            this.txtLog.Size = new System.Drawing.Size(265, 112);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
@@ -2478,7 +2478,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1501, 781);
+            this.ClientSize = new System.Drawing.Size(610, 156);
             this.Controls.Add(this.pnTMSDassGrid);
             this.Controls.Add(this.pnTMSDassChart);
             this.Controls.Add(this.grdBaseNpi);
@@ -2505,7 +2505,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "20200715040000";
+            this.Text = "20210109143200";
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel4)).EndInit();
