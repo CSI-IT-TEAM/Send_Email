@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -34,13 +35,18 @@ namespace Send_Email
             chart2.Size = new Size(1950, 1035);
 
             //Phước Thêm TMS Dass
-            pnTMSDassChart.Size = new Size(1950, 900);
-            pnTMSDassGrid.Size = new Size(1500, 300);
+            pnTMSDassChart.Size = new Size(1700, 500);
+            pnTMSDassGrid.Size = new Size(1420, 215);
+            pnTMSDassGrid.Visible = false;
+            pnTMSDassChart.Visible = false;
 
 
             tmrLoad.Enabled = true;
             this.Text = "20210102080000";
         }
+        //Phuoc.IT
+  
+
         string[] headNames = new string[] { "COMP" };
         string[] divNames = new string[] { "Order By Set (prs)", "Total Outgoing (prs)", "Per", "", "", "", "", "", "", "DMP-Y", "IP-Y", "PU-Y", "OS-Y", "PH-Y" };
         DataTable dtEmail;
@@ -49,7 +55,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -115,7 +121,7 @@ namespace Send_Email
         }
 
         #endregion Event
-
+       
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
@@ -191,7 +197,7 @@ namespace Send_Email
                 string imgChart = "imgChart", imgGrid1 = "imgGrid1";
                 oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
                 oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
-                string EmbedImg = string.Format(@"<section><img src='cid:{0}'><hr><br><img src='cid:{1}'</section></body></html>", imgChart, imgGrid1);
+                string EmbedImg = string.Format(@"<table class='tftable' border='1' width='100%' cellspacing='0' cellpadding='0'><tr><td class='tftable-clax'><img src='cid:{0}'></td></tr><tr><td class='tftable-clax'><img src='cid:{1}'</td></tr></table></body></html>", imgChart, imgGrid1);
                 mailItem.HTMLBody = htmlBody + EmbedImg;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -3081,7 +3087,7 @@ namespace Send_Email
 
                 WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
 
-                string html = getHTMLBodyHeaderTMSDashv2(dtHeader, dtData);
+                string html = getHTMLBodyHeaderTMSDashv3(dtHeader, dtData);
                 DataSet dsHead = SEL_DATA_TMS_DAAS_CHART("QH", DateTime.Now.AddDays(-6).ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), "ALL");
                 DataTable dtDays = dsHead.Tables[0];
                 DataTable dtDates = dsHead.Tables[1];
@@ -3098,9 +3104,7 @@ namespace Send_Email
                 DataTable dtChart = ds.Tables[1];
                 loadchart(dtChart);
 
-                pnTMSDassChart.Size = new Size(1700, 500);
-                pnTMSDassGrid.Size = new Size(1240, 250);
-
+               
                 CaptureControl(pnTMSDassChart, "TMSChart");
                 CaptureControl(pnTMSDassGrid, "TMSGrid");
                 CreateMailwithImage(Emoji.ChartIncreasing + " TMS MONITORING SUMMARY", html, dtEmail);
@@ -3659,6 +3663,80 @@ namespace Send_Email
 
         }
 
+        private string getHTMLBodyHeaderTMSDashv3(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
+                string headertable = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_HEADER_TABLE.txt");
+                object[] argsHeader = new object[dtHead.Columns.Count * dtHead.Rows.Count];
+
+                int HeaderiDx = 0;
+                string headerTotal = string.Empty;
+                for (int iCol = 0; iCol < dtHead.Columns.Count; iCol++)
+                {
+                    if (iCol > 0)
+                        for (int iRow = 0; iRow < dtHead.Rows.Count; iRow++)
+                        {
+                            argsHeader[HeaderiDx] = dtHead.Rows[iRow][iCol].ToString();
+                            HeaderiDx++;
+                        }
+                }
+                DataTable dtHeaderTotal = new DataTable();
+                //Create Header Total
+                if (dtData.Select("FACTORY = 'TOTAL' AND PLANT = 'TOTAL'").Count() > 0)
+                    dtHeaderTotal = dtData.Select("FACTORY = 'TOTAL' AND PLANT = 'TOTAL'").CopyToDataTable();
+
+                for (int iHead = 0; iHead < dtHeaderTotal.Columns.Count; iHead++)
+                {
+                    if (iHead > 3 && iHead < dtHeaderTotal.Columns["REASON"].Ordinal)
+                        if (dtHeaderTotal.Columns[iHead].ToString().Contains("ORDR"))
+                            headerTotal += $"<td style='color:{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_F_COLOR")]]}' bgcolor='{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                        else
+                            headerTotal += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                }
+                argsHeader[28] = @"<tr>" + headerTotal + "</tr>";
+                headertable = string.Format(headertable, argsHeader);
+                string body = string.Empty;
+
+
+                //Create Body
+                DataTable dtDataFillter = new DataTable();
+                if (dtData.Select("FACTORY <> 'TOTAL' AND PLANT <> 'TOTAL'").Count() > 0)
+                    dtDataFillter = dtData.Select("FACTORY <> 'TOTAL' AND PLANT <> 'TOTAL'").CopyToDataTable();
+                for (int iRowData = 0; iRowData < dtDataFillter.Rows.Count; iRowData++)
+                {
+                    string bodyTD = string.Empty;
+                    for (int iColData = 0; iColData < dtDataFillter.Columns.Count; iColData++)
+                    {
+                        if (iColData > 0 && iColData <= dtDataFillter.Columns["REASON"].Ordinal)
+                            if (dtDataFillter.Columns[iColData].ToString().Contains("ORDR") || dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
+                                if (dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
+                                    bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                                else
+                                    bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                            else
+                                if (dtDataFillter.Columns[iColData].ToString().Equals("PLANT") || dtDataFillter.Columns[iColData].ToString().Equals("LAST_RANK"))
+                                bodyTD += $"<td class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                            else if (dtDataFillter.Columns[iColData].ToString().Equals("REASON"))
+                                bodyTD += $"<td class='tftable-llax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                            else
+                                bodyTD += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                    }
+                    body += string.Format("<tr>{0}</tr>", bodyTD);
+                }
+                string end = "</tbody></table><hr>";
+                string HTML = string.Concat(style, headertable, body, end);
+                return HTML;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
         private void gvwBase_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
             if (e.Column.ColumnHandle >= 1)
@@ -3715,13 +3793,11 @@ namespace Send_Email
                         e.Appearance.ForeColor = Color.White;
 
                     }
-
                 }
-
             }
             catch
             {
-                
+
             }
         }
 
