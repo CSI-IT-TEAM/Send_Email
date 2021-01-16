@@ -37,9 +37,6 @@ namespace Send_Email
             //Phước Thêm TMS Dass
             pnTMSDassChart.Size = new Size(1700, 500);
             pnTMSDassGrid.Size = new Size(1420, 215);
-            pnTMSDassGrid.Visible = false;
-            pnTMSDassChart.Visible = false;
-
 
             tmrLoad.Enabled = true;
             this.Text = "20210102080000";
@@ -55,7 +52,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -204,7 +201,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                WriteLog("CreateMailProduction: " + ex.ToString());
+                WriteLog("CreateMailwithImage: " + ex.ToString());
             }
         }
 
@@ -3111,7 +3108,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                WriteLog(ex.ToString());
+                WriteLog(ex.Message);
             }
             finally
             {
@@ -3848,6 +3845,9 @@ namespace Send_Email
                                                               <tr>
                                                                 <th class='tg-0lax' rowspan='2'>Process</th>
                                                                 <th class='tg-0lax' rowspan='2'>Assembly Date</th>
+                                                                <th class='tg-0lax' rowspan='2'>Production Date</th>
+                                                                <th class='tg-0lax' rowspan='2'>Elapse Time</th>
+                                                                <th class='tg-0lax' rowspan='2'>Division</th>
                                                                 <th class='tg-0lax' rowspan='2'>Plant</th>
                                                                 <th class='tg-0lax' rowspan='2'>Assembly Line</th>
                                                                 <th class='tg-0lax' rowspan='2'>Mini Line</th>
@@ -3864,7 +3864,7 @@ namespace Send_Email
                 {
                     string SIZE_CODE = dtHead.Rows[j]["SIZE_CODE"].ToString();
                     sHeader2 += string.Format(@"<th class='tg-0lax'>{0}</th>", SIZE_CODE);
-                    string iDx = (j + 10).ToString();
+                    string iDx = (j + 13).ToString();
                     sBody2 += @"<td class='tg-2lax'>{" + iDx + "}</td>";
                 }
                 sHeader3 = @"</tr></thead><tbody>";
@@ -3905,15 +3905,19 @@ namespace Send_Email
                     sBody += string.Format(@"<tr>" + BodyProcName + @"
 				                        <td class='tg-0lax'>{1}</td>
                                         <td class='tg-0lax'>{2}</td>
+
                                         <td class='tg-0lax'>{3}</td>
                                         <td class='tg-0lax'>{4}</td>
-                                        <td class='tg-1lax'>{5}</td>
-				                        <td class='tg-0lax'>{6}</td>
-				                        " + sBody2 + " <td class='tg-total'>{7}</td><td class='tg-1lax'>{8}</td></tr>", argBodys);
+                                        <td class='tg-0lax'>{5}</td>
+
+                                        <td class='tg-0lax'>{6}</td>
+                                        <td class='tg-0lax'>{7}</td>
+                                        <td class='tg-1lax'>{8}</td>
+				                        <td class='tg-0lax'>{9}</td>
+				                        " + sBody2 + " <td class='tg-total'>{10}</td><td class='tg-1lax'>{11}</td></tr>", argBodys);
                 }
 
-                EndTag = @"</tbody></table></body></html>
-                     ";
+                EndTag = @"</tbody></table></body></html>";
                 //<script type='text/javascript'>document.getElementById('test').innerHTML = 'Hello World';</script>
                 sHTML = string.Concat(sStyle, sHeader1, sHeader2, sHeader3, sBody, EndTag);
                 return sHTML;
