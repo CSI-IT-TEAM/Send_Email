@@ -249,7 +249,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -512,7 +512,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -763,7 +763,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -986,7 +986,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email 
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
 
                     foreach (DataRow row in dtEmail.Rows)
@@ -1210,7 +1210,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -1479,7 +1479,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -2192,7 +2192,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email
-                if (!app.Session.CurrentUser.AddressEntry.Address.Contains("IT.NGOC"))
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
