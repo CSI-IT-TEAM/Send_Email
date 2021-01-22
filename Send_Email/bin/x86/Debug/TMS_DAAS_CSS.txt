@@ -1,0 +1,75 @@
+<html>
+<head>
+<style type="text/css">
+.tftable {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+.tftable thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
+.tftable td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
+.tftable1 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+.tftable1 thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
+.tftable1 td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 0px; padding: 3px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
+span {
+  color: #2e5f82;
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 25px;
+  font-style: italic;
+  }
+.rainbow {
+  align: center;
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 50px;
+  font-family: Calibri;
+}
+.red{
+  background-color: #f22;
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.green{
+  background-color:green;
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.yellow {
+  background-color: yellow;
+  color: black;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.black {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+ 
+}
+.mg{
+ margin-left: 10px;
+ margin-top: 9px;
+}
+#example2 {
+  border: 2px solid green;
+  padding: 9px;
+  border-radius: 50px 20px;
+}
+tr:hover {background-color:#f5f5f5;}
+.tftable .tftable-clax{text-align:center;}
+.tftable .tftable-llax{text-align:left;}
+.tftable .tftable-rlax{text-align:right;}
+.tftable1 .tftable1-clax{text-align:center;}
+.tftable1 .tftable1-llax{text-align:left;}
+.tftable1 .tftable1-rlax{text-align:right;}
+.divided tr { line-height: 14px; }
+</style>
+</head>

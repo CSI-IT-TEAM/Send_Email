@@ -1,0 +1,72 @@
+<html>
+<head>
+<style type="text/css">
+.tftable {font-size:12px; width:100%;border-width: 1px; border-collapse: collapse;}
+.tftable thead {font-size:12px;font-family: Calibri;border-width: 1px;padding: 8px;border-style: solid;border-color: #9dcc7a ;text-align:left;}
+.tftable td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;padding: 8px;border-style: solid;border-color: #9dcc7a;white-space: nowrap}
+span {
+color: #fff;
+background-color: #2b2301;
+display: inline-block;
+padding: 3px 10px;
+font-weight: bold;
+border-radius: 5px;
+}
+.rainbow {
+  align: center;
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color:transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 50px;
+  font-family: Calibri;
+}
+.red{
+  background-color: #f22;
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.green{
+  background-color:green;
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.yellow {
+  background-color: yellow;
+  color: black;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+  margin-left: 10px;
+}
+.black {
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 5px 20px;
+  text-shadow: 2px 4px 10px black;
+ 
+}
+.mg{
+ margin-left: 10px;
+ margin-top: 9px;
+}
+#example2 {
+  border: 2px solid green;
+  padding: 9px;
+  border-radius: 50px 20px;
+}
+tr:hover {background-color:#f5f5f5;}
+section {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* To vertically align all items added to the flex--not just one. */
+}
+</style>
+</head>
