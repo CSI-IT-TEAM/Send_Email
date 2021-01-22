@@ -42,7 +42,7 @@ namespace Send_Email
             this.Text = "20210102080000";
         }
         //Phuoc.IT
-  
+
 
         string[] headNames = new string[] { "COMP" };
         string[] divNames = new string[] { "Order By Set (prs)", "Total Outgoing (prs)", "Per", "", "", "", "", "", "", "DMP-Y", "IP-Y", "PU-Y", "OS-Y", "PH-Y" };
@@ -52,7 +52,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -118,7 +118,7 @@ namespace Send_Email
         }
 
         #endregion Event
-       
+
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
@@ -194,8 +194,9 @@ namespace Send_Email
                 string imgChart = "imgChart", imgGrid1 = "imgGrid1";
                 oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
                 oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
-                string EmbedImg = string.Format(@"<table class='tftable' border='1' width='100%' cellspacing='0' cellpadding='0'><tr><td class='tftable-clax'><img src='cid:{0}'></td></tr><tr><td class='tftable-clax'><img src='cid:{1}'</td></tr></table></body></html>", imgChart, imgGrid1);
-                mailItem.HTMLBody = htmlBody + EmbedImg;
+                // string EmbedImg = string.Format(@"<table class='tftable' border='1' width='100%' cellspacing='0' cellpadding='0'><tr><td class='tftable-clax'><img src='cid:{0}'></td></tr><tr><td class='tftable-clax'><img src='cid:{1}'</td></tr></table></body></html>", imgChart, imgGrid1);
+                string endTag = "</body></html>";
+                mailItem.HTMLBody = htmlBody + endTag;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -3101,9 +3102,9 @@ namespace Send_Email
                 DataTable dtChart = ds.Tables[1];
                 loadchart(dtChart);
 
-               
-                CaptureControl(pnTMSDassChart, "TMSChart");
-                CaptureControl(pnTMSDassGrid, "TMSGrid");
+
+                //CaptureControl(pnTMSDassChart, "TMSChart");
+                //CaptureControl(pnTMSDassGrid, "TMSGrid");
                 CreateMailwithImage(Emoji.ChartIncreasing + " TMS MONITORING SUMMARY", html, dtEmail);
             }
             catch (Exception ex)
@@ -3146,7 +3147,7 @@ namespace Send_Email
             }
         }
 
-        private void RunTimeContraint(string arg_type)
+        private void RunTimeContraint(string DivTag, string arg_type)
         {
             try
             {
@@ -3164,7 +3165,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTimeContraint(dtHeader, dtData);
 
-                CreateMail(Emoji.ChartIncreasing + " TIME CONSTRAINT", html, dtEmail);
+                CreateMail(Emoji.ChartIncreasing + " Time Constraint By " + DivTag, html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -3509,7 +3510,8 @@ namespace Send_Email
         {
             try
             {
-                RunTimeContraint("Q");
+                RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
             }
             catch
             {
@@ -3669,7 +3671,7 @@ namespace Send_Email
                 object[] argsHeader = new object[dtHead.Columns.Count * dtHead.Rows.Count];
 
                 int HeaderiDx = 0;
-                string headerTotal = string.Empty;
+                string headerTotal = string.Empty, headerDivided = string.Empty;
                 for (int iCol = 0; iCol < dtHead.Columns.Count; iCol++)
                 {
                     if (iCol > 0)
@@ -3687,12 +3689,26 @@ namespace Send_Email
                 for (int iHead = 0; iHead < dtHeaderTotal.Columns.Count; iHead++)
                 {
                     if (iHead > 3 && iHead < dtHeaderTotal.Columns["REASON"].Ordinal)
-                        if (dtHeaderTotal.Columns[iHead].ToString().Contains("ORDR"))
-                            headerTotal += $"<td style='color:{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_F_COLOR")]]}' bgcolor='{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                    {
+                        if (dtHeaderTotal.Columns[iHead].ToString().Equals("EMPTY_COL"))
+                        {
+                            headerTotal += $"<td style='width: 1px; padding: 1px;border: blue;' bgcolor='blue'></td>";
+                        }
                         else
-                            headerTotal += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                        {
+                            if (dtHeaderTotal.Columns[iHead].ToString().Contains("ORDR"))
+                                headerTotal += $"<td style='color:{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_F_COLOR")]]}' bgcolor='{dtHeaderTotal.Rows[0][dtHeaderTotal.Columns[string.Concat(dtHeaderTotal.Columns[iHead].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                            else
+                                headerTotal += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtHeaderTotal.Rows[0][iHead])}</td>";
+                        }
+                    }
+
+                    if (iHead < dtHeaderTotal.Columns["REASON"].Ordinal)
+                        headerDivided += "<td style='height: 1px; padding: 1px;border: blue;' bgcolor='blue'></td>";
+
                 }
-                argsHeader[28] = @"<tr>" + headerTotal + "</tr>";
+                argsHeader[38] = @"<tr>" + headerDivided + "</tr>";
+                argsHeader[39] = @"<tr>" + headerTotal + "</tr>";
                 headertable = string.Format(headertable, argsHeader);
                 string body = string.Empty;
 
@@ -3707,18 +3723,25 @@ namespace Send_Email
                     for (int iColData = 0; iColData < dtDataFillter.Columns.Count; iColData++)
                     {
                         if (iColData > 0 && iColData <= dtDataFillter.Columns["REASON"].Ordinal)
-                            if (dtDataFillter.Columns[iColData].ToString().Contains("ORDR") || dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
-                                if (dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
-                                    bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                        {
+                            if (dtDataFillter.Columns[iColData].ToString().Equals("EMPTY_COL"))
+                                bodyTD += "<td style='width: 1px; padding: 1px;border-width: 0px;border: blue;' bgcolor='blue'></td>";
+                            else
+                            {
+                                if (dtDataFillter.Columns[iColData].ToString().Contains("ORDR") || dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
+                                    if (dtDataFillter.Columns[iColData].ToString().Equals("THIS_RANK"))
+                                        bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                                    else
+                                        bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
                                 else
-                                    bodyTD += $"<td style='color:{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtHeaderTotal.Columns[iColData].ColumnName, "_F_COLOR")]]}' bgcolor='{dtDataFillter.Rows[iRowData][dtDataFillter.Columns[string.Concat(dtDataFillter.Columns[iColData].ColumnName, "_B_COLOR")]]}' class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
-                            else
                                 if (dtDataFillter.Columns[iColData].ToString().Equals("PLANT") || dtDataFillter.Columns[iColData].ToString().Equals("LAST_RANK"))
-                                bodyTD += $"<td class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
-                            else if (dtDataFillter.Columns[iColData].ToString().Equals("REASON"))
-                                bodyTD += $"<td class='tftable-llax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
-                            else
-                                bodyTD += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                                    bodyTD += $"<td class='tftable-clax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                                else if (dtDataFillter.Columns[iColData].ToString().Equals("REASON"))
+                                    bodyTD += $"<td class='tftable-llax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                                else
+                                    bodyTD += $"<td class='tftable-rlax'>{string.Format("{0:n0}", dtDataFillter.Rows[iRowData][iColData])}</td>";
+                            }
+                        }
                     }
                     body += string.Format("<tr>{0}</tr>", bodyTD);
                 }
@@ -3819,7 +3842,7 @@ namespace Send_Email
                                                         .tg .tg-0lax{text-align:center;}
                                                         .tg .tg-1lax{text-align:left;}
                                                         .tg .tg-2lax{text-align:right;}
-                                                        .tg .tg-total{text-align:right;background-color:yellow;color: #000000;}
+                                                        .tg .tg-eslapse{text-align:center;background-color:yellow;color: #000000;}
                                                         span {
                                                         color: #2e5f82;
                                                         display: inline-block;
@@ -3846,13 +3869,14 @@ namespace Send_Email
                                                                 <th class='tg-0lax' rowspan='2'>Process</th>
                                                                 <th class='tg-0lax' rowspan='2'>Assembly Date</th>
                                                                 <th class='tg-0lax' rowspan='2'>Production Date</th>
-                                                                <th class='tg-0lax' rowspan='2'>Elapse Time</th>
+                                                                <th class='tg-0lax' rowspan='2'>Elapsed Time</th>
                                                                 <th class='tg-0lax' rowspan='2'>Division</th>
                                                                 <th class='tg-0lax' rowspan='2'>Plant</th>
                                                                 <th class='tg-0lax' rowspan='2'>Assembly Line</th>
                                                                 <th class='tg-0lax' rowspan='2'>Mini Line</th>
                                                                 <th class='tg-0lax' rowspan='2'>Style Name</th>
                                                                 <th class='tg-0lax' rowspan='2'>Style Code</th>
+                                                                <th class='tg-0lax' rowspan='2'>Location</th>
                                                                 <th class='tg-0lax' colspan='{0}'>Size</th>
                                                                 <th class='tg-0lax' rowspan='2'>Total</th>
                                                                 <th class='tg-0lax' rowspan='2'>Reason</th>
@@ -3864,7 +3888,7 @@ namespace Send_Email
                 {
                     string SIZE_CODE = dtHead.Rows[j]["SIZE_CODE"].ToString();
                     sHeader2 += string.Format(@"<th class='tg-0lax'>{0}</th>", SIZE_CODE);
-                    string iDx = (j + 13).ToString();
+                    string iDx = (j + 15).ToString();
                     sBody2 += @"<td class='tg-2lax'>{" + iDx + "}</td>";
                 }
                 sHeader3 = @"</tr></thead><tbody>";
@@ -3875,7 +3899,7 @@ namespace Send_Email
                 dt.Columns.Remove(dt.Columns["SIZE_NO"]);
                 DataTable dtGrid = Pivot(dt, dt.Columns["SIZE_CODE"], dt.Columns["QTY"]);
                 DataView dtViewGrid = new DataView(dtGrid);
-                dtViewGrid.Sort = "PROC_CODE,FA_DATE,PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE";
+                dtViewGrid.Sort = "PROC_CODE, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
 
                 dtGrid = dtViewGrid.ToTable();
                 object[] argBodys = new object[dtGrid.Columns.Count];
@@ -3906,7 +3930,7 @@ namespace Send_Email
 				                        <td class='tg-0lax'>{1}</td>
                                         <td class='tg-0lax'>{2}</td>
 
-                                        <td class='tg-0lax'>{3}</td>
+                                        <td class='tg-eslapse'>{3}</td>
                                         <td class='tg-0lax'>{4}</td>
                                         <td class='tg-0lax'>{5}</td>
 
@@ -3914,7 +3938,8 @@ namespace Send_Email
                                         <td class='tg-0lax'>{7}</td>
                                         <td class='tg-1lax'>{8}</td>
 				                        <td class='tg-0lax'>{9}</td>
-				                        " + sBody2 + " <td class='tg-total'>{10}</td><td class='tg-1lax'>{11}</td></tr>", argBodys);
+                                        <td class='tg-0lax'>{10}</td>
+				                        " + sBody2 + " <td class='tg-2lax'>{11}</td><td class='tg-1lax'>{12}</td></tr>", argBodys);
                 }
 
                 EndTag = @"</tbody></table></body></html>";
