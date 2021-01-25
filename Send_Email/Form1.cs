@@ -57,6 +57,7 @@ namespace Send_Email
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
+            string dateNow = System.DateTime.Now.ToString("HH:mm");
             //12h
             RunToPo("Q1");
             RunToPoIe("Q1");
@@ -74,6 +75,13 @@ namespace Send_Email
 
             //16h
             RunCutting("Q1");
+
+            //10h
+            if (dateNow.Equals("10:00"))
+            {
+                RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+            }
         }
 
         private void cmdRunProd_Click(object sender, EventArgs e)
@@ -3516,7 +3524,6 @@ namespace Send_Email
             catch
             {
 
-
             }
         }
 
@@ -3819,6 +3826,11 @@ namespace Send_Email
             {
 
             }
+        }
+
+        private void tmrLoad2_Tick(object sender, EventArgs e)
+        {
+
         }
 
         private string getHTMLBodyHeaderTimeContraint(DataTable dtHead, DataTable dtData)
