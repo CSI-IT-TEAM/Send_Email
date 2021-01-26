@@ -52,7 +52,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "nguyen.it@changshininc.com"};
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -81,6 +81,12 @@ namespace Send_Email
             {
                 RunTimeContraint("Bottom", "Q1"); //BOTTOM
                 RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+            }
+
+            //16h
+            if (dateNow.Equals("16:00"))
+            {
+                RunTMSDashv2("Q");
             }
         }
 
@@ -3039,7 +3045,55 @@ namespace Send_Email
             if (retDS == null) return null;
             return retDS;
         }
+        public DataSet SEL_SCADA_DATA(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
 
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "MES.P_SEND_EMAIL_SCADA";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "CV_1";
+                MyOraDB.Parameter_Name[2] = "CV_2";
+                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("SEL_SCADA_DATA: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
         #endregion
 
 
@@ -3185,6 +3239,33 @@ namespace Send_Email
             }
         }
 
+        private void RunScada(string arg_type)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                DataSet dsData = SEL_SCADA_DATA(arg_type);
+                if (dsData == null) return;
+
+                DataTable dtHeader = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+                string html = getHTMLBodyHeaderScada(dtHeader, dtData);
+                CreateMailwithImage(Emoji.ChartIncreasing + "Top 50 Over Temperature", html, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
         private void Format_Grid()
         {
 
@@ -3764,6 +3845,73 @@ namespace Send_Email
 
         }
 
+        private string getHTMLBodyHeaderScada(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string style, headertable, body, end;
+                style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
+                headertable = @"<body><div style='-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #029c3d; display: block;'>
+                                          <span>TOP 50 SCADA MACHINE <b>OVER TEMPERATURE</b></span><br>
+                                      <hr>
+                                      </div>
+                                    <table class='tftable2' border='1' width='100%' cellspacing='0' cellpadding='0'>
+                                    <thead>
+                                    <tr style='font-weight: bold;'>
+                                    <td style='width: auto; font-weight: bolder; font-size: 18px;'   align='center'>Plant</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Line</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Process</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Machine Name</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Machine Code</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Machine ID</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Description</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>PV</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Min</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Max</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Total Data</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Abnormal</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Anomal Ratio</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>";
+                body = string.Empty;
+                int iDx = 0;
+                foreach (DataRow dr in dtData.Rows)
+                {
+                    string rowColor = string.Empty;
+                    if (iDx % 2 == 0)
+                        rowColor = "#ededed";
+                    else
+                        rowColor = "white";
+                    body +=  $"<tr style='background-color:{rowColor}'><td class='tftable2-clax'>{dr["PLANT"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["LINE"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["OP_CD"]}</td>" +
+                              $"   <td class='tftable2-llax'>{dr["MACHINE_NAME"]}</td>" +
+                              $"   <td class='tftable2-llax'>{dr["MACHINE_CODE"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["MACHINE_ID"]}</td>" +
+                              $"   <td class='tftable2-llax'>{dr["DESCR"]}</td>" +
+                              $"   <td class='tftable2-clax'>{ dr["PV"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["MIN_VALUE"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["MAX_VALUE"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["TOTAL"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["OVER"]}</td>" +
+                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"],"%")}</td></tr>";
+                    iDx++;
+                }
+                
+                end = "</tbody></table><hr></body></html>";
+                
+                string HTML = string.Concat(style, headertable, body, end);
+                return HTML;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
         private void gvwBase_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
         {
             if (e.Column.ColumnHandle >= 1)
@@ -3831,6 +3979,11 @@ namespace Send_Email
         private void tmrLoad2_Tick(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRunScada_Click(object sender, EventArgs e)
+        {
+            RunScada("Q");
         }
 
         private string getHTMLBodyHeaderTimeContraint(DataTable dtHead, DataTable dtData)
