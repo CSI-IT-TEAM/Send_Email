@@ -52,7 +52,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "nguyen.it@changshininc.com"};
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
 
         #region Event
         private void tmrLoad_Tick(object sender, EventArgs e)
@@ -179,8 +179,8 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                //  Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\TMSGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -205,9 +205,9 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "phuoc.it@changshininc.com";
-                string imgChart = "imgChart", imgGrid1 = "imgGrid1";
-                oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
-                oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
+                // string imgChart = "imgChart", imgGrid1 = "imgGrid1";
+                //  oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
+                //  oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
                 // string EmbedImg = string.Format(@"<table class='tftable' border='1' width='100%' cellspacing='0' cellpadding='0'><tr><td class='tftable-clax'><img src='cid:{0}'></td></tr><tr><td class='tftable-clax'><img src='cid:{1}'</td></tr></table></body></html>", imgChart, imgGrid1);
                 string endTag = "</body></html>";
                 mailItem.HTMLBody = htmlBody + endTag;
@@ -2525,108 +2525,116 @@ namespace Send_Email
         public static DataTable GetInversedDataTable(DataTable table, string columnX,
                                                      params string[] columnsToIgnore)
         {
-            //Create a DataTable to Return
-            DataTable returnTable = new DataTable();
-
-            if (columnX == "")
-                columnX = table.Columns[0].ColumnName;
-
-            //Add a Column at the beginning of the table
-
-            returnTable.Columns.Add(columnX);
-
-            //Read all DISTINCT values from columnX Column in the provided DataTale
-            List<string> columnXValues = new List<string>();
-
-            //Creates list of columns to ignore
-            List<string> listColumnsToIgnore = new List<string>();
-            if (columnsToIgnore.Length > 0)
-                listColumnsToIgnore.AddRange(columnsToIgnore);
-
-            if (!listColumnsToIgnore.Contains(columnX))
-                listColumnsToIgnore.Add(columnX);
-
-            foreach (DataRow dr in table.Rows)
+            try
             {
-                string columnXTemp = dr[columnX].ToString();
-                //Verify if the value was already listed
-                if (!columnXValues.Contains(columnXTemp))
+                //Create a DataTable to Return
+                DataTable returnTable = new DataTable();
+
+                if (columnX == "")
+                    columnX = table.Columns[0].ColumnName;
+
+                //Add a Column at the beginning of the table
+
+                returnTable.Columns.Add(columnX);
+
+                //Read all DISTINCT values from columnX Column in the provided DataTale
+                List<string> columnXValues = new List<string>();
+
+                //Creates list of columns to ignore
+                List<string> listColumnsToIgnore = new List<string>();
+                if (columnsToIgnore.Length > 0)
+                    listColumnsToIgnore.AddRange(columnsToIgnore);
+
+                if (!listColumnsToIgnore.Contains(columnX))
+                    listColumnsToIgnore.Add(columnX);
+
+                foreach (DataRow dr in table.Rows)
                 {
-                    //if the value id different from others provided, add to the list of 
-                    //values and creates a new Column with its value.
-                    columnXValues.Add(columnXTemp);
-                    returnTable.Columns.Add(columnXTemp);
+                    string columnXTemp = dr[columnX].ToString();
+                    //Verify if the value was already listed
+                    if (!columnXValues.Contains(columnXTemp))
+                    {
+                        //if the value id different from others provided, add to the list of 
+                        //values and creates a new Column with its value.
+                        columnXValues.Add(columnXTemp);
+                        returnTable.Columns.Add(columnXTemp);
+                    }
+                    else
+                    {
+                        //Throw exception for a repeated value
+                        throw new Exception("The inversion used must have " +
+                                            "unique values for column " + columnX);
+                    }
                 }
-                else
+
+                //Add a line for each column of the DataTable
+
+                foreach (DataColumn dc in table.Columns)
                 {
-                    //Throw exception for a repeated value
-                    throw new Exception("The inversion used must have " +
-                                        "unique values for column " + columnX);
+                    if (!columnXValues.Contains(dc.ColumnName) &&
+                        !listColumnsToIgnore.Contains(dc.ColumnName))
+                    {
+                        DataRow dr = returnTable.NewRow();
+                        dr[0] = dc.ColumnName;
+                        returnTable.Rows.Add(dr);
+                    }
                 }
+
+                //Complete the datatable with the values
+                for (int i = 0; i < returnTable.Rows.Count; i++)
+                {
+                    for (int j = 1; j < returnTable.Columns.Count; j++)
+                    {
+                        returnTable.Rows[i][j] =
+                          table.Rows[j - 1][returnTable.Rows[i][0].ToString()].ToString();
+                    }
+                }
+
+                return returnTable;
             }
-
-            //Add a line for each column of the DataTable
-
-            foreach (DataColumn dc in table.Columns)
-            {
-                if (!columnXValues.Contains(dc.ColumnName) &&
-                    !listColumnsToIgnore.Contains(dc.ColumnName))
-                {
-                    DataRow dr = returnTable.NewRow();
-                    dr[0] = dc.ColumnName;
-                    returnTable.Rows.Add(dr);
-                }
-            }
-
-            //Complete the datatable with the values
-            for (int i = 0; i < returnTable.Rows.Count; i++)
-            {
-                for (int j = 1; j < returnTable.Columns.Count; j++)
-                {
-                    returnTable.Rows[i][j] =
-                      table.Rows[j - 1][returnTable.Rows[i][0].ToString()].ToString();
-                }
-            }
-
-            return returnTable;
+            catch (Exception ex) { return null; }
         }
 
         DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {
-            // find primary key columns 
-            //(i.e. everything but pivot column and pivot value)
-            DataTable temp = dt.Copy();
-            temp.Columns.Remove(pivotColumn.ColumnName);
-            temp.Columns.Remove(pivotValue.ColumnName);
-            string[] pkColumnNames = temp.Columns.Cast<DataColumn>()
-            .Select(c => c.ColumnName)
-            .ToArray();
-
-            // prep results table
-            DataTable result = temp.DefaultView.ToTable(true, pkColumnNames).Copy();
-            result.PrimaryKey = result.Columns.Cast<DataColumn>().ToArray();
-            dt.AsEnumerable()
-            .Select(r => r[pivotColumn.ColumnName].ToString())
-            .Distinct().ToList()
-            .ForEach(c => result.Columns.Add(c, pivotValue.DataType));
-            //.ForEach(c => result.Columns.Add(c, pivotColumn.DataType));
-
-            // load it
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                // find row to update
-                DataRow aggRow = result.Rows.Find(
-                pkColumnNames
-                .Select(c => row[c])
-                .ToArray());
-                // the aggregate used here is LATEST 
-                // adjust the next line if you want (SUM, MAX, etc...)
-                aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
+                // find primary key columns 
+                //(i.e. everything but pivot column and pivot value)
+                DataTable temp = dt.Copy();
+                temp.Columns.Remove(pivotColumn.ColumnName);
+                temp.Columns.Remove(pivotValue.ColumnName);
+                string[] pkColumnNames = temp.Columns.Cast<DataColumn>()
+                .Select(c => c.ColumnName)
+                .ToArray();
+
+                // prep results table
+                DataTable result = temp.DefaultView.ToTable(true, pkColumnNames).Copy();
+                result.PrimaryKey = result.Columns.Cast<DataColumn>().ToArray();
+                dt.AsEnumerable()
+                .Select(r => r[pivotColumn.ColumnName].ToString())
+                .Distinct().ToList()
+                .ForEach(c => result.Columns.Add(c, pivotValue.DataType));
+                //.ForEach(c => result.Columns.Add(c, pivotColumn.DataType));
+
+                // load it
+                foreach (DataRow row in dt.Rows)
+                {
+                    // find row to update
+                    DataRow aggRow = result.Rows.Find(
+                    pkColumnNames
+                    .Select(c => row[c])
+                    .ToArray());
+                    // the aggregate used here is LATEST 
+                    // adjust the next line if you want (SUM, MAX, etc...)
+                    aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
 
 
+                }
+
+                return result;
             }
-
-            return result;
+            catch (Exception ex) { return null; }
         }
 
         private void grdViewNpi_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -3225,7 +3233,7 @@ namespace Send_Email
 
                 WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
 
-                string html = getHTMLBodyHeaderTimeContraint(dtHeader, dtData);
+                string html = getHTMLBodyHeaderTimeContraint(arg_type, dtHeader, dtData);
 
                 CreateMail(Emoji.ChartIncreasing + " Time Constraint By " + DivTag, html, dtEmail);
             }
@@ -3852,12 +3860,27 @@ namespace Send_Email
                 string style, headertable, body, end;
                 style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
                 headertable = @"<body><div style='-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #029c3d; display: block;'>
-                                          <span>TOP 50 SCADA MACHINE <b>OVER TEMPERATURE</b></span><br>
-                                      <hr>
+                                          <span>Top 50 Scada Machine <b>Abnormal Temperature</b></span><br>
+                                      <hr><div style = 'color:black'>
+                                          <b>Thiết bị nóng</b><br>
+                                            <ul>
+                                          <li>Tiêu chuẩn nhiệt độ cài đặt là <b>+-3</b></li>
+                                          <li>Nếu nhiệt độ vượt quá tiêu chuẩn, hệ thống sẽ thông báo <b style='color:yellow; background-color:black'>màu vàng</b></li>
+                                          <li>Nếu nhiệt độ vượt quá thời gian 3 phút, hệ thống sẽ thông báo <b style='color:red; background-color:black'>màu đỏ</b></li>
+                                           </ul>
+                                          <b>Thiết bị lạnh</b><br>
+                                          <ul>
+                                          <li>Tiêu chuẩn nhiệt độ cài đặt là <b>+7</b> và <b>-3</b></li>
+                                          <li>Nếu nhiệt độ vượt quá tiêu chuẩn, hệ thống sẽ thông báo <b style='color:yellow; background-color:black'>màu vàng</b></li>
+                                          <li>Nếu nhiệt độ vượt quá thời gian 5 phút, hệ thống sẽ thông báo <b style='color:red; background-color:black'>màu đỏ</b></li>
+                                          </ul>
+                                        </div>
+                                        <hr>
                                       </div>
                                     <table class='tftable2' border='1' width='100%' cellspacing='0' cellpadding='0'>
                                     <thead>
                                     <tr style='font-weight: bold;'>
+                                    <td style='width: auto; font-weight: bolder; font-size: 18px;'   align='center'>Date</td>
                                     <td style='width: auto; font-weight: bolder; font-size: 18px;'   align='center'>Plant</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Line</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Process</td>
@@ -3868,9 +3891,9 @@ namespace Send_Email
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>PV</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Min</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Max</td>
-                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Total Data</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>I/F Data Count</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Abnormal</td>
-                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Anomal Ratio</td>
+                                    <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Abnormal Ratio</td>
                                     </tr>
                                     </thead>
                                     <tbody>";
@@ -3883,7 +3906,9 @@ namespace Send_Email
                         rowColor = "#ededed";
                     else
                         rowColor = "white";
-                    body +=  $"<tr style='background-color:{rowColor}'><td class='tftable2-clax'>{dr["PLANT"]}</td>" +
+                    body += $"<tr style='background-color:{rowColor}'>" +
+                              $"<td class='tftable2-clax'>{dr["YMD"]}</td>" +
+                              $"<td class='tftable2-clax'>{dr["PLANT"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["LINE"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["OP_CD"]}</td>" +
                               $"   <td class='tftable2-llax'>{dr["MACHINE_NAME"]}</td>" +
@@ -3895,12 +3920,12 @@ namespace Send_Email
                               $"   <td class='tftable2-clax'>{dr["MAX_VALUE"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["TOTAL"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["OVER"]}</td>" +
-                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"],"%")}</td></tr>";
+                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"], "%")}</td></tr>";
                     iDx++;
                 }
-                
+
                 end = "</tbody></table><hr></body></html>";
-                
+
                 string HTML = string.Concat(style, headertable, body, end);
                 return HTML;
 
@@ -3986,7 +4011,7 @@ namespace Send_Email
             RunScada("Q");
         }
 
-        private string getHTMLBodyHeaderTimeContraint(DataTable dtHead, DataTable dtData)
+        private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
             try
             {
@@ -4049,12 +4074,12 @@ namespace Send_Email
                 DataView dtView = new DataView(dtData);
                 dtView.Sort = "SIZE_NO";
                 dtHead = dtView.ToTable(true, "SIZE_CODE");
+                int iDx = 0;
                 for (int j = 0; j < dtHead.Rows.Count; j++)
                 {
-                    string SIZE_CODE = dtHead.Rows[j]["SIZE_CODE"].ToString();
-                    sHeader2 += string.Format(@"<th class='tg-0lax'>{0}</th>", SIZE_CODE);
-                    string iDx = (j + 15).ToString();
-                    sBody2 += @"<td class='tg-2lax'>{" + iDx + "}</td>";
+                    sHeader2 += $"<th class='tg-0lax'>{dtHead.Rows[j]["SIZE_CODE"]}</th>";
+                    iDx = j + 16;
+                    sBody2 += @"<td class='tg-2lax' style = 'font-weight:bold;background-color:{99}'>{" + iDx + "}</td>";
                 }
                 sHeader3 = @"</tr></thead><tbody>";
 
@@ -4064,47 +4089,81 @@ namespace Send_Email
                 dt.Columns.Remove(dt.Columns["SIZE_NO"]);
                 DataTable dtGrid = Pivot(dt, dt.Columns["SIZE_CODE"], dt.Columns["QTY"]);
                 DataView dtViewGrid = new DataView(dtGrid);
+                if (Qtype.Equals("Q1"))
                 dtViewGrid.Sort = "PROC_CODE, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
+                else
+                dtViewGrid.Sort = "PROC_CODE, PROC_NAME, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
 
                 dtGrid = dtViewGrid.ToTable();
-                object[] argBodys = new object[dtGrid.Columns.Count];
+                object[] argBodys = new object[100];
 
                 string ProcCodeTmp = string.Empty;
-
+                string PlantCodeTmp = string.Empty;
+                //Loop Rows
                 for (int iRow = 0; iRow < dtGrid.Rows.Count; iRow++)
                 {
+                    //Loop Cols
                     for (int iCol = 0; iCol < dtGrid.Columns.Count; iCol++)
                     {
                         if (iCol >= 2)
                         {
-                            if (dtGrid.Columns[iCol].ColumnName.Equals("TOTAL"))
-                                argBodys[iCol - 2] = string.Format("{0:n0}", dtGrid.Rows[iRow][iCol]);
-                            else
-                                argBodys[iCol - 2] = dtGrid.Rows[iRow][iCol].ToString();
+                            //if (dtGrid.Columns[iCol].ColumnName.Equals("TOTAL"))
+                            argBodys[iCol - 2] = string.Format("{0:n0}", dtGrid.Rows[iRow][iCol]);
+                            //else
+                            //    argBodys[iCol - 2] = dtGrid.Rows[iRow][iCol].ToString();
                         }
 
                     }
                     string BodyProcName = string.Empty;
-                    if (!ProcCodeTmp.Equals(dtGrid.Rows[iRow]["PROC_CODE"].ToString()))
+                    string BodyPlantName = string.Empty;
+                    if (dtGrid.Rows[iRow]["PROC_NAME"].ToString().ToUpper().Equals("TOTAL"))
                     {
-                        BodyProcName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN"], dtGrid.Rows[iRow]["PROC_NAME"]);
-                        ProcCodeTmp = dtGrid.Rows[iRow]["PROC_CODE"].ToString();
+                        argBodys[99] = "#ffffc9";
+                        BodyProcName = string.Format("<td class='tg-0lax' colspan = '11' style='font-weight:bold;background-color:#0080a0;color: #ffffff;'>{0}</td>",  dtGrid.Rows[iRow]["PROC_NAME"]);
+                    }
+                    else
+                    {
+                        argBodys[99] = "";
+                       //  BodyProcName = string.Format("<td class='tg-0lax' rowspan='1'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN1"], dtGrid.Rows[iRow]["PROC_NAME"]);
+                        if (!ProcCodeTmp.Equals(dtGrid.Rows[iRow]["PROC_NAME"].ToString()))
+                        {
+                            BodyProcName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN1"], dtGrid.Rows[iRow]["PROC_NAME"]);
+                        }
+                        if (!dtGrid.Rows[iRow]["ROWSPAN1"].ToString().Equals("1"))
+                            ProcCodeTmp = dtGrid.Rows[iRow]["PROC_NAME"].ToString();
+                        else
+                            ProcCodeTmp = string.Empty;
                     }
 
-                    sBody += string.Format(@"<tr>" + BodyProcName + @"
+                    if (!PlantCodeTmp.Equals(dtGrid.Rows[iRow]["FA_WC_CD"].ToString()))
+                    {
+                        BodyPlantName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN2"], dtGrid.Rows[iRow]["FA_WC_CD"]);
+                    }
+                     if (!dtGrid.Rows[iRow]["ROWSPAN2"].ToString().Equals("1"))
+                            PlantCodeTmp = dtGrid.Rows[iRow]["FA_WC_CD"].ToString();
+                    else
+                        PlantCodeTmp = string.Empty;
+
+                    if (dtGrid.Rows[iRow]["PROC_NAME"].ToString().ToUpper().Equals("TOTAL"))
+                    {
+                        sBody += string.Format(@"<tr>" + BodyProcName + @"
+				                        " + sBody2 + "<td class='tg-2lax' style='font-weight:bold;background-color:#ffffc9'>{11}</td><td class='tg-1lax'>{12}</td></tr>", argBodys);
+                    }
+                    else
+                    {
+                        sBody += string.Format(@"<tr>" + BodyProcName + @"
 				                        <td class='tg-0lax'>{1}</td>
                                         <td class='tg-0lax'>{2}</td>
-
                                         <td class='tg-eslapse'>{3}</td>
-                                        <td class='tg-0lax'>{4}</td>
-                                        <td class='tg-0lax'>{5}</td>
-
+                                        <td class='tg-0lax'>{4}</td>" +
+                                            BodyPlantName + @"
                                         <td class='tg-0lax'>{6}</td>
                                         <td class='tg-0lax'>{7}</td>
                                         <td class='tg-1lax'>{8}</td>
 				                        <td class='tg-0lax'>{9}</td>
                                         <td class='tg-0lax'>{10}</td>
-				                        " + sBody2 + " <td class='tg-2lax'>{11}</td><td class='tg-1lax'>{12}</td></tr>", argBodys);
+				                        " + sBody2 + " <td class='tg-2lax' style='font-weight:bold;background-color:#ffffc9'>{11}</td><td class='tg-1lax'>{12}</td></tr>", argBodys);
+                    }
                 }
 
                 EndTag = @"</tbody></table></body></html>";

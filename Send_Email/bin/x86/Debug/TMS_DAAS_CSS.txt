@@ -9,7 +9,7 @@
 .tftable1 thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
 .tftable1 td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 0px; padding: 3px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
 .tftable2 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
-.tftable2 thead {font-size:12px;font-family: 'Open Sans', sans-serif;border-width: 0px;padding: 0px;border-style: solid;border-color: #1b6de0 ;background-color: #1b6de0;color: #ffffff; text-align:left;white-space: nowrap;}
+.tftable2 thead {font-size:12px;font-family: 'Times New Roman', sans-serif; font-style: italic; font-weight: bold; border-width: 0px;padding: 0px;border-style: solid;border-color: #00ccff ;background-color: #ff9100;color: #ffffff; }
 .tftable2 td {font-size:12px;font-family: 'Open Sans', sans-serif;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: rgb(82, 82, 82);white-space: nowrap;}
 span {
   color: #2e5f82;
