@@ -3102,6 +3102,56 @@ namespace Send_Email
                 return null;
             }
         }
+
+        public DataSet SEL_TMS_SUMMARY_DATA(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_TMS_ORDER_SUM";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "CV_1";
+                MyOraDB.Parameter_Name[2] = "CV_2";
+                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("SEL_TMS_SUM_DATA: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
         #endregion
 
 
@@ -3264,6 +3314,34 @@ namespace Send_Email
                 WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
                 string html = getHTMLBodyHeaderScada(dtHeader, dtData);
                 CreateMailwithImage(Emoji.ChartIncreasing + "Top 50 Over Temperature", html, dtEmail);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.Message);
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+        private void RunTMS_Summary(string arg_type)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                DataSet dsData = SEL_TMS_SUMMARY_DATA(arg_type);
+                if (dsData == null) return;
+
+                DataTable dtHeader = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+                string html = getHTMLBodyHeaderTMSSummary(dtHeader, dtData);
+                CreateMailwithImage(Emoji.ChartIncreasing + "Daily TMS Performance Summary", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -3852,7 +3930,112 @@ namespace Send_Email
             }
 
         }
+        private string getHTMLBodyHeaderTMSSummary(DataTable dtHead, DataTable dtData)
+        {
+            try
+            {
+                string style, sdate = string.Empty, headertable, body = string.Empty;
+                 style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
+                body = string.Empty;
+                bool isAppend = false;
+                int iDx = 0;
+                foreach (DataRow dr in dtData.Rows)
+                {
+                    if (iDx == 5)
+                    {
+                        body += "<tr><td style='border:none;padding: 3px;' bgcolor=silver colspan =14></td></tr>";
+                    }
+                    else
+                    {
+                        if (!isAppend)
+                        {
+                            body += $"<tr><td>{dr["PLANT"]}</td>" +
+                                 $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
+                                 $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
+                                 $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
+                                 $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
+                                 $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
+                                 $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
+                                 $"<td width=5px bgcolor=silver rowspan = {dtData.Rows.Count}></td>" +
+                                 $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
+                                 $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
+                                 $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
+                                 $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
+                                 $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
+                                 $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
+                            isAppend = true;
+                        }
+                        else
+                        {
+                            body += $"<tr><td>{dr["PLANT"]}</td>" +
+                                 $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
+                                 $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
+                                 $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
+                                 $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
+                                 $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
+                                 $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
+                                 $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
+                                 $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
+                                 $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
+                                 $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
+                                 $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
+                                 $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
+                        }
+                    }
+                    iDx++;
+                }
+                iDx = 0;
+                foreach (DataRow dr in dtHead.Rows)
+                {
+                    if (iDx == 6)
+                        sdate += $"<th></th>";
+                    else
+                        sdate += $"<th>{dr["CAPTION"]}</th>";
 
+                    iDx++;
+                }
+                string InOrder = string.Empty, WithOutOrder = string.Empty;
+                InOrder = dtHead.Rows[0]["OIO"].ToString();
+                WithOutOrder= dtHead.Rows[0]["OWO"].ToString();
+                headertable = @"
+                                    <table class='greyGridTable'>
+                                    <thead>
+                                    <tr>
+                                    <th rowspan='2'>Plant</th>
+                                    <th colspan='6'>
+                                        <table class='infoTable' >
+                                        <tbody >
+                                        <tr><td style='border:none; border-bottom: 2px solid #0043fa;' colspan='4'><p style='color:#0043fa'>Outgoing In Order</p></td></tr>
+                                        <tr>"+ InOrder + @"</tr>
+                                        </tbody>
+                                    </table></th>
+<th></th>
+                                    <th colspan='6'><table class='infoTable' >
+                                        <tbody >
+                                        <tr><td style='border:none;border-bottom: 2px solid #0043fa;' colspan='4'><p style='color:#ff0000'>Without Order</p></td></tr>
+                                        <tr>" + WithOutOrder + @"</tr>
+                                        </tbody>
+                                    </table></th>
+                                    </tr>
+                                    <tr>" + sdate+ @"
+                                    </tr>
+                                    </thead>
+
+                                    <tbody> " +
+                                    body + @"
+                                    </tbody>
+                                    </table></html>";
+                
+                string HTML = string.Concat(style, headertable);
+                return HTML;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
         private string getHTMLBodyHeaderScada(DataTable dtHead, DataTable dtData)
         {
             try
@@ -4009,6 +4192,11 @@ namespace Send_Email
         private void btnRunScada_Click(object sender, EventArgs e)
         {
             RunScada("Q");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            RunTMS_Summary("Q");
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
@@ -4177,9 +4365,5 @@ namespace Send_Email
             }
 
         }
-
-
-
-
     }
 }
