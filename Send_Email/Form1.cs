@@ -40,6 +40,8 @@ namespace Send_Email
 
             tmrLoad.Enabled = true;
             this.Text = "20210102080000";
+
+            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
         //Phuoc.IT
 
@@ -52,12 +54,14 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "do.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
+        
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
-            string dateNow = System.DateTime.Now.ToString("HH:mm");
+            string TimeNow = System.DateTime.Now.ToString("HH:mm");
+            DateTime today = DateTime.Today;
             //12h
             RunToPo("Q1");
             RunToPoIe("Q1");
@@ -77,15 +81,21 @@ namespace Send_Email
             RunCutting("Q1");
 
             //10h
-            if (dateNow.Equals("10:00"))
+            if (TimeNow.Equals("10:00"))
             {
                 RunTimeContraint("Bottom", "Q1"); //BOTTOM
                 RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
             }
 
             //16h
-            if (dateNow.Equals("16:00"))
+            if (TimeNow.Equals("16:00"))
             {
+                RunTMSDashv2("Q");
+            }
+
+            if (today.DayOfWeek == DayOfWeek.Monday && TimeNow.Equals("08:00"))
+            {
+                RunTMS_Summary("Q");
                 RunTMSDashv2("Q");
             }
         }
@@ -3225,7 +3235,7 @@ namespace Send_Email
 
                 //CaptureControl(pnTMSDassChart, "TMSChart");
                 //CaptureControl(pnTMSDassGrid, "TMSGrid");
-                CreateMailwithImage(Emoji.ChartIncreasing + " TMS MONITORING SUMMARY", html, dtEmail);
+                CreateMailwithImage(Emoji.ChartIncreasing + " TMS MONITORING DETAIL", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -3341,7 +3351,7 @@ namespace Send_Email
 
                 WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
                 string html = getHTMLBodyHeaderTMSSummary(dtHeader, dtData);
-                CreateMailwithImage(Emoji.ChartIncreasing + "Daily TMS Performance Summary", html, dtEmail);
+                CreateMailwithImage(Emoji.ChartIncreasing + "Weekly TMS Performance Summary", html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -3592,8 +3602,6 @@ namespace Send_Email
                             }
                         }
                     }
-
-
                 }
 
                 // --TOTAL TRONG LUOI---
@@ -3685,7 +3693,7 @@ namespace Send_Email
         {
             try
             {
-                RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                //RunTimeContraint("Bottom", "Q1"); //BOTTOM
                 RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
             }
             catch
@@ -3935,7 +3943,7 @@ namespace Send_Email
             try
             {
                 string style, sdate = string.Empty, headertable, body = string.Empty;
-                 style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
+                style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
                 body = string.Empty;
                 bool isAppend = false;
                 int iDx = 0;
@@ -3944,59 +3952,60 @@ namespace Send_Email
                     if (iDx == 5)
                     {
                         body += "<tr><td style='border:none;padding: 3px;' bgcolor=silver colspan =14></td></tr>";
+                        body += $"<tr><td>{dr["PLANT"]}</td>" +
+                             $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
+                             $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
+                             $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
+                             $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
+                             $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
+                             $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
+                             $"<td width=5px bgcolor=silver></td>" +
+                             $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
+                             $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
+                             $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
+                             $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
+                             $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
+                             $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
                     }
                     else
                     {
-                        if (!isAppend)
-                        {
-                            body += $"<tr><td>{dr["PLANT"]}</td>" +
-                                 $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
-                                 $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
-                                 $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
-                                 $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
-                                 $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
-                                 $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
-                                 $"<td width=5px bgcolor=silver rowspan = {dtData.Rows.Count}></td>" +
-                                 $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
-                                 $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
-                                 $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
-                                 $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
-                                 $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
-                                 $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
-                            isAppend = true;
-                        }
-                        else
-                        {
-                            body += $"<tr><td>{dr["PLANT"]}</td>" +
-                                 $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
-                                 $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
-                                 $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
-                                 $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
-                                 $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
-                                 $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
-                                 $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
-                                 $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
-                                 $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
-                                 $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
-                                 $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
-                                 $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
-                        }
+
+                        body += $"<tr><td>{dr["PLANT"]}</td>" +
+                             $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
+                             $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
+                             $"<td bgcolor='{dr["I03_BCOLOR"]}' style ='color:{dr["I03_FCOLOR"]}'>{dr["I03"]}</td>" +
+                             $"<td bgcolor='{dr["I04_BCOLOR"]}' style ='color:{dr["I04_FCOLOR"]}'>{dr["I04"]}</td>" +
+                             $"<td bgcolor='{dr["I05_BCOLOR"]}' style ='color:{dr["I05_FCOLOR"]}'>{dr["I05"]}</td>" +
+                             $"<td bgcolor='{dr["I06_BCOLOR"]}' style ='color:{dr["I06_FCOLOR"]}'>{dr["I06"]}</td>" +
+                             $"<td width=5px bgcolor=silver></td>" +
+                             $"<td bgcolor='{dr["W01_BCOLOR"]}' style ='color:{dr["W01_FCOLOR"]}'>{dr["W01"]}</td>" +
+                             $"<td bgcolor='{dr["W02_BCOLOR"]}' style ='color:{dr["W02_FCOLOR"]}'>{dr["W02"]}</td>" +
+                             $"<td bgcolor='{dr["W03_BCOLOR"]}' style ='color:{dr["W03_FCOLOR"]}'>{dr["W03"]}</td>" +
+                             $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
+                             $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
+                             $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
+
                     }
                     iDx++;
                 }
-                iDx = 0;
+                string DivTemp = "I";
                 foreach (DataRow dr in dtHead.Rows)
                 {
-                    if (iDx == 6)
-                        sdate += $"<th></th>";
+                    if (!DivTemp.Equals(dr["DIV"].ToString()))
+                    {
+                        sdate += $"<th></th><th>{dr["CAPTION"]}</th>";
+                        DivTemp = dr["DIV"].ToString();
+                    }
                     else
+                    {
                         sdate += $"<th>{dr["CAPTION"]}</th>";
+                        DivTemp = dr["DIV"].ToString();
+                    }
 
-                    iDx++;
                 }
                 string InOrder = string.Empty, WithOutOrder = string.Empty;
                 InOrder = dtHead.Rows[0]["OIO"].ToString();
-                WithOutOrder= dtHead.Rows[0]["OWO"].ToString();
+                WithOutOrder = dtHead.Rows[0]["OWO"].ToString();
                 headertable = @"
                                     <table class='greyGridTable'>
                                     <thead>
@@ -4006,10 +4015,10 @@ namespace Send_Email
                                         <table class='infoTable' >
                                         <tbody >
                                         <tr><td style='border:none; border-bottom: 2px solid #0043fa;' colspan='4'><p style='color:#0043fa'>Outgoing In Order</p></td></tr>
-                                        <tr>"+ InOrder + @"</tr>
+                                        <tr>" + InOrder + @"</tr>
                                         </tbody>
                                     </table></th>
-<th></th>
+                                    <th></th>
                                     <th colspan='6'><table class='infoTable' >
                                         <tbody >
                                         <tr><td style='border:none;border-bottom: 2px solid #0043fa;' colspan='4'><p style='color:#ff0000'>Without Order</p></td></tr>
@@ -4017,7 +4026,7 @@ namespace Send_Email
                                         </tbody>
                                     </table></th>
                                     </tr>
-                                    <tr>" + sdate+ @"
+                                    <tr>" + sdate + @"
                                     </tr>
                                     </thead>
 
@@ -4025,16 +4034,14 @@ namespace Send_Email
                                     body + @"
                                     </tbody>
                                     </table></html>";
-                
+
                 string HTML = string.Concat(style, headertable);
                 return HTML;
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
         private string getHTMLBodyHeaderScada(DataTable dtHead, DataTable dtData)
         {
@@ -4278,9 +4285,9 @@ namespace Send_Email
                 DataTable dtGrid = Pivot(dt, dt.Columns["SIZE_CODE"], dt.Columns["QTY"]);
                 DataView dtViewGrid = new DataView(dtGrid);
                 if (Qtype.Equals("Q1"))
-                dtViewGrid.Sort = "PROC_CODE, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
+                    dtViewGrid.Sort = "PROC_CODE, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
                 else
-                dtViewGrid.Sort = "PROC_CODE, PROC_NAME, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
+                    dtViewGrid.Sort = "PROC_CODE, PROC_NAME, ELAPSE_TIME DESC, FA_DATE, PLANT_CODE,ERP_FA_WC_CD,ERP_FA_MLINE_CD,STYLE_CODE,LOCATE";
 
                 dtGrid = dtViewGrid.ToTable();
                 object[] argBodys = new object[100];
@@ -4307,12 +4314,14 @@ namespace Send_Email
                     if (dtGrid.Rows[iRow]["PROC_NAME"].ToString().ToUpper().Equals("TOTAL"))
                     {
                         argBodys[99] = "#ffffc9";
-                        BodyProcName = string.Format("<td class='tg-0lax' colspan = '11' style='font-weight:bold;background-color:#0080a0;color: #ffffff;'>{0}</td>",  dtGrid.Rows[iRow]["PROC_NAME"]);
+                        BodyProcName = string.Format("<td class='tg-0lax' colspan = '11' style='font-weight:bold;background-color:#0080a0;color: #ffffff;'>{0}</td>", dtGrid.Rows[iRow]["PROC_NAME"]);
+                        ProcCodeTmp = string.Empty;
+                        PlantCodeTmp = string.Empty;
                     }
                     else
                     {
                         argBodys[99] = "";
-                       //  BodyProcName = string.Format("<td class='tg-0lax' rowspan='1'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN1"], dtGrid.Rows[iRow]["PROC_NAME"]);
+                        //  BodyProcName = string.Format("<td class='tg-0lax' rowspan='1'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN1"], dtGrid.Rows[iRow]["PROC_NAME"]);
                         if (!ProcCodeTmp.Equals(dtGrid.Rows[iRow]["PROC_NAME"].ToString()))
                         {
                             BodyProcName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN1"], dtGrid.Rows[iRow]["PROC_NAME"]);
@@ -4327,8 +4336,8 @@ namespace Send_Email
                     {
                         BodyPlantName = string.Format("<td class='tg-0lax' rowspan='{0}'>{1}</td>", dtGrid.Rows[iRow]["ROWSPAN2"], dtGrid.Rows[iRow]["FA_WC_CD"]);
                     }
-                     if (!dtGrid.Rows[iRow]["ROWSPAN2"].ToString().Equals("1"))
-                            PlantCodeTmp = dtGrid.Rows[iRow]["FA_WC_CD"].ToString();
+                    if (!dtGrid.Rows[iRow]["ROWSPAN2"].ToString().Equals("1"))
+                        PlantCodeTmp = dtGrid.Rows[iRow]["FA_WC_CD"].ToString();
                     else
                         PlantCodeTmp = string.Empty;
 
