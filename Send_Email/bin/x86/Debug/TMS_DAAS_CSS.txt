@@ -1,75 +1,136 @@
 <html>
 <head>
-<style type="text/css">
-.tftable {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
-.tftable thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
-.tftable td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
-.tftable1 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
-.tftable1 thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
-.tftable1 td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 0px; padding: 3px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
-span {
-  color: #2e5f82;
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 5px;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 25px;
-  font-style: italic;
-  }
-.rainbow {
-  align: center;
-  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
-  color:transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-size: 50px;
-  font-family: Calibri;
-}
-.red{
-  background-color: #f22;
-  color: white;
-  padding: 5px 20px;
-  text-shadow: 2px 4px 10px black;
-  margin-left: 10px;
-}
-.green{
-  background-color:green;
-  color: white;
-  padding: 5px 20px;
-  text-shadow: 2px 4px 10px black;
-  margin-left: 10px;
-}
-.yellow {
-  background-color: yellow;
-  color: black;
-  padding: 5px 20px;
-  text-shadow: 2px 4px 10px black;
-  margin-left: 10px;
-}
-.black {
-  background-color: rgb(0, 0, 0);
-  color: white;
-  padding: 5px 20px;
-  text-shadow: 2px 4px 10px black;
- 
-}
-.mg{
- margin-left: 10px;
- margin-top: 9px;
-}
-#example2 {
-  border: 2px solid green;
-  padding: 9px;
-  border-radius: 50px 20px;
-}
-tr:hover {background-color:#f5f5f5;}
-.tftable .tftable-clax{text-align:center;}
-.tftable .tftable-llax{text-align:left;}
-.tftable .tftable-rlax{text-align:right;}
-.tftable1 .tftable1-clax{text-align:center;}
-.tftable1 .tftable1-llax{text-align:left;}
-.tftable1 .tftable1-rlax{text-align:right;}
-.divided tr { line-height: 14px; }
-</style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Pacifico&family=Potta+One&family=Roboto:wght@100;500&display=swap');
+    .tftable {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+    .tftable thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
+    .tftable td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
+    .tftable1 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+    .tftable1 thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
+    .tftable1 td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 0px; padding: 3px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
+    .tftable2 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+    .tftable2 thead {font-size:12px;font-family: 'Times New Roman', sans-serif; font-style: italic; font-weight: bold; border-width: 0px;padding: 0px;border-style: solid;border-color: #00ccff ;background-color: #ff9100;color: #ffffff; }
+    .tftable2 td {font-size:12px;font-family: Calibri;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: rgb(82, 82, 82);white-space: nowrap;}
+    span {
+      color: #2e5f82;
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 25px;
+      font-style: italic;
+      }
+    .rainbow {
+      align: center;
+      background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+      background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+      color:transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-size: 50px;
+      font-family: Calibri;
+    }
+    .red{
+      background-color: #f22;
+      color: white;
+      padding: 5px 20px;
+      text-shadow: 2px 4px 10px black;
+      margin-left: 10px;
+    }
+    .green{
+      background-color:green;
+      color: white;
+      padding: 5px 20px;
+      text-shadow: 2px 4px 10px black;
+      margin-left: 10px;
+    }
+    .yellow {
+      background-color: yellow;
+      color: black;
+      padding: 5px 20px;
+      text-shadow: 2px 4px 10px black;
+      margin-left: 10px;
+    }
+    .black {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      padding: 5px 20px;
+      text-shadow: 2px 4px 10px black;
+     
+    }
+    .mg{
+     margin-left: 10px;
+     margin-top: 9px;
+    }
+    #example2 {
+      border: 2px solid green;
+      padding: 9px;
+      border-radius: 50px 20px;
+    }
+    tr:hover {background-color:#f5f5f5;}
+    .tftable .tftable-clax{text-align:center;}
+    .tftable .tftable-llax{text-align:left;}
+    .tftable .tftable-rlax{text-align:right;}
+    .tftable1 .tftable1-clax{text-align:center;}
+    .tftable1 .tftable1-llax{text-align:left;}
+    .tftable1 .tftable1-rlax{text-align:right;}
+    .tftable2 .tftable2-clax{text-align:center; font-weight:bold;}
+    .tftable2 .tftable2-llax{text-align:left;font-weight:bold;}
+    .tftable2 .tftable2-rlax{text-align:right;font-weight:bold;}
+    .divided tr { line-height: 14px; }
+    
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+    table.infoTable {
+      border: 1px solid #ffffff;
+      width: 100%;
+      font-weight: bold;
+      
+      text-align: center;
+      border-collapse: collapse;
+    }
+    
+    table.infoTable tbody td {
+      font-size: 13px;
+      background-color: rgb(255, 255, 255);
+      border: none;
+    }
+      table.greyGridTable {
+        font-family: 'Roboto', sans-serif;
+        border: 2px solid #000000; 
+      width: 800px;
+      text-align: center;
+      border-collapse: collapse;
+    }
+    table.greyGridTable td, table.greyGridTable th {
+      /* border: 2px solid #000000; */
+      padding: 7px 0px;
+    }
+    table.greyGridTable tbody td {
+      font-size: 13px;
+      font-family:Calibri;
+      /*background-color: rgb(255, 255, 255);*/
+      border: 1px solid #000000;
+    }
+    
+    table.greyGridTable thead {
+      font-size:12px;font-family:Calibri;
+      background: #FFFFFF;
+      border-bottom: 1px solid #333333;
+    }
+    table.greyGridTable thead th {
+      font-family:Calibri;
+      font-size: 15px;
+      font-weight: bold;
+      color: #333333;
+      text-align: center;
+      border-left: 1px solid #333333;
+    }
+    table.greyGridTable td:nth-child(2) {
+      border-left: 2px solid #000000;
+    }
+    table.greyGridTable td:nth-child(7) {
+       border-right: 2px solid #000000; 
+    }
+    
+    </style>
 </head>
