@@ -141,6 +141,11 @@ namespace Send_Email
             //RunNPI2();
         }
 
+        private void cmdMoldRepair_Click(object sender, EventArgs e)
+        {
+            RunMoldRepair("Q");
+        }
+
         #endregion Event
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
@@ -172,7 +177,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.HTMLBody = htmlBody;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -3164,7 +3169,43 @@ namespace Send_Email
         }
         #endregion
 
+        #region Mold Repair
+        private void RunMoldRepair(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
 
+                _isRun2 = true;
+
+
+                //if (dsData == null) return;
+                Mold_Repair mold_Repair = new Mold_Repair();
+                string html = mold_Repair.Html_MoldRepair(argType);
+                if (html == "") return;
+                WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+               // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMail(mold_Repair._subject, html, mold_Repair._email);
+              //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+
+        }
+
+        #endregion
 
         private string ColorNull(string argColor)
         {
@@ -4205,6 +4246,8 @@ namespace Send_Email
         {
             RunTMS_Summary("Q");
         }
+
+        
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

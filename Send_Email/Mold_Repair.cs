@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -9,120 +10,97 @@ namespace Send_Email
 {
     class Mold_Repair
     {
+        public string _subject = "";
+        public DataTable _email;
         public string Html_MoldRepair(string argType)
         {
-            string htmlReturn = "";
+            try
+            {
+                string htmlReturn = "";
 
-            DataSet dsData = SEL_MOLD_REPAIR(argType, DateTime.Now.ToString("yyyyMMdd"));
-            if (dsData == null) return "";
-            //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-            DataTable dtData = dsData.Tables[0];
-            DataTable dtHeader = dsData.Tables[1];
-            DataTable dtExplain = dsData.Tables[2];
-            DataTable dtEmail = dsData.Tables[3];
+                DataSet dsData = SEL_MOLD_REPAIR(argType, DateTime.Now.ToString("yyyyMMdd"));
+                if (dsData == null) return "";
+                //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                DataTable dtData = dsData.Tables[0];
+                DataTable dtHeader = dsData.Tables[1];
+                DataTable dtExplain = dsData.Tables[2];
+                _email = dsData.Tables[3];
 
-           // WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+                // WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
 
-            string html = GetHtmlBodyNpi(dtHeader, dtData);
+                htmlReturn = GetHtmlBodyMoldRepair(dtHeader, dtData);
 
-            string subject = dtExplain.Rows[0]["SUBJECT"].ToString();
+                _subject = dtExplain.Rows[0]["SUBJECT"].ToString();
 
-            string explain = dtExplain.Rows[0]["TXT"].ToString();
+                string explain = dtExplain.Rows[0]["TXT"].ToString();
 
-            return htmlReturn;
+                return explain + htmlReturn;
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.ToString();
+            }
+            
         }
 
-        private string GetHtmlBodyNpi(DataTable dtHeader, DataTable dtData)
+        private string GetHtmlBodyMoldRepair(DataTable dtHeader, DataTable dtData)
         {
             try
             {
                 string TableHeader = "";
 
-                int i = 0;
-                int npiCode = 0;
-                string HeaderRow1 = "", HeaderRow2 = "";
+               // int i = 0;
+                //int npiCode = 0;
+                string HeaderRow1 = "";
 
-                int[] colWidth = { 67, 67, 67, 67, 67, 67, 67, 80, 67, 80, 67, 67, 67, 67, 67, 67, 75, 67 };
-
+                // int[] colWidth = { 67, 67, 67, 67, 67, 67, 67, 80, 67, 80, 67, 67, 67, 67, 67, 67, 75, 67 };
+                string[] headerArray = new string[dtHeader.Rows.Count];
+                int iArray = 0;
                 foreach (DataRow row in dtHeader.Rows)
                 {
-                    int.TryParse(row["NPI_CODE"].ToString(), out npiCode);
-                    if (npiCode >= 10)
-                    {
-
-                        HeaderRow1 += $"<td bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
-                        HeaderRow2 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
-                        i++;
-                    }
-
-                    else
-                        HeaderRow1 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
+                    HeaderRow1 += $"<th bgcolor = '{row["BCOLOR"]}' style = 'color:{row["FCOLOR"]}' align = 'center' width = '{row["WIDTH"]}'>{row["CAPTION"]}</th>";
+                    headerArray[iArray] = row["FIELD_NAME"].ToString();
+                    iArray++;
                 }
 
-                TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " +
-                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> ";
+                TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " ;
 
                 //Row
                 string TableRow = "";
 
-                for (int iRowData = 0; iRowData < dtData.Rows.Count; iRowData++)
+                foreach (DataRow row in dtData.Rows)
                 {
-                    string plantNm = dtData.Rows[iRowData]["PLANT_NM"].ToString();
-                    string lineCd = dtData.Rows[iRowData]["LINE_CD"].ToString();
-                    string category = dtData.Rows[iRowData]["CATEGORY_NAME"].ToString();
-                    string tdCode = dtData.Rows[iRowData]["TD_CODE"].ToString();
-                    string modelName = dtData.Rows[iRowData]["MODEL_NAME"].ToString();
-                    string styleCode = dtData.Rows[iRowData]["STYLE_CODE"].ToString();
-                    string prodDate = dtData.Rows[iRowData]["PROD_DATE"].ToString();
-                    string backColor = dtData.Rows[iRowData]["BCOLOR"].ToString();
+                    
 
-                    string plantNm_prev = "";
-                    string lineCd_prev = "";
-                    string category_prev = "";
-                    string tdCode_prev = "";
-                    string modelName_prev = "";
-                    string styleCode_prev = "";
-                    string prodDate_prev = "";
-
-                    if (iRowData > 0)
-                    {
-                        plantNm_prev = dtData.Rows[iRowData - 1]["PLANT_NM"].ToString();
-                        lineCd_prev = dtData.Rows[iRowData - 1]["LINE_CD"].ToString();
-                        category_prev = dtData.Rows[iRowData - 1]["CATEGORY_NAME"].ToString();
-                        tdCode_prev = dtData.Rows[iRowData - 1]["TD_CODE"].ToString();
-                        modelName_prev = dtData.Rows[iRowData - 1]["MODEL_NAME"].ToString();
-                        styleCode_prev = dtData.Rows[iRowData - 1]["STYLE_CODE"].ToString();
-                        prodDate_prev = dtData.Rows[iRowData - 1]["PROD_DATE"].ToString();
-                    }
-
-                    if (plantNm != plantNm_prev || lineCd != lineCd_prev || category != category_prev || tdCode != tdCode_prev ||
-                        modelName != modelName_prev || styleCode != styleCode_prev || prodDate != prodDate_prev)
-                    {
-                        if (iRowData > 0) TableRow += "</tr> ";
-                        TableRow += "<tr> " +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'>{plantNm }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ lineCd }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{ category }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ tdCode }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left' >{styleCode }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{ modelName }</td>" +
-                                $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ prodDate }</td>" +
-                                $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>"
+                    TableRow += string.Format(
+                                "<tr> " +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{0}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{1}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{2}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{3}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{4}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{5}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{6}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{7}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{8}</td>" +
+                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{9}</td>" +
+                                    "<td bgcolor='{11}'  style='color:{12}'  align='center' >{10}</td>" +
+                                "</tr> ",
+                                row[headerArray[0]],
+                                row[headerArray[1]], row[headerArray[2]], row[headerArray[3]], row[headerArray[4]],
+                                row[headerArray[5]], row[headerArray[6]], row[headerArray[7]], row[headerArray[8]],
+                                row[headerArray[9]], row[headerArray[10]], row[headerArray[11] + "_BCOLOR"], row[headerArray[12] + "_FCOLOR"])
                               ;
-                    }
-                    else
-                    {
-                        TableRow += $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center'></td>";
-                    }
                 }
 
-                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' with = '5000' >" +
+                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' >" +
                             TableHeader + TableRow +
                        "</table>";
             }
             catch (Exception ex)
             {
-               // WriteLog("GetHtmlBodyCutting: " + ex.ToString());
+                // WriteLog("GetHtmlBodyCutting: " + ex.ToString());
+                Debug.WriteLine(ex);
                 return "";
             }
         }
