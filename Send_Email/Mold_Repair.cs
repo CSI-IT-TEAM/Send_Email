@@ -89,7 +89,7 @@ namespace Send_Email
                                 row[headerArray[0]],
                                 row[headerArray[1]], row[headerArray[2]], row[headerArray[3]], row[headerArray[4]],
                                 row[headerArray[5]], row[headerArray[6]], row[headerArray[7]], row[headerArray[8]],
-                                row[headerArray[9]], row[headerArray[10]], row[headerArray[11] + "_BCOLOR"], row[headerArray[12] + "_FCOLOR"])
+                                row[headerArray[9]], row[headerArray[10]], row[headerArray[10] + "_BCOLOR"], row[headerArray[10] + "_FCOLOR"])
                               ;
                 }
 
