@@ -179,6 +179,7 @@ namespace Send_Email
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.HTMLBody = htmlBody;
+                
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }

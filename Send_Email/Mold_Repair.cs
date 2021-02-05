@@ -68,32 +68,21 @@ namespace Send_Email
                 //Row
                 string TableRow = "";
 
-                foreach (DataRow row in dtData.Rows)
+                foreach (DataRow rowData in dtData.Rows)
                 {
+                    TableRow += "<tr> ";
+                    foreach (DataRow rowHeader in dtHeader.Rows)
+                    {
+                        TableRow += $"<td bgcolor='WHITE' style='color:BLACK' align='{rowHeader["ALIGN"]}'>" +
+                                        $"{rowData[rowHeader["FIELD_NAME"].ToString()]}" +
+                                    $"</td>"; 
+                    }
                     
+                    TableRow += "</tr> ";
 
-                    TableRow += string.Format(
-                                "<tr> " +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{0}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{1}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{2}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{3}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{4}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{5}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='left'   >{6}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{7}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{8}</td>" +
-                                    "<td bgcolor='WHITE' style='color:BLACK' align='center' >{9}</td>" +
-                                    "<td bgcolor='{11}'  style='color:{12}'  align='center' >{10}</td>" +
-                                "</tr> ",
-                                row[headerArray[0]],
-                                row[headerArray[1]], row[headerArray[2]], row[headerArray[3]], row[headerArray[4]],
-                                row[headerArray[5]], row[headerArray[6]], row[headerArray[7]], row[headerArray[8]],
-                                row[headerArray[9]], row[headerArray[10]], row[headerArray[10] + "_BCOLOR"], row[headerArray[10] + "_FCOLOR"])
-                              ;
                 }
 
-                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' >" +
+                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='2' cellspacing='0' >" +
                             TableHeader + TableRow +
                        "</table>";
             }
