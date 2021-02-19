@@ -77,6 +77,8 @@ namespace Send_Email
 
             RunNPI("Q1");
 
+            RunMoldRepair("Q1");
+
             //16h
             RunCutting("Q1");
 

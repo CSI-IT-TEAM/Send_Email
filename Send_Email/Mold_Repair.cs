@@ -73,9 +73,19 @@ namespace Send_Email
                     TableRow += "<tr> ";
                     foreach (DataRow rowHeader in dtHeader.Rows)
                     {
-                        TableRow += $"<td bgcolor='WHITE' style='color:BLACK' align='{rowHeader["ALIGN"]}'>" +
+                        if (rowHeader["FIELD_NAME"].ToString() == "SCAN_FINISHED")
+                        {
+                            TableRow += $"<td bgcolor='{rowData["STATUS_BCOLOR"]}' style='color:{rowData["STATUS_FCOLOR"]}' align='{rowHeader["ALIGN"]}'>" +
                                         $"{rowData[rowHeader["FIELD_NAME"].ToString()]}" +
-                                    $"</td>"; 
+                                    $"</td>";
+                        }
+                        else
+                        {
+                            TableRow += $"<td bgcolor='WHITE' style='color:BLACK' align='{rowHeader["ALIGN"]}'>" +
+                                        $"{rowData[rowHeader["FIELD_NAME"].ToString()]}" +
+                                    $"</td>";
+                        }
+                        
                     }
                     
                     TableRow += "</tr> ";
