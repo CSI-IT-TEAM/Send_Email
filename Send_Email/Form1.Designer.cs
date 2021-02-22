@@ -270,6 +270,7 @@
             this.chk_yn = new JPlatform.Client.Controls6.RepositoryItemCheckEditEx();
             this.btnRunScada = new System.Windows.Forms.Button();
             this.btnTMS_Summary = new System.Windows.Forms.Button();
+            this.cmdMoldRepair = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -2497,11 +2498,22 @@
             this.btnTMS_Summary.UseVisualStyleBackColor = true;
             this.btnTMS_Summary.Click += new System.EventHandler(this.button2_Click);
             // 
+            // cmdMoldRepair
+            // 
+            this.cmdMoldRepair.Location = new System.Drawing.Point(127, 122);
+            this.cmdMoldRepair.Name = "cmdMoldRepair";
+            this.cmdMoldRepair.Size = new System.Drawing.Size(96, 23);
+            this.cmdMoldRepair.TabIndex = 211;
+            this.cmdMoldRepair.Text = "Run Mold Repair";
+            this.cmdMoldRepair.UseVisualStyleBackColor = true;
+            this.cmdMoldRepair.Click += new System.EventHandler(this.cmdMoldRepair_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(610, 189);
+            this.ClientSize = new System.Drawing.Size(599, 182);
+            this.Controls.Add(this.cmdMoldRepair);
             this.Controls.Add(this.pnTMSDassGrid);
             this.Controls.Add(this.pnTMSDassChart);
             this.Controls.Add(this.grdBaseNpi);
@@ -2958,6 +2970,7 @@
         private JPlatform.Client.Controls6.RepositoryItemCheckEditEx chk_yn;
         private System.Windows.Forms.Button btnRunScada;
         private System.Windows.Forms.Button btnTMS_Summary;
+        private System.Windows.Forms.Button cmdMoldRepair;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
