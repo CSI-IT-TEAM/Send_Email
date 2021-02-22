@@ -96,7 +96,6 @@ namespace Send_Email
             if (today.DayOfWeek == DayOfWeek.Monday && TimeNow.Equals("08:00"))
             {
                 RunTMS_Summary("Q");
-                RunTMSDashv2("Q");
             }
         }
 
