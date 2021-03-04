@@ -315,7 +315,7 @@ namespace Send_Email
                 {
                     ht.Add(row.Name, row.cntLine);
                 }
-                string[] strValue = new string[14];
+                //string[] strValue = new string[14];
 
                 string strDate = "";
                 foreach (DataRow row in dtDate.Rows)
@@ -333,11 +333,19 @@ namespace Send_Email
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>PO Actual</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>Relief Actual</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>Balance</th>" +
+                            "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='3' >Production</th>" +
+                            "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='3' >POD</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='7' >Staffing Ratio(%)</th>" +
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Next TO</th>" +
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Staffing Ratio(%)</th>" +
                         "</tr>" +
                         "<tr>" +
+                            "<th bgcolor='#ff9966' style='color:#ffffff' align='center' width = '80'>Plan</th>" +
+                            "<th bgcolor='#ff9966' style='color:#ffffff' align='center' width = '80'>Actual</th>" +
+                            "<th bgcolor='#0066ff' style='color:#ffffff' align='center' width = '80'>%</th>" +
+                            "<th bgcolor='#ff9999' style='color:#ffffff' align='center' width = '80'>Plan</th>" +
+                            "<th bgcolor='#ff9999' style='color:#ffffff' align='center' width = '80'>Actual</th>" +
+                            "<th bgcolor='#0066ff' style='color:#ffffff' align='center' width = '80'>%</th>" +
                             strDate +
                             "<th bgcolor='#0066ff' style='color:#ffffff' align='center' width = '80'>AVG</th>" +
 
@@ -351,6 +359,14 @@ namespace Send_Email
                     string Po = dtData.Rows[iRow]["PO_ACTUAL"].ToString();
                     string Relief = dtData.Rows[iRow]["RELIEF"].ToString();
                     string Balance = dtData.Rows[iRow]["BALANCE"].ToString();
+
+                    string ProdPlan = dtData.Rows[iRow]["PLAN_QTY"].ToString();
+                    string ProdActual = dtData.Rows[iRow]["ACTUAL_QTY"].ToString();
+                    string ProdRate = dtData.Rows[iRow]["PROD_RATE"].ToString();
+
+                    string PodPlan = dtData.Rows[iRow]["POD_PLAN"].ToString();
+                    string PodActual = dtData.Rows[iRow]["POD_ACTUAL"].ToString();
+                    string PodRate = dtData.Rows[iRow]["POD_RATE"].ToString();
 
                     string Day1 = dtData.Rows[iRow]["DAY1"].ToString();
                     string Day1BgColor = dtData.Rows[iRow]["BG_COLOR_DAY1"].ToString();
@@ -388,6 +404,12 @@ namespace Send_Email
                     string TotalBgColor = dtData.Rows[iRow]["TOTAL_BG_COLOR"].ToString();
                     string TotalForeColor = dtData.Rows[iRow]["TOTAL_FORE_COLOR"].ToString();
 
+                    string ProdBgColor = dtData.Rows[iRow]["BG_COLOR_PROD"].ToString();
+                    string ProdForeColor = dtData.Rows[iRow]["FORE_COLOR_PROD"].ToString();
+
+                    string PodBgColor = dtData.Rows[iRow]["BG_COLOR_POD"].ToString();
+                    string PodForeColor = dtData.Rows[iRow]["FORE_COLOR_POD"].ToString();
+
                     string rowspan = "";
                     if (iRow == 0)
                     {
@@ -408,6 +430,12 @@ namespace Send_Email
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Po}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Relief}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Balance}</td>" +
+                                $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{ProdPlan}</td>" +
+                                $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{ProdActual}</td>" +
+                                $"<td bgcolor='{ProdBgColor}'  style='color:{ProdForeColor}'  align='right'>{ProdRate}</td>" +
+                                $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{PodPlan}</td>" +
+                                $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{PodActual}</td>" +
+                                $"<td bgcolor='{PodBgColor}'   style='color:{PodForeColor}'   align='right'>{PodRate}</td>" +
                                 $"<td bgcolor='{Day1BgColor}'  style='color:{Day1ForeColor}'  align='right'>{Day1}</td>" +
                                 $"<td bgcolor='{Day2BgColor}'  style='color:{Day2ForeColor}'  align='right'>{Day2}</td>" +
                                 $"<td bgcolor='{Day3BgColor}'  style='color:{Day3ForeColor}'  align='right'>{Day3}</td>" +
@@ -457,7 +485,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_TO_PO_V2";
+                string process_name = "P_SEND_EMAIL_TO_PO_V3";
                 MyOraDB.ReDim_Parameter(5);
                 MyOraDB.Process_Name = process_name;
 
