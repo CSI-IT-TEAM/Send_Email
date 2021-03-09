@@ -39,7 +39,7 @@ namespace Send_Email
             pnTMSDassGrid.Size = new Size(1420, 215);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210220080000";
+            this.Text = "20210309103000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -317,10 +317,23 @@ namespace Send_Email
                 }
                 //string[] strValue = new string[14];
 
-                string strDate = "";
+                string strDate = "", strLastDate ="";
+                int iDateRow = dtDate.Rows.Count;
+                for (int i=0; i< iDateRow; i++)
+                {
+                    if (i == iDateRow -1)
+                    {
+                        strLastDate = $"<th bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '80' rowspan='2' >%</th >";
+                    }
+                    else
+                    {
+                        strDate += $"<th bgcolor = '#cc66ff' style = 'color:#ffffff' align = 'center' width = '80' >{dtDate.Rows[i]["YMD"]}</th >";
+                    }
+                    
+                }
                 foreach (DataRow row in dtDate.Rows)
                 {
-                    strDate += "<th bgcolor = '#cc66ff' style = 'color:#ffffff' align = 'center' width = '80' >" + row["YMD"].ToString() + " </th >";
+                    
                 }
 
                 string HtmlTableBody = "";
@@ -333,9 +346,10 @@ namespace Send_Email
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>PO Actual</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>Relief Actual</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' rowspan='2' width = '80'>Balance</th>" +
+                            strLastDate +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='3' >Production</th>" +
                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='3' >POD</th>" +
-                            "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='7' >Staffing Ratio(%)</th>" +
+                            "<th bgcolor='#00ced1' style='color:#ffffff' align='center' colspan='6' >Staffing Ratio(%)</th>" +
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Next TO</th>" +
                             "<th bgcolor='#ff9900' style='color:#ffffff' align='center' rowspan='2' width = '80'>Staffing Ratio(%)</th>" +
                         "</tr>" +
@@ -430,6 +444,7 @@ namespace Send_Email
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Po}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Relief}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{Balance}</td>" +
+                                $"<td bgcolor='{Day6BgColor}'  style='color:{Day6ForeColor}'  align='right'>{Day6}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{ProdPlan}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{ProdActual}</td>" +
                                 $"<td bgcolor='{ProdBgColor}'  style='color:{ProdForeColor}'  align='right'>{ProdRate}</td>" +
@@ -441,7 +456,6 @@ namespace Send_Email
                                 $"<td bgcolor='{Day3BgColor}'  style='color:{Day3ForeColor}'  align='right'>{Day3}</td>" +
                                 $"<td bgcolor='{Day4BgColor}'  style='color:{Day4ForeColor}'  align='right'>{Day4}</td>" +
                                 $"<td bgcolor='{Day5BgColor}'  style='color:{Day5ForeColor}'  align='right'>{Day5}</td>" +
-                                $"<td bgcolor='{Day6BgColor}'  style='color:{Day6ForeColor}'  align='right'>{Day6}</td>" +
                                 $"<td bgcolor='{DAvgBgColor}'  style='color:{DAvgForeColor}'  align='right'>{DAvg}</td>" +
                                 $"<td bgcolor='{TotalBgColor}' style='color:{TotalForeColor}' align='right'>{NextTo}</td>" +
                                 $"<td bgcolor='{NextBgColor}'  style='color:{NextForeColor}' align='right'>{Next}</td>" +
