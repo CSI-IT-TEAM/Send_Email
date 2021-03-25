@@ -39,7 +39,7 @@ namespace Send_Email
             pnTMSDassGrid.Size = new Size(1420, 215);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210320083000";
+            this.Text = "20210325153000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -200,12 +200,56 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody =htmlBody;
+                
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        private void CreateMailOs(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\outsole.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email 
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
                 mailItem.BCC = "phuoc.it@changshininc.com";
                 string imgInfo = "imgInfo";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody = String.Format(
-                    @"<body><img src='cid:{0}'></body>",imgInfo) + htmlBody;
-                
+                    @"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
+
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -3259,7 +3303,7 @@ namespace Send_Email
                 }
                 // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
-                CreateMail(OsRedMachine._subject, html, OsRedMachine._email);
+                CreateMailOs(OsRedMachine._subject, html, OsRedMachine._email);
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
