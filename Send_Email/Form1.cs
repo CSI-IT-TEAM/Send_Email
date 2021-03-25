@@ -300,7 +300,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                mailItem.Subject = "POD(TO&PO List)";
+                mailItem.Subject = "POD Achievement";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
