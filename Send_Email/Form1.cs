@@ -54,7 +54,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = {  "dien.it@changshininc.com" };
+        readonly string[] _emailTest = {  "nguyen.it@changshininc.com" };
 
         #region Event
         
@@ -98,6 +98,19 @@ namespace Send_Email
             if (today.DayOfWeek == DayOfWeek.Monday && TimeNow.Equals("08:00"))
             {
                 RunTMS_Summary("Q");
+            }
+
+            switch (TimeNow)
+            {
+                case "06:10":
+                case "10:10":
+                case "14:10":
+                case "18:10":
+                case "22:10":
+                case "02:10":
+                    RunOSRedMachine("Q",DateTime.Now.ToString("yyyyMMdd"),TimeNow.Substring(0,2));
+                    break;
+               
             }
         }
 
@@ -147,6 +160,14 @@ namespace Send_Email
             RunMoldRepair("Q");
         }
 
+        private void cmdRunOS_Red_MC_Click(object sender, EventArgs e)
+        {
+            //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
+
+            //Run TEst
+            RunOSRedMachine("Q", "20210323", "14");
+        }
+
         #endregion Event
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
@@ -155,6 +176,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\outsole.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -178,8 +200,11 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
-                mailItem.HTMLBody = htmlBody;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = String.Format(
+                    @"<body><img src='cid:{0}'></body>",imgInfo) + htmlBody;
                 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -3212,7 +3237,42 @@ namespace Send_Email
             }
         }
         #endregion
+        #region OS Red Machine
+        private void RunOSRedMachine(string argType,string argDate,string argHH)
+        {
+            try
+            {
+                if (_isRun2) return;
 
+                _isRun2 = true;
+
+                //if (dsData == null) return;
+                OS_Red_Machine OsRedMachine = new OS_Red_Machine();
+                
+                string html = OsRedMachine.Html(argType, argDate, argHH);
+                if (html == "") return;
+                WriteLog("RunOSRedMachine: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMail(OsRedMachine._subject, html, OsRedMachine._email);
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+
+        }
+        #endregion
         #region Mold Repair
         private void RunMoldRepair(string argType)
         {
