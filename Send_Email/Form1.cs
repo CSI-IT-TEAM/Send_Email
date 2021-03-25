@@ -39,7 +39,7 @@ namespace Send_Email
             pnTMSDassGrid.Size = new Size(1420, 215);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210309103000";
+            this.Text = "20210320083000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -275,7 +275,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                mailItem.Subject = "TO&PO List";
+                mailItem.Subject = "POD(TO&PO List)";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -2807,13 +2807,13 @@ namespace Send_Email
                     if (npiCode >= 10)
                     {
 
-                        HeaderRow1 += $"<td bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
-                        HeaderRow2 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
+                        HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
+                        HeaderRow2 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
                         i++;
                     }
 
                     else
-                        HeaderRow1 += $"<td bgcolor = '#00ced1' style = 'color:#ffffff' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
+                        HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
 
 
                 }
