@@ -96,6 +96,8 @@ namespace Send_Email
                                         <th rowspan='2'>Machine</th>
                                         <th colspan='2'>{0}</th>
                                         <th colspan='2'>{1}</th>
+                                        <th colspan='2'>PIC</th>
+                                        <th colspan='2'>Reason</th>
                                         </tr>
                                         <tr>
                                         <th width='80px'>Plan</th>
@@ -108,7 +110,7 @@ namespace Send_Email
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
                 {
-                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ></tr>";
+                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ><td></td><td></td></tr>";
                 }
 
                 string EndTag = "</tbody></table></body></html>";
