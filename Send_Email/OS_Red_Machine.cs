@@ -19,7 +19,7 @@ namespace Send_Email
                 string htmlReturn = "";
 
                 DataSet dsData = SEL_DATA(argType, argDate, argHH);
-                if (dsData == null) return "";
+                if (dsData == null || dsData.Tables[1].Rows.Count <=0) return "";
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[1];
                 DataTable dtHeader = dsData.Tables[0];
@@ -29,8 +29,9 @@ namespace Send_Email
 
                 htmlReturn = GetHtmlBody(dtHeader, dtData);
 
-                _subject = "Outsole Machine Problem";
-
+                
+                _subject = "Outsole press machine drawback list";
+                //_subject = "(Test Email) Outsole press machine drawback list";
                 return htmlReturn;
             }
             catch (Exception ex)
@@ -48,7 +49,6 @@ namespace Send_Email
                                   font-family: 'Times New Roman', Times, serif;
                                   width: 500px;
                                   text-align: center;
-                                  border: 5px solid #353535; 
                                 }
                                 table.OSPTable td, table.OSPTable th {
                                   border: 1px solid #c0c0c0;
@@ -62,6 +62,9 @@ namespace Send_Email
                                   font-style: italic;
                                   border-bottom: 0px solid #444444;
                                 }
+                                table.OSPTable tbody {
+                                  font-style: italic;
+                                }
                                 table.OSPTable thead th {
                                   font-size: 19px;
                                   font-weight: bold;
@@ -72,7 +75,6 @@ namespace Send_Email
                                 .info{
                                   font-family: 'Times New Roman', Times, serif;
                                   font-style: italic;
-                                  font-weight: bold;
                                   font-size: 24px;
                                   color: #1a6e79;
                                 }
@@ -80,11 +82,11 @@ namespace Send_Email
 
                 string TableHeader = string.Format(@"<body>
                                        <!-- <div class='info'>
-                                        4시간 동안 아웃솔 프레스 실적 이 interface 되지 않으면 자동 으로 메일이 담당자 들에게 발송 처리가 된다.</div></br> -->
+                                        4시간 동안 아웃솔 프레스 실적 이 interface 되지 않으면 자동 으로 메일이 담당자 들에게 발송 처리가 된다.</div></br>
 
-                                        <div class='info'>Without pressing actual during 4 hours were mailed out to PIC promptly.</div></br>
+                                        <div class='info'>Without pressing actual during 4 hours were mailed out to PIC promptly.</div></br> -->
 
-                                        <div class='info'>Số lượng sản xuất không đạt Target trong 4 giờ sẽ gửi Email</div></br>
+                                        <div class='info'>&nbsp;Số lượng sản xuất không đạt Target trong 4 giờ sẽ gửi Email</div></br>
                              
 
                                         <table class='OSPTable'>
