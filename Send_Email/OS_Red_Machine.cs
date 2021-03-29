@@ -47,12 +47,12 @@ namespace Send_Email
             {
                 string StyleSheet = @"<html><head><style>table.OSPTable {
                                   font-family: 'Times New Roman', Times, serif;
-                                  width: 500px;
                                   text-align: center;
                                 }
                                 table.OSPTable td, table.OSPTable th {
                                   border: 1px solid #c0c0c0;
                                   padding: 3px 2px;
+                                  white-space: nowrap;
                                 }
                                 table.OSPTable tbody td {
                                   font-size: 20px;
@@ -78,6 +78,20 @@ namespace Send_Email
                                   font-size: 24px;
                                   color: #1a6e79;
                                 }
+                                table.OSPTable thead th.pic{
+                                   color: black;
+                                   background-color: orange;
+                                   width: 230px;
+                                }
+                                table.OSPTable thead th.reason{
+                                   color: rgb(255, 255, 255);
+                                   background-color: rgb(0, 162, 255);
+                                   width: 500px;
+                                }
+                                table.OSPTable tbody td.pic {
+                                  font-size: 20px;
+                                  font-weight: bold;
+                                }
                                 </style></head>";
 
                 string TableHeader = string.Format(@"<body>
@@ -96,8 +110,8 @@ namespace Send_Email
                                         <th rowspan='2'>Machine</th>
                                         <th colspan='2'>{0}</th>
                                         <th colspan='2'>{1}</th>
-                                        <th colspan='2'>PIC</th>
-                                        <th colspan='2'>Reason</th>
+                                        <th rowspan='2' class='pic'>PIC</th>
+                                        <th rowspan='2' class ='reason'>Reason</th>
                                         </tr>
                                         <tr>
                                         <th width='80px'>Plan</th>
@@ -110,7 +124,7 @@ namespace Send_Email
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
                 {
-                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ><td></td><td></td></tr>";
+                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ><td class='pic'>{row["STATUS"].ToString()}</td><td>{row["REASON"].ToString()}</td></tr>";
                 }
 
                 string EndTag = "</tbody></table></body></html>";
