@@ -57,13 +57,13 @@ namespace Send_Email
                 string[] headerArray = new string[arg_DtHeader.Rows.Count];
                 //int iArray = 0;
                 HeaderRow1 = "<tr>" +
-                                $"<th bgcolor='#000099' style='color:#ffffff' rowspan = '2' align='center'>Head of Group</th>" +
-                                $"<th bgcolor='#ff9900' style='color:#ffffff' colspan = '3' align='center'>2021-March</th>" +
+                                $"<th  rowspan = '2' align='center'>Head of Group</th>" +
+                                $"<th class='date' colspan = '3' align='center'>2021-March</th>" +
                              "</tr>";
                 HeaderRow2 = "<tr>" +
-                                 $"<th bgcolor='#000099' style='color:#ffffff' align='center'> Target </th>" +
-                                 $"<th bgcolor='#000099' style='color:#ffffff' align='center'> Actual </th>" +
-                                 $"<th bgcolor='#000099' style='color:#ffffff' align='center'> Rate </th> " +
+                                 $"<th align='center'> Target </th>" +
+                                 $"<th align='center'> Actual </th>" +
+                                 $"<th align='center'> Rate </th> " +
                              "</tr>";
                 //foreach (DataRow row in dtHeader.Rows)
                 //{
