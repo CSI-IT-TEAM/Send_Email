@@ -54,7 +54,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        readonly string[] _emailTest = {  "nguyen.it@changshininc.com" };
 
         #region Event
         
@@ -165,7 +165,7 @@ namespace Send_Email
             //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
 
             //Run TEst
-            RunOSRedMachine("Q", "20210323", "14");
+            RunOSRedMachine("Q", "20210326", "14");
         }
 
         private void cmd_Budget_Click(object sender, EventArgs e)
@@ -3299,7 +3299,7 @@ namespace Send_Email
                 OS_Red_Machine OsRedMachine = new OS_Red_Machine();
                 
                 string html = OsRedMachine.Html(argType, argDate, argHH);
-                if (html == "") return;
+                if (string.IsNullOrEmpty(html)) return;
                 WriteLog("RunOSRedMachine: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (html.StartsWith("Error"))
                 {

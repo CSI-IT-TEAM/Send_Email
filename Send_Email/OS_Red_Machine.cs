@@ -19,7 +19,7 @@ namespace Send_Email
                 string htmlReturn = "";
 
                 DataSet dsData = SEL_DATA(argType, argDate, argHH);
-                if (dsData == null) return "";
+                if (dsData == null || dsData.Tables[1].Rows.Count <=0) return "";
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[1];
                 DataTable dtHeader = dsData.Tables[0];
@@ -29,8 +29,9 @@ namespace Send_Email
 
                 htmlReturn = GetHtmlBody(dtHeader, dtData);
 
-                _subject = "Outsole Machine Problem";
-
+                
+                _subject = "Outsole press machine drawback list";
+                //_subject = "(Test Email) Outsole press machine drawback list";
                 return htmlReturn;
             }
             catch (Exception ex)
@@ -46,13 +47,12 @@ namespace Send_Email
             {
                 string StyleSheet = @"<html><head><style>table.OSPTable {
                                   font-family: 'Times New Roman', Times, serif;
-                                  width: 500px;
                                   text-align: center;
-                                  border: 5px solid #353535; 
                                 }
                                 table.OSPTable td, table.OSPTable th {
                                   border: 1px solid #c0c0c0;
                                   padding: 3px 2px;
+                                  white-space: nowrap;
                                 }
                                 table.OSPTable tbody td {
                                   font-size: 20px;
@@ -61,6 +61,9 @@ namespace Send_Email
                                   background: #26A1B2;
                                   font-style: italic;
                                   border-bottom: 0px solid #444444;
+                                }
+                                table.OSPTable tbody {
+                                  font-style: italic;
                                 }
                                 table.OSPTable thead th {
                                   font-size: 19px;
@@ -72,19 +75,32 @@ namespace Send_Email
                                 .info{
                                   font-family: 'Times New Roman', Times, serif;
                                   font-style: italic;
-                                  font-weight: bold;
                                   font-size: 24px;
                                   color: #1a6e79;
+                                }
+                                table.OSPTable thead th.pic{
+                                   color: black;
+                                   background-color: orange;
+                                   width: 230px;
+                                }
+                                table.OSPTable thead th.reason{
+                                   color: rgb(255, 255, 255);
+                                   background-color: rgb(0, 162, 255);
+                                   width: 500px;
+                                }
+                                table.OSPTable tbody td.pic {
+                                  font-size: 20px;
+                                  font-weight: bold;
                                 }
                                 </style></head>";
 
                 string TableHeader = string.Format(@"<body>
                                        <!-- <div class='info'>
-                                        4시간 동안 아웃솔 프레스 실적 이 interface 되지 않으면 자동 으로 메일이 담당자 들에게 발송 처리가 된다.</div></br> -->
+                                        4시간 동안 아웃솔 프레스 실적 이 interface 되지 않으면 자동 으로 메일이 담당자 들에게 발송 처리가 된다.</div></br>
 
-                                        <div class='info'>Without pressing actual during 4 hours were mailed out to PIC promptly.</div></br>
+                                        <div class='info'>Without pressing actual during 4 hours were mailed out to PIC promptly.</div></br> -->
 
-                                        <div class='info'>Số lượng sản xuất không đạt Target trong 4 giờ sẽ gửi Email</div></br>
+                                        <div class='info'>&nbsp;Số lượng sản xuất không đạt Target trong 4 giờ sẽ gửi Email</div></br>
                              
 
                                         <table class='OSPTable'>
@@ -94,6 +110,8 @@ namespace Send_Email
                                         <th rowspan='2'>Machine</th>
                                         <th colspan='2'>{0}</th>
                                         <th colspan='2'>{1}</th>
+                                        <th rowspan='2' class='pic'>PIC</th>
+                                        <th rowspan='2' class ='reason'>Reason</th>
                                         </tr>
                                         <tr>
                                         <th width='80px'>Plan</th>
@@ -106,7 +124,7 @@ namespace Send_Email
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
                 {
-                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ></tr>";
+                    TableRow += $"<tr><td>{row["LINE"]}</td><td > {row["MC"]} </td><td>{string.Format("{0:n0}",row["COL1_PLAN"].ToString())} </td><td> {string.Format("{0:n0}", row["COL1_ACT"].ToString())}</ td><td> {string.Format("{0:n0}", row["COL2_PLAN"].ToString())} </td ><td> {string.Format("{0:n0}", row["COL2_ACT"].ToString())} </td ><td class='pic'>{row["STATUS"].ToString()}</td><td>{row["REASON"].ToString()}</td></tr>";
                 }
 
                 string EndTag = "</tbody></table></body></html>";
