@@ -54,7 +54,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = {  "nguyen.it@changshininc.com" };
+        readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
         
@@ -168,6 +168,11 @@ namespace Send_Email
             RunOSRedMachine("Q", "20210323", "14");
         }
 
+        private void cmd_Budget_Click(object sender, EventArgs e)
+        {
+            RunBuget("Q");
+        }
+
         #endregion Event
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
@@ -176,7 +181,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\outsole.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                //Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\outsole.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -201,8 +206,8 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
-                string imgInfo = "imgInfo";
-                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+              //  string imgInfo = "imgInfo";
+               // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody =htmlBody;
                 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -3317,6 +3322,7 @@ namespace Send_Email
 
         }
         #endregion
+
         #region Mold Repair
         private void RunMoldRepair(string argType)
         {
@@ -3341,6 +3347,44 @@ namespace Send_Email
 
                 CreateMail(mold_Repair._subject, html, mold_Repair._email);
               //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+
+        }
+
+        #endregion
+
+        #region Budget
+        private void RunBuget(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+
+
+                //if (dsData == null) return;
+                Send_Budget budget = new Send_Budget();
+                string html = budget.Html(argType);
+                if (html == "") return;
+                WriteLog("RunBudget: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMail(budget._subject, html, budget._email);
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
