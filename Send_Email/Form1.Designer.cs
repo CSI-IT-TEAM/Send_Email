@@ -272,6 +272,7 @@
             this.btnTMS_Summary = new System.Windows.Forms.Button();
             this.cmdMoldRepair = new System.Windows.Forms.Button();
             this.btnRunOS_Red = new System.Windows.Forms.Button();
+            this.cmd_Budget = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY2)).BeginInit();
@@ -2519,11 +2520,22 @@
             this.btnRunOS_Red.UseVisualStyleBackColor = true;
             this.btnRunOS_Red.Click += new System.EventHandler(this.cmdRunOS_Red_MC_Click);
             // 
+            // cmd_Budget
+            // 
+            this.cmd_Budget.Location = new System.Drawing.Point(5, 151);
+            this.cmd_Budget.Name = "cmd_Budget";
+            this.cmd_Budget.Size = new System.Drawing.Size(116, 23);
+            this.cmd_Budget.TabIndex = 212;
+            this.cmd_Budget.Text = "Run Budget";
+            this.cmd_Budget.UseVisualStyleBackColor = true;
+            this.cmd_Budget.Click += new System.EventHandler(this.cmd_Budget_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(599, 182);
+            this.Controls.Add(this.cmd_Budget);
             this.Controls.Add(this.btnRunOS_Red);
             this.Controls.Add(this.cmdMoldRepair);
             this.Controls.Add(this.pnTMSDassGrid);
@@ -2984,6 +2996,7 @@
         private System.Windows.Forms.Button btnTMS_Summary;
         private System.Windows.Forms.Button cmdMoldRepair;
         private System.Windows.Forms.Button btnRunOS_Red;
+        private System.Windows.Forms.Button cmd_Budget;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
