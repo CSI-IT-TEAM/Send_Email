@@ -54,7 +54,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "jungbo.shim@dskorea.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
         
@@ -165,7 +165,7 @@ namespace Send_Email
             //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
 
             //Run TEst
-            RunOSRedMachine("Q", "20210326", "14");
+            RunOSRedMachine("Q", "20210327", "14");
         }
 
         #endregion Event
@@ -3402,7 +3402,7 @@ namespace Send_Email
                 DataTable dtData = dsData.Tables[1];
                 DataTable dtEmail = dsData.Tables[2];
 
-                WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+                WriteLog("RunOSRedMachine: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
 
                 string html = getHTMLBodyHeaderTMSDashv3(dtHeader, dtData);
                 DataSet dsHead = SEL_DATA_TMS_DAAS_CHART("QH", DateTime.Now.AddDays(-6).ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), "ALL");
