@@ -339,7 +339,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 // string imgChart = "imgChart", imgGrid1 = "imgGrid1";
                 //  oAttach.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart);
                 //  oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
