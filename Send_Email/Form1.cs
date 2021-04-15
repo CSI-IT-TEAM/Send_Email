@@ -93,6 +93,7 @@ namespace Send_Email
             if (TimeNow.Equals("16:00"))
             {
                 RunTMSDashv2("Q");
+                RunScada("Q");
             }
 
             if (today.DayOfWeek == DayOfWeek.Monday && TimeNow.Equals("08:00"))
@@ -4337,7 +4338,7 @@ namespace Send_Email
                                            </ul>
                                           <b>Thiết bị lạnh</b><br>
                                           <ul>
-                                          <li>Tiêu chuẩn nhiệt độ cài đặt là <b>+7</b> và <b>-3</b></li>
+                                          <li>Tiêu chuẩn nhiệt độ cài đặt là <b>+7</b> và <b>-12</b></li>
                                           <li>Nếu nhiệt độ vượt quá tiêu chuẩn, hệ thống sẽ thông báo <b style='color:yellow; background-color:black'>màu vàng</b></li>
                                           <li>Nếu nhiệt độ vượt quá thời gian 5 phút, hệ thống sẽ thông báo <b style='color:red; background-color:black'>màu đỏ</b></li>
                                           </ul>
