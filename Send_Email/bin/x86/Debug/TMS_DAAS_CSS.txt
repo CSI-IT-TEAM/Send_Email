@@ -8,9 +8,9 @@
     .tftable1 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
     .tftable1 thead {font-size:12px;font-family: Calibri;border-width: 0px;padding: 0px;border-style: solid;border-color: #9dcc7a ;text-align:left;white-space: nowrap;}
     .tftable1 td {font-size:12px;font-family:Calibri;bgcolor:#ffffff;border: 0px; padding: 3px;border-style: solid;border-color: #9dcc7a;white-space: nowrap;}
-    .tftable2 {font-size:12px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
-    .tftable2 thead {font-size:12px;font-family: 'Times New Roman', sans-serif; font-style: italic; font-weight: bold; border-width: 0px;padding: 0px;border-style: solid;border-color: #00ccff ;background-color: #ff9100;color: #ffffff; }
-    .tftable2 td {font-size:12px;font-family: Calibri;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: rgb(82, 82, 82);white-space: nowrap;}
+    .tftable2 {font-size:20px; width:100%;border-width: 0px; border-collapse: collapse; margin:0}
+    .tftable2 thead {font-size:20px;font-family: 'Times New Roman', sans-serif; font-style: italic; font-weight: bold; border-width: 0px;padding: 0px;border-style: solid;border-color: #00ccff ;background-color: #ff9100;color: #ffffff; }
+    .tftable2 td {font-size:15px;font-family: 'Times New Roman', sans-serif;bgcolor:#ffffff;border: 1px; padding: 5px;border-style: solid;border-color: rgb(82, 82, 82);white-space: nowrap;}
     span {
       color: #2e5f82;
       display: inline-block;
@@ -131,6 +131,15 @@
     table.greyGridTable td:nth-child(7) {
        border-right: 2px solid #000000; 
     }
-    
+     .info{
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: bold;
+    }
+    .bg-red{
+      background-color: red;
+      color: white;
+    }
     </style>
 </head>
