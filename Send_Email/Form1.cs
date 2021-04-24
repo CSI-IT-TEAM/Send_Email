@@ -54,7 +54,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = {  "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
         
@@ -4328,7 +4328,7 @@ namespace Send_Email
                 style = System.IO.File.ReadAllText(Application.StartupPath + "\\TMS_DAAS_CSS.txt");
                 headertable = @"<body><div style='-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color: #029c3d; display: block;'>
                                           <span>Top 50 Scada Machine <b>Abnormal Temperature</b></span><br>
-                                      <hr><div style = 'color:black'>
+                                      <hr><div class='info' style = 'color:black'>
                                           <b>Thiết bị nóng</b><br>
                                             <ul>
                                           <li>Tiêu chuẩn nhiệt độ cài đặt là <b>+-3</b></li>
@@ -4361,6 +4361,8 @@ namespace Send_Email
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>I/F Data Count</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Abnormal</td>
                                     <td style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Abnormal Ratio</td>
+                                    <td class='bg-red' style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Alert (Minutes)</td>
+                                    <td class='bg-red' style='width: auto; font-weight: bolder;  font-size: 18px;'  align='center'>Alert (Times)</td>
                                     </tr>
                                     </thead>
                                     <tbody>";
@@ -4387,7 +4389,9 @@ namespace Send_Email
                               $"   <td class='tftable2-clax'>{dr["MAX_VALUE"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["TOTAL"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["OVER"]}</td>" +
-                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"], "%")}</td></tr>";
+                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"], "%")}</td>"+
+                              $"   <td class='tftable2-clax'>{dr["ALARM_TIME_M"]}</td>" +
+                              $"   <td class='tftable2-clax'>{dr["ALARM_TIME_C"]}</td></tr>";
                     iDx++;
                 }
 
