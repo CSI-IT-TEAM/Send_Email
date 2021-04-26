@@ -20,7 +20,7 @@ namespace Send_Email
                 string htmlReturn = "";
 
                 DataSet dsData = SEL_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
-                if (dsData == null) return "";
+                if (dsData == null || dsData.Tables.Count <=1) return "";
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtHeader = dsData.Tables[1];
