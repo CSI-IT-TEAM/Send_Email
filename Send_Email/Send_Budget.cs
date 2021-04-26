@@ -58,7 +58,7 @@ namespace Send_Email
                 //int iArray = 0;
                 HeaderRow1 = "<tr>" +
                                 $"<th  rowspan = '2' align='center'>Head of Group</th>" +
-                                $"<th class='date' colspan = '3' align='center'>2021-March</th>" +
+                                $"<th class='date' colspan = '3' align='center'>2021-April</th>" +
                              "</tr>";
                 HeaderRow2 = "<tr>" +
                                  $"<th align='center'> Target </th>" +
