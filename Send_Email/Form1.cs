@@ -93,6 +93,7 @@ namespace Send_Email
             if (TimeNow.Equals("16:00"))
             {
                 RunTMSDashv2("Q");
+                RunScada("Q");
             }
 
             if (today.DayOfWeek == DayOfWeek.Monday && TimeNow.Equals("08:00"))
