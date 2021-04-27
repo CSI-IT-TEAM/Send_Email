@@ -55,10 +55,11 @@ namespace Send_Email
                 string HeaderRow1 = "";
                 string HeaderRow2 = "";
                 string[] headerArray = new string[arg_DtHeader.Rows.Count];
+                
                 //int iArray = 0;
                 HeaderRow1 = "<tr>" +
                                 $"<th  rowspan = '2' align='center'>Head of Group</th>" +
-                                $"<th class='date' colspan = '3' align='center'>2021-March</th>" +
+                                $"<th class='date' colspan = '3' align='center'>{arg_DtHeader.Rows[0]["MON"]}</th>" +
                              "</tr>";
                 HeaderRow2 = "<tr>" +
                                  $"<th align='center'> Target </th>" +
