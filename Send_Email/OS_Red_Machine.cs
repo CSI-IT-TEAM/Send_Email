@@ -85,7 +85,7 @@ namespace Send_Email
                                 }
                                 table.OSPTable thead th.reason{
                                    color: rgb(255, 255, 255);
-                                   background-color: rgb(0, 162, 255);
+                                   background-color: rgb(255, 0, 0);
                                    width: 500px;
                                 }
                                 table.OSPTable tbody td.pic {
