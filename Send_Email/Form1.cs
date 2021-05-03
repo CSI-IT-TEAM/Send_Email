@@ -206,7 +206,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
               //  string imgInfo = "imgInfo";
                // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody =htmlBody;
@@ -3368,6 +3368,43 @@ namespace Send_Email
         }
         #endregion
 
+        #region Run Feedback
+        private void RunFeedback(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+
+                //if (dsData == null) return;
+                Send_Feedback send_Feedback = new Send_Feedback();
+
+                string html = send_Feedback.Html(argType);
+                if (string.IsNullOrEmpty(html)) return;
+                WriteLog("Run Feedback: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMail(send_Feedback._subject, html, send_Feedback._email);
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+
+        }
+        #endregion
+
         #region Mold Repair
         private void RunMoldRepair(string argType)
         {
@@ -4475,7 +4512,8 @@ namespace Send_Email
 
         private void tmrLoad2_Tick(object sender, EventArgs e)
         {
-
+            //Each 5 minutes.
+            //RunFeedback("Q"); RunFeedback("U");
         }
 
         private void btnRunScada_Click(object sender, EventArgs e)
@@ -4488,7 +4526,10 @@ namespace Send_Email
             RunTMS_Summary("Q");
         }
 
-        
+        private void btnFeedback_Click(object sender, EventArgs e)
+        {
+            RunFeedback("Q"); RunFeedback("U");
+        }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

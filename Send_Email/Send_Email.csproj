@@ -157,12 +157,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Emoji.cs" />
+    <Compile Include="EncryptExtend.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Send_Feedback.cs" />
     <Compile Include="Send_Budget.cs" />
     <Compile Include="OS_Red_Machine.cs" />
     <Compile Include="Mold_Repair.cs" />
