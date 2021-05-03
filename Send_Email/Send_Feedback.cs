@@ -117,8 +117,7 @@ namespace Send_Email
                                         <th>Title</th>
                                         <th>Content</th>
                                         </tr>
-                                      
-                                        </thead><tbody>", dtHeader.Rows[0][0], dtHeader.Rows[0][1]);
+                                        </thead><tbody>");
                 //Row
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
