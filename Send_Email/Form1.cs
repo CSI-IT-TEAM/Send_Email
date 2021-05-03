@@ -2913,7 +2913,7 @@ namespace Send_Email
 
                 int i = 0;
                 int npiCode = 0;
-                string HeaderRow1 = "", HeaderRow2 = "";
+                string HeaderRow1 = "", HeaderRow2 = "", HeaderRow3 = "";
 
                 // int[] colWidth = { 55, 55, 55, 60, 66, 55, 70, 80, 70, 80, 65, 65, 60, 70, 65, 55, 75, 55 };
 
@@ -2928,11 +2928,12 @@ namespace Send_Email
 
                         HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
                         HeaderRow2 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
+                        HeaderRow3 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["VALUE3"]}</td>";
                         i++;
                     }
 
                     else
-                        HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' rowspan ='2' align = 'center'>{row["NPI_NAME"]}</td>";
+                        HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' rowspan ='3' align = 'center'>{row["NPI_NAME"]}</td>";
 
 
                 }
@@ -2940,7 +2941,8 @@ namespace Send_Email
 
 
                 TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " +
-                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> ";
+                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> " +
+                              "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow3 + "</tr> ";
 
                 //Row
                 string TableRow = "", rowspan = "", rowspan2 = "", rowspan3 = "";
@@ -3002,7 +3004,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                WriteLog("GetHtmlBodyCutting: " + ex.ToString());
+                WriteLog("GetHtmlBodyNpi: " + ex.ToString());
                 return "";
             }
         }
