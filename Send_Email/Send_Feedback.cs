@@ -37,7 +37,7 @@ namespace Send_Email
                 htmlReturn = GetHtmlBody(dtHeader, dtData);
 
                 
-                _subject = "Digital Twin Feedback";
+                _subject = "Digital Twin Help Desk";
                 //_subject = "(Test Email) Outsole press machine drawback list";
                 return htmlReturn;
             }
@@ -73,7 +73,7 @@ namespace Send_Email
                                   font-style: italic;
                                 }
                                 table.OSPTable thead th {
-                                  font-size: 19px;
+                                  font-size: 24px;
                                   font-weight: bold;
                                   color: #F0F0F0;
                                   background: #26A1B2;
@@ -113,9 +113,9 @@ namespace Send_Email
                                         <table class='OSPTable'>
                                         <thead>
                                         <tr>
+                                        <th>User Request </th>
                                         <th>Title</th>
                                         <th>Content</th>
-                                        <th>User</th>
                                         </tr>
                                       
                                         </thead><tbody>", dtHeader.Rows[0][0], dtHeader.Rows[0][1]);
@@ -123,7 +123,7 @@ namespace Send_Email
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
                 {
-                    TableRow += $"<tr><td>{row["TITLE"]}</td><td >{row["CONTENTS"]} </td><td>{row["REG_USER"]}</td></tr>";
+                    TableRow += $"<tr><td>{row["REG_USER"]}</td><td >{row["TITLE"]} </td><td>{row["CONTENTS"]}</td></tr>";
                 }
 
                 string EndTag = "</tbody></table></body></html>";

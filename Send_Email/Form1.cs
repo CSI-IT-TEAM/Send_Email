@@ -4502,7 +4502,6 @@ namespace Send_Email
                     {
                         e.Appearance.BackColor = Color.Red;
                         e.Appearance.ForeColor = Color.White;
-
                     }
                 }
             }
@@ -4515,7 +4514,7 @@ namespace Send_Email
         private void tmrLoad2_Tick(object sender, EventArgs e)
         {
             //Each 5 minutes.
-            //RunFeedback("Q"); RunFeedback("U");
+            RunFeedback("Q"); RunFeedback("U");
         }
 
         private void btnRunScada_Click(object sender, EventArgs e)
