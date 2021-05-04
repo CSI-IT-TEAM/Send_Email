@@ -17,7 +17,7 @@ namespace Send_Email
             try
             {
                 string htmlReturn = "";
-
+                //string msg = EncryptExtend.ToDecryptString("pFtsI2Z5oYLg1ir9wDtd1LX/ycQqKlIUJfbez9AMpklbTJkBE8p6SDm/rluGBZOlb7C5L5rEclw0bJg2fn/9xQ==");
                 DataSet dsData = SEL_DATA(argType);
                 if (dsData == null) return "";
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
