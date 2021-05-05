@@ -19,14 +19,14 @@ namespace Send_Email
                 string htmlReturn = "";
                 //string msg = EncryptExtend.ToDecryptString("pFtsI2Z5oYLg1ir9wDtd1LX/ycQqKlIUJfbez9AMpklbTJkBE8p6SDm/rluGBZOlb7C5L5rEclw0bJg2fn/9xQ==");
                 DataSet dsData = SEL_DATA(argType);
-                if (dsData == null) return "";
+                if (dsData.Tables[0] == null || dsData.Tables[0].Rows.Count==0) return "";
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[0];
 
                 foreach (DataRow dr in dtData.Rows)
                 {
-                    dr["TITLE"]  = EncryptExtend.ToDecryptString(dr["TITLE"].ToString());
-                    dr["CONTENTS"] = EncryptExtend.ToDecryptString(dr["CONTENTS"].ToString());
+                    dr["TITLE"] = EncryptExtend.DescryptString(dr["TITLE"].ToString());
+                    dr["CONTENTS"] = EncryptExtend.DescryptString(dr["CONTENTS"].ToString());
                 }
 
                 DataTable dtHeader = dsData.Tables[0];
@@ -60,6 +60,7 @@ namespace Send_Email
                                   border: 1px solid #c0c0c0;
                                   padding: 3px 2px;
                                   white-space: nowrap;
+                                  text-align: left;
                                 }
                                 table.OSPTable tbody td {
                                   font-size: 20px;
@@ -122,7 +123,8 @@ namespace Send_Email
                 string TableRow = "";
                 foreach (DataRow row in dtData.Rows)
                 {
-                    TableRow += $"<tr><td>{row["REG_USER"]}</td><td >{row["TITLE"]} </td><td>{row["CONTENTS"]}</td></tr>";
+                   
+                    TableRow += $"<tr><td>{row["REG_USER"].ToString().Replace("\r", "<br>")}</td><td>{row["TITLE"].ToString().Replace("\r", "<br>")} </td><td>{row["CONTENTS"].ToString().Replace("\r", "<br>")}</td></tr>";
                 }
 
                 string EndTag = "</tbody></table></body></html>";

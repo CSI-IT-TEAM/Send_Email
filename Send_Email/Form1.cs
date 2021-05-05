@@ -3393,6 +3393,8 @@ namespace Send_Email
                 // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 CreateMail(send_Feedback._subject, html, send_Feedback._email);
+
+                RunFeedback("U");
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
@@ -4514,7 +4516,7 @@ namespace Send_Email
         private void tmrLoad2_Tick(object sender, EventArgs e)
         {
             //Each 5 minutes.
-            RunFeedback("Q"); RunFeedback("U");
+            RunFeedback("Q"); //RunFeedback("U");
         }
 
         private void btnRunScada_Click(object sender, EventArgs e)
@@ -4529,7 +4531,7 @@ namespace Send_Email
 
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            RunFeedback("Q"); RunFeedback("U");
+            RunFeedback("Q"); 
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
