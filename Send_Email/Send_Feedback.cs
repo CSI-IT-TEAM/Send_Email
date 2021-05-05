@@ -19,31 +19,34 @@ namespace Send_Email
                 string htmlReturn = "";
                 //string msg = EncryptExtend.ToDecryptString("pFtsI2Z5oYLg1ir9wDtd1LX/ycQqKlIUJfbez9AMpklbTJkBE8p6SDm/rluGBZOlb7C5L5rEclw0bJg2fn/9xQ==");
                 DataSet dsData = SEL_DATA(argType);
-                if (dsData.Tables[0] == null || dsData.Tables[0].Rows.Count==0) return "";
-                //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                DataTable dtData = dsData.Tables[0];
-
-                foreach (DataRow dr in dtData.Rows)
+                if (argType.Equals("Q"))
                 {
-                    dr["TITLE"] = EncryptExtend.DescryptString(dr["TITLE"].ToString());
-                    dr["CONTENTS"] = EncryptExtend.DescryptString(dr["CONTENTS"].ToString());
+                    if (dsData.Tables[0] == null || dsData.Tables[0].Rows.Count == 0) return "";
+                    //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    DataTable dtData = dsData.Tables[0];
+
+                    foreach (DataRow dr in dtData.Rows)
+                    {
+                        dr["TITLE"] = EncryptExtend.DescryptString(dr["TITLE"].ToString());
+                        dr["CONTENTS"] = EncryptExtend.DescryptString(dr["CONTENTS"].ToString());
+                    }
+
+                    DataTable dtHeader = dsData.Tables[0];
+                    _email = dsData.Tables[1];
+
+                    // WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                    htmlReturn = GetHtmlBody(dtHeader, dtData);
+
+                    _subject = "Digital Twin Help Desk";
                 }
-
-                DataTable dtHeader = dsData.Tables[0];
-                _email = dsData.Tables[1];
-
-                // WriteLog(dtHeader.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
-
-                htmlReturn = GetHtmlBody(dtHeader, dtData);
-
-                
-                _subject = "Digital Twin Help Desk";
                 //_subject = "(Test Email) Outsole press machine drawback list";
                 return htmlReturn;
             }
-            catch (Exception ex)
+            catch// (Exception ex)
             {
-                return "Error: " + ex.ToString();
+                return null;
+               // return "Error: " + ex.ToString();
             }
             
         }
