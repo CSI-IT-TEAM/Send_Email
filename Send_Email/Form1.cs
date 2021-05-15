@@ -24,10 +24,10 @@ namespace Send_Email
         {
             InitializeComponent();
 
-            grdBase1.Size = new Size(1950, 1100);
+            grdBase1.Size = new Size(1950, 1220);
             grdBase2.Size = new Size(1950, 1100);
-            grdBase3.Size = new Size(1950, 1200);
-            grdBase4.Size = new Size(1950, 1000);
+            grdBase3.Size = new Size(1950, 1320);
+            grdBase4.Size = new Size(1950, 1400);
 
             grdBaseNpi.Size = new Size(4000, 700);
 
