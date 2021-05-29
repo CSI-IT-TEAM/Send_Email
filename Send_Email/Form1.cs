@@ -2,17 +2,14 @@
 using DevExpress.XtraCharts;
 using JPlatform.Client.Controls6;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
 using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -39,25 +36,26 @@ namespace Send_Email
             pnTMSDassGrid.Size = new Size(1420, 215);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210325153000";
+            this.Text = "20210525133000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
+
         //Phuoc.IT
 
+        private string[] headNames = new string[] { "COMP" };
+        private string[] divNames = new string[] { "Order By Set (prs)", "Total Outgoing (prs)", "Per", "", "", "", "", "", "", "DMP-Y", "IP-Y", "PU-Y", "OS-Y", "PH-Y" };
+        private DataTable dtEmail;
+        private bool _isRun = false, _isRun2 = false;
+        private int _start_column = 0;
 
-        string[] headNames = new string[] { "COMP" };
-        string[] divNames = new string[] { "Order By Set (prs)", "Total Outgoing (prs)", "Per", "", "", "", "", "", "", "DMP-Y", "IP-Y", "PU-Y", "OS-Y", "PH-Y" };
-        DataTable dtEmail;
-        bool _isRun = false, _isRun2 = false;
-        int _start_column = 0;
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        readonly string[] _emailTest = { "do.it@changshininc.com" };
+        private readonly string[] _emailTest = { "do.it@changshininc.com" };
 
         #region Event
-        
+
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
             string TimeNow = System.DateTime.Now.ToString("HH:mm");
@@ -111,9 +109,8 @@ namespace Send_Email
                 case "18:10":
                 case "22:10":
                 case "02:10":
-                    RunOSRedMachine("Q",DateTime.Now.ToString("yyyyMMdd"),TimeNow.Substring(0,2));
+                    RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), TimeNow.Substring(0, 2));
                     break;
-               
             }
         }
 
@@ -189,7 +186,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -209,10 +206,10 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "phuoc.it@changshininc.com; ngoc.it@changshininc.com";
-              //  string imgInfo = "imgInfo";
-               // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-                mailItem.HTMLBody =htmlBody;
-                
+                //  string imgInfo = "imgInfo";
+                // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = htmlBody;
+
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -233,7 +230,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -277,7 +274,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -323,7 +320,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -400,7 +397,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -438,11 +435,11 @@ namespace Send_Email
                 }
                 //string[] strValue = new string[14];
 
-                string strDate = "", strLastDate ="";
+                string strDate = "", strLastDate = "";
                 int iDateRow = dtDate.Rows.Count;
-                for (int i=0; i< iDateRow; i++)
+                for (int i = 0; i < iDateRow; i++)
                 {
-                    if (i == iDateRow -1)
+                    if (i == iDateRow - 1)
                     {
                         strLastDate = $"<th bgcolor = '#00ced1' style = 'color:#ffffff' align = 'center' width = '80' rowspan='2' >%</th >";
                     }
@@ -450,11 +447,9 @@ namespace Send_Email
                     {
                         strDate += $"<th bgcolor = '#cc66ff' style = 'color:#ffffff' align = 'center' width = '80' >{dtDate.Rows[i]["YMD"]}</th >";
                     }
-                    
                 }
                 foreach (DataRow row in dtDate.Rows)
                 {
-                    
                 }
 
                 string HtmlTableBody = "";
@@ -664,7 +659,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email TO/PO
 
         #region Email TO/PO IE
 
@@ -705,7 +700,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -738,7 +733,6 @@ namespace Send_Email
                                 Name = dept.Key,
                                 cntLine = dept.Count()
                             };
-
 
                 var query2 = from row in dtData.AsEnumerable()
                              group row by row.Field<string>("MLINE") into dept
@@ -913,7 +907,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email TO/PO IE
 
         #region Email E-SCAN
 
@@ -956,7 +950,7 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
@@ -999,7 +993,6 @@ namespace Send_Email
                                     "<br>" +
                                     HtmlTanPhu;
 
-
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
             }
@@ -1008,7 +1001,6 @@ namespace Send_Email
                 WriteLog("CreateMailEScan " + ex.ToString());
             }
         }
-
 
         private string CreateTableHtml(DataTable argDt)
         {
@@ -1048,8 +1040,6 @@ namespace Send_Email
                         rowValue +
                     "</table>";
         }
-
-
 
         private string GetHeader(DataTable argTable)
         {
@@ -1113,7 +1103,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[5] = "";
                 MyOraDB.Parameter_Values[6] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
@@ -1134,7 +1123,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email E-SCAN
 
         #region Email Production
 
@@ -1163,10 +1152,8 @@ namespace Send_Email
             }
             finally
             {
-
                 _isRun2 = false;
             }
-
         }
 
         private void CreateMailProduction(DataTable dtDate, DataTable dtData, DataTable dtEmail)
@@ -1179,10 +1166,9 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
-                //Get List Send email 
+                //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
-
                     foreach (DataRow row in dtEmail.Rows)
                     {
                         Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
@@ -1265,7 +1251,6 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["REASON_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["REASON_FORE_COLOR"].ToString() + "' align='left' >" + dtData.Rows[iRow]["REASON"].ToString() + " </td>" +
                                   "</tr>";
                         }
-
                     }
                 }
 
@@ -1297,9 +1282,6 @@ namespace Send_Email
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
                 //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
                 //               "</p>";
-
-
-
 
                 mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -1339,7 +1321,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[3] = "";
                 MyOraDB.Parameter_Values[4] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -1362,7 +1343,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email Production
 
         #region Email ANDON
 
@@ -1386,17 +1367,13 @@ namespace Send_Email
             }
             finally
             {
-
             }
-
         }
 
         private void CreateMailAndon(DataTable dtData, DataTable dtEmail)
         {
             try
             {
-
-
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 mailItem.Subject = "Andon information of yesterday";
@@ -1429,7 +1406,6 @@ namespace Send_Email
                 string rowValue = "";
 
                 string strRowSpan = "";
-
 
                 for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
                 {
@@ -1561,7 +1537,6 @@ namespace Send_Email
                                    //"</td>" +
 
                                    "</tr>"; ;
-
                         }
                     }
                 }
@@ -1610,7 +1585,6 @@ namespace Send_Email
             }
         }
 
-
         public DataSet SEL_ANDON_DATA(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -1637,7 +1611,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
@@ -1650,7 +1623,9 @@ namespace Send_Email
             }
         }
 
-        #endregion        
+        #endregion Email ANDON
+
+
 
         #region Email Bottom Inventory
 
@@ -1668,7 +1643,6 @@ namespace Send_Email
                 Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = "Bottom Inventory Set Analysis";
-
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -1717,8 +1691,6 @@ namespace Send_Email
             {
                 Console.WriteLine(ex.ToString());
             }
-
-
         }
 
         private void Run(string argType)
@@ -1758,7 +1730,7 @@ namespace Send_Email
                 dtEmail = dsReturn.Tables[2];
                 LoadDataChart(dtChart);
 
-                // Grid 
+                // Grid
                 DataTable dtSource = new DataTable();
                 if (buildHeader_detail(dtSource, dtGrid))
                 {
@@ -1777,7 +1749,6 @@ namespace Send_Email
                 }
 
                 return true;
-
             }
             catch (Exception ex)
             {
@@ -1788,7 +1759,6 @@ namespace Send_Email
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
 
         private bool buildHeader_detail(DataTable dtSource, DataTable dt)
@@ -1859,6 +1829,7 @@ namespace Send_Email
         }
 
         #region Set Data For Chart & Grid
+
         private void LoadDataChart(DataTable argDtChart)
         {
             chart2.DataSource = argDtChart;
@@ -1945,7 +1916,7 @@ namespace Send_Email
             catch { }
         }
 
-        #endregion
+        #endregion Set Data For Chart & Grid
 
         private void CaptureControl(Control control, string nameImg)
         {
@@ -1997,7 +1968,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[5] = "";
                 MyOraDB.Parameter_Values[6] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
@@ -2009,8 +1979,6 @@ namespace Send_Email
                 return null;
             }
         }
-
-
 
         private void gvwBase2_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
@@ -2030,7 +1998,6 @@ namespace Send_Email
 
             if (e.Column.ColumnHandle > 5 && ex.GetRowCellValue(e.RowHandle, "Plant").ToString() != "Total")
             {
-
                 if (e.CellValue == null || e.CellValue.ToString() == "") return;
                 //if (Convert.ToDouble(e.CellValue.ToString().Replace(",", "")) < 0)
                 //{
@@ -2065,7 +2032,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email Bottom Inventory
 
         #region Email Cutting
 
@@ -2097,7 +2064,6 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
 
         private string GetHtmlBodyCutting(DataTable dtHeader, DataTable dtData)
@@ -2128,7 +2094,6 @@ namespace Send_Email
                     {
                         htLine.Add(HtKey, 1);
                     }
-
                 }
 
                 foreach (var row in query)
@@ -2152,10 +2117,6 @@ namespace Send_Email
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPA2<br>(D-D +10H)</td > " +
                                  "<td bgcolor = '#00ced1' style = 'color:#ffffff' colspan = '2' align = 'center' >UPO<br>(D-D +16H)</td > " +
 
-
-
-
-
                               "</tr> " +
                               "<tr> " +
                                  "<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '120' >Fast</td > " +
@@ -2172,7 +2133,6 @@ namespace Send_Email
                               //"<td bgcolor = '#9966ff' style = 'color:#ffffff' align = 'center' width = '100' >Date</td > " +
                               //"<td bgcolor = '#366cc9' style = 'color:#ffffff' align = 'center' width = '100' >Time</td > " +
                               "</tr> ";
-
 
                 //Row
                 string TableRow = "", rowspan = "", rowspan2 = "", rowspan3 = "";
@@ -2230,10 +2190,8 @@ namespace Send_Email
                     ;
                     rowspan2 = $"<td bgcolor='WHITE' style='color:BLACK' align='center' rowspan='{htLine[deptName + mline]}'>{mline.TrimStart('0')}</td>";
 
-
                     if (deptName == "LEAN L" && mline == "005")
                     { }
-
 
                     if (iRow > 0 && deptName == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
                     {
@@ -2246,7 +2204,6 @@ namespace Send_Email
                     {
                         rowspan2 = "";
                     }
-
 
                     TableRow += "<tr>" +
                                    //  rowspan3 +
@@ -2266,11 +2223,6 @@ namespace Send_Email
                                    $"<td bgcolor='{Upa2SlowBColor}' style='color:{Upa2SlowFColor}' align='center'>{Upa2SlowQty}</td>" +
                                    $"<td bgcolor='{UpoFastBColor}' style='color:{UpoFastFColor}' align='center'>{UpoFastQty}</td>" +
                                    $"<td bgcolor='{UpoSlowBColor}' style='color:{UpoSlowFColor}' align='center'>{UpoSlowQty}</td>" +
-
-
-
-
-
 
                                //  $"<td bgcolor='{UpsBColor}' style='color:{UpsFColor}' align='center'>{AssYmdQty}</td>" +
 
@@ -2306,7 +2258,6 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
 
-
             DataSet ds_ret;
             try
             {
@@ -2332,7 +2283,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[3] = "";
                 MyOraDB.Parameter_Values[4] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -2355,15 +2305,12 @@ namespace Send_Email
             }
         }
 
-        #endregion
-
-
+        #endregion Email Cutting
 
         #region Email NPI Capture
 
         private void RunNPI2()
         {
-
             fn_BindingHeader();
             fn_BindingData();
             CaptureControl(grdBaseNpi, "GridNpi");
@@ -2381,7 +2328,6 @@ namespace Send_Email
                 Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\GridNpi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
 
                 mailItem.Subject = "NPI";
-
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -2412,8 +2358,6 @@ namespace Send_Email
                 oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgGrid1);
                 //oAttachPicGrid1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x00390040", imgGrid1);
 
-
-
                 mailItem.HTMLBody = String.Format(
                     "<body>" +
                           "<img src=\"cid:{0}\">" +
@@ -2426,8 +2370,6 @@ namespace Send_Email
             {
                 WriteLog(ex.ToString());
             }
-
-
         }
 
         public DataSet SEL_NPI_DATA2(string V_P_TYPE)
@@ -2673,7 +2615,6 @@ namespace Send_Email
                         {
                             grdViewNpi.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
                         }
-
                     }
 
                     grdViewNpi.Columns["CATEGORY_NAME"].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Near;
@@ -2699,7 +2640,7 @@ namespace Send_Email
         /// <param name="table">DataTable do invert</param>
         /// <param name="columnX">X Axis Column</param>
         /// <param name="nullValue">null Value to Complete the Pivot Table</param>
-        /// <param name="columnsToIgnore">Columns that should be ignored in the pivot 
+        /// <param name="columnsToIgnore">Columns that should be ignored in the pivot
         /// process (X Axis column is ignored by default)</param>
         /// <returns>C# Pivot Table Method  - Felipe Sabino</returns>
         public static DataTable GetInversedDataTable(DataTable table, string columnX,
@@ -2734,7 +2675,7 @@ namespace Send_Email
                     //Verify if the value was already listed
                     if (!columnXValues.Contains(columnXTemp))
                     {
-                        //if the value id different from others provided, add to the list of 
+                        //if the value id different from others provided, add to the list of
                         //values and creates a new Column with its value.
                         columnXValues.Add(columnXTemp);
                         returnTable.Columns.Add(columnXTemp);
@@ -2775,11 +2716,11 @@ namespace Send_Email
             catch (Exception ex) { return null; }
         }
 
-        DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
+        private DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {
             try
             {
-                // find primary key columns 
+                // find primary key columns
                 //(i.e. everything but pivot column and pivot value)
                 DataTable temp = dt.Copy();
                 temp.Columns.Remove(pivotColumn.ColumnName);
@@ -2805,11 +2746,9 @@ namespace Send_Email
                     pkColumnNames
                     .Select(c => row[c])
                     .ToArray());
-                    // the aggregate used here is LATEST 
+                    // the aggregate used here is LATEST
                     // adjust the next line if you want (SUM, MAX, etc...)
                     aggRow[row[pivotColumn.ColumnName].ToString()] = row[pivotValue.ColumnName];
-
-
                 }
 
                 return result;
@@ -2834,22 +2773,27 @@ namespace Send_Email
                             e.Appearance.BackColor = Color.Yellow;
                             e.Appearance.ForeColor = Color.Yellow;
                             break;
+
                         case "G":
                             e.Appearance.BackColor = Color.Green;
                             e.Appearance.ForeColor = Color.Green;
                             break;
+
                         case "R":
                             e.Appearance.BackColor = Color.Red;
                             e.Appearance.ForeColor = Color.Red;
                             break;
+
                         case "S":
                             e.Appearance.BackColor = Color.Silver;
                             e.Appearance.ForeColor = Color.Silver;
                             break;
+
                         case "B":
                             e.Appearance.BackColor = Color.Black;
                             e.Appearance.ForeColor = Color.Black;
                             break;
+
                         default:
                             break;
                     }
@@ -2861,7 +2805,7 @@ namespace Send_Email
             }
         }
 
-        #endregion
+        #endregion Email NPI Capture
 
         #region Email NPI
 
@@ -2904,7 +2848,6 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
 
         private string GetHtmlBodyNpi(DataTable dtHeader, DataTable dtData)
@@ -2923,24 +2866,17 @@ namespace Send_Email
 
                 foreach (DataRow row in dtHeader.Rows)
                 {
-
                     int.TryParse(row["NPI_CODE"].ToString(), out npiCode);
                     if (npiCode >= 10)
                     {
-
                         HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_DATE"]}</td>";
                         HeaderRow2 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["NPI_NAME"]}</td>";
                         HeaderRow3 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' align = 'center' width = '{colWidth[i]}'>{row["VALUE3"]}</td>";
                         i++;
                     }
-
                     else
                         HeaderRow1 += $"<td bgcolor = '#e9f1fb' style = 'color:#000000' rowspan ='3' align = 'center'>{row["NPI_NAME"]}</td>";
-
-
                 }
-
-
 
                 TableHeader = "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow1 + "</tr> " +
                               "<tr style='font-family:Calibri; font-size:14px'> " + HeaderRow2 + "</tr> " +
@@ -3073,8 +3009,6 @@ namespace Send_Email
             }
         }
 
-
-
         public DataSet SEL_TMD_DASH_DATA(string V_P_TYPE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -3102,7 +3036,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -3124,6 +3057,7 @@ namespace Send_Email
                 return null;
             }
         }
+
         public DataSet SEL_TIME_CONTRAINT_DATA(string V_P_TYPE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -3151,7 +3085,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -3173,7 +3106,6 @@ namespace Send_Email
                 return null;
             }
         }
-
 
         private DataSet SEL_DATA_TMS_DAAS_CHART(string WorkType, string DateF, string DateT, string LineCd)
         {
@@ -3214,8 +3146,6 @@ namespace Send_Email
             MyOraDB.Parameter_Name[11] = "OUT_CURSOR";
             MyOraDB.Parameter_Name[12] = "OUT_CURSOR1";
 
-
-
             MyOraDB.Parameter_Values[0] = WorkType;
             MyOraDB.Parameter_Values[1] = DateF;
             MyOraDB.Parameter_Values[2] = DateT;
@@ -3235,6 +3165,7 @@ namespace Send_Email
             if (retDS == null) return null;
             return retDS;
         }
+
         public DataSet SEL_SCADA_DATA(string V_P_TYPE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -3261,7 +3192,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[1] = "";
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
-
 
                 MyOraDB.Add_Select_Parameter(true);
 
@@ -3312,7 +3242,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
 
-
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -3334,9 +3263,12 @@ namespace Send_Email
                 return null;
             }
         }
-        #endregion
+
+        #endregion Email NPI
+
         #region OS Red Machine
-        private void RunOSRedMachine(string argType,string argDate,string argHH)
+
+        private void RunOSRedMachine(string argType, string argDate, string argHH)
         {
             try
             {
@@ -3346,7 +3278,7 @@ namespace Send_Email
 
                 //if (dsData == null) return;
                 OS_Red_Machine OsRedMachine = new OS_Red_Machine();
-                
+
                 string html = OsRedMachine.Html(argType, argDate, argHH);
                 if (string.IsNullOrEmpty(html)) return;
                 WriteLog("RunOSRedMachine: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
@@ -3368,11 +3300,12 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
-        #endregion
+
+        #endregion OS Red Machine
 
         #region Run Feedback
+
         private void RunFeedback(string argType)
         {
             try
@@ -3396,7 +3329,6 @@ namespace Send_Email
 
                 CreateMail(send_Feedback._subject, html, send_Feedback._email);
 
-              
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
@@ -3407,11 +3339,12 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
-        #endregion
+
+        #endregion Run Feedback
 
         #region Mold Repair
+
         private void RunMoldRepair(string argType)
         {
             try
@@ -3419,7 +3352,6 @@ namespace Send_Email
                 if (_isRun2) return;
 
                 _isRun2 = true;
-
 
                 //if (dsData == null) return;
                 Mold_Repair mold_Repair = new Mold_Repair();
@@ -3431,10 +3363,10 @@ namespace Send_Email
                     WriteLog(html);
                     return;
                 }
-               // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
                 CreateMail(mold_Repair._subject, html, mold_Repair._email);
-              //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
@@ -3444,12 +3376,12 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
 
-        #endregion
+        #endregion Mold Repair
 
         #region Budget
+
         private void RunBuget(string argType)
         {
             try
@@ -3457,7 +3389,6 @@ namespace Send_Email
                 if (_isRun2) return;
 
                 _isRun2 = true;
-
 
                 //if (dsData == null) return;
                 Send_Budget budget = new Send_Budget();
@@ -3482,10 +3413,9 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
-
         }
 
-        #endregion
+        #endregion Budget
 
         private string ColorNull(string argColor)
         {
@@ -3494,7 +3424,6 @@ namespace Send_Email
 
         private void WriteLog(string argText)
         {
-
             txtLog.BeginInvoke(new Action(() =>
             {
                 txtLog.Text += argText + "\r\n";
@@ -3508,10 +3437,12 @@ namespace Send_Email
         {
             RunTMSDash("Q");
         }
+
         private void btnRunTMSV2_Click(object sender, EventArgs e)
         {
             RunTMSDashv2("Q");
         }
+
         private void checkRunning()
         {
             foreach (Process p in Process.GetProcessesByName("Send_Email"))
@@ -3552,7 +3483,6 @@ namespace Send_Email
                 Format_Grid();
                 DataTable dtChart = ds.Tables[1];
                 loadchart(dtChart);
-
 
                 //CaptureControl(pnTMSDassChart, "TMSChart");
                 //CaptureControl(pnTMSDassGrid, "TMSGrid");
@@ -3683,13 +3613,14 @@ namespace Send_Email
                 _isRun2 = false;
             }
         }
+
         private void Format_Grid()
         {
-
             double order_qty = 0;
             double actual_qty = 0;
 
             #region replace
+
             gvwBase.BeginUpdate();
 
             for (int i = 0; i <= gvwBase.RowCount - 1; i++)
@@ -3720,9 +3651,7 @@ namespace Send_Email
                 {
                     gvwBase.SetRowCellValue(i, gvwBase.Columns[0], "Bottom Performance");
                 }
-
             }
-
 
             for (int i = 0; i < gvwBase.Columns.Count; i++)
             {
@@ -3743,7 +3672,6 @@ namespace Send_Email
                     gvwBase.Columns[i].Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
                     gvwBase.Columns[i].OptionsColumn.AllowMerge = DevExpress.Utils.DefaultBoolean.False;
                 }
-
                 else
                 {
                     gvwBase.Columns[i].Width = 60;
@@ -3751,11 +3679,8 @@ namespace Send_Email
                     //  gvwBase.Columns[i].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
 
                     //  gvwBase.Columns[j].DisplayFormat.FormatString = "#,###";
-
                 }
-
             }
-
 
             for (int i = 0; i <= gvwBase.RowCount - 1; i++)
             {
@@ -3768,20 +3693,19 @@ namespace Send_Email
                     {
                         gvwBase.SetRowCellValue(i, gvwBase.Columns[j + 1], "0");
                     }
-
-
                 }
             }
-
 
             gvwBase.Appearance.Row.Font = new System.Drawing.Font("DotumChe", 10F, System.Drawing.FontStyle.Regular);
             //   gvwBase.BestFitColumns();
 
             // gvwBase.OptionsView.ColumnAutoWidth = false;
             gvwBase.EndUpdate();
-            #endregion
+
+            #endregion replace
         }
-        void BuildHeader(DataTable dtSource, DataTable dtDays)
+
+        private void BuildHeader(DataTable dtSource, DataTable dtDays)
         {
             GridBandEx band, bandChild;
             string col_name = "";
@@ -3806,19 +3730,16 @@ namespace Send_Email
                     {
                         band.Caption = "Process";
                     }
-
                     else
                     {
                         band.Caption = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(headNames[i].ToLower().Replace("_", " "));
                     }
-
 
                     //band.MinWidth = 80;//TextRenderer.MeasureText(band.Caption, band.AppearanceHeader.Font).Width;
                     band.AppearanceHeader.Options.UseTextOptions = true;
                     band.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
 
                     gvwBase.Bands.Add(band);
-
 
                     AddColumn(band, headNames[i]);
                     dtSource.Columns.Add(headNames[i], typeof(string));
@@ -3838,8 +3759,6 @@ namespace Send_Email
 
                     for (int j = 1; j <= 3; j++)
                     {
-
-
                         if (j == 1) col_name = "Order";
                         else if (j == 2) col_name = "Actual";
                         else if (j == 3) col_name = "Percent";
@@ -3860,7 +3779,6 @@ namespace Send_Email
                     }
                     gvwBase.Bands.Add(band);
                 }
-
             }
             catch (Exception ex)
             {
@@ -3868,9 +3786,8 @@ namespace Send_Email
             }
         }
 
-        void BindingDataSource(DataTable dtSource, DataTable dtDays, DataTable dtData)
+        private void BindingDataSource(DataTable dtSource, DataTable dtDays, DataTable dtData)
         {
-
             double Order = 0;
             double Actual = 0;
             double Percent = 0;
@@ -3895,7 +3812,6 @@ namespace Send_Email
                         double.TryParse(dtData.Rows[i]["Actual"].ToString(), out Actual);
                         double.TryParse(dtData.Rows[i]["Percent"].ToString(), out Percent);
 
-
                         //--tim dong opcd--
                         for (int row = 0; row <= 4; row++)
                         {
@@ -3906,9 +3822,8 @@ namespace Send_Email
                             }
                         }
 
-                        if (dtData.Rows[i]["D"].ToString() == dtSource.Columns[col].Caption.Split('_')[0].ToString())//date 
+                        if (dtData.Rows[i]["D"].ToString() == dtSource.Columns[col].Caption.Split('_')[0].ToString())//date
                         {
-
                             if (dtSource.Columns[col].Caption.Split('_')[1].ToString() == "Order")
                             {
                                 dtSource.Rows[row_opcd][col] = Order;
@@ -3934,10 +3849,8 @@ namespace Send_Email
                         total_row = 0;
                         for (int i = 0; i <= dtSource.Rows.Count - 1; i++)
                         {
-
                             double.TryParse(dtSource.Rows[i][j].ToString(), out total_tmp);
                             total_row = total_row + total_tmp;
-
                         }
                         dtSource.Rows[dtSource.Rows.Count - 1][j] = total_row.ToString();
                     }
@@ -3951,12 +3864,12 @@ namespace Send_Email
                     }
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("BindingDataSource(): " + ex.Message);
             }
         }
+
         private void AddColumn(GridBandEx band, string fieldName)
         {
             BandedGridColumnEx col = new BandedGridColumnEx();
@@ -3981,10 +3894,8 @@ namespace Send_Email
                 chart.Series[1].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[1].ValueDataMembers.AddRange(new string[] { "PH_PER" }); //COT Y
 
-
                 chart.Series[2].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[2].ValueDataMembers.AddRange(new string[] { "PU_PER" }); //COT Y
-
 
                 chart.Series[3].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[3].ValueDataMembers.AddRange(new string[] { "IP_PER" }); //COT Y
@@ -3992,16 +3903,13 @@ namespace Send_Email
                 chart.Series[4].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[4].ValueDataMembers.AddRange(new string[] { "DMP_PER" }); //COT Y
 
-
                 chart.Series[5].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[5].ValueDataMembers.AddRange(new string[] { "TOTAL_PER" }); //COT Y
 
                 chart.Series[6].ArgumentDataMember = "YMD"; // cot X
                 chart.Series[6].ValueDataMembers.AddRange(new string[] { "TAR_PER" }); //COT Y
 
-
                 ((XYDiagram)chart.Diagram).AxisX.Label.Staggered = false;
-
             }
             catch (Exception ex)
             {
@@ -4019,7 +3927,6 @@ namespace Send_Email
             }
             catch
             {
-
             }
         }
 
@@ -4100,14 +4007,13 @@ namespace Send_Email
 
                 //  string remakeBody = string.Format(body, argsBody);
                 return string.Concat(style, remakeHeader, body, end);
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
+
         private string getHTMLBodyHeaderTMSDashv2(DataTable dtHead, DataTable dtData)
         {
             try
@@ -4140,8 +4046,7 @@ namespace Send_Email
                                <td bgcolor='{38}' style='color:{39}'>{5}</td>
                                <td style='color:red'>{6}</td>
                                <td>{7}</td>
-                               
-                             
+
                                <td align='left'>{42} </td>
                               </tr>", argsBody);
                 }
@@ -4156,13 +4061,11 @@ namespace Send_Email
 
                 string HTML = string.Concat(style, remakeHeader, body, end);
                 return HTML;
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
 
         private string getHTMLBodyHeaderTMSDashv3(DataTable dtHead, DataTable dtData)
@@ -4208,13 +4111,11 @@ namespace Send_Email
 
                     if (iHead < dtHeaderTotal.Columns["REASON"].Ordinal)
                         headerDivided += "<td style='height: 1px; padding: 1px;border: blue;' bgcolor='blue'></td>";
-
                 }
                 argsHeader[38] = @"<tr>" + headerDivided + "</tr>";
                 argsHeader[39] = @"<tr>" + headerTotal + "</tr>";
                 headertable = string.Format(headertable, argsHeader);
                 string body = string.Empty;
-
 
                 //Create Body
                 DataTable dtDataFillter = new DataTable();
@@ -4251,14 +4152,13 @@ namespace Send_Email
                 string end = "</tbody></table><hr>";
                 string HTML = string.Concat(style, headertable, body, end);
                 return HTML;
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
+
         private string getHTMLBodyHeaderTMSSummary(DataTable dtHead, DataTable dtData)
         {
             try
@@ -4290,7 +4190,6 @@ namespace Send_Email
                     }
                     else
                     {
-
                         body += $"<tr><td>{dr["PLANT"]}</td>" +
                              $"<td bgcolor='{dr["I01_BCOLOR"]}' style ='color:{dr["I01_FCOLOR"]}'>{dr["I01"]}</td>" +
                              $"<td bgcolor='{dr["I02_BCOLOR"]}' style ='color:{dr["I02_FCOLOR"]}'>{dr["I02"]}</td>" +
@@ -4305,7 +4204,6 @@ namespace Send_Email
                              $"<td bgcolor='{dr["W04_BCOLOR"]}' style ='color:{dr["W04_FCOLOR"]}'>{dr["W04"]}</td>" +
                              $"<td bgcolor='{dr["W05_BCOLOR"]}' style ='color:{dr["W05_FCOLOR"]}'>{dr["W05"]}</td>" +
                              $"<td bgcolor='{dr["W06_BCOLOR"]}' style ='color:{dr["W06_FCOLOR"]}'>{dr["W06"]}</td></tr>";
-
                     }
                     iDx++;
                 }
@@ -4322,7 +4220,6 @@ namespace Send_Email
                         sdate += $"<th>{dr["CAPTION"]}</th>";
                         DivTemp = dr["DIV"].ToString();
                     }
-
                 }
                 string InOrder = string.Empty, WithOutOrder = string.Empty;
                 InOrder = dtHead.Rows[0]["OIO"].ToString();
@@ -4364,6 +4261,7 @@ namespace Send_Email
                 return null;
             }
         }
+
         private string getHTMLBodyHeaderScada(DataTable dtHead, DataTable dtData)
         {
             try
@@ -4433,7 +4331,7 @@ namespace Send_Email
                               $"   <td class='tftable2-clax'>{dr["MAX_VALUE"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["TOTAL"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["OVER"]}</td>" +
-                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"], "%")}</td>"+
+                              $"   <td class='tftable2-clax'>{string.Concat(dr["RATE"], "%")}</td>" +
                               $"   <td class='tftable2-clax'>{dr["ALARM_TIME_M"]}</td>" +
                               $"   <td class='tftable2-clax'>{dr["ALARM_TIME_C"]}</td></tr>";
                     iDx++;
@@ -4443,13 +4341,11 @@ namespace Send_Email
 
                 string HTML = string.Concat(style, headertable, body, end);
                 return HTML;
-
             }
             catch (Exception ex)
             {
                 return null;
             }
-
         }
 
         private void gvwBase_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
@@ -4470,12 +4366,10 @@ namespace Send_Email
                 if (gvwBase.GetRowCellValue(e.RowHandle, gvwBase.Columns[0]).ToString().Contains("Bottom Performance"))
                 {
                     e.Appearance.BackColor = Color.Cyan;
-
                 }
 
                 if ((e.Column.FieldName.Contains("Percent")) && (e.CellValue != null))
                 {
-
                     double.TryParse(e.CellValue.ToString(), out temp); //out
 
                     if (temp > 0 && temp < 50)
@@ -4483,7 +4377,6 @@ namespace Send_Email
                         e.Appearance.BackColor = Color.Black;
                         e.Appearance.ForeColor = Color.White;
                     }
-
                     else if (temp >= 50 && temp < 80)
                     {
                         e.Appearance.BackColor = Color.Red;
@@ -4491,7 +4384,6 @@ namespace Send_Email
                     }
                     else if (temp >= 80 && temp < 95)
                     {
-
                         e.Appearance.BackColor = Color.Yellow;
                         e.Appearance.ForeColor = Color.Black;
                     }
@@ -4500,7 +4392,6 @@ namespace Send_Email
                         e.Appearance.BackColor = Color.LightGreen;
                         e.Appearance.ForeColor = Color.Black;
                     }
-
 
                     if (e.CellValue.ToString() == "0")
                     {
@@ -4511,7 +4402,6 @@ namespace Send_Email
             }
             catch
             {
-
             }
         }
 
@@ -4572,11 +4462,11 @@ namespace Send_Email
                 sHeader1 += string.Format(@"
                                                     </head>
                                                   <body>
-                                                    <ul> 
+                                                    <ul>
                                                     <li><span>Outsole went ahead of 13 days(base on outgoing scan) in comparison with production date</span></li>
                                                     <li><span>UV went ahead of  13 days(base on water) and 24 days(base on solvent) in comparison with production date</span></li>
                                                     </ul>
-                                             
+
                                              <hr>
                                                             <table class='tg'>
                                                             <thead>
@@ -4637,7 +4527,6 @@ namespace Send_Email
                             //else
                             //    argBodys[iCol - 2] = dtGrid.Rows[iRow][iCol].ToString();
                         }
-
                     }
                     string BodyProcName = string.Empty;
                     string BodyPlantName = string.Empty;
@@ -4702,7 +4591,6 @@ namespace Send_Email
             {
                 return null;
             }
-
         }
     }
 }
