@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Send_Email
 {
-    class Send_Quality
+    class Send_Quality2
     {
         public string _subject = "";
         public DataTable _email;
@@ -51,10 +51,10 @@ namespace Send_Email
         {
             try
             {
-               // string TableExtOsd = "", TableExtOsdHeader = "", HeaderExtOsdRow1 = "", HeaderExtOsdRow2 = "", TableExtOsdRow = "";
-                string TableRewBcg = "", TableRewBcgHeader = "", HeaderRewBcgRow1 = "", HeaderRewBcgRow2= "", TableRewBcgRow = "";
+                // string TableExtOsd = "", TableExtOsdHeader = "", HeaderExtOsdRow1 = "", HeaderExtOsdRow2 = "", TableExtOsdRow = "";
+                string TableRewBcg = "", TableRewBcgHeader = "", HeaderRewBcgRow1 = "", HeaderRewBcgRow2 = "", TableRewBcgRow = "";
                 string bColor, fColor, bColorRew, fColorRew, bColorBcg, fColorBcg;
-                string factory, plant, line, production,  rework, reworkRate, bQty, cQty, bcQty, bcRate, qty;
+                string factory, plant, line, production, rework, reworkRate, bQty, cQty, bcQty, bcRate, qty;
                 string strStyle = argStyle.Rows[0]["STYLE"].ToString();
                 string strTitle1 = argStyle.Rows[0]["TITLE1"].ToString();
                 string strTitle2 = argStyle.Rows[0]["TITLE2"].ToString();
@@ -67,10 +67,6 @@ namespace Send_Email
                                      $"<th align='center' rowspan = '2'> Plant </th>" +
                                      $"<th align='center' rowspan = '2'> Line </th> " +
                                      $"<th align='center' rowspan = '2'> Production<br>Quantity </th> " +
-                                     $"<th align='center' rowspan = '2' class='bcGrade' > B - Grade </th> " +
-                                     $"<th align='center' rowspan = '2' class='bcGrade'> C - Grade </th> " +
-                                     $"<th align='center' rowspan = '2' class='bcGrade'> Total<br>B,C Grade </th> " +
-                                     $"<th align='center' rowspan = '2' class='bcGrade'> PPM </th> " +
                                      $"<th align='center' rowspan = '2' class='rework'> Rework </th> " +
                                      $"<th align='center' rowspan = '2' class='rework'> Rate(%) </th> " +
                                      $"<th align='center' colspan = '5' class='rework'> Rework Type </th> " +
@@ -84,12 +80,12 @@ namespace Send_Email
                                      $"<th align='center' > Rank 5 </th> " +
                                  "</tr>";
 
-                TableRewBcgHeader = "<thead>" + HeaderRewBcgRow1 + HeaderRewBcgRow2 +"</thead>";
+                TableRewBcgHeader = "<thead>" + HeaderRewBcgRow1 + HeaderRewBcgRow2 + "</thead>";
 
 
                 TableRewBcgRow = "<tbody>";
 
-                
+
                 int rowspanFactory = 1, rowspanPlant = 1;
                 string factoryPre = "", plantPre = "";
                 string rewName1 = "", rewName2 = "", rewName3 = "", rewName4 = "", rewName5 = "";
@@ -102,7 +98,7 @@ namespace Send_Email
                     fColorRew = rowData["FCOLOR_RE"].ToString();
                     bColorBcg = rowData["BCOLOR_BC"].ToString();
                     fColorBcg = rowData["FCOLOR_BC"].ToString();
-                    
+
                     factory = rowData["FACTORY"].ToString();
                     plant = rowData["LINE_NM"].ToString();
                     line = rowData["MLINE_CD"].ToString();
@@ -137,7 +133,7 @@ namespace Send_Email
                     if (factoryPre == "" || factory != factoryPre)
                     {
                         rowspanFactory = (int)arg_DtData.Compute("COUNT(FACTORY)", $"FACTORY ='{factory}'");
-                        TableRewBcgRow +=  $"  <td rowspan = '{rowspanFactory}' bgcolor='{bColor}' style='color:{fColor}; width: 80' align='left'>{factory}</td>";
+                        TableRewBcgRow += $"  <td rowspan = '{rowspanFactory}' bgcolor='{bColor}' style='color:{fColor}; width: 80' align='left'>{factory}</td>";
                     }
 
                     if (plantPre == "" || plant != plantPre)
@@ -148,11 +144,7 @@ namespace Send_Email
 
 
                     TableRewBcgRow += $"  <td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='left'>{line}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{production}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{bQty}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{cQty}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{bcQty}</td>" +
-                                        $"<td bgcolor='{bColorBcg}' style='color:{fColorBcg}; width: 80' align='right'>{bcRate}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{production}</td>" +                                       
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{rework}</td>" +
                                         $"<td bgcolor='{bColorRew}' style='color:{fColorRew}; width: 80' align='right'>{reworkRate}</td>" +
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName1}</td>" +
@@ -259,8 +251,8 @@ namespace Send_Email
                                 strExplain +
                                 strTitle1 +
                                 TableRewBcg +
-                               // strTitle2 + 
-                               // TableExtOsd +
+                            // strTitle2 + 
+                            // TableExtOsd +
                             "</body>" +
                         "<html>"
                     ;
@@ -282,7 +274,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_QUALITY";
+                string process_name = "P_SEND_EMAIL_QUALITY2";
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 
@@ -303,7 +295,7 @@ namespace Send_Email
                 MyOraDB.Parameter_Type[6] = (int)OracleType.Cursor;
 
                 MyOraDB.Parameter_Values[0] = V_P_TYPE;
-                MyOraDB.Parameter_Values[1] = "1";
+                MyOraDB.Parameter_Values[1] = "2";
                 MyOraDB.Parameter_Values[2] = "";
                 MyOraDB.Parameter_Values[3] = "";
                 MyOraDB.Parameter_Values[4] = "";
