@@ -52,7 +52,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "do.it@changshininc.com" };
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -78,6 +78,8 @@ namespace Send_Email
             RunMoldRepair("Q1");
 
             RunBuget("Q1");
+
+            RunQuality("Q1");
 
             //16h
             RunCutting("Q1");
@@ -226,6 +228,50 @@ namespace Send_Email
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\budget_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        private void CreateMailQuality(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\quality_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -3417,6 +3463,43 @@ namespace Send_Email
 
         #endregion Budget
 
+        #region Quality
+
+        private void RunQuality(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+
+                //if (dsData == null) return;
+                Send_Quality quality = new Send_Quality();
+                string html = quality.Html(argType);
+                if (html == "") return;
+                WriteLog("RunQuality: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMailQuality(quality._subject, html, quality._email);
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+        #endregion Budget
+
         private string ColorNull(string argColor)
         {
             return argColor == "" ? "WHITE" : argColor;
@@ -4424,6 +4507,11 @@ namespace Send_Email
         private void btnFeedback_Click(object sender, EventArgs e)
         {
             RunFeedback("Q"); RunFeedback("U");
+        }
+
+        private void cmd_Quality_Click(object sender, EventArgs e)
+        {
+            RunQuality("Q");
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)

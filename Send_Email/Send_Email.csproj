@@ -164,6 +164,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Send_Quality.cs" />
     <Compile Include="Send_Feedback.cs" />
     <Compile Include="Send_Budget.cs" />
     <Compile Include="OS_Red_Machine.cs" />
