@@ -52,9 +52,9 @@ namespace Send_Email
             try
             {
                
-                string TableRewBcg = "", TableRewBcgHeader = "", HeaderRewBcgRow1 = "", TableRewBcgRow = "";
+                string TableRewBcg = "", TableRewBcgHeader = "", HeaderRewBcgRow1 = "", HeaderRewBcgRow2 ="", TableRewBcgRow = "";
                 string bColor, fColor, bColorRew, fColorRew, bColorBcg, fColorBcg;
-                string factory, plant, line, production,  rework, reworkRate, bQty, cQty, bcQty, bcRate, qty;
+                
                 string strStyle = argStyle.Rows[0]["STYLE"].ToString();
                 string strTitle1 = argStyle.Rows[0]["TITLE1"].ToString();
                 string strTitle2 = argStyle.Rows[0]["TITLE2"].ToString();
@@ -63,148 +63,85 @@ namespace Send_Email
                 ///Bottom Part Defective Rate
                 ///
                 HeaderRewBcgRow1 = "<tr>" +
-                                     $"<th align='center'></th>" +
-                                     $"<th align='center'> Outsole </th>" +
-                                     $"<th align='center'> Phylon </th> " +
-                                     $"<th align='center'> CMP </th> " +
-                                     $"<th align='center'> IP </th> " +
-                                     $"<th align='center'> PU </th> " +
-                                     $"<th align='center'> DMP </th> " +                                     
+                                     $"<th rowspan = '2' align='center'> Plant </th>" +
+                                     $"<th rowspan = '2' align='center'> Style Name </th>" +
+                                     $"<th rowspan = '2' align='center'> Production<br>Quantity </th> " +
+                                     $"<th rowspan = '2' align='center'> Defective </th> " +
+                                     $"<th rowspan = '2' align='center'> Rate </th> " +
+                                     $"<th colspan = '4' align='center'> Defective Type </th> " +
+                                                                       
+                                 "</tr>";
+                HeaderRewBcgRow2 = "<tr>" +
+                                    $"<th align='center'> Rank 1 </th> " +
+                                    $"<th align='center'> Rank 2 </th> " +
+                                    $"<th align='center'> Rank 3 </th> " +
+                                    $"<th align='center'> Others </th> " +
                                  "</tr>";
 
-                TableRewBcgHeader = "<thead>" + HeaderRewBcgRow1 + "</thead>";
-                TableRewBcgRow = "<tbody>";
+                TableRewBcgHeader = "<thead>" + HeaderRewBcgRow1 + HeaderRewBcgRow2 + "</thead>";
+                
 
-                int rowspanFactory = 1, rowspanPlant = 1;
-             
+               
+                string plant, plantPre ="", prod, osd, rate, colorRate, colorRow, styleCd, styleNm, reason1, reason2, reason3, reason4;
+                int rowspanPlant = 1;
+                TableRewBcgRow += "<tbody>";
                 foreach (DataRow rowData in arg_DtData.Rows)
                 {
+                    plant = rowData["OP_NM"].ToString();
 
-                    bColor = rowData["BCOLOR"].ToString();
-                    fColor = rowData["FCOLOR"].ToString();
-                    bColorRew = rowData["BCOLOR_RE"].ToString();
-                    fColorRew = rowData["FCOLOR_RE"].ToString();
-                    bColorBcg = rowData["BCOLOR_BC"].ToString();
-                    fColorBcg = rowData["FCOLOR_BC"].ToString();
-                    
-                    factory = rowData["FACTORY"].ToString();
-                    plant = rowData["LINE_NM"].ToString();
-                    line = rowData["MLINE_CD"].ToString();
-                    production = rowData["PROD_QTY"].ToString();
-                    bQty = rowData["B_QTY"].ToString();
-                    cQty = rowData["C_QTY"].ToString();
-                    bcQty = rowData["BC_QTY"].ToString();
-                    bcRate = rowData["BC_RATE"].ToString();
-                    rework = rowData["REWORK_QTY"].ToString();
-                    reworkRate = rowData["REWORK_RATE"].ToString();
+                    colorRate = rowData["COLOR_RATE"].ToString();
+                    colorRow = rowData["COLOR_ROW"].ToString();
+                    prod = rowData["PROD_QTY"].ToString();
+                    osd = rowData["OSD_QTY"].ToString();
+                    rate = rowData["RATE"].ToString();
+                    styleCd = rowData["STYLE_CD"].ToString();
+                    styleNm = rowData["STYLE_NM"].ToString();
+                    reason1 = rowData["REASON_NM1"].ToString();
+                    reason2 = rowData["REASON_NM2"].ToString();
+                    reason3 = rowData["REASON_NM3"].ToString();
+                    reason4 = rowData["REASON_NM4"].ToString();
 
 
-                    TableRewBcgRow += "<tr> ";
+                    TableRewBcgRow += "<tr>";
 
-                    TableRewBcgRow += $"  <td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='left'>{line}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='right'>{production}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='right'>{bQty}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='right'>{cQty}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='right'>{bcQty}</td>" +
-                                        $"<td bgcolor='{bColorBcg}' style='color:{fColorBcg}; width: 100' align='right'>{bcRate}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 100' align='right'>{rework}</td>" +
-                                        $"<td bgcolor='{bColorRew}' style='color:{fColorRew}; width: 100' align='right'>{reworkRate}</td>";
-                    TableRewBcgRow += "</tr> ";
+                    if (plantPre == "" || plantPre != plant)
+                    {
+                        rowspanPlant = (int)arg_DtData.Compute("COUNT(OP_NM)", $"OP_NM ='{plant}'");
+                        TableRewBcgRow += $"<td rowspan = '{rowspanPlant}' col class= '{colorRow}' style=' width: 80' align='left'>{plant}</td>";
+                    }
+                    TableRewBcgRow += $"<td col class= '{colorRow}' style=' width: 300' align='left'>{styleNm}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 80' align='right'>{prod}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 80' align='right'>{osd}</td>" +
+                                      $"<td col class= '{colorRate}' style=' width: 80' align='right'>{rate}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 250' align='left'>{reason1}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 250' align='left'>{reason2}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 250' align='left'>{reason3}</td>" +
+                                      $"<td col class= '{colorRow}' style=' width: 250' align='left'>{reason4}</td>"
+                                      ;
 
+                    TableRewBcgRow += "</tr>";
+                    plantPre = plant;
                 }
+                
+                                    
                 TableRewBcgRow += "</tbody>";
                 TableRewBcg = "<table class = 'tblBoder'>" + TableRewBcgHeader + TableRewBcgRow + "</table>";
-
-
-                ///
-                ///OS&D External
-                ///
-                /*
-                string[] arrHead = { "Outsole", "Phylon", "IP-A", "IP-B", "PU", "F#1", "Plant N", "Plant C", "Plant LE" };
-                HeaderExtOsdRow1 = "<tr>" +
-                                    $"<th  rowspan = '2' align='center'></th>" +
-                                    $"<th class='date' colspan = '2' align='center'>Bottom#1</th>" +
-                                    $"<th class='date' colspan = '3' align='center'>Bottom#2</th>" +
-                                    $"<th class='date' colspan = '2' align='center'>Long Thanh</th>" +
-                                    $"<th class='date' colspan = '3' align='center'>VJ3</th>" +
-                                    $"<th  rowspan = '2' align='center'>Total</th>" +
-                                 "</tr>";
-                HeaderExtOsdRow2 = "<tr>" +
-                                     $"<th align='center'> Outsole </th>" +
-                                     $"<th align='center'> Phylon </th>" +
-                                     $"<th align='center'> IP-A </th> " +
-                                     $"<th align='center'> IP-B </th> " +
-                                     $"<th align='center'> PU </th> " +
-                                     $"<th align='center'> F#1 </th> " +
-                                     $"<th align='center'> Plant N </th> " +
-                                     $"<th align='center'> Plant C </th> " +
-                                     $"<th align='center'> Plant N </th> " +
-                                     $"<th align='center'> Plant LE </th> " +
-                                 "</tr>";
-
-                TableExtOsdHeader = "<thead>" + HeaderExtOsdRow1 + HeaderExtOsdRow2 + "</thead>";
-                TableExtOsdRow = "<tbody>";
-
-                string divPre = "", divCur ="", type = "";
-                int iColMax = 11, iCol =0;
-
-                foreach (DataRow rowData in arg_DtData2.Rows)
-                {
-                    divCur = rowData["DIV"].ToString();
-                    type = rowData["O_TYPE"].ToString();
-                    bColor = rowData["BCOLOR"].ToString();
-                    fColor = rowData["FCOLOR"].ToString();
-                    bColorOsd = rowData["BCOLOR_RATE"].ToString();
-                    fColorOsd = rowData["FCOLOR_RATE"].ToString();
-                    qty = rowData["QTY"].ToString();
-                    
-                    if (divPre == "")
-                    {
-                        TableExtOsdRow += "<tr> ";
-                        TableExtOsdRow += $"<td bgcolor='{bColor}' style='color:{fColor}; width: 150' align='left'>{type}</td>";                       
-                    }
-                    else if (divCur != divPre && divCur == "2")
-                    {                        
-                        TableExtOsdRow += "</tr> ";                     
-                        TableExtOsdRow += "<tr> ";
-                        iCol = 0;
-                        TableExtOsdRow += $"<td bgcolor='{bColor}' style='color:{fColor}; width: 90' align='left'>{type}</td>";
-                        iCol++;
-                    }
-                    else if (divCur != divPre && divCur == "3")
-                    {
-                        if (iCol < iColMax)
-                        {
-                            for (int i = iCol; i <= iColMax; i++)
-                            {
-                                TableExtOsdRow += $"<td bgcolor='WHITE' style='color:WHITE; width: 100' align='right'></td>";
-                            }
-                        }
-                        TableExtOsdRow += "</tr> ";
-                        TableExtOsdRow += $"<td bgcolor='{bColor}' style='color:{fColor}; width: 90' align='left'>{type}</td>";
-                        
-                        TableExtOsdRow += "<tr> ";
-                        iCol = 1;
-                    }
-                    if (divCur == "3")
-                        TableExtOsdRow += $"<td bgcolor='{bColorOsd}' style='color:{fColorOsd}; width: 100' align='right'>{qty}</td>";
-                    else
-                        TableExtOsdRow += $"<td bgcolor='{bColor}' style='color:{fColor}; width: 100' align='right'>{qty}</td>";
-                    divPre = divCur;
-                    iCol++;
-                }
-                TableExtOsdRow += "</tr> ";
-                TableExtOsdRow += "</tbody>";
-                TableExtOsd = "<table>" + TableExtOsdHeader + TableExtOsdRow + "</table>";
-                */
 
 
                 return "<Html>" +
                             strStyle +
                             "<body>" +
                                 strExplain +
-                                strTitle1 +
-                                TableRewBcg +
+                                "<table>" +
+                                 "<tr> " +
+                                      strTitle1 +  
+                                 "</tr>" +
+                                    
+                                 "<tr> " +
+                                    "<td>" + TableRewBcg + " </td>" +
+                                 "</tr>" +
+
+                                "</table>" +
                                // strTitle2 + 
                                // TableExtOsd +
                             "</body>" +

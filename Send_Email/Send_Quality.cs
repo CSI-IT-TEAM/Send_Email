@@ -66,22 +66,22 @@ namespace Send_Email
                                      $"<th align='center' rowspan = '2'> Factory </th>" +
                                      $"<th align='center' rowspan = '2'> Plant </th>" +
                                      $"<th align='center' rowspan = '2'> Line </th> " +
-                                     $"<th align='center' rowspan = '2'> Production<br>Quantity </th> " +
+                                     $"<th align='center' rowspan = '2'> Production<br>Quantity </th> " +                                    
+                                     $"<th align='center' rowspan = '2' class='rework'> Rework </th> " +
+                                     $"<th align='center' rowspan = '2' class='rework'> Rate(%) </th> " +
+                                     $"<th align='center' colspan = '5' class='rework'> Rework Type Top 5 </th> " +
                                      $"<th align='center' rowspan = '2' class='bcGrade' > B - Grade </th> " +
                                      $"<th align='center' rowspan = '2' class='bcGrade'> C - Grade </th> " +
                                      $"<th align='center' rowspan = '2' class='bcGrade'> Total<br>B,C Grade </th> " +
                                      $"<th align='center' rowspan = '2' class='bcGrade'> PPM </th> " +
-                                     $"<th align='center' rowspan = '2' class='rework'> Rework </th> " +
-                                     $"<th align='center' rowspan = '2' class='rework'> Rate(%) </th> " +
-                                     $"<th align='center' colspan = '5' class='rework'> Rework Type </th> " +
                                  "</tr>";
 
                 HeaderRewBcgRow2 = "<tr>" +
-                                     $"<th align='center' > Rank 1 </th> " +
-                                     $"<th align='center' > Rank 2 </th> " +
-                                     $"<th align='center' > Rank 3 </th> " +
-                                     $"<th align='center' > Rank 4 </th> " +
-                                     $"<th align='center' > Rank 5 </th> " +
+                                     $"<th align='center' > Bonding gap </th> " +
+                                     $"<th align='center' > High cement </th> " +
+                                     $"<th align='center' > Contamination </th> " +
+                                     $"<th align='center' > Thread end </th> " +
+                                     $"<th align='center' > Stain on O/S & midsole </th> " +
                                  "</tr>";
 
                 TableRewBcgHeader = "<thead>" + HeaderRewBcgRow1 + HeaderRewBcgRow2 +"</thead>";
@@ -149,17 +149,18 @@ namespace Send_Email
 
                     TableRewBcgRow += $"  <td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='left'>{line}</td>" +
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{production}</td>" +
+                                        
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{rework}</td>" +
+                                        $"<td bgcolor='{bColorRew}' style='color:{fColorRew}; width: 80' align='right'>{reworkRate}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='right'>{rewName1}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='right'>{rewName2}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='right'>{rewName3}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='right'>{rewName4}</td>" +
+                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='right'>{rewName5}</td>" + 
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{bQty}</td>" +
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{cQty}</td>" +
                                         $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{bcQty}</td>" +
-                                        $"<td bgcolor='{bColorBcg}' style='color:{fColorBcg}; width: 80' align='right'>{bcRate}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 80' align='right'>{rework}</td>" +
-                                        $"<td bgcolor='{bColorRew}' style='color:{fColorRew}; width: 80' align='right'>{reworkRate}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName1}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName2}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName3}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName4}</td>" +
-                                        $"<td bgcolor='{bColor}'    style='color:{fColor};    width: 150' align='left'>{rewName5}</td>";
+                                        $"<td bgcolor='{bColorBcg}' style='color:{fColorBcg}; width: 80' align='right'>{bcRate}</td>";
 
                     TableRewBcgRow += "</tr> ";
 
