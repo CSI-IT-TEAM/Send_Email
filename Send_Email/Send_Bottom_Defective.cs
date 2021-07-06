@@ -64,7 +64,7 @@ namespace Send_Email
                 ///
                 HeaderRewBcgRow1 = "<tr>" +
                                      $"<th rowspan = '2' align='center'> Plant </th>" +
-                                     $"<th rowspan = '2' align='center'> Style Name </th>" +
+                                     $"<th rowspan = '2' align='center'> Model Name </th>" +
                                      $"<th rowspan = '2' align='center'> Production<br>Quantity </th> " +
                                      $"<th rowspan = '2' align='center'> Defective </th> " +
                                      $"<th rowspan = '2' align='center'> Rate </th> " +

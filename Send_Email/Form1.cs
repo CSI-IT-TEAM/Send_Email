@@ -36,7 +36,7 @@ namespace Send_Email
             pnTMSDassGrid.Size = new Size(1420, 215);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210702090500";
+            this.Text = "20210706153000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
