@@ -59,6 +59,8 @@ namespace Send_Email
                 string strTitle1 = argStyle.Rows[0]["TITLE1"].ToString();
                 string strTitle2 = argStyle.Rows[0]["TITLE2"].ToString();
                 string strExplain = argStyle.Rows[0]["TXT"].ToString();
+
+                
                 ///
                 ///Bottom Part Defective Rate
                 ///
@@ -107,7 +109,7 @@ namespace Send_Email
                     if (plantPre == "" || plantPre != plant)
                     {
                         rowspanPlant = (int)arg_DtData.Compute("COUNT(OP_NM)", $"OP_NM ='{plant}'");
-                        TableRewBcgRow += $"<td rowspan = '{rowspanPlant}' col class= '{colorRow}' style=' width: 80' align='left'>{plant}</td>";
+                        TableRewBcgRow += $"<td rowspan = '{rowspanPlant}' col class= 'white' style=' width: 80' align='left'>{plant}</td>";
                     }
                     TableRewBcgRow += $"<td col class= '{colorRow}' style=' width: 300' align='left'>{styleNm}</td>" +
                                       $"<td col class= '{colorRow}' style=' width: 80' align='right'>{prod}</td>" +
@@ -126,6 +128,34 @@ namespace Send_Email
                                     
                 TableRewBcgRow += "</tbody>";
                 TableRewBcg = "<table class = 'tblBoder'>" + TableRewBcgHeader + TableRewBcgRow + "</table>";
+
+
+
+                string rate1 = "", rate2 = "", rate3 = "", rate4 = "", rate5 = "", rate6 = "";
+                string clr1 = "", clr2 = "", clr3 = "", clr4 = "", clr5 = "", clr6 = "";
+                try
+                {
+                    DataTable dtRate = arg_DtData.Select("ORD_SORT = '10000'", "RN").CopyToDataTable();
+                    rate1 = dtRate.Rows[0]["RATE"].ToString();
+                    rate2 = dtRate.Rows[1]["RATE"].ToString();
+                    rate3 = dtRate.Rows[2]["RATE"].ToString();
+                    rate4 = dtRate.Rows[3]["RATE"].ToString();
+                    rate5 = dtRate.Rows[4]["RATE"].ToString();
+                    rate6 = dtRate.Rows[5]["RATE"].ToString();
+                    clr1 = dtRate.Rows[0]["COLOR_RATE"].ToString();
+                    clr2 = dtRate.Rows[1]["COLOR_RATE"].ToString();
+                    clr3 = dtRate.Rows[2]["COLOR_RATE"].ToString();
+                    clr4 = dtRate.Rows[3]["COLOR_RATE"].ToString();
+                    clr5 = dtRate.Rows[4]["COLOR_RATE"].ToString();
+                    clr6 = dtRate.Rows[5]["COLOR_RATE"].ToString();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex); 
+                }
+
+                strExplain = string.Format(strExplain, rate1, rate2, rate3, rate4, rate5, rate6
+                                                     , clr1, clr2, clr3, clr4, clr5, clr6);
 
 
                 return "<Html>" +

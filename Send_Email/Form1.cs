@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils;
 using DevExpress.XtraCharts;
+using DevExpress.XtraGrid.Views.BandedGrid;
 using JPlatform.Client.Controls6;
 using System;
 using System.Collections.Generic;
@@ -35,8 +36,11 @@ namespace Send_Email
             pnTMSDassChart.Size = new Size(1700, 500);
             pnTMSDassGrid.Size = new Size(1420, 215);
 
+            pnMold.Size = new Size(1800, 1000);
+            grdMain.Size = new Size(1800, 300);
+
             tmrLoad.Enabled = true;
-            this.Text = "20210706153000";
+            this.Text = "20210708083000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -52,7 +56,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -1763,6 +1767,410 @@ namespace Send_Email
 
         #endregion Email ANDON
 
+
+        #region Email Mold Monthly
+
+        private void RunMoldRepairMonth(string argType)
+        {
+            DataSet ds = SEL_LOAD_MOLD_DATA(argType);
+            if (ds == null || ds.Tables.Count == 0) return;
+            DataTable dtData = ds.Tables[0];
+            if (dtData == null || dtData.Rows.Count == 0) return ;
+            string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
+            DataTable dtEmail = ds.Tables[3];
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
+            if (LoadDataMold(dtData))
+            {
+                CaptureControl(pnMold, "MoldChart");
+                CaptureControl(grdMain, "MoldGrid");
+
+                CreateMailMoldMonth(subject, "", dtEmail);
+            }
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
+        }
+
+        private bool LoadDataMold(DataTable argDt)
+        {
+            try
+            {
+                DataTable dt = argDt;
+                DataTable dtYMD = dt.AsEnumerable().Where(r => r.Field<string>("IS_YMD") == "Y").OrderBy(r => r.Field<string>("WORK_YMD")).CopyToDataTable();
+                DataView view = new DataView(dtYMD);
+                DataTable distinctValues = view.ToTable(true, "WORK_YMD");
+                InitBandHeader(distinctValues);
+                dt.Columns.Remove(dt.Columns["IS_YMD"]);
+                DataTable dtPivot = Pivot(dt, dt.Columns["WORK_YMD"], dt.Columns["MOLD_RP_QTY"]);
+                grdMain.DataSource = dtPivot;
+                // SetData(grdMain, dtPivot);
+                FormatGrid(grdView);
+                BindingChart(dtPivot);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"  LoadDataMold: {ex.Message}");
+                return false;
+            }
+            
+        }
+
+        private void InitBandHeader(DataTable dt)
+        {
+            try
+            {
+                while (grdView.Columns.Count > 0)
+                {
+                    grdView.Columns.RemoveAt(0);
+                }
+
+                while (grdView.Bands.Count > 0)
+                {
+                    grdView.Bands.RemoveAt(0);
+                }
+
+                grdView.Bands.Clear();
+                grdView.Columns.Clear();
+
+                GridBand gridBandBottom = new GridBand();
+                GridBand gridBandTotalMold = new GridBand();
+                GridBand gridBandMonth = new GridBand();
+
+                //2 band cuối
+                GridBand gridBandAvgMold = new GridBand();
+                GridBand gridBandPerMold = new GridBand();
+                // 
+                // gridBandBottom
+                // 
+               // gridBandBottom.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                gridBandBottom.AppearanceHeader.Options.UseTextOptions = true;
+                gridBandBottom.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gridBandBottom.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandBottom.Caption = "Location";
+                gridBandBottom.Name = "gridBandBottom";
+                gridBandBottom.RowCount = 2;
+                gridBandBottom.VisibleIndex = 0;
+                gridBandBottom.Width = 150;
+                // 
+                // gridBandTotalMold
+                // 
+                gridBandTotalMold.AppearanceHeader.Options.UseTextOptions = true;
+              //  gridBandTotalMold.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                gridBandTotalMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gridBandTotalMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandTotalMold.Caption = "Total Mold";
+                gridBandTotalMold.Name = "gridBandTotalMold";
+                gridBandTotalMold.VisibleIndex = 1;
+                gridBandTotalMold.Width = 100;
+
+                //2 band cuối
+                // 
+                // gridBandavgMold
+                // 
+                gridBandAvgMold.AppearanceHeader.Options.UseTextOptions = true;
+                gridBandAvgMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gridBandAvgMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandAvgMold.Caption = "Average\nMold";
+                gridBandAvgMold.Name = "gridBandAvgMold";
+                gridBandAvgMold.VisibleIndex = 50;
+                gridBandAvgMold.Width = 100;
+
+                // 
+                // gridBandPerMold
+                // 
+                gridBandPerMold.AppearanceHeader.Options.UseTextOptions = true;
+                gridBandPerMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gridBandPerMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandPerMold.Caption = "Repair\nRatio";
+
+                gridBandPerMold.Name = "gridBandPerMold";
+                gridBandPerMold.VisibleIndex = 51;
+                gridBandPerMold.Width = 75;
+
+                BandedGridColumn WORK_BOTTOM = new BandedGridColumn();
+                BandedGridColumn WORK_PLACE_NM = new BandedGridColumn();
+                BandedGridColumn TOTAL_MOLD_RP = new BandedGridColumn();
+
+                //2 COLUMNS LAST
+                BandedGridColumn AVG_MOLD = new BandedGridColumn();
+                BandedGridColumn PER_MOLD = new BandedGridColumn();
+                // 
+                // WORK_BOTTOM
+                // 
+                WORK_BOTTOM.Caption = "WORK_BOTTOM";
+                WORK_BOTTOM.FieldName = "WORK_BOTTOM";
+                WORK_BOTTOM.Name = "WORK_BOTTOM";
+                WORK_BOTTOM.Visible = true;
+                
+
+                // 
+                // WORK_PLACE_NM
+                // 
+                WORK_PLACE_NM.Caption = "WORK_PLACE_NM";
+                WORK_PLACE_NM.FieldName = "WORK_PLACE_NM";
+                WORK_PLACE_NM.Name = "WORK_PLACE_NM";
+                WORK_PLACE_NM.Visible = true;
+                
+
+                // 
+                // TOTAL_MOLD_RP
+                // 
+                TOTAL_MOLD_RP.Caption = "TOTAL_MOLD_RP";
+                TOTAL_MOLD_RP.FieldName = "TOTAL_MOLD_RP";
+                TOTAL_MOLD_RP.Name = "TOTAL_MOLD_RP";
+                TOTAL_MOLD_RP.Visible = true;
+                TOTAL_MOLD_RP.Width = 100;
+
+                // 
+                // AVG_MOLD
+                // 
+                AVG_MOLD.Caption = "AVG_MOLD";
+                AVG_MOLD.FieldName = "AVG_MOLD_RP";
+                AVG_MOLD.Name = "AVG_MOLD";
+                AVG_MOLD.Visible = true;
+                AVG_MOLD.Width = 100;
+                
+
+                // 
+                // PER_MOLD
+                // 
+                PER_MOLD.Caption = "PER_MOLD";
+                PER_MOLD.FieldName = "PER_MOLD_RP";
+                PER_MOLD.Name = "PER_MOLD";
+                PER_MOLD.Visible = true;
+                
+
+                gridBandBottom.Columns.Add(WORK_BOTTOM);
+                gridBandBottom.Columns.Add(WORK_PLACE_NM);
+                gridBandTotalMold.Columns.Add(TOTAL_MOLD_RP);
+
+                gridBandAvgMold.Columns.Add(AVG_MOLD);
+                gridBandPerMold.Columns.Add(PER_MOLD);
+
+                GridBand[] gridBand = new GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold };
+
+                grdView.Bands.AddRange(gridBand);
+                //    grdView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold });
+                grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+                   WORK_BOTTOM,
+                   WORK_PLACE_NM,
+                   TOTAL_MOLD_RP,AVG_MOLD,PER_MOLD});
+
+                // 
+                // gridBandMonth
+                // 
+                string date = DateTime.Now.AddMonths(-1).ToString("MMM-yyyy");
+                gridBandMonth.AppearanceHeader.Options.UseTextOptions = true;
+                gridBandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                gridBandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandMonth.Caption = date;
+                gridBandMonth.Name = "gridBandMonth";
+                gridBandMonth.VisibleIndex = 2;
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+
+                    GridBand gridbandDays = new GridBand();
+                    // 
+                    // gridbandDays
+                    // 
+                    string Days = dt.Rows[i]["WORK_YMD"].ToString();
+                    string CaptionOfDays = Days.Substring(Days.Length - 2, 2);
+                    gridbandDays.AppearanceHeader.Options.UseTextOptions = true;
+                   // gridbandDays.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+
+                    gridbandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+                    gridbandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                    gridbandDays.Caption = CaptionOfDays;
+                    gridbandDays.Name = Days;
+                    gridbandDays.VisibleIndex = i + 3; //Từ column 3 trở đi
+                    gridBandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridbandDays });
+
+                    BandedGridColumn ColumnsDays = new BandedGridColumn();
+                    // 
+                    // ColumnsDays
+                    // 
+                    
+                    ColumnsDays.Caption = Days;
+                    ColumnsDays.FieldName = Days;
+                    ColumnsDays.Name = Days;
+                    ColumnsDays.Width = 50;
+                    ColumnsDays.Visible = true;
+                    
+
+
+                    gridbandDays.Columns.Add(ColumnsDays);
+                    grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { ColumnsDays });
+                }
+
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void FormatGrid(BandedGridView grid)
+        {
+            try
+            {
+               // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
+                grdView.OptionsView.AllowCellMerge = true;
+                grdView.BandPanelRowHeight = 30;
+               
+                for (int i = 0; i < grid.Columns.Count; i++)
+                {
+                    if (grid.Columns[i].OwnerBand.ParentBand != null)
+                    {
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.Orange;
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
+
+                    }
+                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.DodgerBlue;
+                    grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
+                    if (i <= 1)
+                    {
+                        grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.True;
+                    }
+                    else
+                    {
+                        
+                        grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.False;
+                        grid.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+                        grid.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+                        grid.Columns[i].DisplayFormat.FormatString = "#,0.##";
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+        }
+
+        private void grdView_CustomDrawBandHeader(object sender, BandHeaderCustomDrawEventArgs e)
+        {
+            if (e.Band == null) return;
+            if (e.Band.AppearanceHeader.BackColor != Color.Empty)
+                e.Info.AllowColoring = true;
+
+
+        }
+
+        private void BindingChart(DataTable dt)
+        {
+            try
+            {
+                chartMold.DataSource = dt;
+                chartMold.Series[0].ArgumentDataMember = "WORK_PLACE_NM";
+                chartMold.Series[0].ValueDataMembers.AddRange(new string[] { "PER_MOLD_RP" });
+            }
+            catch
+            {
+
+            }
+        }
+
+
+        private void CreateMailMoldMonth(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo",imgInfo2 = "imgInfo2";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                mailItem.HTMLBody = String.Format(@"<body>
+                                                        <img src='cid:{0}'><br>
+                                                        <img src='cid:{1}'>
+                                                    </body>", imgInfo, imgInfo2) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        private DataSet SEL_LOAD_MOLD_DATA(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+                string process_name = "P_SEND_EMAIL_MOLD_REPAIR_MONTH";
+                MyOraDB.ShowErr = true;
+                MyOraDB.ReDim_Parameter(6);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_DATA";
+                MyOraDB.Parameter_Name[3] = "CV_COL";
+                MyOraDB.Parameter_Name[4] = "CV_SUBJECT";
+                MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null) return null;
+                return ds_ret;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+       
+        #endregion
 
 
         #region Email Bottom Inventory
@@ -4683,6 +5091,13 @@ namespace Send_Email
         {
             RunBotDef("Q");
         }
+
+        private void cmdMoldRepairMonth_Click(object sender, EventArgs e)
+        {
+            RunMoldRepairMonth("Q");
+        }
+
+        
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
