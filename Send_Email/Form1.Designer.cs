@@ -2771,7 +2771,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 235);
+            this.ClientSize = new System.Drawing.Size(629, 217);
             this.Controls.Add(this.cmdMoldRepairMonth);
             this.Controls.Add(this.grdMain);
             this.Controls.Add(this.pnMold);

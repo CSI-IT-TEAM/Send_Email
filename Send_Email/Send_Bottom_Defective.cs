@@ -129,8 +129,7 @@ namespace Send_Email
                 TableRewBcgRow += "</tbody>";
                 TableRewBcg = "<table class = 'tblBoder'>" + TableRewBcgHeader + TableRewBcgRow + "</table>";
 
-
-
+                /*
                 string rate1 = "", rate2 = "", rate3 = "", rate4 = "", rate5 = "", rate6 = "";
                 string clr1 = "", clr2 = "", clr3 = "", clr4 = "", clr5 = "", clr6 = "";
                 try
@@ -151,13 +150,48 @@ namespace Send_Email
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex); 
+                    Debug.WriteLine(ex);
                 }
 
                 strExplain = string.Format(strExplain, rate1, rate2, rate3, rate4, rate5, rate6
                                                      , clr1, clr2, clr3, clr4, clr5, clr6);
+                */
 
+                
+                try
+                {
+                    string[] arrValue ;
+                    string ord = arg_DtData.Rows[0]["COL_ORDER"].ToString();
+                    DataTable dtRate = arg_DtData.Select("ORD_SORT = '10000'", ord).CopyToDataTable();
+                    int iMaxRow = dtRate.Rows.Count;
+                    arrValue = new string[iMaxRow *6];
+                    int i = 0;
 
+                    foreach(DataRow row in dtRate.Rows)
+                    {
+                        arrValue[i] = row["OP_NM2"].ToString();
+                        i++;
+                        arrValue[i] = row["GREEN"].ToString();
+                        i++;
+                        arrValue[i] = row["YELLOW"].ToString();
+                        i++;
+                        arrValue[i] = row["RED"].ToString();
+                        i++;
+                        arrValue[i] = row["RATE"].ToString();
+                        i++;
+                        arrValue[i] = row["COLOR_RATE"].ToString();
+                        i++;
+                    }
+
+                    strExplain = string.Format(strExplain, arrValue);
+                }
+                
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex); 
+                }
+                
                 return "<Html>" +
                             strStyle +
                             "<body>" +

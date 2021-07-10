@@ -40,7 +40,7 @@ namespace Send_Email
             grdMain.Size = new Size(1800, 300);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210708083000";
+            this.Text = "20210710103000";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -56,7 +56,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -1682,40 +1682,118 @@ namespace Send_Email
                         }
                     }
                 }
-
-                string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                    "Total Downtime per Line & Downtime by line = under 10 minutes is <b style='color:green'>green </b> " +
-                                    "and from 10 min to 29:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
-                                    "and from 30 min to 59:59 min is <b style='color:orange'>orange</b> " +
-                                    "and then more than 1 hour is <b style='color:red'>red</b>" +
-                               "</p>" +
-                              "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
-                                    "Total average measure & Downtime average by line = under 2 minutes is <b style='color:green'>green </b> " +
-                                    "and from 2 min to 4:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
-                                    "and from 5 min to 09:59 is <b style='color:orange'>orange</b> " +
-                                    "and then more than 10 min is <b style='color:red'>red</b>" +
-                              "</p>"
-                              ;
-
-                string html = text +
-                            "<br>" +
-                            "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
-                                  "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
-                                     "<th style='color:#ffffff' align='center' width='100'>Ranking</th>" +
-                                     "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
-                                     "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
-                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='100'>Line</th>" +
-                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
-                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
-                                     "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
-                                     "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
-                                  //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
-                                  "</tr>" +
-                                    rowValue +
+                string style = "<style> " +
+                               "   .tblBoder { " +
+                               "             font-family: 'Times New Roman', Times, serif; " +
+                               "             font-style: italic; " +
+                               "   } " +
+                               "   .tblBoder td, .tblBoder th { " +
+                               "         border: 0px; " +
+                               "         padding: 3px 2px; " +
+                               "         white-space: nowrap; " +
+                               "         border: 1px solid #c0c0c0; " +
+                               "   } " +
+                               "   .tblBoder tbody td { " +
+                               "             font-size: 20px; " +
+                               "         } " +
+                               "   .tblBoder thead { " +
+                               "         background: #26A1B2; " +
+                               "         font-style: italic; " +
+                               "         border-bottom: 0px solid #444444; " +
+                               "   } " +
+                               "   .tblBoder thead th { " +
+                               "             font-size: 19px; " +
+                               "             font-weight: bold; " +
+                               "         color: #F0F0F0; " +
+                               "     background: #26A1B2; " +
+                               "     text-align: center; " +
+                               "         } " +
+                               "   .green{ " +
+                               "         background: green; " +
+                               "         color: white; " +
+                               "         } " +
+                               "   .yellow{ " +
+                               "         background: yellow; " +
+                               "         color: black; " +
+                               "         } " +
+                               "   .red{ " +
+                               "         background: red; " +
+                               "         color: white; " +
+                               "         } " +
+                               "</style> ";
+                string text = "<table class='tblBoder'> " +
+                              "  <tr> " +
+                              "    <td></ td >" +
+                              "    <td class='green'  align ='center'>Green</td>" +
+                              "    <td class='yellow'  align ='center'>Yellow</td>" +
+                              "    <td class='red'  align ='center'>Red</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "    <td>Total Downtime per Line</td>" +
+                              "    <td>&lt;10 minutes</td>" +
+                              "    <td>10 ~ 29:59 minutes</td>" +
+                              "    <td>30 ~ 59:59 minutes</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Downtime by line</td>" +
+                              "      <td>&lt;10 minutes</td>" +
+                              "      <td>10 ~ 29:59 minutes</td>" +
+                              "      <td>30 ~ 59:59 minutes</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Total average measure</td>" +
+                              "      <td>&lt;02 minutes</td>" +
+                              "      <td>02 ~ 04:59 minutes</td>" +
+                              "      <td>05 ~ 09:59 minutes</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Downtime average by line</td>" +
+                              "      <td>&lt;02 minutes</td>" +
+                              "      <td>02 ~ 04:59 minutes</td>" +
+                              "      <td>05 ~ 09:59 minutes</td>" +
+                              "  </tr>       " +
                               "</table>";
+                //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
+                //                    "Total Downtime per Line & Downtime by line = under 10 minutes is <b style='color:green'>green </b> " +
+                //                    "and from 10 min to 29:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
+                //                    "and from 30 min to 59:59 min is <b style='color:orange'>orange</b> " +
+                //                    "and then more than 1 hour is <b style='color:red'>red</b>" +
+                //               "</p>" +
+                //              "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;'>" +
+                //                    "Total average measure & Downtime average by line = under 2 minutes is <b style='color:green'>green </b> " +
+                //                    "and from 2 min to 4:59 is <b style='background-color:black; color:yellow'>yellow</b> " +
+                //                    "and from 5 min to 09:59 is <b style='color:orange'>orange</b> " +
+                //                    "and then more than 10 min is <b style='color:red'>red</b>" +
+                //              "</p>"
+                //              ;
+
+                string html = "<html>" +
+                                "<head>" +
+                                    style +
+                                "</head>" +                                
+                                "<body>" +
+                                     text +
+                                    "<br>" +
+                                    "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000px'>" +
+                                          "<tr bgcolor='#366cc9' style='color:#ffffff'>" +
+                                             "<th style='color:#ffffff' align='center' width='100'>Ranking</th>" +
+                                             "<th style='color:#ffffff' align='center' width='100'>Plant</th>" +
+                                             "<th style='color:#ffffff' align='center' width='200'>Total Downtime</th>" +
+                                             "<th style='color:#ffffff' align='center' width='200'>Total Downtime per Line</th>" +
+                                             "<th style='color:#ffffff' align='center' width='200'>Total Calling Times</th>" +
+                                             "<th style='color:#ffffff' align='center' width='200'>Total Average Measure</th>" +
+                                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='100'>Line</th>" +
+                                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime by Line</th>" +
+                                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Calling Times by Line</th>" +
+                                             "<th bgcolor='#00ced1' style='color:#ffffff' align='center' width='200'>Downtime Average by Line</th>" +
+                                             "<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine Total</th>" +
+                                          //"<th bgcolor='#8b2cb0' style='color:#ffffff' align='center' width='200'>Machine D/T(Min)</th>" +
+                                          "</tr>" +
+                                            rowValue +
+                                    "</table>" +
+                               "</body>" +
+                            "<html>"
+                              ;
 
                 mailItem.HTMLBody = html;
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -1801,7 +1879,8 @@ namespace Send_Email
                 dt.Columns.Remove(dt.Columns["IS_YMD"]);
                 DataTable dtPivot = Pivot(dt, dt.Columns["WORK_YMD"], dt.Columns["MOLD_RP_QTY"]);
                 grdMain.DataSource = dtPivot;
-                // SetData(grdMain, dtPivot);
+                
+                //SetData(grdMain, dtPivot);
                 FormatGrid(grdView);
                 BindingChart(dtPivot);
                 return true;
@@ -1818,19 +1897,8 @@ namespace Send_Email
         {
             try
             {
-                while (grdView.Columns.Count > 0)
-                {
-                    grdView.Columns.RemoveAt(0);
-                }
-
-                while (grdView.Bands.Count > 0)
-                {
-                    grdView.Bands.RemoveAt(0);
-                }
-
                 grdView.Bands.Clear();
                 grdView.Columns.Clear();
-
                 GridBand gridBandBottom = new GridBand();
                 GridBand gridBandTotalMold = new GridBand();
                 GridBand gridBandMonth = new GridBand();
@@ -1841,11 +1909,10 @@ namespace Send_Email
                 // 
                 // gridBandBottom
                 // 
-               // gridBandBottom.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
                 gridBandBottom.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandBottom.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandBottom.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandBottom.Caption = "Location";
+                gridBandBottom.Caption = "Bottom";
                 gridBandBottom.Name = "gridBandBottom";
                 gridBandBottom.RowCount = 2;
                 gridBandBottom.VisibleIndex = 0;
@@ -1854,13 +1921,12 @@ namespace Send_Email
                 // gridBandTotalMold
                 // 
                 gridBandTotalMold.AppearanceHeader.Options.UseTextOptions = true;
-              //  gridBandTotalMold.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
                 gridBandTotalMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandTotalMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 gridBandTotalMold.Caption = "Total Mold";
                 gridBandTotalMold.Name = "gridBandTotalMold";
                 gridBandTotalMold.VisibleIndex = 1;
-                gridBandTotalMold.Width = 100;
+                gridBandTotalMold.Width = 75;
 
                 //2 band cuối
                 // 
@@ -1869,10 +1935,10 @@ namespace Send_Email
                 gridBandAvgMold.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandAvgMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandAvgMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandAvgMold.Caption = "Average\nMold";
+                gridBandAvgMold.Caption = "AVG Mold";
                 gridBandAvgMold.Name = "gridBandAvgMold";
                 gridBandAvgMold.VisibleIndex = 50;
-                gridBandAvgMold.Width = 100;
+                gridBandAvgMold.Width = 75;
 
                 // 
                 // gridBandPerMold
@@ -1880,7 +1946,7 @@ namespace Send_Email
                 gridBandPerMold.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandPerMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandPerMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandPerMold.Caption = "Repair\nRatio";
+                gridBandPerMold.Caption = "% Mold";
 
                 gridBandPerMold.Name = "gridBandPerMold";
                 gridBandPerMold.VisibleIndex = 51;
@@ -1900,8 +1966,6 @@ namespace Send_Email
                 WORK_BOTTOM.FieldName = "WORK_BOTTOM";
                 WORK_BOTTOM.Name = "WORK_BOTTOM";
                 WORK_BOTTOM.Visible = true;
-                
-
                 // 
                 // WORK_PLACE_NM
                 // 
@@ -1909,7 +1973,6 @@ namespace Send_Email
                 WORK_PLACE_NM.FieldName = "WORK_PLACE_NM";
                 WORK_PLACE_NM.Name = "WORK_PLACE_NM";
                 WORK_PLACE_NM.Visible = true;
-                
 
                 // 
                 // TOTAL_MOLD_RP
@@ -1918,7 +1981,6 @@ namespace Send_Email
                 TOTAL_MOLD_RP.FieldName = "TOTAL_MOLD_RP";
                 TOTAL_MOLD_RP.Name = "TOTAL_MOLD_RP";
                 TOTAL_MOLD_RP.Visible = true;
-                TOTAL_MOLD_RP.Width = 100;
 
                 // 
                 // AVG_MOLD
@@ -1927,8 +1989,6 @@ namespace Send_Email
                 AVG_MOLD.FieldName = "AVG_MOLD_RP";
                 AVG_MOLD.Name = "AVG_MOLD";
                 AVG_MOLD.Visible = true;
-                AVG_MOLD.Width = 100;
-                
 
                 // 
                 // PER_MOLD
@@ -1937,7 +1997,6 @@ namespace Send_Email
                 PER_MOLD.FieldName = "PER_MOLD_RP";
                 PER_MOLD.Name = "PER_MOLD";
                 PER_MOLD.Visible = true;
-                
 
                 gridBandBottom.Columns.Add(WORK_BOTTOM);
                 gridBandBottom.Columns.Add(WORK_PLACE_NM);
@@ -1946,22 +2005,18 @@ namespace Send_Email
                 gridBandAvgMold.Columns.Add(AVG_MOLD);
                 gridBandPerMold.Columns.Add(PER_MOLD);
 
-                GridBand[] gridBand = new GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold };
-
-                grdView.Bands.AddRange(gridBand);
-                //    grdView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold });
-                grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+                grdView.Bands.AddRange(new GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold });
+                grdView.Columns.AddRange(new BandedGridColumn[] {
                    WORK_BOTTOM,
                    WORK_PLACE_NM,
                    TOTAL_MOLD_RP,AVG_MOLD,PER_MOLD});
-
                 // 
                 // gridBandMonth
                 // 
                 string date = DateTime.Now.AddMonths(-1).ToString("MMM-yyyy");
                 gridBandMonth.AppearanceHeader.Options.UseTextOptions = true;
-                gridBandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                gridBandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+                gridBandMonth.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                gridBandMonth.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
                 gridBandMonth.Caption = date;
                 gridBandMonth.Name = "gridBandMonth";
                 gridBandMonth.VisibleIndex = 2;
@@ -1976,68 +2031,49 @@ namespace Send_Email
                     string Days = dt.Rows[i]["WORK_YMD"].ToString();
                     string CaptionOfDays = Days.Substring(Days.Length - 2, 2);
                     gridbandDays.AppearanceHeader.Options.UseTextOptions = true;
-                   // gridbandDays.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
 
                     gridbandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                     gridbandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                     gridbandDays.Caption = CaptionOfDays;
                     gridbandDays.Name = Days;
                     gridbandDays.VisibleIndex = i + 3; //Từ column 3 trở đi
-                    gridBandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridbandDays });
+                    gridBandMonth.Children.AddRange(new GridBand[] { gridbandDays });
 
                     BandedGridColumn ColumnsDays = new BandedGridColumn();
                     // 
                     // ColumnsDays
                     // 
-                    
                     ColumnsDays.Caption = Days;
                     ColumnsDays.FieldName = Days;
                     ColumnsDays.Name = Days;
-                    ColumnsDays.Width = 50;
                     ColumnsDays.Visible = true;
-                    
-
 
                     gridbandDays.Columns.Add(ColumnsDays);
-                    grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { ColumnsDays });
+                    grdView.Columns.AddRange(new BandedGridColumn[] { ColumnsDays });
                 }
 
-                
+
             }
             catch (Exception ex)
             {
 
+                throw;
             }
         }
-
         private void FormatGrid(BandedGridView grid)
         {
             try
             {
-               // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
+                //  grdMain.Font = new Font("Dotumche", 9, FontStyle.Regular);
                 grdView.OptionsView.AllowCellMerge = true;
-                grdView.BandPanelRowHeight = 30;
-               
                 for (int i = 0; i < grid.Columns.Count; i++)
                 {
-                    if (grid.Columns[i].OwnerBand.ParentBand != null)
-                    {
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.Orange;
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
-
-                    }
-                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
-                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
-                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.DodgerBlue;
-                    grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
                     if (i <= 1)
                     {
                         grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.True;
                     }
                     else
                     {
-                        
                         grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.False;
                         grid.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                         grid.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
@@ -2051,6 +2087,234 @@ namespace Send_Email
             }
 
         }
+
+
+        //private void InitBandHeader(DataTable dt)
+        //{
+        //    try
+        //    {
+
+        //        grdView.Bands.Clear();
+        //        grdView.Columns.Clear();
+
+        //        GridBand gridBandBottom = new GridBand();
+        //        GridBand gridBandTotalMold = new GridBand();
+        //        GridBand gridBandMonth = new GridBand();
+
+        //        //2 band cuối
+        //        GridBand gridBandAvgMold = new GridBand();
+        //        GridBand gridBandPerMold = new GridBand();
+        //        // 
+        //        // gridBandBottom
+        //        // 
+        //       // gridBandBottom.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+        //        gridBandBottom.AppearanceHeader.Options.UseTextOptions = true;
+        //        gridBandBottom.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        gridBandBottom.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        gridBandBottom.Caption = "Location";
+        //        gridBandBottom.Name = "gridBandBottom";
+        //        gridBandBottom.RowCount = 2;
+        //        gridBandBottom.VisibleIndex = 0;
+        //        gridBandBottom.Width = 150;
+        //        // 
+        //        // gridBandTotalMold
+        //        // 
+        //        gridBandTotalMold.AppearanceHeader.Options.UseTextOptions = true;
+        //      //  gridBandTotalMold.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+        //        gridBandTotalMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        gridBandTotalMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        gridBandTotalMold.Caption = "Total Mold";
+        //        gridBandTotalMold.Name = "gridBandTotalMold";
+        //        gridBandTotalMold.VisibleIndex = 1;
+        //        gridBandTotalMold.Width = 100;
+
+        //        //2 band cuối
+        //        // 
+        //        // gridBandavgMold
+        //        // 
+        //        gridBandAvgMold.AppearanceHeader.Options.UseTextOptions = true;
+        //        gridBandAvgMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        gridBandAvgMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        gridBandAvgMold.Caption = "Average\nMold";
+        //        gridBandAvgMold.Name = "gridBandAvgMold";
+        //        gridBandAvgMold.VisibleIndex = 50;
+        //        gridBandAvgMold.Width = 100;
+
+        //        // 
+        //        // gridBandPerMold
+        //        // 
+        //        gridBandPerMold.AppearanceHeader.Options.UseTextOptions = true;
+        //        gridBandPerMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        gridBandPerMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        gridBandPerMold.Caption = "Repair\nRatio";
+
+        //        gridBandPerMold.Name = "gridBandPerMold";
+        //        gridBandPerMold.VisibleIndex = 51;
+        //        gridBandPerMold.Width = 75;
+
+        //        BandedGridColumn WORK_BOTTOM = new BandedGridColumn();
+        //        BandedGridColumn WORK_PLACE_NM = new BandedGridColumn();
+        //        BandedGridColumn TOTAL_MOLD_RP = new BandedGridColumn();
+
+        //        //2 COLUMNS LAST
+        //        BandedGridColumn AVG_MOLD = new BandedGridColumn();
+        //        BandedGridColumn PER_MOLD = new BandedGridColumn();
+        //        // 
+        //        // WORK_BOTTOM
+        //        // 
+        //        WORK_BOTTOM.Caption = "WORK_BOTTOM";
+        //        WORK_BOTTOM.FieldName = "WORK_BOTTOM";
+        //        WORK_BOTTOM.Name = "WORK_BOTTOM";
+        //        WORK_BOTTOM.Visible = true;
+
+
+        //        // 
+        //        // WORK_PLACE_NM
+        //        // 
+        //        WORK_PLACE_NM.Caption = "WORK_PLACE_NM";
+        //        WORK_PLACE_NM.FieldName = "WORK_PLACE_NM";
+        //        WORK_PLACE_NM.Name = "WORK_PLACE_NM";
+        //        WORK_PLACE_NM.Visible = true;
+
+
+        //        // 
+        //        // TOTAL_MOLD_RP
+        //        // 
+        //        TOTAL_MOLD_RP.Caption = "TOTAL_MOLD_RP";
+        //        TOTAL_MOLD_RP.FieldName = "TOTAL_MOLD_RP";
+        //        TOTAL_MOLD_RP.Name = "TOTAL_MOLD_RP";
+        //        TOTAL_MOLD_RP.Visible = true;
+        //        TOTAL_MOLD_RP.Width = 100;
+
+        //        // 
+        //        // AVG_MOLD
+        //        // 
+        //        AVG_MOLD.Caption = "AVG_MOLD";
+        //        AVG_MOLD.FieldName = "AVG_MOLD_RP";
+        //        AVG_MOLD.Name = "AVG_MOLD";
+        //        AVG_MOLD.Visible = true;
+        //        AVG_MOLD.Width = 100;
+
+
+        //        // 
+        //        // PER_MOLD
+        //        // 
+        //        PER_MOLD.Caption = "PER_MOLD";
+        //        PER_MOLD.FieldName = "PER_MOLD_RP";
+        //        PER_MOLD.Name = "PER_MOLD";
+        //        PER_MOLD.Visible = true;
+
+
+        //        gridBandBottom.Columns.Add(WORK_BOTTOM);
+        //        gridBandBottom.Columns.Add(WORK_PLACE_NM);
+        //        gridBandTotalMold.Columns.Add(TOTAL_MOLD_RP);
+
+        //        gridBandAvgMold.Columns.Add(AVG_MOLD);
+        //        gridBandPerMold.Columns.Add(PER_MOLD);
+
+
+        //        grdView.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold });
+        //        grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {
+        //           WORK_BOTTOM,
+        //           WORK_PLACE_NM,
+        //           TOTAL_MOLD_RP,AVG_MOLD,PER_MOLD});
+
+        //        // 
+        //        // gridBandMonth
+        //        // 
+        //        string date = DateTime.Now.AddMonths(-1).ToString("MMM-yyyy");
+        //        gridBandMonth.AppearanceHeader.Options.UseTextOptions = true;
+        //        gridBandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        gridBandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        gridBandMonth.Caption = date;
+        //        gridBandMonth.Name = "gridBandMonth";
+        //        gridBandMonth.VisibleIndex = 2;
+
+        //        for (int i = 0; i < dt.Rows.Count; i++)
+        //        {
+
+        //            GridBand gridbandDays = new GridBand();
+        //            // 
+        //            // gridbandDays
+        //            // 
+        //            string Days = dt.Rows[i]["WORK_YMD"].ToString();
+        //            string CaptionOfDays = Days.Substring(Days.Length - 2, 2);
+        //            gridbandDays.AppearanceHeader.Options.UseTextOptions = true;
+        //           // gridbandDays.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+
+        //            gridbandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //            gridbandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //            gridbandDays.Caption = CaptionOfDays;
+        //            gridbandDays.Name = Days;
+        //            gridbandDays.VisibleIndex = i + 3; //Từ column 3 trở đi
+        //            gridBandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] { gridbandDays });
+
+        //            BandedGridColumn ColumnsDays = new BandedGridColumn();
+        //            // 
+        //            // ColumnsDays
+        //            // 
+
+        //            ColumnsDays.Caption = Days;
+        //            ColumnsDays.FieldName = Days;
+        //            ColumnsDays.Name = Days;
+        //            ColumnsDays.Width = 50;
+        //            ColumnsDays.Visible = true;
+
+
+
+        //            gridbandDays.Columns.Add(ColumnsDays);
+        //            grdView.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] { ColumnsDays });
+        //        }
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //}
+
+        //private void FormatGrid(BandedGridView grid)
+        //{
+        //    try
+        //    {
+        //       // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
+        //        grdView.OptionsView.AllowCellMerge = true;
+        //        grdView.BandPanelRowHeight = 30;
+
+        //        for (int i = 0; i < grid.Columns.Count; i++)
+        //        {
+        //            if (grid.Columns[i].OwnerBand.ParentBand != null)
+        //            {
+        //                grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+        //                grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.Orange;
+        //                grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
+
+        //            }
+        //            grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+        //            grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
+        //            grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.DodgerBlue;
+        //            grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
+        //            if (i <= 1)
+        //            {
+        //                grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.True;
+        //            }
+        //            else
+        //            {
+
+        //                grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.False;
+        //                grid.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+        //                grid.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+        //                grid.Columns[i].DisplayFormat.FormatString = "#,0.##";
+        //            }
+        //        }
+        //    }
+        //    catch
+        //    {
+
+        //    }
+
+        //}
 
         private void grdView_CustomDrawBandHeader(object sender, BandHeaderCustomDrawEventArgs e)
         {
