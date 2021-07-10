@@ -40,7 +40,7 @@ namespace Send_Email
             grdMain.Size = new Size(1800, 300);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210710103000";
+            this.Text = "20210710133500";
 
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
@@ -1720,12 +1720,17 @@ namespace Send_Email
                                "         background: red; " +
                                "         color: white; " +
                                "         } " +
+                               "   .orange{ " +
+                               "         background: orange; " +
+                               "         color: white; " +
+                               "         } " +
                                "</style> ";
                 string text = "<table class='tblBoder'> " +
                               "  <tr> " +
                               "    <td></ td >" +
                               "    <td class='green'  align ='center'>Green</td>" +
                               "    <td class='yellow'  align ='center'>Yellow</td>" +
+                              "    <td class='orange'  align ='center'>Orange</td>" +
                               "    <td class='red'  align ='center'>Red</td>" +
                               "  </tr>" +
                               "  <tr>" +
@@ -1733,24 +1738,28 @@ namespace Send_Email
                               "    <td>&lt;10 minutes</td>" +
                               "    <td>10 ~ 29:59 minutes</td>" +
                               "    <td>30 ~ 59:59 minutes</td>" +
+                              "    <td>Over 1 hour</td>" +
+                              "  </tr>" +                             
+                              "  <tr>" +
+                              "      <td>Total average measure</td>" +
+                              "      <td>&lt;02 minutes</td>" +
+                              "      <td>02 ~ 04:59 minutes</td>" +
+                              "      <td>05 ~ 09:59 minutes</td>" +
+                              "      <td>Over 10 minutes</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Downtime by line</td>" +
                               "      <td>&lt;10 minutes</td>" +
                               "      <td>10 ~ 29:59 minutes</td>" +
                               "      <td>30 ~ 59:59 minutes</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Total average measure</td>" +
-                              "      <td>&lt;02 minutes</td>" +
-                              "      <td>02 ~ 04:59 minutes</td>" +
-                              "      <td>05 ~ 09:59 minutes</td>" +
+                              "      <td>Over 1 hour</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Downtime average by line</td>" +
                               "      <td>&lt;02 minutes</td>" +
                               "      <td>02 ~ 04:59 minutes</td>" +
                               "      <td>05 ~ 09:59 minutes</td>" +
+                              "      <td>Over 10 minutes</td>" +
                               "  </tr>       " +
                               "</table>";
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
