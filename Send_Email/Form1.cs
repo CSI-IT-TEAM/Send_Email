@@ -2906,7 +2906,8 @@ namespace Send_Email
                     string HtKey = dtData.Rows[iRow]["LINE_NAME"].ToString() + dtData.Rows[iRow]["MLINE_CD"].ToString();
                     if (htLine.ContainsKey(HtKey))
                     {
-                        int.TryParse(htLine[HtKey].ToString(), out int CurrentValue);
+                        int CurrentValue;
+                        int.TryParse(htLine[HtKey].ToString(), out CurrentValue);
                         htLine[HtKey] = CurrentValue + 1;
                     }
                     else
