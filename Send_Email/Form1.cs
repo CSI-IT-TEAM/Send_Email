@@ -422,7 +422,7 @@ namespace Send_Email
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\chartReworkReasonMonthly.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\chartBCGrade.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\gridRework.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPic5 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\quality2_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic5 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\quality_month.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
