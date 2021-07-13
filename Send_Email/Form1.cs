@@ -36,8 +36,8 @@ namespace Send_Email
             pnTMSDassChart.Size = new Size(1700, 500);
             pnTMSDassGrid.Size = new Size(1420, 215);
 
-            pnMold.Size = new Size(1800, 1000);
-            grdMain.Size = new Size(1800, 300);
+            pnMold.Size = new Size(1750, 1000);
+            grdMain.Size = new Size(1750, 300);
 
             tmrLoad.Enabled = true;
             this.Text = "20210710133500";
@@ -1921,7 +1921,7 @@ namespace Send_Email
                 gridBandBottom.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandBottom.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandBottom.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandBottom.Caption = "Bottom";
+                gridBandBottom.Caption = "Location";
                 gridBandBottom.Name = "gridBandBottom";
                 gridBandBottom.RowCount = 2;
                 gridBandBottom.VisibleIndex = 0;
@@ -1932,10 +1932,10 @@ namespace Send_Email
                 gridBandTotalMold.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandTotalMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandTotalMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandTotalMold.Caption = "Total Mold";
+                gridBandTotalMold.Caption = "Total\nMold";
                 gridBandTotalMold.Name = "gridBandTotalMold";
                 gridBandTotalMold.VisibleIndex = 1;
-                gridBandTotalMold.Width = 75;
+                gridBandTotalMold.Width = 150;
 
                 //2 band cuối
                 // 
@@ -1944,10 +1944,10 @@ namespace Send_Email
                 gridBandAvgMold.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandAvgMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandAvgMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandAvgMold.Caption = "AVG Mold";
+                gridBandAvgMold.Caption = "Averange\nMold";
                 gridBandAvgMold.Name = "gridBandAvgMold";
                 gridBandAvgMold.VisibleIndex = 50;
-                gridBandAvgMold.Width = 75;
+                gridBandAvgMold.Width = 150;
 
                 // 
                 // gridBandPerMold
@@ -1955,7 +1955,7 @@ namespace Send_Email
                 gridBandPerMold.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandPerMold.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 gridBandPerMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                gridBandPerMold.Caption = "% Mold";
+                gridBandPerMold.Caption = "Repair\nRatio";
 
                 gridBandPerMold.Name = "gridBandPerMold";
                 gridBandPerMold.VisibleIndex = 51;
@@ -2056,6 +2056,7 @@ namespace Send_Email
                     ColumnsDays.FieldName = Days;
                     ColumnsDays.Name = Days;
                     ColumnsDays.Visible = true;
+                    ColumnsDays.Width = 50;
 
                     gridbandDays.Columns.Add(ColumnsDays);
                     grdView.Columns.AddRange(new BandedGridColumn[] { ColumnsDays });
@@ -2073,16 +2074,30 @@ namespace Send_Email
         {
             try
             {
-                //  grdMain.Font = new Font("Dotumche", 9, FontStyle.Regular);
+                // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
                 grdView.OptionsView.AllowCellMerge = true;
+                grdView.BandPanelRowHeight = 30;
+
                 for (int i = 0; i < grid.Columns.Count; i++)
                 {
+                    if (grid.Columns[i].OwnerBand.ParentBand != null)
+                    {
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.Orange;
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
+
+                    }
+                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
+                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.DodgerBlue;
+                    grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
                     if (i <= 1)
                     {
                         grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.True;
                     }
                     else
                     {
+
                         grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.False;
                         grid.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
                         grid.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
@@ -4304,7 +4319,7 @@ namespace Send_Email
             }
         }
 
-        #endregion Budget
+        #endregion 
 
         #region Bottom Defective Rate
         private void RunBotDef(string argType)
