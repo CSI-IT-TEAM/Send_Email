@@ -92,6 +92,9 @@
             DevExpress.XtraCharts.XYDiagram xyDiagram6 = new DevExpress.XtraCharts.XYDiagram();
             DevExpress.XtraCharts.Series series22 = new DevExpress.XtraCharts.Series();
             DevExpress.XtraCharts.ChartTitle chartTitle7 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram7 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series23 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.ChartTitle chartTitle8 = new DevExpress.XtraCharts.ChartTitle();
             this.button1 = new System.Windows.Forms.Button();
             this.chart2 = new DevExpress.XtraCharts.ChartControl();
             this.tmrLoad = new System.Windows.Forms.Timer(this.components);
@@ -323,6 +326,8 @@
             this.chartBCGrade = new DevExpress.XtraCharts.ChartControl();
             this.grdRework = new JPlatform.Client.Controls6.GridControlEx();
             this.gvwView = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.chartControl2 = new DevExpress.XtraCharts.ChartControl();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -571,6 +576,10 @@
             ((System.ComponentModel.ISupportInitialize)(series22)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRework)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwView)).BeginInit();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series23)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1025,7 +1034,7 @@
             // grdBase3
             // 
             this.grdBase3.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdBase3.Location = new System.Drawing.Point(3, 573);
+            this.grdBase3.Location = new System.Drawing.Point(-1059, 461);
             this.grdBase3.MainView = this.gvwBase3;
             this.grdBase3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grdBase3.Name = "grdBase3";
@@ -1339,7 +1348,7 @@
             // grdBase4
             // 
             this.grdBase4.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdBase4.Location = new System.Drawing.Point(3, 814);
+            this.grdBase4.Location = new System.Drawing.Point(5, 719);
             this.grdBase4.MainView = this.gvwBase4;
             this.grdBase4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grdBase4.Name = "grdBase4";
@@ -1377,7 +1386,7 @@
             this.repositoryItemCheckEditEx26,
             this.repositoryItemCheckEditEx27,
             this.repositoryItemCheckEditEx28});
-            this.grdBase4.Size = new System.Drawing.Size(1799, 225);
+            this.grdBase4.Size = new System.Drawing.Size(308, 225);
             this.grdBase4.TabIndex = 21;
             this.grdBase4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvwBase4,
@@ -1858,7 +1867,7 @@
             // grdBase1
             // 
             this.grdBase1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdBase1.Location = new System.Drawing.Point(1361, 300);
+            this.grdBase1.Location = new System.Drawing.Point(321, 719);
             this.grdBase1.MainView = this.gvwBase1;
             this.grdBase1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grdBase1.Name = "grdBase1";
@@ -1896,7 +1905,7 @@
             this.repositoryItemCheckEditEx12,
             this.repositoryItemCheckEditEx13,
             this.repositoryItemCheckEditEx14});
-            this.grdBase1.Size = new System.Drawing.Size(127, 93);
+            this.grdBase1.Size = new System.Drawing.Size(324, 225);
             this.grdBase1.TabIndex = 17;
             this.grdBase1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvwBase1,
@@ -1933,7 +1942,7 @@
             this.panel1.Controls.Add(this.labelEx1);
             this.panel1.Controls.Add(this.labelEx3);
             this.panel1.Controls.Add(this.chart2);
-            this.panel1.Location = new System.Drawing.Point(1281, 330);
+            this.panel1.Location = new System.Drawing.Point(439, 418);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(73, 63);
             this.panel1.TabIndex = 198;
@@ -2852,7 +2861,7 @@
             this.chartControl1.Legend.Direction = DevExpress.XtraCharts.LegendDirection.LeftToRight;
             this.chartControl1.Legend.Font = new System.Drawing.Font("Tahoma", 18F);
             this.chartControl1.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartControl1.Location = new System.Drawing.Point(1039, 398);
+            this.chartControl1.Location = new System.Drawing.Point(966, 552);
             this.chartControl1.Name = "chartControl1";
             this.chartControl1.PaletteName = "Mixed";
             this.chartControl1.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
@@ -2889,7 +2898,7 @@
         series17,
         series18,
         series19};
-            this.chartControl1.Size = new System.Drawing.Size(258, 188);
+            this.chartControl1.Size = new System.Drawing.Size(222, 188);
             this.chartControl1.TabIndex = 220;
             chartTitle4.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartTitle4.Text = "Top 20 Machine Have Many Issue";
@@ -2999,7 +3008,7 @@
             // pnchartBCGrade
             // 
             this.pnchartBCGrade.Controls.Add(this.chartBCGrade);
-            this.pnchartBCGrade.Location = new System.Drawing.Point(590, 270);
+            this.pnchartBCGrade.Location = new System.Drawing.Point(655, 335);
             this.pnchartBCGrade.Name = "pnchartBCGrade";
             this.pnchartBCGrade.Size = new System.Drawing.Size(533, 211);
             this.pnchartBCGrade.TabIndex = 221;
@@ -3044,10 +3053,10 @@
             // 
             // grdRework
             // 
-            this.grdRework.Location = new System.Drawing.Point(15, 432);
+            this.grdRework.Location = new System.Drawing.Point(652, 719);
             this.grdRework.MainView = this.gvwView;
             this.grdRework.Name = "grdRework";
-            this.grdRework.Size = new System.Drawing.Size(1400, 305);
+            this.grdRework.Size = new System.Drawing.Size(308, 225);
             this.grdRework.TabIndex = 222;
             this.grdRework.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvwView});
@@ -3074,14 +3083,61 @@
             this.gvwView.RowHeight = 30;
             this.gvwView.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gvwView_RowCellStyle);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.chartControl2);
+            this.panel2.Location = new System.Drawing.Point(1212, 25);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(533, 149);
+            this.panel2.TabIndex = 221;
+            // 
+            // chartControl2
+            // 
+            this.chartControl2.AppearanceNameSerializable = "Light";
+            xyDiagram7.AxisX.Label.Angle = 45;
+            xyDiagram7.AxisX.Title.Text = "Plant";
+            xyDiagram7.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram7.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram7.AxisY.Title.Text = "Rework Rate (%)";
+            xyDiagram7.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram7.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartControl2.Diagram = xyDiagram7;
+            this.chartControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartControl2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
+            this.chartControl2.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
+            this.chartControl2.Legend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.chartControl2.Legend.Direction = DevExpress.XtraCharts.LegendDirection.LeftToRight;
+            this.chartControl2.Legend.Font = new System.Drawing.Font("Tahoma", 18F);
+            this.chartControl2.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartControl2.Location = new System.Drawing.Point(0, 0);
+            this.chartControl2.Name = "chartControl2";
+            this.chartControl2.PaletteName = "Mixed";
+            this.chartControl2.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(129)))), ((int)(((byte)(189))))), System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(90)))), ((int)(((byte)(136)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(80)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(52)))), ((int)(((byte)(49)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(187)))), ((int)(((byte)(89))))), System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(137)))), ((int)(((byte)(56)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(100)))), ((int)(((byte)(162))))), System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(69)))), ((int)(((byte)(115)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(150)))), ((int)(((byte)(70))))), System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(101)))), ((int)(((byte)(9))))))}));
+            series23.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            series23.Name = "Rework Rate";
+            this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series23};
+            this.chartControl2.Size = new System.Drawing.Size(533, 149);
+            this.chartControl2.TabIndex = 222;
+            chartTitle8.Font = new System.Drawing.Font("Times New Roman", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartTitle8.Text = "Rework Rate By Plant";
+            this.chartControl2.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle8});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1788, 613);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.grdRework);
             this.Controls.Add(this.pnChartReworkReason);
             this.Controls.Add(this.pnchartBCGrade);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnchartReworkPlant);
             this.Controls.Add(this.chartControl1);
             this.Controls.Add(this.cmdMoldRepairMonth);
@@ -3372,6 +3428,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartBCGrade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdRework)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwView)).EndInit();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartControl2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3609,6 +3669,8 @@
         private DevExpress.XtraCharts.ChartControl chartBCGrade;
         private JPlatform.Client.Controls6.GridControlEx grdRework;
         private DevExpress.XtraGrid.Views.Grid.GridView gvwView;
+        private System.Windows.Forms.Panel panel2;
+        private DevExpress.XtraCharts.ChartControl chartControl2;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
