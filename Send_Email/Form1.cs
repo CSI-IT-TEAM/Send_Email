@@ -46,8 +46,8 @@ namespace Send_Email
             grdMain.Size = new Size(1750, 300);
 
             tmrLoad.Enabled = true;
-            this.Text = "20210710133500";
-
+            //this.Text = "20210710133500";
+            this.Text = "20211008083800";
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
 
@@ -199,7 +199,6 @@ namespace Send_Email
         private void cmdRunOS_Red_MC_Click(object sender, EventArgs e)
         {
             //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
-
             //Run TEst
             RunOSRedMachine("Q", "20210326", "14");
         }
