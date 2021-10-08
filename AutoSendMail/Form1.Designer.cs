@@ -30,218 +30,284 @@ namespace AutoSendMail
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
+            this.cmdMoldRepairMonth = new System.Windows.Forms.Button();
+            this.btnRunQualityMonth = new System.Windows.Forms.Button();
+            this.cmd_Quality2 = new System.Windows.Forms.Button();
+            this.cmd_BotDef = new System.Windows.Forms.Button();
+            this.cmd_Quality = new System.Windows.Forms.Button();
+            this.cmd_Budget = new System.Windows.Forms.Button();
+            this.btnFeedback = new System.Windows.Forms.Button();
+            this.btnRunOS_Red = new System.Windows.Forms.Button();
+            this.cmdMoldRepair = new System.Windows.Forms.Button();
+            this.btnTimeContraint = new System.Windows.Forms.Button();
+            this.btnRunScada = new System.Windows.Forms.Button();
+            this.btnTMS_Summary = new System.Windows.Forms.Button();
+            this.btnRunTMSV2 = new System.Windows.Forms.Button();
+            this.btnRunTMS = new System.Windows.Forms.Button();
+            this.cmdNpi = new System.Windows.Forms.Button();
+            this.cmdCutting = new System.Windows.Forms.Button();
+            this.cmdPoToIe = new System.Windows.Forms.Button();
+            this.cmdPoTo = new System.Windows.Forms.Button();
+            this.cmdRunEscan = new System.Windows.Forms.Button();
+            this.cmdRunAndon = new System.Windows.Forms.Button();
+            this.cmdRunProd = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.cmdMoldRepairMonth);
+            this.groupBox1.Controls.Add(this.btnRunQualityMonth);
+            this.groupBox1.Controls.Add(this.cmd_Quality2);
+            this.groupBox1.Controls.Add(this.cmd_BotDef);
+            this.groupBox1.Controls.Add(this.cmd_Quality);
+            this.groupBox1.Controls.Add(this.cmd_Budget);
+            this.groupBox1.Controls.Add(this.btnFeedback);
+            this.groupBox1.Controls.Add(this.btnRunOS_Red);
+            this.groupBox1.Controls.Add(this.cmdMoldRepair);
+            this.groupBox1.Controls.Add(this.btnTimeContraint);
+            this.groupBox1.Controls.Add(this.btnRunScada);
+            this.groupBox1.Controls.Add(this.btnTMS_Summary);
+            this.groupBox1.Controls.Add(this.btnRunTMSV2);
+            this.groupBox1.Controls.Add(this.btnRunTMS);
+            this.groupBox1.Controls.Add(this.cmdNpi);
+            this.groupBox1.Controls.Add(this.cmdCutting);
+            this.groupBox1.Controls.Add(this.cmdPoToIe);
+            this.groupBox1.Controls.Add(this.cmdPoTo);
+            this.groupBox1.Controls.Add(this.cmdRunEscan);
+            this.groupBox1.Controls.Add(this.cmdRunAndon);
+            this.groupBox1.Controls.Add(this.cmdRunProd);
             this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(525, 261);
+            this.groupBox1.Size = new System.Drawing.Size(525, 351);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Send Mail Daily";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(194, 22);
+            this.checkBox1.Location = new System.Drawing.Point(471, 26);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(48, 17);
             this.checkBox1.TabIndex = 1;
             this.checkBox1.Text = "Auto";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // cmdMoldRepairMonth
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(248, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Schedule";
+            this.cmdMoldRepairMonth.Location = new System.Drawing.Point(343, 22);
+            this.cmdMoldRepairMonth.Name = "cmdMoldRepairMonth";
+            this.cmdMoldRepairMonth.Size = new System.Drawing.Size(118, 23);
+            this.cmdMoldRepairMonth.TabIndex = 241;
+            this.cmdMoldRepairMonth.Text = "Mold Month";
+            this.cmdMoldRepairMonth.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // btnRunQualityMonth
             // 
-            this.textBox1.Location = new System.Drawing.Point(306, 21);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(70, 20);
-            this.textBox1.TabIndex = 3;
+            this.btnRunQualityMonth.Location = new System.Drawing.Point(343, 51);
+            this.btnRunQualityMonth.Name = "btnRunQualityMonth";
+            this.btnRunQualityMonth.Size = new System.Drawing.Size(118, 23);
+            this.btnRunQualityMonth.TabIndex = 240;
+            this.btnRunQualityMonth.Text = "B/C Grade Noon";
+            this.btnRunQualityMonth.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // cmd_Quality2
             // 
-            this.button2.Location = new System.Drawing.Point(382, 19);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(63, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Save";
-            this.button2.UseVisualStyleBackColor = true;
+            this.cmd_Quality2.Location = new System.Drawing.Point(177, 109);
+            this.cmd_Quality2.Name = "cmd_Quality2";
+            this.cmd_Quality2.Size = new System.Drawing.Size(118, 23);
+            this.cmd_Quality2.TabIndex = 239;
+            this.cmd_Quality2.Text = "B/C Grade Noon";
+            this.cmd_Quality2.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // cmd_BotDef
             // 
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Location = new System.Drawing.Point(12, 357);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(525, 81);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Send Mail Monthly";
+            this.cmd_BotDef.Location = new System.Drawing.Point(8, 197);
+            this.cmd_BotDef.Name = "cmd_BotDef";
+            this.cmd_BotDef.Size = new System.Drawing.Size(116, 23);
+            this.cmd_BotDef.TabIndex = 238;
+            this.cmd_BotDef.Text = "Run Bottom Defect";
+            this.cmd_BotDef.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // cmd_Quality
             // 
-            this.button3.Location = new System.Drawing.Point(382, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(63, 23);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Save";
-            this.button3.UseVisualStyleBackColor = true;
+            this.cmd_Quality.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
+            this.cmd_Quality.Location = new System.Drawing.Point(177, 284);
+            this.cmd_Quality.Name = "cmd_Quality";
+            this.cmd_Quality.Size = new System.Drawing.Size(118, 23);
+            this.cmd_Quality.TabIndex = 237;
+            this.cmd_Quality.Text = "B/C Grade Morning";
+            this.cmd_Quality.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // cmd_Budget
             // 
-            this.textBox2.Location = new System.Drawing.Point(306, 21);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(70, 20);
-            this.textBox2.TabIndex = 3;
+            this.cmd_Budget.Location = new System.Drawing.Point(8, 168);
+            this.cmd_Budget.Name = "cmd_Budget";
+            this.cmd_Budget.Size = new System.Drawing.Size(116, 23);
+            this.cmd_Budget.TabIndex = 236;
+            this.cmd_Budget.Text = "Run Budget";
+            this.cmd_Budget.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // btnFeedback
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(248, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Schedule";
+            this.btnFeedback.Location = new System.Drawing.Point(177, 80);
+            this.btnFeedback.Name = "btnFeedback";
+            this.btnFeedback.Size = new System.Drawing.Size(118, 23);
+            this.btnFeedback.TabIndex = 235;
+            this.btnFeedback.Text = "Run Feedback";
+            this.btnFeedback.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // btnRunOS_Red
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(194, 22);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(48, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Auto";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.btnRunOS_Red.Location = new System.Drawing.Point(177, 255);
+            this.btnRunOS_Red.Name = "btnRunOS_Red";
+            this.btnRunOS_Red.Size = new System.Drawing.Size(118, 23);
+            this.btnRunOS_Red.TabIndex = 234;
+            this.btnRunOS_Red.Text = "OS Red M/C";
+            this.btnRunOS_Red.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // cmdMoldRepair
             // 
-            this.button4.Location = new System.Drawing.Point(6, 19);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(182, 23);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.cmdMoldRepair.Location = new System.Drawing.Point(177, 51);
+            this.cmdMoldRepair.Name = "cmdMoldRepair";
+            this.cmdMoldRepair.Size = new System.Drawing.Size(118, 23);
+            this.cmdMoldRepair.TabIndex = 233;
+            this.cmdMoldRepair.Text = "Run Mold Repair";
+            this.cmdMoldRepair.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // btnTimeContraint
             // 
-            this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.checkBox3);
-            this.groupBox3.Controls.Add(this.button6);
-            this.groupBox3.Location = new System.Drawing.Point(12, 279);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(525, 72);
-            this.groupBox3.TabIndex = 0;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Send Mail Weekly";
+            this.btnTimeContraint.Location = new System.Drawing.Point(8, 110);
+            this.btnTimeContraint.Name = "btnTimeContraint";
+            this.btnTimeContraint.Size = new System.Drawing.Size(116, 23);
+            this.btnTimeContraint.TabIndex = 232;
+            this.btnTimeContraint.Text = "Run Time Contraint";
+            this.btnTimeContraint.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnRunScada
             // 
-            this.button5.Location = new System.Drawing.Point(382, 19);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(63, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnRunScada.Location = new System.Drawing.Point(177, 226);
+            this.btnRunScada.Name = "btnRunScada";
+            this.btnRunScada.Size = new System.Drawing.Size(118, 23);
+            this.btnRunScada.TabIndex = 231;
+            this.btnRunScada.Text = "RUN SCADA";
+            this.btnRunScada.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // btnTMS_Summary
             // 
-            this.textBox3.Location = new System.Drawing.Point(306, 21);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(70, 20);
-            this.textBox3.TabIndex = 3;
+            this.btnTMS_Summary.Location = new System.Drawing.Point(8, 139);
+            this.btnTMS_Summary.Name = "btnTMS_Summary";
+            this.btnTMS_Summary.Size = new System.Drawing.Size(116, 23);
+            this.btnTMS_Summary.TabIndex = 230;
+            this.btnTMS_Summary.Text = "Run TMS [SUM]";
+            this.btnTMS_Summary.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // btnRunTMSV2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(248, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Schedule";
+            this.btnRunTMSV2.Location = new System.Drawing.Point(177, 23);
+            this.btnRunTMSV2.Name = "btnRunTMSV2";
+            this.btnRunTMSV2.Size = new System.Drawing.Size(118, 23);
+            this.btnRunTMSV2.TabIndex = 229;
+            this.btnRunTMSV2.Text = "Run TMS v2";
+            this.btnRunTMSV2.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // btnRunTMS
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(194, 22);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(48, 17);
-            this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Auto";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.btnRunTMS.Enabled = false;
+            this.btnRunTMS.Location = new System.Drawing.Point(177, 197);
+            this.btnRunTMS.Name = "btnRunTMS";
+            this.btnRunTMS.Size = new System.Drawing.Size(118, 23);
+            this.btnRunTMS.TabIndex = 228;
+            this.btnRunTMS.Text = "Run TMS";
+            this.btnRunTMS.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // cmdNpi
             // 
-            this.button6.Location = new System.Drawing.Point(6, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(182, 23);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "button1";
-            this.button6.UseVisualStyleBackColor = true;
+            this.cmdNpi.Location = new System.Drawing.Point(8, 284);
+            this.cmdNpi.Name = "cmdNpi";
+            this.cmdNpi.Size = new System.Drawing.Size(118, 23);
+            this.cmdNpi.TabIndex = 227;
+            this.cmdNpi.Text = "Run NPI";
+            this.cmdNpi.UseVisualStyleBackColor = true;
+            // 
+            // cmdCutting
+            // 
+            this.cmdCutting.Location = new System.Drawing.Point(6, 80);
+            this.cmdCutting.Name = "cmdCutting";
+            this.cmdCutting.Size = new System.Drawing.Size(118, 23);
+            this.cmdCutting.TabIndex = 226;
+            this.cmdCutting.Text = "Run Cutting";
+            this.cmdCutting.UseVisualStyleBackColor = true;
+            // 
+            // cmdPoToIe
+            // 
+            this.cmdPoToIe.Location = new System.Drawing.Point(177, 169);
+            this.cmdPoToIe.Name = "cmdPoToIe";
+            this.cmdPoToIe.Size = new System.Drawing.Size(118, 23);
+            this.cmdPoToIe.TabIndex = 225;
+            this.cmdPoToIe.Text = "Run PO/TO IE";
+            this.cmdPoToIe.UseVisualStyleBackColor = true;
+            // 
+            // cmdPoTo
+            // 
+            this.cmdPoTo.Location = new System.Drawing.Point(8, 255);
+            this.cmdPoTo.Name = "cmdPoTo";
+            this.cmdPoTo.Size = new System.Drawing.Size(118, 23);
+            this.cmdPoTo.TabIndex = 224;
+            this.cmdPoTo.Text = "Run PO/TO";
+            this.cmdPoTo.UseVisualStyleBackColor = true;
+            // 
+            // cmdRunEscan
+            // 
+            this.cmdRunEscan.Location = new System.Drawing.Point(177, 139);
+            this.cmdRunEscan.Name = "cmdRunEscan";
+            this.cmdRunEscan.Size = new System.Drawing.Size(118, 23);
+            this.cmdRunEscan.TabIndex = 223;
+            this.cmdRunEscan.Text = "Run E-Scan";
+            this.cmdRunEscan.UseVisualStyleBackColor = true;
+            // 
+            // cmdRunAndon
+            // 
+            this.cmdRunAndon.Location = new System.Drawing.Point(8, 226);
+            this.cmdRunAndon.Name = "cmdRunAndon";
+            this.cmdRunAndon.Size = new System.Drawing.Size(118, 23);
+            this.cmdRunAndon.TabIndex = 222;
+            this.cmdRunAndon.Text = "Run Andon";
+            this.cmdRunAndon.UseVisualStyleBackColor = true;
+            // 
+            // cmdRunProd
+            // 
+            this.cmdRunProd.Location = new System.Drawing.Point(6, 52);
+            this.cmdRunProd.Name = "cmdRunProd";
+            this.cmdRunProd.Size = new System.Drawing.Size(118, 23);
+            this.cmdRunProd.TabIndex = 221;
+            this.cmdRunProd.Text = "Run Productivity";
+            this.cmdRunProd.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 23);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(118, 23);
+            this.button1.TabIndex = 220;
+            this.button1.Text = "Run Bottom Invetory";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Auto Send Mail";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -249,23 +315,29 @@ namespace AutoSendMail
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button cmdMoldRepairMonth;
+        private System.Windows.Forms.Button btnRunQualityMonth;
+        private System.Windows.Forms.Button cmd_Quality2;
+        private System.Windows.Forms.Button cmd_BotDef;
+        private System.Windows.Forms.Button cmd_Quality;
+        private System.Windows.Forms.Button cmd_Budget;
+        private System.Windows.Forms.Button btnFeedback;
+        private System.Windows.Forms.Button btnRunOS_Red;
+        private System.Windows.Forms.Button cmdMoldRepair;
+        private System.Windows.Forms.Button btnTimeContraint;
+        private System.Windows.Forms.Button btnRunScada;
+        private System.Windows.Forms.Button btnTMS_Summary;
+        private System.Windows.Forms.Button btnRunTMSV2;
+        private System.Windows.Forms.Button btnRunTMS;
+        private System.Windows.Forms.Button cmdNpi;
+        private System.Windows.Forms.Button cmdCutting;
+        private System.Windows.Forms.Button cmdPoToIe;
+        private System.Windows.Forms.Button cmdPoTo;
+        private System.Windows.Forms.Button cmdRunEscan;
+        private System.Windows.Forms.Button cmdRunAndon;
+        private System.Windows.Forms.Button cmdRunProd;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Button button6;
     }
 }
 
