@@ -66,6 +66,9 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DASS.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="COM, Version=1.0.7429.13642, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -214,6 +217,7 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DASS.ico" />
     <Content Include="DLL\COM.dll" />
     <Content Include="DLL\DevExpress.Charts.v15.2.Core.dll" />
     <Content Include="DLL\DevExpress.Data.v15.2.dll" />

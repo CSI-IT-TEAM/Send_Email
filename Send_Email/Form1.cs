@@ -47,7 +47,8 @@ namespace Send_Email
 
             tmrLoad.Enabled = true;
             //this.Text = "20210710133500";
-            this.Text = "20211008083800";
+            //this.Text = "20211008083800";
+            this.Text = "Data as a service";
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
         }
 
