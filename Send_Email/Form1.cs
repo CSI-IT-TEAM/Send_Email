@@ -63,7 +63,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" };
 
         #region Event
 
@@ -201,7 +201,7 @@ namespace Send_Email
         {
             //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
             //Run TEst
-            RunOSRedMachine("Q", "20210326", "14");
+            RunOSRedMachine("Q", "20211014", "14");
         }
 
         private void cmd_Budget_Click(object sender, EventArgs e)
@@ -977,7 +977,7 @@ namespace Send_Email
                 }
 
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
 
                 string rowValue = "";
@@ -5201,7 +5201,7 @@ namespace Send_Email
         {
             try
             {
-                //RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                RunTimeContraint("Bottom", "Q1"); //BOTTOM
                 RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
             }
             catch
@@ -5770,6 +5770,11 @@ namespace Send_Email
 
                 throw;
             }
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)

@@ -2086,6 +2086,7 @@
             this.checkBox2.Text = "Test2";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.Visible = false;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // cmdRunEscan
             // 
@@ -2100,12 +2101,11 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(5, 417);
+            this.txtLog.Location = new System.Drawing.Point(545, 411);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(679, 124);
+            this.txtLog.Size = new System.Drawing.Size(360, 124);
             this.txtLog.TabIndex = 204;
-            this.txtLog.Visible = false;
             // 
             // cmdPoTo
             // 
@@ -2125,7 +2125,7 @@
             this.cmdPoToIe.Name = "cmdPoToIe";
             this.cmdPoToIe.Size = new System.Drawing.Size(397, 23);
             this.cmdPoToIe.TabIndex = 206;
-            this.cmdPoToIe.Text = "Run PO/TO IE";
+            this.cmdPoToIe.Text = "TO&&PO List";
             this.cmdPoToIe.UseVisualStyleBackColor = true;
             this.cmdPoToIe.Click += new System.EventHandler(this.cmdPoToIe_Click);
             // 
@@ -2637,7 +2637,7 @@
             this.btnTMS_Summary.Name = "btnTMS_Summary";
             this.btnTMS_Summary.Size = new System.Drawing.Size(397, 23);
             this.btnTMS_Summary.TabIndex = 208;
-            this.btnTMS_Summary.Text = "Run TMS [SUM]";
+            this.btnTMS_Summary.Text = "TMS Summary by Weekly";
             this.btnTMS_Summary.UseVisualStyleBackColor = true;
             this.btnTMS_Summary.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -2681,7 +2681,7 @@
             this.btnFeedback.Name = "btnFeedback";
             this.btnFeedback.Size = new System.Drawing.Size(397, 23);
             this.btnFeedback.TabIndex = 211;
-            this.btnFeedback.Text = "Run Feedback";
+            this.btnFeedback.Text = "Digital Twin Feedback";
             this.btnFeedback.UseVisualStyleBackColor = true;
             this.btnFeedback.Click += new System.EventHandler(this.btnFeedback_Click);
             // 
@@ -2714,7 +2714,7 @@
             this.cmd_Quality2.Name = "cmd_Quality2";
             this.cmd_Quality2.Size = new System.Drawing.Size(397, 23);
             this.cmd_Quality2.TabIndex = 215;
-            this.cmd_Quality2.Text = "B/C Grade Noon";
+            this.cmd_Quality2.Text = "Rework Information During This Morning";
             this.cmd_Quality2.UseVisualStyleBackColor = true;
             this.cmd_Quality2.Click += new System.EventHandler(this.cmd_Quality2_Click);
             // 
@@ -3012,7 +3012,7 @@
             this.btnRunQualityMonth.Name = "btnRunQualityMonth";
             this.btnRunQualityMonth.Size = new System.Drawing.Size(397, 23);
             this.btnRunQualityMonth.TabIndex = 215;
-            this.btnRunQualityMonth.Text = "B/C Grade Noon";
+            this.btnRunQualityMonth.Text = "B/C Grade & Rework Last Month";
             this.btnRunQualityMonth.UseVisualStyleBackColor = true;
             this.btnRunQualityMonth.Click += new System.EventHandler(this.btnRunQualityMonth_Click);
             // 
@@ -3447,8 +3447,6 @@
             // cmdMoldRepairMonthChk
             // 
             this.cmdMoldRepairMonthChk.AutoSize = true;
-            this.cmdMoldRepairMonthChk.Checked = true;
-            this.cmdMoldRepairMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdMoldRepairMonthChk.Enabled = false;
             this.cmdMoldRepairMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 282);
@@ -3478,7 +3476,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(956, 41);
+            this.panel3.Size = new System.Drawing.Size(945, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3496,7 +3494,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 401);
+            this.ClientSize = new System.Drawing.Size(945, 404);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmd_QualityChk);
             this.Controls.Add(this.btnRunScadaChk);
