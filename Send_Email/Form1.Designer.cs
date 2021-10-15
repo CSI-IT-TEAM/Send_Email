@@ -2101,10 +2101,10 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(545, 411);
+            this.txtLog.Location = new System.Drawing.Point(468, 310);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(360, 124);
+            this.txtLog.Size = new System.Drawing.Size(301, 124);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
@@ -3494,7 +3494,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 404);
+            this.ClientSize = new System.Drawing.Size(945, 539);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmd_QualityChk);
             this.Controls.Add(this.btnRunScadaChk);
