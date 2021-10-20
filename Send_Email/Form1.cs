@@ -2672,9 +2672,12 @@ namespace Send_Email
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
+                
+
                 //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
+                    WriteLog(DateTime.Now.ToString() + " Bottom Inventory: email " + dtEmail.Rows.Count.ToString());
                     foreach (DataRow row in dtEmail.Rows)
                     {
                         Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
@@ -2712,9 +2715,11 @@ namespace Send_Email
                     imgChart, imgGrid1, imgGrid2, imgGrid3, imgGrid4);
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: send ok ");
             }
             catch (Exception ex)
             {
+                WriteLog( DateTime.Now.ToString() + " Bottom Inventory: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }

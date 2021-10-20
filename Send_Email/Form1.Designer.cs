@@ -2101,10 +2101,10 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(468, 310);
+            this.txtLog.Location = new System.Drawing.Point(440, 380);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(301, 124);
+            this.txtLog.Size = new System.Drawing.Size(520, 124);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
@@ -3476,7 +3476,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(945, 41);
+            this.panel3.Size = new System.Drawing.Size(1372, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3494,7 +3494,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 539);
+            this.ClientSize = new System.Drawing.Size(1372, 753);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmd_QualityChk);
             this.Controls.Add(this.btnRunScadaChk);
