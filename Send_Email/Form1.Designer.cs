@@ -353,6 +353,7 @@
             this.btnRunQualityMonthChk = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -3490,11 +3491,22 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "DaaS Management";
             // 
+            // btnP
+            // 
+            this.btnP.Location = new System.Drawing.Point(121, 421);
+            this.btnP.Name = "btnP";
+            this.btnP.Size = new System.Drawing.Size(117, 23);
+            this.btnP.TabIndex = 225;
+            this.btnP.Text = "Test Messenge";
+            this.btnP.UseVisualStyleBackColor = true;
+            this.btnP.Click += new System.EventHandler(this.btnP_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 541);
+            this.Controls.Add(this.btnP);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmd_QualityChk);
             this.Controls.Add(this.btnRunScadaChk);
@@ -4082,6 +4094,7 @@
         private System.Windows.Forms.CheckBox btnRunQualityMonthChk;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnP;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

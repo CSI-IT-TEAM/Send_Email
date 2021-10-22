@@ -153,64 +153,86 @@ namespace Send_Email
 
         private void cmdRunProd_Click(object sender, EventArgs e)
         {
-            RunProduction("Q");
+            if (SendYN(((Button)sender).Text))
+                RunProduction("Q");
         }
 
         private void cmdRunAndon_Click(object sender, EventArgs e)
         {
-            RunAndon("Q");
+            if (SendYN(((Button)sender).Text))
+                RunAndon("Q");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Run("Q");
+            if (SendYN(((Button)sender).Text))
+                Run("Q");
         }
 
         private void cmdRunEscan_Click(object sender, EventArgs e)
         {
-            RunEScan("Q");
+            if (SendYN(((Button)sender).Text))
+                RunEScan("Q");
         }
 
         private void cmdPoTo_Click(object sender, EventArgs e)
         {
-            RunToPo("Q");
+            if (SendYN(((Button)sender).Text))
+                RunToPo("Q");
         }
 
         private void cmdPoToIe_Click(object sender, EventArgs e)
         {
-            RunToPoIe("Q");
+            if (SendYN(((Button)sender).Text))
+                RunToPoIe("Q");
         }
 
         private void cmdCutting_Click(object sender, EventArgs e)
         {
-            RunCutting("Q");
+            if (SendYN(((Button)sender).Text))
+                RunCutting("Q");
         }
 
         private void cmdNpi_Click(object sender, EventArgs e)
         {
-            RunNPI("Q");
+            if (SendYN(((Button)sender).Text))
+                RunNPI("Q");
             //RunNPI2();
         }
 
         private void cmdMoldRepair_Click(object sender, EventArgs e)
         {
-            RunMoldRepair("Q");
+            if (SendYN(((Button)sender).Text))
+                RunMoldRepair("Q");
         }
 
         private void cmdRunOS_Red_MC_Click(object sender, EventArgs e)
         {
             //RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
             //Run TEst
-            RunOSRedMachine("Q", "20211014", "14");
+            if (SendYN(((Button)sender).Text))
+                RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
+           
         }
 
         private void cmd_Budget_Click(object sender, EventArgs e)
         {
-            RunBuget("Q");
+            if (SendYN(((Button)sender).Text))
+                RunBuget("Q");
         }
-
+        private void btnP_Click(object sender, EventArgs e)
+        {
+           
+        }
         #endregion Event
 
+        private bool SendYN(string MailSubject)
+        {
+            DialogResult dl = MessageBox.Show(this, string.Concat("Bạn có muốn gửi mail", "\n", MailSubject), "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            if (dl == DialogResult.Yes)
+                return true;
+            return false;
+        }
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
@@ -2666,19 +2688,19 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Chart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Chart.png ok");
-                
+
                 Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid1.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid1.png ok");
-                
+
                 Outlook.Attachment oAttachPicGrid2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid2.png ok");
-                
+
                 Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid3.png ok");
-                
+
                 Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid4.png ok");
-                
+
                 mailItem.Subject = "Bottom Inventory Set Analysis";
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -2727,7 +2749,7 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
-                WriteLog( DateTime.Now.ToString() + " Bottom Inventory: " + ex.ToString());
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: " + ex.ToString());
                 Console.WriteLine(ex.ToString());
             }
         }
@@ -4732,7 +4754,8 @@ namespace Send_Email
 
         private void btnRunTMSV2_Click(object sender, EventArgs e)
         {
-            RunTMSDashv2("Q");
+            if (SendYN(((Button)sender).Text))
+                RunTMSDashv2("Q");
         }
 
         private void checkRunning()
@@ -5214,8 +5237,11 @@ namespace Send_Email
         {
             try
             {
-                RunTimeContraint("Bottom", "Q1"); //BOTTOM
-                RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+                if (SendYN(((Button)sender).Text))
+                {
+                    RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                    RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+                }
             }
             catch
             {
@@ -5706,43 +5732,52 @@ namespace Send_Email
 
         private void btnRunScada_Click(object sender, EventArgs e)
         {
-            RunScada("Q");
+            if (SendYN(((Button)sender).Text))
+                RunScada("Q");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            RunTMS_Summary("Q");
+            if (SendYN(((Button)sender).Text))
+                RunTMS_Summary("Q");
         }
 
         private void btnFeedback_Click(object sender, EventArgs e)
         {
-            RunFeedback("Q"); RunFeedback("U");
+            if (SendYN(((Button)sender).Text))
+            {
+                RunFeedback("Q"); RunFeedback("U");
+            }
         }
 
         private void cmd_Quality_Click(object sender, EventArgs e)
         {
-            RunQuality("Q");
+            if (SendYN(((Button)sender).Text))
+                RunQuality("Q");
         }
 
         private void cmd_Quality2_Click(object sender, EventArgs e)
         {
-            RunQuality2("Q");
+            if (SendYN(((Button)sender).Text))
+                RunQuality2("Q");
         }
 
         private void cmd_BotDef_Click(object sender, EventArgs e)
         {
-            RunBotDef("Q");
+            if (SendYN(((Button)sender).Text))
+                RunBotDef("Q");
         }
 
         private void cmdMoldRepairMonth_Click(object sender, EventArgs e)
         {
-            RunMoldRepairMonth("Q");
+            if (SendYN(((Button)sender).Text))
+                RunMoldRepairMonth("Q");
         }
 
         private void btnRunQualityMonth_Click(object sender, EventArgs e)
         {
-
-            RunQualityMonth("Q");
+            if (SendYN(((Button)sender).Text))
+                RunQualityMonth("Q");
         }
 
         private void gvwView_RowCellStyle(object sender, DevExpress.XtraGrid.Views.Grid.RowCellStyleEventArgs e)
@@ -5789,6 +5824,8 @@ namespace Send_Email
         {
 
         }
+
+
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
