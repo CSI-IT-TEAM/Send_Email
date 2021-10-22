@@ -610,7 +610,7 @@
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(6, 163);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(397, 23);
@@ -1365,7 +1365,7 @@
             // 
             // cmdRunProd
             // 
-            this.cmdRunProd.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdRunProd.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunProd.Location = new System.Drawing.Point(6, 308);
             this.cmdRunProd.Name = "cmdRunProd";
             this.cmdRunProd.Size = new System.Drawing.Size(397, 23);
@@ -2039,7 +2039,7 @@
             // 
             // cmdRunAndon
             // 
-            this.cmdRunAndon.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdRunAndon.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunAndon.Location = new System.Drawing.Point(6, 134);
             this.cmdRunAndon.Name = "cmdRunAndon";
             this.cmdRunAndon.Size = new System.Drawing.Size(397, 23);
@@ -2090,7 +2090,7 @@
             // 
             // cmdRunEscan
             // 
-            this.cmdRunEscan.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdRunEscan.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunEscan.Location = new System.Drawing.Point(6, 192);
             this.cmdRunEscan.Name = "cmdRunEscan";
             this.cmdRunEscan.Size = new System.Drawing.Size(397, 23);
@@ -2101,7 +2101,7 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(440, 380);
+            this.txtLog.Location = new System.Drawing.Point(421, 395);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(520, 124);
@@ -2109,7 +2109,7 @@
             // 
             // cmdPoTo
             // 
-            this.cmdPoTo.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdPoTo.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdPoTo.Location = new System.Drawing.Point(6, 337);
             this.cmdPoTo.Name = "cmdPoTo";
             this.cmdPoTo.Size = new System.Drawing.Size(397, 23);
@@ -2120,7 +2120,7 @@
             // 
             // cmdPoToIe
             // 
-            this.cmdPoToIe.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdPoToIe.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdPoToIe.Location = new System.Drawing.Point(486, 162);
             this.cmdPoToIe.Name = "cmdPoToIe";
             this.cmdPoToIe.Size = new System.Drawing.Size(397, 23);
@@ -2131,7 +2131,7 @@
             // 
             // cmdCutting
             // 
-            this.cmdCutting.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdCutting.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdCutting.Location = new System.Drawing.Point(6, 367);
             this.cmdCutting.Name = "cmdCutting";
             this.cmdCutting.Size = new System.Drawing.Size(397, 23);
@@ -2142,7 +2142,7 @@
             // 
             // cmdNpi
             // 
-            this.cmdNpi.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdNpi.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdNpi.Location = new System.Drawing.Point(6, 250);
             this.cmdNpi.Name = "cmdNpi";
             this.cmdNpi.Size = new System.Drawing.Size(397, 23);
@@ -2423,7 +2423,7 @@
             // 
             // btnTimeContraint
             // 
-            this.btnTimeContraint.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnTimeContraint.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimeContraint.Location = new System.Drawing.Point(6, 279);
             this.btnTimeContraint.Name = "btnTimeContraint";
             this.btnTimeContraint.Size = new System.Drawing.Size(397, 23);
@@ -2434,7 +2434,7 @@
             // 
             // btnRunTMSV2
             // 
-            this.btnRunTMSV2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunTMSV2.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRunTMSV2.Location = new System.Drawing.Point(486, 47);
             this.btnRunTMSV2.Name = "btnRunTMSV2";
             this.btnRunTMSV2.Size = new System.Drawing.Size(397, 23);
@@ -2446,7 +2446,7 @@
             // pnTMSDassChart
             // 
             this.pnTMSDassChart.Controls.Add(this.chart);
-            this.pnTMSDassChart.Location = new System.Drawing.Point(195, 509);
+            this.pnTMSDassChart.Location = new System.Drawing.Point(12, 552);
             this.pnTMSDassChart.Name = "pnTMSDassChart";
             this.pnTMSDassChart.Size = new System.Drawing.Size(313, 140);
             this.pnTMSDassChart.TabIndex = 210;
@@ -2621,7 +2621,7 @@
             // 
             // btnRunScada
             // 
-            this.btnRunScada.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunScada.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRunScada.Location = new System.Drawing.Point(486, 75);
             this.btnRunScada.Name = "btnRunScada";
             this.btnRunScada.Size = new System.Drawing.Size(397, 23);
@@ -2632,7 +2632,7 @@
             // 
             // btnTMS_Summary
             // 
-            this.btnTMS_Summary.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnTMS_Summary.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTMS_Summary.Location = new System.Drawing.Point(486, 220);
             this.btnTMS_Summary.Name = "btnTMS_Summary";
             this.btnTMS_Summary.Size = new System.Drawing.Size(397, 23);
@@ -2643,7 +2643,7 @@
             // 
             // cmdMoldRepair
             // 
-            this.cmdMoldRepair.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdMoldRepair.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdMoldRepair.Location = new System.Drawing.Point(6, 221);
             this.cmdMoldRepair.Name = "cmdMoldRepair";
             this.cmdMoldRepair.Size = new System.Drawing.Size(397, 23);
@@ -2654,7 +2654,7 @@
             // 
             // btnRunOS_Red
             // 
-            this.btnRunOS_Red.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunOS_Red.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRunOS_Red.Location = new System.Drawing.Point(6, 47);
             this.btnRunOS_Red.Name = "btnRunOS_Red";
             this.btnRunOS_Red.Size = new System.Drawing.Size(397, 23);
@@ -2665,7 +2665,7 @@
             // 
             // cmd_Budget
             // 
-            this.cmd_Budget.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_Budget.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmd_Budget.Location = new System.Drawing.Point(486, 104);
             this.cmd_Budget.Name = "cmd_Budget";
             this.cmd_Budget.Size = new System.Drawing.Size(397, 23);
@@ -2676,7 +2676,7 @@
             // 
             // btnFeedback
             // 
-            this.btnFeedback.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnFeedback.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFeedback.Location = new System.Drawing.Point(486, 249);
             this.btnFeedback.Name = "btnFeedback";
             this.btnFeedback.Size = new System.Drawing.Size(397, 23);
@@ -2687,7 +2687,7 @@
             // 
             // cmd_Quality
             // 
-            this.cmd_Quality.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_Quality.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmd_Quality.Location = new System.Drawing.Point(6, 105);
             this.cmd_Quality.Name = "cmd_Quality";
             this.cmd_Quality.Size = new System.Drawing.Size(397, 23);
@@ -2698,7 +2698,7 @@
             // 
             // cmd_BotDef
             // 
-            this.cmd_BotDef.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_BotDef.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmd_BotDef.Location = new System.Drawing.Point(6, 76);
             this.cmd_BotDef.Name = "cmd_BotDef";
             this.cmd_BotDef.Size = new System.Drawing.Size(397, 23);
@@ -2709,7 +2709,7 @@
             // 
             // cmd_Quality2
             // 
-            this.cmd_Quality2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_Quality2.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmd_Quality2.Location = new System.Drawing.Point(486, 191);
             this.cmd_Quality2.Name = "cmd_Quality2";
             this.cmd_Quality2.Size = new System.Drawing.Size(397, 23);
@@ -2879,7 +2879,7 @@
             // cmdMoldRepairMonth
             // 
             this.cmdMoldRepairMonth.Enabled = false;
-            this.cmdMoldRepairMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdMoldRepairMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdMoldRepairMonth.Location = new System.Drawing.Point(486, 278);
             this.cmdMoldRepairMonth.Name = "cmdMoldRepairMonth";
             this.cmdMoldRepairMonth.Size = new System.Drawing.Size(397, 23);
@@ -3007,7 +3007,7 @@
             // 
             // btnRunQualityMonth
             // 
-            this.btnRunQualityMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunQualityMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRunQualityMonth.Location = new System.Drawing.Point(486, 134);
             this.btnRunQualityMonth.Name = "btnRunQualityMonth";
             this.btnRunQualityMonth.Size = new System.Drawing.Size(397, 23);
@@ -3476,7 +3476,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1372, 41);
+            this.panel3.Size = new System.Drawing.Size(994, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3494,7 +3494,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1372, 753);
+            this.ClientSize = new System.Drawing.Size(994, 541);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.cmd_QualityChk);
             this.Controls.Add(this.btnRunScadaChk);

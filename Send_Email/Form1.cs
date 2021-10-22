@@ -63,7 +63,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" };
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com" };
 
         #region Event
 
@@ -2661,18 +2661,26 @@ namespace Send_Email
             {
                 //Outlook.MailItem mailItem = (Outlook.MailItem)
                 // this.Application.CreateItem(Outlook.OlItemType.olMailItem);
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Begin send email");
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttach = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Chart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid1.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "Bottom Inventory Set Analysis";
-
-                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
-
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Chart.png ok");
                 
+                Outlook.Attachment oAttachPicGrid1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid1.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid1.png ok");
+                
+                Outlook.Attachment oAttachPicGrid2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid2.png ok");
+                
+                Outlook.Attachment oAttachPicGrid3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid3.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid3.png ok");
+                
+                Outlook.Attachment oAttachPicGrid4 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Grid4.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                WriteLog(DateTime.Now.ToString() + " Bottom Inventory: Grid4.png ok");
+                
+                mailItem.Subject = "Bottom Inventory Set Analysis";
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
