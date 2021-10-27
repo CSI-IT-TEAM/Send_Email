@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Send_Email
 {
@@ -12,6 +14,7 @@ namespace Send_Email
     {
         public string _subject = "";
         public DataTable _email;
+        public static string _Hms, _Ymd, _User;
         public string Html(string argType)
         {
             try
@@ -24,13 +27,17 @@ namespace Send_Email
                     if (dsData.Tables[0] == null || dsData.Tables[0].Rows.Count == 0) return "";
                     //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     DataTable dtData = dsData.Tables[0];
-
+                   
                     foreach (DataRow dr in dtData.Rows)
                     {
                         dr["TITLE"] = EncryptExtend.DescryptString(dr["TITLE"].ToString());
                         dr["CONTENTS"] = EncryptExtend.DescryptString(dr["CONTENTS"].ToString());
+                        _Hms = dr["HMS"].ToString();
+                        _Ymd = dr["YMD"].ToString();
+                        _User = dr["ADD_USER"].ToString();
+                        saveImg(dr["IMG"]);
                     }
-
+                    
                     DataTable dtHeader = dsData.Tables[0];
                     _email = dsData.Tables[1];
 
@@ -47,6 +54,26 @@ namespace Send_Email
             {
                 return null;
                // return "Error: " + ex.ToString();
+            }
+            
+        }
+
+        private void saveImg(object argImg)
+        {
+            try
+            {
+                string path = Application.StartupPath + @"\Capture\feedback.png";
+
+                byte[] MyData = (byte[])argImg;
+                int ArraySize = MyData.GetUpperBound(0) + 1;
+                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+
+                fs.Write(MyData, 0, ArraySize);
+                fs.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
             }
             
         }
@@ -177,6 +204,44 @@ namespace Send_Email
                     return null;
                 }
                 return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+
+        public static DataTable UPD_DATA()
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_FEEDBACK_UPDATE";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+                MyOraDB.Parameter_Name[0] = "ARG_YMD";
+                MyOraDB.Parameter_Name[1] = "ARG_HMS";
+                MyOraDB.Parameter_Name[2] = "ARG_REG_USER";
+                MyOraDB.Parameter_Name[3] = "CV_1";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = _Ymd;
+                MyOraDB.Parameter_Values[1] = _Hms;
+                MyOraDB.Parameter_Values[2] = _User;
+                MyOraDB.Parameter_Values[3] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+            
+                return ds_ret.Tables[0];
             }
             catch (Exception ex)
             {

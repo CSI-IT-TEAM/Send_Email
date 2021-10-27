@@ -42,8 +42,9 @@ namespace Send_Email
             pnchartBCGrade.Size = new Size(1560, 400);
             grdRework.Size = new Size(1560, 270);
 
-            pnMold.Size = new Size(1750, 1000);
-            grdMain.Size = new Size(1750, 300);
+            pnMold.Size = new Size(2000, 1000);
+            chartMold.Size = new Size(750, 700);
+            grdMain.Size = new Size(1700, 300);
 
             tmrLoad.Enabled = true;
             //this.Text = "20210710133500";
@@ -63,7 +64,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com"};
 
         #region Event
 
@@ -233,6 +234,53 @@ namespace Send_Email
                 return true;
             return false;
         }
+
+        private void CreateMailFeedBack(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\feedback.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = htmlBody + String.Format(@"<body><br><img src='cid:{0}'></body>", imgInfo);
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+
+                Send_Feedback.UPD_DATA();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailFeedBack: " + ex.ToString());
+            }
+        }
+
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
@@ -263,7 +311,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com; ngoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 //  string imgInfo = "imgInfo";
                 // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody = htmlBody;
@@ -2076,11 +2124,12 @@ namespace Send_Email
             DataSet ds = SEL_LOAD_MOLD_DATA(argType);
             if (ds == null || ds.Tables.Count == 0) return;
             DataTable dtData = ds.Tables[0];
+            DataTable dtData2 = ds.Tables[1];
             if (dtData == null || dtData.Rows.Count == 0) return;
             string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
             DataTable dtEmail = ds.Tables[3];
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
-            if (LoadDataMold(dtData))
+            if (LoadDataMold(dtData, dtData2))
             {
                 CaptureControl(pnMold, "MoldChart");
                 CaptureControl(grdMain, "MoldGrid");
@@ -2090,7 +2139,7 @@ namespace Send_Email
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
 
-        private bool LoadDataMold(DataTable argDt)
+        private bool LoadDataMold(DataTable argDt, DataTable argDt2)
         {
             try
             {
@@ -2106,6 +2155,15 @@ namespace Send_Email
                 //SetData(grdMain, dtPivot);
                 FormatGrid(grdView);
                 BindingChart(dtPivot);
+                SetDataChart(argDt2);
+
+                setChartRound(chartControl2, GetDataTemp(argDt2, "PU"));
+                setChartRound(chartControl3, GetDataTemp(argDt2, "IP"));
+                setChartRound(chartControl4, GetDataTemp(argDt2, "DMP"));
+                setChartRound(chartControl5, GetDataTemp(argDt2, "Outsole"));
+                setChartRound(chartControl6, GetDataTemp(argDt2, "Phylon"));
+                setChartRound(chartControl7, GetDataTemp(argDt2, "CMP"));
+                // SetTreelist(argDt2);
                 return true;
             }
             catch (Exception ex)
@@ -2114,6 +2172,140 @@ namespace Send_Email
                 return false;
             }
 
+        }
+
+        private void SetDataChart(DataTable argDt)
+        {
+            try
+            {
+                chartControl1.DataSource = argDt;
+                for (int i = 0; i < 5; i++)
+                {
+                    chartControl1.Series[i].ArgumentDataMember = "WORKSHOP";
+                    chartControl1.Series[i].ValueDataMembers.AddRange(new string[] { "ERR" + (i + 1).ToString() });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+        }
+
+        private void setChartRound(ChartControl argChart, DataTable argData)
+        {
+            try
+            {
+                argChart.DataSource = argData;
+                argChart.Series[0].ArgumentDataMember = "ERR_NM";
+                argChart.Series[0].ValueDataMembers.AddRange(new string[] { "ERR" });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+        }
+
+        private void SetTreelist(DataTable argDt)
+        {
+            try
+            {
+
+                //DataTable dt = GetDataTemp(argDt);
+                //gridControlEx1.DataSource = dt;
+
+
+
+                //DataTable dt = GetDataTemp(argDt);
+                //tlsLoction.DataSource = dt;
+                //tlsLoction.KeyFieldName = "ID";
+                //tlsLoction.ParentFieldName = "PARENTID";
+                //tlsLoction.Columns["ID_NAME"].Visible = false;
+                //Skin skin = GridSkins.GetSkin(tlsLoction.LookAndFeel);
+                //skin.Properties[GridSkins.OptShowTreeLine] = true;
+
+                //foreach (TreeListNode node in tlsLoction.Nodes)
+                //{
+                //    var dataRow = tlsLoction.GetDataRecordByNode(node);
+                //    node.Tag = dataRow;
+                //    string nodeId = node.GetValue("ID").ToString();
+                //    node.Checked = true;
+                //    node.Expanded = true;
+                //    foreach (TreeListNode node1 in node.RootNode.Nodes)
+                //    {
+
+                //        node1.Checked = true;
+                //    }
+                //}
+            }
+            catch (Exception ex)
+            { }
+        }
+
+
+        private DataTable GetDataTemp(DataTable argDt, string argLocation)
+        {
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("ERR_NM");
+            dt.Columns.Add("ERR", typeof(int));
+
+            DataTable dtData = argDt.Select($"WORKSHOP = '{argLocation}'").CopyToDataTable();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                string errName = dtData.Rows[0]["ERR_NM" + i].ToString();
+                if (errName == "") continue;
+                DataRow row = dt.NewRow();
+                row["ERR_NM"] = dtData.Rows[0]["ERR_NM" + i].ToString();
+                row["ERR"] = int.Parse(dtData.Rows[0]["ERR" + i].ToString());
+                dt.Rows.Add(row);
+            }
+
+
+            /*
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("WORKSHOP");
+            dt.Columns.Add("ERR_NM");
+            dt.Columns.Add("ERR");
+            foreach (DataRow dataRow in argDt.Rows)
+            {
+                for(int i = 1; i < 6; i++)
+                {
+                    if (dataRow["ERR_NM" + i.ToString()].ToString() == "") continue;
+                    DataRow row = dt.NewRow();
+                    row["WORKSHOP"] = dataRow["WORKSHOP"].ToString();
+                    row["ERR_NM"] = dataRow["ERR_NM" + i.ToString()].ToString();
+                    row["ERR"] = dataRow["ERR" + i.ToString()].ToString();
+                    dt.Rows.Add(row);
+                }                    
+            }
+            */
+            /*
+            DataTable dt = new DataTable();
+            dt.Clear();
+            dt.Columns.Add("PARENTID");
+            dt.Columns.Add("ID");
+            dt.Columns.Add("MENU_NM");
+            foreach (DataRow dataRow in argDt.Rows)
+            {
+                foreach(DataColumn dataColumn in argDt.Columns)
+                {
+                    if (dataColumn.ColumnName.Contains("ERR_NM"))
+                    {
+                        if (dataRow[dataColumn].ToString() == "") continue;
+                        DataRow row = dt.NewRow();
+                        row["PARENTID"] = dataRow["WORKSHOP"].ToString();
+                        row["ID"] = dataRow["WORKSHOP"].ToString() + "|" + dataRow[dataColumn].ToString();
+                        row["MENU_NM"] = dataRow[dataColumn].ToString();
+                        dt.Rows.Add(row);
+                    }
+                    
+                }
+            }*/
+            return dt;
         }
 
         private void InitBandHeader(DataTable dt)
@@ -2138,8 +2330,8 @@ namespace Send_Email
                 gridBandBottom.Caption = "Location";
                 gridBandBottom.Name = "gridBandBottom";
                 gridBandBottom.RowCount = 2;
-                gridBandBottom.VisibleIndex = 0;
-                gridBandBottom.Width = 150;
+                //  gridBandBottom.VisibleIndex = 0;
+                gridBandBottom.Width = 50;
                 // 
                 // gridBandTotalMold
                 // 
@@ -2148,7 +2340,7 @@ namespace Send_Email
                 gridBandTotalMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 gridBandTotalMold.Caption = "Total\nMold";
                 gridBandTotalMold.Name = "gridBandTotalMold";
-                gridBandTotalMold.VisibleIndex = 1;
+                // gridBandTotalMold.VisibleIndex = 1;
                 gridBandTotalMold.Width = 150;
 
                 //2 band cuối
@@ -2160,7 +2352,7 @@ namespace Send_Email
                 gridBandAvgMold.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
                 gridBandAvgMold.Caption = "Averange\nMold";
                 gridBandAvgMold.Name = "gridBandAvgMold";
-                gridBandAvgMold.VisibleIndex = 50;
+                // gridBandAvgMold.VisibleIndex = 50;
                 gridBandAvgMold.Width = 150;
 
                 // 
@@ -2172,8 +2364,8 @@ namespace Send_Email
                 gridBandPerMold.Caption = "Repair\nRatio";
 
                 gridBandPerMold.Name = "gridBandPerMold";
-                gridBandPerMold.VisibleIndex = 51;
-                gridBandPerMold.Width = 75;
+                //  gridBandPerMold.VisibleIndex = 51;
+                gridBandPerMold.Width = 70;
 
                 BandedGridColumn WORK_BOTTOM = new BandedGridColumn();
                 BandedGridColumn WORK_PLACE_NM = new BandedGridColumn();
@@ -2270,7 +2462,7 @@ namespace Send_Email
                     ColumnsDays.FieldName = Days;
                     ColumnsDays.Name = Days;
                     ColumnsDays.Visible = true;
-                    ColumnsDays.Width = 50;
+                    ColumnsDays.Width = 43;
 
                     gridbandDays.Columns.Add(ColumnsDays);
                     grdView.Columns.AddRange(new BandedGridColumn[] { ColumnsDays });
@@ -2615,7 +2807,7 @@ namespace Send_Email
                 oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 mailItem.HTMLBody = String.Format(@"<body>
                                                         <img src='cid:{0}'><br>
-                                                        <img src='cid:{1}'>
+                                                         <img src='cid:{1}'><br>                                                       
                                                     </body>", imgInfo, imgInfo2) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -4389,7 +4581,9 @@ namespace Send_Email
                 }
                 // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
-                CreateMail(send_Feedback._subject, html, send_Feedback._email);
+                CreateMailFeedBack(send_Feedback._subject, html, send_Feedback._email);
+
+               
 
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
@@ -5727,7 +5921,7 @@ namespace Send_Email
         {
             //Each 5 minutes.
 
-            RunFeedback("Q"); RunFeedback("U");
+            RunFeedback("Q"); //RunFeedback("U");
         }
 
         private void btnRunScada_Click(object sender, EventArgs e)
@@ -5746,7 +5940,7 @@ namespace Send_Email
         {
             if (SendYN(((Button)sender).Text))
             {
-                RunFeedback("Q"); RunFeedback("U");
+                RunFeedback("Q"); 
             }
         }
 
