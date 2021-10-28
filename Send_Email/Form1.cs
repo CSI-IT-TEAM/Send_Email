@@ -64,7 +64,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com"};
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com" };
 
         #region Event
 
@@ -905,22 +905,16 @@ namespace Send_Email
                             "</tr>";
                 }
 
-                string html = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
-                                      "<b style='background-color:black; color:yellow' >Formular and staffing ratio color explanation</b><br>" +
-                                      "&nbsp;&nbsp;&nbsp;Balance = PO Actual + Relief – TO<br>" +
-                                      "&nbsp;&nbsp;&nbsp;Staffing Ratio = (PO + Relief) / TO<br>" +
-                                      "&nbsp;&nbsp;&nbsp;More than 105: red<br>" +
-                                      "&nbsp;&nbsp;&nbsp;103 ~ 105: yellow<br>" +
-                                      "&nbsp;&nbsp;&nbsp;97 ~ 103: green<br>" +
-                                      "&nbsp;&nbsp;&nbsp;95 ~ 97: yellow<br>" +
-                                      "&nbsp;&nbsp;&nbsp;Less than 95: grey<br>" +
-                                      "* System will inform everyday and W/S have to check and update<br>" +
-                                      "* IE will inform to workshop if continue red color for 3 days<br>" +
-                                      "* If within 1 weeks, there are plant to change model, it will be allowed to keep manpower<br><br>" +
-                                      "Remark:<br>" +
-                                      "● Support include indirect / OH (Material handler, Office, W/H worker …)<br>" +
-                                      "● TL / GL for line include in line<br>" +
-                               "</p>" +
+                string imgInfo = "imgInfo", imgInfo2= "imgInfo2";
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\POD_ko.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\POD_vi.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                // mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) ;
+
+                //string explain = String.Format(dtDate.Rows[0]["TEXT1"].ToString(), imgInfo, imgInfo2);
+
+                string html = "<body>" + String.Format(dtDate.Rows[0]["TEXT1"].ToString(), imgInfo, imgInfo2) + "</ body > " +
                               "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' >" +
                                     HtmlTableHeader +
                                     HtmlTableBody +
