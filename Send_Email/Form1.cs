@@ -461,9 +461,11 @@ namespace Send_Email
         {
             try
             {
+                string shift = dtEmail.Rows[0]["SHIFT"].ToString();
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\botDef_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Shift"+ shift +".jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\botDef_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -488,9 +490,10 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
-                string imgInfo = "imgInfo";
-                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
+                string imgInfo = "imgInfo", imgShift = "imgShift";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgShift);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgShift, imgInfo) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -543,7 +546,7 @@ namespace Send_Email
 
 
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 string imgChart1 = "imgChart1", imgChart2 = "imgChart2", imgChart3 = "imgChart3", gridRework = "gridRework", imgTitle = "imgTitle";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart1);
                 oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgChart2);

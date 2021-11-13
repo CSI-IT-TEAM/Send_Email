@@ -164,26 +164,65 @@ namespace Send_Email
                     string ord = arg_DtData.Rows[0]["COL_ORDER"].ToString();
                     DataTable dtRate = arg_DtData.Select("ORD_SORT = '10000'", ord).CopyToDataTable();
                     int iMaxRow = dtRate.Rows.Count;
+                    if (iMaxRow < 6) iMaxRow = 6;
                     arrValue = new string[iMaxRow *6];
                     int i = 0;
-
-                    foreach(DataRow row in dtRate.Rows)
+                    string[] arrValue2 = new string[iMaxRow * 2];
+                    for (int iArr = 0; iArr < arrValue2.Length; iArr++)
                     {
-                        arrValue[i] = row["OP_NM2"].ToString();
-                        i++;
-                        arrValue[i] = row["GREEN"].ToString();
-                        i++;
-                        arrValue[i] = row["YELLOW"].ToString();
-                        i++;
-                        arrValue[i] = row["RED"].ToString();
-                        i++;
-                        arrValue[i] = row["RATE"].ToString();
-                        i++;
-                        arrValue[i] = row["COLOR_RATE"].ToString();
-                        i++;
+                        // arrValue2[iArr] = " ";
+                        if (iArr % 2 == 0)
+                            arrValue2[iArr] = "0";
+                        else
+                            arrValue2[iArr] = "trans";
+                    }
+                    foreach (DataRow row in dtRate.Rows)
+                    {
+                        switch (row["RN"].ToString())
+                        {
+                            case "1":
+                                arrValue2[0] = row["RATE"].ToString();
+                                arrValue2[1] = row["COLOR_RATE"].ToString();
+                                break;
+                            case "2":
+                                arrValue2[2] = row["RATE"].ToString();
+                                arrValue2[3] = row["COLOR_RATE"].ToString();
+                                break;
+                            case "3":
+                                arrValue2[4] = row["RATE"].ToString();
+                                arrValue2[5] = row["COLOR_RATE"].ToString();
+                                break;
+                            case "4":
+                                arrValue2[6] = row["RATE"].ToString();
+                                arrValue2[7] = row["COLOR_RATE"].ToString();
+                                break;
+                            case "5":
+                                arrValue2[8] = row["RATE"].ToString();
+                                arrValue2[9] = row["COLOR_RATE"].ToString();
+                                break;
+                            case "6":
+                                arrValue2[10] = row["RATE"].ToString();
+                                arrValue2[11] = row["COLOR_RATE"].ToString();
+                                break;
+                            default:
+                                break;
+
+                        }
+                        //arrValue[i] = row["OP_NM2"].ToString();
+                        //i++;
+                        //arrValue[i] = row["GREEN"].ToString();
+                        //i++;
+                        //arrValue[i] = row["YELLOW"].ToString();
+                        //i++;
+                        //arrValue[i] = row["RED"].ToString();
+                        //i++;
+                        //arrValue[i] = row["RATE"].ToString();
+                        //i++;
+                        //arrValue[i] = row["COLOR_RATE"].ToString();
+                        //i++;
                     }
 
-                    strExplain = string.Format(strExplain, arrValue);
+                    strExplain = string.Format(strExplain, arrValue2);
                 }
                 
 

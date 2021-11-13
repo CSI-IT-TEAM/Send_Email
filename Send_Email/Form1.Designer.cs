@@ -3337,6 +3337,8 @@
             // cmdMoldRepairMonthChk
             // 
             this.cmdMoldRepairMonthChk.AutoSize = true;
+            this.cmdMoldRepairMonthChk.Checked = true;
+            this.cmdMoldRepairMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdMoldRepairMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 282);
             this.cmdMoldRepairMonthChk.Name = "cmdMoldRepairMonthChk";
@@ -3348,6 +3350,8 @@
             // btnRunQualityMonthChk
             // 
             this.btnRunQualityMonthChk.AutoSize = true;
+            this.btnRunQualityMonthChk.Checked = true;
+            this.btnRunQualityMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunQualityMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRunQualityMonthChk.Location = new System.Drawing.Point(889, 138);
             this.btnRunQualityMonthChk.Name = "btnRunQualityMonthChk";
