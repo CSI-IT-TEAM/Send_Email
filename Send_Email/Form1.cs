@@ -281,6 +281,52 @@ namespace Send_Email
             }
         }
 
+        private void CreateMailTimeContraint(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\constraint_kr.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\constraint_vi.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo", imgInfo1 = "imgInfo1";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo1);
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><br><img src='cid:{1}'></body>", imgInfo, imgInfo1) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
@@ -5052,7 +5098,7 @@ namespace Send_Email
 
                 string html = getHTMLBodyHeaderTimeContraint(arg_type, dtHeader, dtData);
 
-                CreateMail(Emoji.ChartIncreasing + " Time Constraint By " + DivTag, html, dtEmail);
+                CreateMailTimeContraint(Emoji.ChartIncreasing + " Time Constraint By " + DivTag, html, dtEmail);
             }
             catch (Exception ex)
             {
@@ -6054,10 +6100,6 @@ namespace Send_Email
                 sHeader1 += string.Format(@"
                                                     </head>
                                                   <body>
-                                                    <ul>
-                                                    <li><span>Outsole went ahead of 13 days(base on outgoing scan) in comparison with production date</span></li>
-                                                    <li><span>UV went ahead of  13 days(base on water) and 24 days(base on solvent) in comparison with production date</span></li>
-                                                    </ul>
 
                                              <hr>
                                                             <table class='tg'>
