@@ -320,7 +320,7 @@
             this.repositoryItemCheckEditEx30 = new JPlatform.Client.Controls6.RepositoryItemCheckEditEx();
             this.gridViewEx1 = new JPlatform.Client.Controls6.GridViewEx();
             this.btnRunTMS = new System.Windows.Forms.Button();
-            this.btnTimeContraint = new System.Windows.Forms.Button();
+            this.btnTimeContraintStockfit = new System.Windows.Forms.Button();
             this.btnRunTMSV2 = new System.Windows.Forms.Button();
             this.pnTMSDassChart = new System.Windows.Forms.Panel();
             this.chart = new DevExpress.XtraCharts.ChartControl();
@@ -388,6 +388,7 @@
             this.chartControl7 = new DevExpress.XtraCharts.ChartControl();
             this.label3 = new System.Windows.Forms.Label();
             this.chartMold = new DevExpress.XtraCharts.ChartControl();
+            this.btnTimeContraintBottom = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -1429,7 +1430,7 @@
             // cmdRunProd
             // 
             this.cmdRunProd.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunProd.Location = new System.Drawing.Point(6, 308);
+            this.cmdRunProd.Location = new System.Drawing.Point(6, 326);
             this.cmdRunProd.Name = "cmdRunProd";
             this.cmdRunProd.Size = new System.Drawing.Size(397, 23);
             this.cmdRunProd.TabIndex = 20;
@@ -2163,16 +2164,16 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(409, 404);
+            this.txtLog.Location = new System.Drawing.Point(409, 421);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(532, 124);
+            this.txtLog.Size = new System.Drawing.Size(532, 107);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
             // 
             this.cmdPoTo.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPoTo.Location = new System.Drawing.Point(6, 337);
+            this.cmdPoTo.Location = new System.Drawing.Point(6, 351);
             this.cmdPoTo.Name = "cmdPoTo";
             this.cmdPoTo.Size = new System.Drawing.Size(397, 23);
             this.cmdPoTo.TabIndex = 205;
@@ -2483,16 +2484,16 @@
             this.btnRunTMS.Visible = false;
             this.btnRunTMS.Click += new System.EventHandler(this.btnRunTMS_Click);
             // 
-            // btnTimeContraint
+            // btnTimeContraintStockfit
             // 
-            this.btnTimeContraint.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimeContraint.Location = new System.Drawing.Point(6, 279);
-            this.btnTimeContraint.Name = "btnTimeContraint";
-            this.btnTimeContraint.Size = new System.Drawing.Size(397, 23);
-            this.btnTimeContraint.TabIndex = 208;
-            this.btnTimeContraint.Text = "Time Contraint by Stockfit and Bottom";
-            this.btnTimeContraint.UseVisualStyleBackColor = true;
-            this.btnTimeContraint.Click += new System.EventHandler(this.btnTimeContraint_Click);
+            this.btnTimeContraintStockfit.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimeContraintStockfit.Location = new System.Drawing.Point(6, 279);
+            this.btnTimeContraintStockfit.Name = "btnTimeContraintStockfit";
+            this.btnTimeContraintStockfit.Size = new System.Drawing.Size(397, 23);
+            this.btnTimeContraintStockfit.TabIndex = 208;
+            this.btnTimeContraintStockfit.Text = "Time Contraint by Stockfit ";
+            this.btnTimeContraintStockfit.UseVisualStyleBackColor = true;
+            this.btnTimeContraintStockfit.Click += new System.EventHandler(this.btnTimeContraint_Click);
             // 
             // btnRunTMSV2
             // 
@@ -2772,7 +2773,7 @@
             // cmd_Quality2
             // 
             this.cmd_Quality2.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_Quality2.Location = new System.Drawing.Point(6, 365);
+            this.cmd_Quality2.Location = new System.Drawing.Point(6, 376);
             this.cmd_Quality2.Name = "cmd_Quality2";
             this.cmd_Quality2.Size = new System.Drawing.Size(397, 23);
             this.cmd_Quality2.TabIndex = 215;
@@ -3107,7 +3108,7 @@
             this.cmdRunProdChk.Checked = true;
             this.cmdRunProdChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunProdChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunProdChk.Location = new System.Drawing.Point(409, 308);
+            this.cmdRunProdChk.Location = new System.Drawing.Point(409, 326);
             this.cmdRunProdChk.Name = "cmdRunProdChk";
             this.cmdRunProdChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunProdChk.TabIndex = 223;
@@ -3159,7 +3160,7 @@
             this.btnTimeContraintChk.Checked = true;
             this.btnTimeContraintChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnTimeContraintChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimeContraintChk.Location = new System.Drawing.Point(409, 282);
+            this.btnTimeContraintChk.Location = new System.Drawing.Point(409, 293);
             this.btnTimeContraintChk.Name = "btnTimeContraintChk";
             this.btnTimeContraintChk.Size = new System.Drawing.Size(52, 19);
             this.btnTimeContraintChk.TabIndex = 223;
@@ -3172,7 +3173,7 @@
             this.cmd_Quality2Chk.Checked = true;
             this.cmd_Quality2Chk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_Quality2Chk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_Quality2Chk.Location = new System.Drawing.Point(409, 369);
+            this.cmd_Quality2Chk.Location = new System.Drawing.Point(409, 380);
             this.cmd_Quality2Chk.Name = "cmd_Quality2Chk";
             this.cmd_Quality2Chk.Size = new System.Drawing.Size(52, 19);
             this.cmd_Quality2Chk.TabIndex = 223;
@@ -3288,7 +3289,7 @@
             this.cmdPoToChk.Checked = true;
             this.cmdPoToChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdPoToChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPoToChk.Location = new System.Drawing.Point(409, 337);
+            this.cmdPoToChk.Location = new System.Drawing.Point(409, 351);
             this.cmdPoToChk.Name = "cmdPoToChk";
             this.cmdPoToChk.Size = new System.Drawing.Size(52, 19);
             this.cmdPoToChk.TabIndex = 223;
@@ -3833,11 +3834,23 @@
             this.chartMold.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
             chartTitle12});
             // 
+            // btnTimeContraintBottom
+            // 
+            this.btnTimeContraintBottom.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimeContraintBottom.Location = new System.Drawing.Point(6, 301);
+            this.btnTimeContraintBottom.Name = "btnTimeContraintBottom";
+            this.btnTimeContraintBottom.Size = new System.Drawing.Size(397, 23);
+            this.btnTimeContraintBottom.TabIndex = 227;
+            this.btnTimeContraintBottom.Text = "Time Contraint by Bottom";
+            this.btnTimeContraintBottom.UseVisualStyleBackColor = true;
+            this.btnTimeContraintBottom.Click += new System.EventHandler(this.btnTimeContraintBottom_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(989, 539);
+            this.Controls.Add(this.btnTimeContraintBottom);
             this.Controls.Add(this.pnMold);
             this.Controls.Add(this.btnP);
             this.Controls.Add(this.panel3);
@@ -3881,7 +3894,7 @@
             this.Controls.Add(this.pnTMSDassGrid);
             this.Controls.Add(this.pnTMSDassChart);
             this.Controls.Add(this.grdBaseNpi);
-            this.Controls.Add(this.btnTimeContraint);
+            this.Controls.Add(this.btnTimeContraintStockfit);
             this.Controls.Add(this.btnRunScada);
             this.Controls.Add(this.btnTMS_Summary);
             this.Controls.Add(this.btnRunTMSV2);
@@ -4394,7 +4407,7 @@
         private JPlatform.Client.Controls6.RepositoryItemCheckEditEx repositoryItemCheckEditEx30;
         private JPlatform.Client.Controls6.GridViewEx gridViewEx1;
         private System.Windows.Forms.Button btnRunTMS;
-        private System.Windows.Forms.Button btnTimeContraint;
+        private System.Windows.Forms.Button btnTimeContraintStockfit;
         private System.Windows.Forms.Button btnRunTMSV2;
         private System.Windows.Forms.Panel pnTMSDassChart;
         private System.Windows.Forms.Panel pnTMSDassGrid;
@@ -4462,6 +4475,7 @@
         private DevExpress.XtraCharts.ChartControl chartControl7;
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraCharts.ChartControl chartMold;
+        private System.Windows.Forms.Button btnTimeContraintBottom;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

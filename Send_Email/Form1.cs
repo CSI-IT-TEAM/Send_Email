@@ -5090,6 +5090,7 @@ namespace Send_Email
                 DataSet dsData = SEL_TIME_CONTRAINT_DATA(arg_type);
                 if (dsData == null) return;
 
+                WriteLog("RunTimeContraint: "+ DivTag + " Run --> "  + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") );
                 DataTable dtHeader = dsData.Tables[0];
                 DataTable dtData = dsData.Tables[1];
                 DataTable dtEmail = dsData.Tables[2];
@@ -5099,6 +5100,7 @@ namespace Send_Email
                 string html = getHTMLBodyHeaderTimeContraint(arg_type, dtHeader, dtData);
 
                 CreateMailTimeContraint(Emoji.ChartIncreasing + " Time Constraint By " + DivTag, html, dtEmail);
+                WriteLog("RunTimeContraint: " + DivTag + " end --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
@@ -5476,7 +5478,7 @@ namespace Send_Email
             {
                 if (SendYN(((Button)sender).Text))
                 {
-                    RunTimeContraint("Bottom", "Q1"); //BOTTOM
+                    
                     RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
                 }
             }
@@ -5484,6 +5486,15 @@ namespace Send_Email
             {
             }
         }
+
+        private void btnTimeContraintBottom_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+            {
+                RunTimeContraint("Bottom", "Q1"); //BOTTOM
+            }
+        }
+
 
         private string getHTMLBodyHeaderTMSDash(DataTable dtHead, DataTable dtData)
         {
@@ -6062,7 +6073,7 @@ namespace Send_Email
 
         }
 
-
+        
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
