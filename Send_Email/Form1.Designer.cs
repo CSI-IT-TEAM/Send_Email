@@ -389,6 +389,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.chartMold = new DevExpress.XtraCharts.ChartControl();
             this.btnTimeContraintBottom = new System.Windows.Forms.Button();
+            this.cmd_IeRelief = new System.Windows.Forms.Button();
+            this.cmd_IeReliefChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -3845,11 +3847,37 @@
             this.btnTimeContraintBottom.UseVisualStyleBackColor = true;
             this.btnTimeContraintBottom.Click += new System.EventHandler(this.btnTimeContraintBottom_Click);
             // 
+            // cmd_IeRelief
+            // 
+            this.cmd_IeRelief.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmd_IeRelief.Location = new System.Drawing.Point(486, 308);
+            this.cmd_IeRelief.Name = "cmd_IeRelief";
+            this.cmd_IeRelief.Size = new System.Drawing.Size(397, 23);
+            this.cmd_IeRelief.TabIndex = 228;
+            this.cmd_IeRelief.Text = "Run IE Relief";
+            this.cmd_IeRelief.UseVisualStyleBackColor = true;
+            this.cmd_IeRelief.Click += new System.EventHandler(this.cmd_IeRelief_Click);
+            // 
+            // cmd_IeReliefChk
+            // 
+            this.cmd_IeReliefChk.AutoSize = true;
+            this.cmd_IeReliefChk.Checked = true;
+            this.cmd_IeReliefChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cmd_IeReliefChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_IeReliefChk.Location = new System.Drawing.Point(889, 310);
+            this.cmd_IeReliefChk.Name = "cmd_IeReliefChk";
+            this.cmd_IeReliefChk.Size = new System.Drawing.Size(52, 19);
+            this.cmd_IeReliefChk.TabIndex = 229;
+            this.cmd_IeReliefChk.Text = "Auto";
+            this.cmd_IeReliefChk.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(989, 539);
+            this.Controls.Add(this.cmd_IeReliefChk);
+            this.Controls.Add(this.cmd_IeRelief);
             this.Controls.Add(this.btnTimeContraintBottom);
             this.Controls.Add(this.pnMold);
             this.Controls.Add(this.btnP);
@@ -4476,6 +4504,8 @@
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraCharts.ChartControl chartMold;
         private System.Windows.Forms.Button btnTimeContraintBottom;
+        private System.Windows.Forms.Button cmd_IeRelief;
+        private System.Windows.Forms.CheckBox cmd_IeReliefChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

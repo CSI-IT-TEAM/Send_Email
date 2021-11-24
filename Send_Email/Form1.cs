@@ -64,7 +64,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com" };
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -371,49 +371,7 @@ namespace Send_Email
             }
         }
 
-        private void CreateMailBudget(string Subject, string htmlBody, DataTable dtEmail)
-        {
-            try
-            {
-                Outlook.Application app = new Outlook.Application();
-                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\budget_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = Subject;
-
-                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
-
-                //Get List Send email
-                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
-                {
-                    foreach (DataRow row in dtEmail.Rows)
-                    {
-                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
-                        oRecip.Resolve();
-                    }
-                }
-
-                if (chkTest.Checked)
-                {
-                    for (int i = 0; i < _emailTest.Length; i++)
-                    {
-                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
-                        oRecip.Resolve();
-                    }
-                }
-                oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
-                string imgInfo = "imgInfo";
-                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
-
-                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
-                mailItem.Send();
-            }
-            catch (Exception ex)
-            {
-                WriteLog("CreateMailProduction: " + ex.ToString());
-            }
-        }
+        
 
         private void CreateMailQuality(string Subject, string htmlBody, DataTable dtEmail)
         {
@@ -4711,6 +4669,141 @@ namespace Send_Email
             finally
             {
                 _isRun2 = false;
+            }
+        }
+
+        private void CreateMailBudget(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\budget_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        #endregion Budget
+
+        #region IE Relief
+
+        private void cmd_IeRelief_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunIeRelief("Q");
+        }
+
+        private void RunIeRelief(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+
+                //if (dsData == null) return;
+                Send_IE_Relief iE_Relief = new Send_IE_Relief();
+                string html = iE_Relief.Html(argType);
+                if (html == "") return;
+                WriteLog("RunIeRelief: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                if (html.StartsWith("Error"))
+                {
+                    WriteLog(html);
+                    return;
+                }
+                // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+
+                CreateMailIeRelief(iE_Relief._subject, html, iE_Relief._email);
+                //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+        private void CreateMailIeRelief(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_kr.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_vi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                //mailItem.HTMLBody = htmlBody;
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgInfo, imgInfo2) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+                WriteLog("RunIeRelief: Send Ok -->" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            }
+            catch (Exception ex)
+            {
+                WriteLog("RunIeRelief: " + ex.Message);
             }
         }
 
