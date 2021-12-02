@@ -184,7 +184,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_IE_RELIEF";
+                string process_name = "P_SEND_EMAIL_IE_RELIEF_TEST";
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 

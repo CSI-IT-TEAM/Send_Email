@@ -391,6 +391,9 @@
             this.btnTimeContraintBottom = new System.Windows.Forms.Button();
             this.cmd_IeRelief = new System.Windows.Forms.Button();
             this.cmd_IeReliefChk = new System.Windows.Forms.CheckBox();
+            this.lblFinishSoleQty = new JPlatform.Client.Controls6.LabelEx();
+            this.lblFssSetQty = new JPlatform.Client.Controls6.LabelEx();
+            this.lblBotSetQty = new JPlatform.Client.Controls6.LabelEx();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
@@ -757,7 +760,7 @@
             this.chart2.Legend.MarkerSize = new System.Drawing.Size(15, 15);
             this.chart2.Legend.TextColor = System.Drawing.Color.Black;
             this.chart2.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            this.chart2.Location = new System.Drawing.Point(2, 36);
+            this.chart2.Location = new System.Drawing.Point(2, 69);
             this.chart2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
             this.chart2.Name = "chart2";
             this.chart2.Padding.Bottom = 0;
@@ -2031,24 +2034,27 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Controls.Add(this.lblFinishSoleQty);
+            this.panel1.Controls.Add(this.lblFssSetQty);
+            this.panel1.Controls.Add(this.lblBotSetQty);
             this.panel1.Controls.Add(this.labelEx5);
             this.panel1.Controls.Add(this.labelEx4);
             this.panel1.Controls.Add(this.labelEx2);
             this.panel1.Controls.Add(this.labelEx1);
             this.panel1.Controls.Add(this.labelEx3);
             this.panel1.Controls.Add(this.chart2);
-            this.panel1.Location = new System.Drawing.Point(1171, 441);
+            this.panel1.Location = new System.Drawing.Point(1025, 511);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(73, 63);
+            this.panel1.Size = new System.Drawing.Size(228, 157);
             this.panel1.TabIndex = 198;
             // 
             // labelEx5
             // 
             this.labelEx5.Appearance.BackColor = System.Drawing.Color.Yellow;
-            this.labelEx5.Appearance.Font = new System.Drawing.Font("DotumChe", 10F);
+            this.labelEx5.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEx5.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelEx5.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.labelEx5.Location = new System.Drawing.Point(976, 6);
+            this.labelEx5.Location = new System.Drawing.Point(976, 30);
             this.labelEx5.Name = "labelEx5";
             this.labelEx5.Size = new System.Drawing.Size(165, 25);
             this.labelEx5.TabIndex = 424;
@@ -2057,11 +2063,11 @@
             // labelEx4
             // 
             this.labelEx4.Appearance.BackColor = System.Drawing.Color.Green;
-            this.labelEx4.Appearance.Font = new System.Drawing.Font("DotumChe", 10F);
+            this.labelEx4.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEx4.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelEx4.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelEx4.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.labelEx4.Location = new System.Drawing.Point(809, 6);
+            this.labelEx4.Location = new System.Drawing.Point(809, 30);
             this.labelEx4.Name = "labelEx4";
             this.labelEx4.Size = new System.Drawing.Size(165, 25);
             this.labelEx4.TabIndex = 423;
@@ -2070,11 +2076,12 @@
             // labelEx2
             // 
             this.labelEx2.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.labelEx2.Appearance.Font = new System.Drawing.Font("DotumChe", 10F);
-            this.labelEx2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelEx2.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEx2.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelEx2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.labelEx2.Location = new System.Drawing.Point(507, 6);
+            this.labelEx2.Location = new System.Drawing.Point(507, 30);
             this.labelEx2.Name = "labelEx2";
+            this.labelEx2.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelEx2.Size = new System.Drawing.Size(299, 25);
             this.labelEx2.TabIndex = 422;
             this.labelEx2.Text = "Finished Sole Inventory : 2 Hour Plan";
@@ -2082,11 +2089,12 @@
             // labelEx1
             // 
             this.labelEx1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.labelEx1.Appearance.Font = new System.Drawing.Font("DotumChe", 10F);
-            this.labelEx1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelEx1.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEx1.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelEx1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.labelEx1.Location = new System.Drawing.Point(226, 6);
+            this.labelEx1.Location = new System.Drawing.Point(226, 30);
             this.labelEx1.Name = "labelEx1";
+            this.labelEx1.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelEx1.Size = new System.Drawing.Size(280, 25);
             this.labelEx1.TabIndex = 421;
             this.labelEx1.Text = "Stockfit Incoming Set : 2 Hour Plan";
@@ -2094,11 +2102,13 @@
             // labelEx3
             // 
             this.labelEx3.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.labelEx3.Appearance.Font = new System.Drawing.Font("DotumChe", 10F);
-            this.labelEx3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelEx3.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEx3.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelEx3.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             this.labelEx3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.labelEx3.Location = new System.Drawing.Point(15, 6);
+            this.labelEx3.Location = new System.Drawing.Point(15, 30);
             this.labelEx3.Name = "labelEx3";
+            this.labelEx3.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.labelEx3.Size = new System.Drawing.Size(210, 25);
             this.labelEx3.TabIndex = 420;
             this.labelEx3.Text = "Bottom Set : 8 Hour Plan";
@@ -2123,7 +2133,7 @@
             // chkTest
             // 
             this.chkTest.AutoSize = true;
-            this.chkTest.Location = new System.Drawing.Point(866, 382);
+            this.chkTest.Location = new System.Drawing.Point(866, 397);
             this.chkTest.Name = "chkTest";
             this.chkTest.Size = new System.Drawing.Size(75, 17);
             this.chkTest.TabIndex = 200;
@@ -2785,10 +2795,10 @@
             // 
             // grdMain
             // 
-            this.grdMain.Location = new System.Drawing.Point(1082, 518);
+            this.grdMain.Location = new System.Drawing.Point(1518, 562);
             this.grdMain.MainView = this.grdView;
             this.grdMain.Name = "grdMain";
-            this.grdMain.Size = new System.Drawing.Size(446, 204);
+            this.grdMain.Size = new System.Drawing.Size(10, 160);
             this.grdMain.TabIndex = 218;
             this.grdMain.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdView});
@@ -3370,7 +3380,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(989, 41);
+            this.panel3.Size = new System.Drawing.Size(957, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3871,11 +3881,55 @@
             this.cmd_IeReliefChk.Text = "Auto";
             this.cmd_IeReliefChk.UseVisualStyleBackColor = true;
             // 
+            // lblFinishSoleQty
+            // 
+            this.lblFinishSoleQty.Appearance.BackColor = System.Drawing.Color.OldLace;
+            this.lblFinishSoleQty.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFinishSoleQty.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblFinishSoleQty.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.lblFinishSoleQty.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.lblFinishSoleQty.Location = new System.Drawing.Point(507, 3);
+            this.lblFinishSoleQty.Name = "lblFinishSoleQty";
+            this.lblFinishSoleQty.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.lblFinishSoleQty.Size = new System.Drawing.Size(299, 25);
+            this.lblFinishSoleQty.TabIndex = 427;
+            this.lblFinishSoleQty.Text = "Finished Sole Inventory : ";
+            // 
+            // lblFssSetQty
+            // 
+            this.lblFssSetQty.Appearance.BackColor = System.Drawing.Color.OldLace;
+            this.lblFssSetQty.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFssSetQty.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblFssSetQty.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.lblFssSetQty.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.lblFssSetQty.Location = new System.Drawing.Point(226, 3);
+            this.lblFssSetQty.Name = "lblFssSetQty";
+            this.lblFssSetQty.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.lblFssSetQty.Size = new System.Drawing.Size(280, 25);
+            this.lblFssSetQty.TabIndex = 426;
+            this.lblFssSetQty.Text = "Stockfit Incoming Set : ";
+            // 
+            // lblBotSetQty
+            // 
+            this.lblBotSetQty.Appearance.BackColor = System.Drawing.Color.OldLace;
+            this.lblBotSetQty.Appearance.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBotSetQty.Appearance.ForeColor = System.Drawing.Color.Blue;
+            this.lblBotSetQty.Appearance.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBotSetQty.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            this.lblBotSetQty.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.lblBotSetQty.Location = new System.Drawing.Point(15, 3);
+            this.lblBotSetQty.Name = "lblBotSetQty";
+            this.lblBotSetQty.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.lblBotSetQty.Size = new System.Drawing.Size(210, 25);
+            this.lblBotSetQty.TabIndex = 425;
+            this.lblBotSetQty.Text = "Bottom Set :";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 539);
+            this.ClientSize = new System.Drawing.Size(957, 531);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmd_IeReliefChk);
             this.Controls.Add(this.cmd_IeRelief);
             this.Controls.Add(this.btnTimeContraintBottom);
@@ -3937,7 +3991,6 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chkTest);
             this.Controls.Add(this.cmdRunAndon);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.grdBase1);
             this.Controls.Add(this.grdBase4);
             this.Controls.Add(this.cmdRunProd);
@@ -4506,6 +4559,9 @@
         private System.Windows.Forms.Button btnTimeContraintBottom;
         private System.Windows.Forms.Button cmd_IeRelief;
         private System.Windows.Forms.CheckBox cmd_IeReliefChk;
+        private JPlatform.Client.Controls6.LabelEx lblFinishSoleQty;
+        private JPlatform.Client.Controls6.LabelEx lblFssSetQty;
+        private JPlatform.Client.Controls6.LabelEx lblBotSetQty;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

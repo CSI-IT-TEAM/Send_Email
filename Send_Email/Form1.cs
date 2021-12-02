@@ -22,10 +22,10 @@ namespace Send_Email
         {
             InitializeComponent();
 
-            grdBase1.Size = new Size(1950, 1220);
-            grdBase2.Size = new Size(1950, 1100);
-            grdBase3.Size = new Size(1950, 1320);
-            grdBase4.Size = new Size(1950, 1400);
+            grdBase1.Size = new Size(1980, 1320);
+            grdBase2.Size = new Size(1980, 1150);
+            grdBase3.Size = new Size(1980, 1370);
+            grdBase4.Size = new Size(1980, 1450);
 
             grdBaseNpi.Size = new Size(4000, 700);
 
@@ -64,7 +64,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        private readonly string[] _emailTest = {  "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -105,6 +105,10 @@ namespace Send_Email
             if (cmd_BotDefChk.Checked)
                 RunBotDef("Q1");
 
+            //15h
+            if (cmd_IeReliefChk.Checked)
+                RunIeRelief("Q1");
+
             //16h
             if (cmdCuttingChk.Checked)
                 RunCutting("Q1");
@@ -118,6 +122,8 @@ namespace Send_Email
                     RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
                 }
             }
+
+
 
             //16h
 
@@ -2984,12 +2990,20 @@ namespace Send_Email
                 dtEmail = dsReturn.Tables[2];
                 LoadDataChart(dtChart);
 
+                int iBotSet, iFssSet, iFinishSole;
+
                 // Grid
                 DataTable dtSource = new DataTable();
                 if (buildHeader_detail(dtSource, dtGrid))
                 {
                     if (bindingDataSource_detail(dtSource, dtGrid))
                     {
+                        int.TryParse(dtSource.Rows[0]["Total Inv"].ToString(), out iBotSet);
+                        int.TryParse(dtSource.Rows[1]["Total Inv"].ToString(), out iFssSet);
+                        int.TryParse(dtSource.Rows[2]["Total Inv"].ToString(), out iFinishSole);
+                        lblBotSetQty.Text = "Bottom Set: " + iBotSet.ToString("#,#") + " (Prs)";
+                        lblFssSetQty.Text = "Stockfit Imcoming Set: " + iFssSet.ToString("#,#") + " (Prs)";
+                        lblFinishSoleQty.Text = "Finised Sole Inventory: " + iFinishSole.ToString("#,#") + " (Prs)";
                         grdBase1.DataSource = dtSource.Select("Factory in ('F1','F2')").CopyToDataTable();
                         grdBase2.DataSource = dtSource.Select("Factory in ('F3')").CopyToDataTable();
                         grdBase3.DataSource = dtSource.Select("Factory in ('F4')").CopyToDataTable();
