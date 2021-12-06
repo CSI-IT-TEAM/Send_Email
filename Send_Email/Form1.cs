@@ -30,7 +30,7 @@ namespace Send_Email
             grdBaseNpi.Size = new Size(4000, 700);
 
             panel1.Size = new Size(1950, 1100);
-            chart2.Size = new Size(1950, 1035);
+            chart2.Size = new Size(1950, 900);
 
             //Phước Thêm TMS Dass
             pnTMSDassChart.Size = new Size(1700, 500);
@@ -64,7 +64,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" };
 
         #region Event
 
@@ -633,7 +633,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 string imgInfo = "imgInfo";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody = String.Format(
@@ -3115,6 +3115,7 @@ namespace Send_Email
             chart2.Series[4].ValueDataMembers.AddRange(new string[] { "TAR_QTY2" });
             chart2.Series[5].ArgumentDataMember = "LINE_NM";
             chart2.Series[5].ValueDataMembers.AddRange(new string[] { "TAR_QTY" });
+            
 
             ((DevExpress.XtraCharts.XYDiagram)chart2.Diagram).AxisX.Label.Staggered = false;
         }
