@@ -80,6 +80,11 @@ namespace Send_Email
             if (cmdRunProdChk.Checked)
                 RunProduction("Q1");
 
+            //12H - Phước thêm 2021/12/07
+            if (TimeNow.Equals("11:59"))
+                if (cmdRunAssInLineChk.Checked)
+                    RunAssInLine("Q1");
+
             //7h
             if (cmdRunEscanChk.Checked)
                 RunEScan("Q1");
@@ -219,7 +224,7 @@ namespace Send_Email
             //Run TEst
             if (SendYN(((Button)sender).Text))
                 RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
-           
+
         }
 
         private void cmd_Budget_Click(object sender, EventArgs e)
@@ -229,7 +234,7 @@ namespace Send_Email
         }
         private void btnP_Click(object sender, EventArgs e)
         {
-           
+
         }
         #endregion Event
 
@@ -377,7 +382,7 @@ namespace Send_Email
             }
         }
 
-        
+
 
         private void CreateMailQuality(string Subject, string htmlBody, DataTable dtEmail)
         {
@@ -474,7 +479,7 @@ namespace Send_Email
                 string shift = dtEmail.Rows[0]["SHIFT"].ToString();
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Shift"+ shift +".jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Shift" + shift + ".jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\botDef_ko.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
@@ -918,7 +923,7 @@ namespace Send_Email
                             "</tr>";
                 }
 
-                string imgInfo = "imgInfo", imgInfo2= "imgInfo2";
+                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\POD_ko.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\POD_vi.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
@@ -1520,7 +1525,7 @@ namespace Send_Email
                 }
 
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
 
                 string rowValue = "";
@@ -1678,6 +1683,9 @@ namespace Send_Email
         }
 
         #endregion Email Production
+
+
+
 
         #region Email ANDON
 
@@ -3115,7 +3123,7 @@ namespace Send_Email
             chart2.Series[4].ValueDataMembers.AddRange(new string[] { "TAR_QTY2" });
             chart2.Series[5].ArgumentDataMember = "LINE_NM";
             chart2.Series[5].ValueDataMembers.AddRange(new string[] { "TAR_QTY" });
-            
+
 
             ((DevExpress.XtraCharts.XYDiagram)chart2.Diagram).AxisX.Label.Staggered = false;
         }
@@ -4599,7 +4607,7 @@ namespace Send_Email
 
                 CreateMailFeedBack(send_Feedback._subject, html, send_Feedback._email);
 
-               
+
 
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
@@ -5076,6 +5084,222 @@ namespace Send_Email
         }
         #endregion
 
+        #region Assembly Inline Inventory
+        private void RunAssInLine(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+                DataSet dsData = SEL_FGA_INV_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
+                if (dsData == null) return;
+                WriteLog($"RunFGAInlineInv({argType}): BEGIN ");
+                DataTable dtDate = dsData.Tables[0];
+                DataTable dtData = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog("  " + dtDate.Rows.Count.ToString() + " " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                CreateMailFGAInlineInv(dtDate, dtData, dtEmail);
+                WriteLog($"RunFGAInlineInv({argType}): END ");
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"  RunProduction({argType}) " + ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
+        private void CreateMailFGAInlineInv(DataTable dtDate, DataTable dtData, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                mailItem.Subject = "Assembly Inline Inventory";
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+
+                string rowValue = "";
+
+                string strRowSpan = "";
+
+                for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
+                {
+                    strRowSpan = dtData.Rows[iRow]["CNT"].ToString();
+                    if (iRow == 0)
+                    {
+                        rowValue += "<tr>" +
+                                       "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + " </td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D6_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D6_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D6"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D5_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D5_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D5"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D4_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D4_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D4"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
+                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
+                                  "</tr>";
+                    }
+                    else
+                    {
+                        if (dtData.Rows[iRow]["PLANT"].ToString() == dtData.Rows[iRow - 1]["PLANT"].ToString())
+                        {
+                            rowValue += "<tr>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D6_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D6_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D6"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D5_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D5_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D5"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D4_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D4_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D4"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
+                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
+                                  "</tr>";
+                        }
+                        else
+                        {
+                            rowValue += "<tr>" +
+                                         "<td rowspan='" + strRowSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + " </td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D6_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D6_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D6"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D5_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D5_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D5"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D4_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D4_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D4"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
+                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
+                                  "</tr>";
+                        }
+                    }
+                }
+
+                string strDate = "";
+                foreach (DataRow row in dtDate.Rows)
+                {
+                    strDate += "<th bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '70' >" + row["YMD"].ToString() + " </th >";
+                }
+
+                string html = "<table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='200'>" +
+                    "<tr ><td colspan='2' align='center'>Inventory Target</td></tr>" +
+                    "<tr><td align='center'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
+                     "<tr><td align='center'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
+                      "<tr><td align='center'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
+                    "</table>" +
+                    "<p></p>" +
+                    "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
+                               "<tr bgcolor='#ffe5cc'>" +
+                                  " <th rowspan = '2' align='center' width='70'>Plant</th>" +
+                                  " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
+                                  " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day inventory</th>" +
+                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'> Before lunch on today inventory</th>" +
+                               "</tr>" +
+                               "<tr>" +
+                                  strDate +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>2H Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Inventory (Pairs)</th>" +
+                               "</tr>" +
+                                 rowValue +
+                           "</table>";
+
+                //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
+                //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
+                //               "</p>";
+
+                mailItem.HTMLBody = html;
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("  CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        public DataSet SEL_FGA_INV_DATA(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_FGA_INV";
+                MyOraDB.ReDim_Parameter(5);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_1";
+                MyOraDB.Parameter_Name[3] = "CV_2";
+                MyOraDB.Parameter_Name[4] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_PROD: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_PROD_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        #endregion
+
         private string ColorNull(string argColor)
         {
             return argColor == "" ? "WHITE" : argColor;
@@ -5198,7 +5422,7 @@ namespace Send_Email
                 DataSet dsData = SEL_TIME_CONTRAINT_DATA(arg_type);
                 if (dsData == null) return;
 
-                WriteLog("RunTimeContraint: "+ DivTag + " Run --> "  + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") );
+                WriteLog("RunTimeContraint: " + DivTag + " Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtHeader = dsData.Tables[0];
                 DataTable dtData = dsData.Tables[1];
                 DataTable dtEmail = dsData.Tables[2];
@@ -5586,7 +5810,7 @@ namespace Send_Email
             {
                 if (SendYN(((Button)sender).Text))
                 {
-                    
+
                     RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
                 }
             }
@@ -6102,7 +6326,7 @@ namespace Send_Email
         {
             if (SendYN(((Button)sender).Text))
             {
-                RunFeedback("Q"); 
+                RunFeedback("Q");
             }
         }
 
@@ -6181,7 +6405,13 @@ namespace Send_Email
 
         }
 
-        
+        private void cmdAssInline_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunAssInLine("Q");
+        }
+
+
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

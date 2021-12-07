@@ -29,6 +29,27 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.ConstantLine constantLine1 = new DevExpress.XtraCharts.ConstantLine();
+            DevExpress.XtraCharts.HatchFillOptions hatchFillOptions1 = new DevExpress.XtraCharts.HatchFillOptions();
+            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY1 = new DevExpress.XtraCharts.SecondaryAxisY();
+            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel1 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView1 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel2 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView2 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel3 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
+            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView3 = new DevExpress.XtraCharts.StackedBarSeriesView();
+            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesLabel stackedLineSeriesLabel1 = new DevExpress.XtraCharts.StackedLineSeriesLabel();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView1 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView2 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView3 = new DevExpress.XtraCharts.StackedLineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
             DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
             DevExpress.XtraCharts.HatchFillOptions hatchFillOptions2 = new DevExpress.XtraCharts.HatchFillOptions();
             DevExpress.XtraCharts.Series series7 = new DevExpress.XtraCharts.Series();
@@ -101,27 +122,6 @@
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView7 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle12 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram1 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.ConstantLine constantLine1 = new DevExpress.XtraCharts.ConstantLine();
-            DevExpress.XtraCharts.HatchFillOptions hatchFillOptions1 = new DevExpress.XtraCharts.HatchFillOptions();
-            DevExpress.XtraCharts.SecondaryAxisY secondaryAxisY1 = new DevExpress.XtraCharts.SecondaryAxisY();
-            DevExpress.XtraCharts.Series series1 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel1 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView1 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series2 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel2 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView2 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series3 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedBarSeriesLabel stackedBarSeriesLabel3 = new DevExpress.XtraCharts.StackedBarSeriesLabel();
-            DevExpress.XtraCharts.StackedBarSeriesView stackedBarSeriesView3 = new DevExpress.XtraCharts.StackedBarSeriesView();
-            DevExpress.XtraCharts.Series series4 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesLabel stackedLineSeriesLabel1 = new DevExpress.XtraCharts.StackedLineSeriesLabel();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView1 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.Series series5 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView2 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.Series series6 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.StackedLineSeriesView stackedLineSeriesView3 = new DevExpress.XtraCharts.StackedLineSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle1 = new DevExpress.XtraCharts.ChartTitle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.tmrLoad = new System.Windows.Forms.Timer(this.components);
@@ -272,6 +272,7 @@
             this.grdBase1 = new JPlatform.Client.Controls6.GridControlEx();
             this.gvwBase1 = new JPlatform.Client.Controls6.GridViewEx();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.chart2 = new DevExpress.XtraCharts.ChartControl();
             this.lblFinishSoleQty = new JPlatform.Client.Controls6.LabelEx();
             this.lblFssSetQty = new JPlatform.Client.Controls6.LabelEx();
             this.lblBotSetQty = new JPlatform.Client.Controls6.LabelEx();
@@ -394,7 +395,8 @@
             this.btnTimeContraintBottom = new System.Windows.Forms.Button();
             this.cmd_IeRelief = new System.Windows.Forms.Button();
             this.cmd_IeReliefChk = new System.Windows.Forms.CheckBox();
-            this.chart2 = new DevExpress.XtraCharts.ChartControl();
+            this.cmdAssInline = new System.Windows.Forms.Button();
+            this.cmdRunAssInLineChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -540,6 +542,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdBase1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase1)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBaseNpi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewNpi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx29)).BeginInit();
@@ -658,25 +679,6 @@
             ((System.ComponentModel.ISupportInitialize)(series28)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesLabel1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView3)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -1287,7 +1289,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.Wheat;
-            this.lblStatus.Location = new System.Drawing.Point(817, 371);
+            this.lblStatus.Location = new System.Drawing.Point(814, 402);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(35, 13);
             this.lblStatus.TabIndex = 19;
@@ -1910,6 +1912,162 @@
             this.panel1.Size = new System.Drawing.Size(278, 100);
             this.panel1.TabIndex = 198;
             // 
+            // chart2
+            // 
+            this.chart2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.chart2.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chart2.CacheToMemory = true;
+            this.chart2.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram1.AxisX.DateTimeScaleOptions.AutoGrid = false;
+            xyDiagram1.AxisX.DateTimeScaleOptions.GridAlignment = DevExpress.XtraCharts.DateTimeGridAlignment.Day;
+            xyDiagram1.AxisX.Label.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram1.AxisX.Label.Font = new System.Drawing.Font("Calibri", 7.5F, System.Drawing.FontStyle.Bold);
+            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
+            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.MinIndent = 0;
+            xyDiagram1.AxisX.Tickmarks.Length = 6;
+            xyDiagram1.AxisX.Tickmarks.MinorVisible = false;
+            xyDiagram1.AxisX.Title.Text = "Date";
+            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
+            constantLine1.AxisValueSerializable = "100";
+            constantLine1.Color = System.Drawing.Color.Red;
+            constantLine1.LineStyle.Thickness = 3;
+            constantLine1.Name = "";
+            constantLine1.Visible = false;
+            xyDiagram1.AxisY.ConstantLines.AddRange(new DevExpress.XtraCharts.ConstantLine[] {
+            constantLine1});
+            xyDiagram1.AxisY.CrosshairAxisLabelOptions.BackColor = System.Drawing.Color.White;
+            xyDiagram1.AxisY.Interlaced = true;
+            xyDiagram1.AxisY.InterlacedFillStyle.FillMode = DevExpress.XtraCharts.FillMode.Hatch;
+            hatchFillOptions1.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            hatchFillOptions1.HatchStyle = System.Drawing.Drawing2D.HatchStyle.SmallConfetti;
+            xyDiagram1.AxisY.InterlacedFillStyle.Options = hatchFillOptions1;
+            xyDiagram1.AxisY.Label.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            xyDiagram1.AxisY.Label.TextPattern = "{V:#,0}";
+            xyDiagram1.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            xyDiagram1.AxisY.Title.Text = "Quantity (Prs)";
+            xyDiagram1.AxisY.Title.TextColor = System.Drawing.Color.Blue;
+            xyDiagram1.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
+            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram1.AxisY.WholeRange.AlwaysShowZeroLevel = false;
+            xyDiagram1.AxisY.WholeRange.Auto = false;
+            xyDiagram1.AxisY.WholeRange.AutoSideMargins = false;
+            xyDiagram1.AxisY.WholeRange.MaxValueSerializable = "10000";
+            xyDiagram1.AxisY.WholeRange.MinValueSerializable = "2500";
+            xyDiagram1.AxisY.WholeRange.SideMarginsValue = 2500D;
+            xyDiagram1.DefaultPane.BorderVisible = false;
+            xyDiagram1.EnableAxisXScrolling = true;
+            xyDiagram1.PaneDistance = 0;
+            secondaryAxisY1.AxisID = 0;
+            secondaryAxisY1.DateTimeScaleOptions.AutoGrid = false;
+            secondaryAxisY1.DateTimeScaleOptions.GridSpacing = 10D;
+            secondaryAxisY1.Label.Visible = false;
+            secondaryAxisY1.Name = "Secondary AxisY 1";
+            secondaryAxisY1.NumericScaleOptions.AutoGrid = false;
+            secondaryAxisY1.NumericScaleOptions.GridSpacing = 10D;
+            secondaryAxisY1.Title.Text = "%";
+            secondaryAxisY1.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            secondaryAxisY1.VisibleInPanesSerializable = "-1";
+            secondaryAxisY1.VisualRange.Auto = false;
+            secondaryAxisY1.VisualRange.AutoSideMargins = false;
+            secondaryAxisY1.VisualRange.MaxValueSerializable = "130";
+            secondaryAxisY1.VisualRange.MinValueSerializable = "0";
+            secondaryAxisY1.VisualRange.SideMarginsValue = 5D;
+            secondaryAxisY1.WholeRange.Auto = false;
+            secondaryAxisY1.WholeRange.AutoSideMargins = false;
+            secondaryAxisY1.WholeRange.MaxValueSerializable = "130";
+            secondaryAxisY1.WholeRange.MinValueSerializable = "0";
+            secondaryAxisY1.WholeRange.SideMarginsValue = 5D;
+            xyDiagram1.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
+            secondaryAxisY1});
+            this.chart2.Diagram = xyDiagram1;
+            this.chart2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Right;
+            this.chart2.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
+            this.chart2.Legend.BackColor = System.Drawing.Color.Transparent;
+            this.chart2.Legend.Border.Color = System.Drawing.Color.Transparent;
+            this.chart2.Legend.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            this.chart2.Legend.Direction = DevExpress.XtraCharts.LegendDirection.BottomToTop;
+            this.chart2.Legend.EquallySpacedItems = false;
+            this.chart2.Legend.MarkerSize = new System.Drawing.Size(15, 15);
+            this.chart2.Legend.TextColor = System.Drawing.Color.Black;
+            this.chart2.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            this.chart2.Location = new System.Drawing.Point(2, 65);
+            this.chart2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
+            this.chart2.Name = "chart2";
+            this.chart2.Padding.Bottom = 0;
+            this.chart2.Padding.Left = 1;
+            this.chart2.Padding.Right = 1;
+            this.chart2.Padding.Top = 0;
+            this.chart2.PaletteRepository.Add("Palette 1", new DevExpress.XtraCharts.Palette("Palette 1", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Red, System.Drawing.Color.Red),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Green, System.Drawing.Color.Green)}));
+            this.chart2.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Green, System.Drawing.Color.Green),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Red, System.Drawing.Color.Red)}));
+            series1.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedBarSeriesLabel1.BackColor = System.Drawing.Color.Black;
+            stackedBarSeriesLabel1.Border.Color = System.Drawing.Color.Black;
+            stackedBarSeriesLabel1.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel1.Font = new System.Drawing.Font("DotumChe", 9F);
+            stackedBarSeriesLabel1.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel1.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
+            stackedBarSeriesLabel1.Shadow.Visible = true;
+            stackedBarSeriesLabel1.TextColor = System.Drawing.Color.White;
+            stackedBarSeriesLabel1.TextOrientation = DevExpress.XtraCharts.TextOrientation.BottomToTop;
+            stackedBarSeriesLabel1.TextPattern = "{V:#,0}";
+            series1.Label = stackedBarSeriesLabel1;
+            series1.Name = "Finished Sole Inventory";
+            series1.View = stackedBarSeriesView1;
+            series2.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedBarSeriesLabel2.BackColor = System.Drawing.Color.Black;
+            stackedBarSeriesLabel2.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            stackedBarSeriesLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel2.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
+            stackedBarSeriesLabel2.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
+            stackedBarSeriesLabel2.Shadow.Visible = true;
+            stackedBarSeriesLabel2.TextColor = System.Drawing.Color.White;
+            stackedBarSeriesLabel2.TextOrientation = DevExpress.XtraCharts.TextOrientation.BottomToTop;
+            stackedBarSeriesLabel2.TextPattern = "{V:#,0}";
+            series2.Label = stackedBarSeriesLabel2;
+            series2.Name = "Stockfit Incoming Set";
+            stackedBarSeriesView2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            series2.View = stackedBarSeriesView2;
+            series3.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedBarSeriesLabel3.TextPattern = "{V:#,0}";
+            series3.Label = stackedBarSeriesLabel3;
+            series3.Name = "Bottom Set";
+            stackedBarSeriesView3.Color = System.Drawing.Color.YellowGreen;
+            series3.View = stackedBarSeriesView3;
+            series4.CrosshairLabelPattern = "{S} : {V:#,0}";
+            stackedLineSeriesLabel1.TextPattern = "{V:#,0}";
+            series4.Label = stackedLineSeriesLabel1;
+            series4.Name = "Target Finished Sole Inventory";
+            stackedLineSeriesView1.Color = System.Drawing.Color.RoyalBlue;
+            stackedLineSeriesView1.LineStyle.Thickness = 3;
+            series4.View = stackedLineSeriesView1;
+            series5.CrosshairLabelPattern = "{S} : {V:#,0}";
+            series5.Name = "Target Stockfit Incoming Set";
+            stackedLineSeriesView2.Color = System.Drawing.Color.Tomato;
+            stackedLineSeriesView2.LineStyle.Thickness = 3;
+            series5.View = stackedLineSeriesView2;
+            series6.CrosshairLabelPattern = "{S} : {V:#,0}";
+            series6.Name = "Target Bottom Set";
+            stackedLineSeriesView3.Color = System.Drawing.Color.OliveDrab;
+            stackedLineSeriesView3.LineStyle.Thickness = 3;
+            series6.View = stackedLineSeriesView3;
+            this.chart2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series1,
+        series2,
+        series3,
+        series4,
+        series5,
+        series6};
+            this.chart2.Size = new System.Drawing.Size(1918, 310);
+            this.chart2.TabIndex = 428;
+            chartTitle1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartTitle1.Text = "Bottom Inventory Set Analysis";
+            this.chart2.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle1});
+            // 
             // lblFinishSoleQty
             // 
             this.lblFinishSoleQty.Appearance.BackColor = System.Drawing.Color.OldLace;
@@ -2048,7 +2206,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(755, 372);
+            this.checkBox1.Location = new System.Drawing.Point(752, 403);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(53, 17);
             this.checkBox1.TabIndex = 201;
@@ -2059,7 +2217,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(814, 371);
+            this.checkBox2.Location = new System.Drawing.Point(811, 402);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(53, 17);
             this.checkBox2.TabIndex = 202;
@@ -2392,7 +2550,7 @@
             // 
             this.btnRunTMS.Enabled = false;
             this.btnRunTMS.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunTMS.Location = new System.Drawing.Point(775, 337);
+            this.btnRunTMS.Location = new System.Drawing.Point(772, 368);
             this.btnRunTMS.Name = "btnRunTMS";
             this.btnRunTMS.Size = new System.Drawing.Size(130, 23);
             this.btnRunTMS.TabIndex = 208;
@@ -3786,161 +3944,27 @@
             this.cmd_IeReliefChk.Text = "Auto";
             this.cmd_IeReliefChk.UseVisualStyleBackColor = true;
             // 
-            // chart2
+            // cmdAssInline
             // 
-            this.chart2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.chart2.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chart2.CacheToMemory = true;
-            this.chart2.CrosshairEnabled = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram1.AxisX.DateTimeScaleOptions.AutoGrid = false;
-            xyDiagram1.AxisX.DateTimeScaleOptions.GridAlignment = DevExpress.XtraCharts.DateTimeGridAlignment.Day;
-            xyDiagram1.AxisX.Label.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram1.AxisX.Label.Font = new System.Drawing.Font("Calibri", 7.5F, System.Drawing.FontStyle.Bold);
-            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.AllowRotate = false;
-            xyDiagram1.AxisX.Label.ResolveOverlappingOptions.MinIndent = 0;
-            xyDiagram1.AxisX.Tickmarks.Length = 6;
-            xyDiagram1.AxisX.Tickmarks.MinorVisible = false;
-            xyDiagram1.AxisX.Title.Text = "Date";
-            xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
-            constantLine1.AxisValueSerializable = "100";
-            constantLine1.Color = System.Drawing.Color.Red;
-            constantLine1.LineStyle.Thickness = 3;
-            constantLine1.Name = "";
-            constantLine1.Visible = false;
-            xyDiagram1.AxisY.ConstantLines.AddRange(new DevExpress.XtraCharts.ConstantLine[] {
-            constantLine1});
-            xyDiagram1.AxisY.CrosshairAxisLabelOptions.BackColor = System.Drawing.Color.White;
-            xyDiagram1.AxisY.Interlaced = true;
-            xyDiagram1.AxisY.InterlacedFillStyle.FillMode = DevExpress.XtraCharts.FillMode.Hatch;
-            hatchFillOptions1.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            hatchFillOptions1.HatchStyle = System.Drawing.Drawing2D.HatchStyle.SmallConfetti;
-            xyDiagram1.AxisY.InterlacedFillStyle.Options = hatchFillOptions1;
-            xyDiagram1.AxisY.Label.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram1.AxisY.Label.TextPattern = "{V:#,0}";
-            xyDiagram1.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram1.AxisY.Title.Text = "Quantity (Prs)";
-            xyDiagram1.AxisY.Title.TextColor = System.Drawing.Color.Blue;
-            xyDiagram1.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.Default;
-            xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.AxisY.WholeRange.AlwaysShowZeroLevel = false;
-            xyDiagram1.AxisY.WholeRange.Auto = false;
-            xyDiagram1.AxisY.WholeRange.AutoSideMargins = false;
-            xyDiagram1.AxisY.WholeRange.MaxValueSerializable = "10000";
-            xyDiagram1.AxisY.WholeRange.MinValueSerializable = "2500";
-            xyDiagram1.AxisY.WholeRange.SideMarginsValue = 2500D;
-            xyDiagram1.DefaultPane.BorderVisible = false;
-            xyDiagram1.EnableAxisXScrolling = true;
-            xyDiagram1.PaneDistance = 0;
-            secondaryAxisY1.AxisID = 0;
-            secondaryAxisY1.DateTimeScaleOptions.AutoGrid = false;
-            secondaryAxisY1.DateTimeScaleOptions.GridSpacing = 10D;
-            secondaryAxisY1.Label.Visible = false;
-            secondaryAxisY1.Name = "Secondary AxisY 1";
-            secondaryAxisY1.NumericScaleOptions.AutoGrid = false;
-            secondaryAxisY1.NumericScaleOptions.GridSpacing = 10D;
-            secondaryAxisY1.Title.Text = "%";
-            secondaryAxisY1.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            secondaryAxisY1.VisibleInPanesSerializable = "-1";
-            secondaryAxisY1.VisualRange.Auto = false;
-            secondaryAxisY1.VisualRange.AutoSideMargins = false;
-            secondaryAxisY1.VisualRange.MaxValueSerializable = "130";
-            secondaryAxisY1.VisualRange.MinValueSerializable = "0";
-            secondaryAxisY1.VisualRange.SideMarginsValue = 5D;
-            secondaryAxisY1.WholeRange.Auto = false;
-            secondaryAxisY1.WholeRange.AutoSideMargins = false;
-            secondaryAxisY1.WholeRange.MaxValueSerializable = "130";
-            secondaryAxisY1.WholeRange.MinValueSerializable = "0";
-            secondaryAxisY1.WholeRange.SideMarginsValue = 5D;
-            xyDiagram1.SecondaryAxesY.AddRange(new DevExpress.XtraCharts.SecondaryAxisY[] {
-            secondaryAxisY1});
-            this.chart2.Diagram = xyDiagram1;
-            this.chart2.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Right;
-            this.chart2.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
-            this.chart2.Legend.BackColor = System.Drawing.Color.Transparent;
-            this.chart2.Legend.Border.Color = System.Drawing.Color.Transparent;
-            this.chart2.Legend.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            this.chart2.Legend.Direction = DevExpress.XtraCharts.LegendDirection.BottomToTop;
-            this.chart2.Legend.EquallySpacedItems = false;
-            this.chart2.Legend.MarkerSize = new System.Drawing.Size(15, 15);
-            this.chart2.Legend.TextColor = System.Drawing.Color.Black;
-            this.chart2.Legend.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            this.chart2.Location = new System.Drawing.Point(2, 65);
-            this.chart2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 1);
-            this.chart2.Name = "chart2";
-            this.chart2.Padding.Bottom = 0;
-            this.chart2.Padding.Left = 1;
-            this.chart2.Padding.Right = 1;
-            this.chart2.Padding.Top = 0;
-            this.chart2.PaletteRepository.Add("Palette 1", new DevExpress.XtraCharts.Palette("Palette 1", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Red, System.Drawing.Color.Red),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Green, System.Drawing.Color.Green)}));
-            this.chart2.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Green, System.Drawing.Color.Green),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.Red, System.Drawing.Color.Red)}));
-            series1.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedBarSeriesLabel1.BackColor = System.Drawing.Color.Black;
-            stackedBarSeriesLabel1.Border.Color = System.Drawing.Color.Black;
-            stackedBarSeriesLabel1.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel1.Font = new System.Drawing.Font("DotumChe", 9F);
-            stackedBarSeriesLabel1.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel1.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
-            stackedBarSeriesLabel1.Shadow.Visible = true;
-            stackedBarSeriesLabel1.TextColor = System.Drawing.Color.White;
-            stackedBarSeriesLabel1.TextOrientation = DevExpress.XtraCharts.TextOrientation.BottomToTop;
-            stackedBarSeriesLabel1.TextPattern = "{V:#,0}";
-            series1.Label = stackedBarSeriesLabel1;
-            series1.Name = "Finished Sole Inventory";
-            series1.View = stackedBarSeriesView1;
-            series2.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedBarSeriesLabel2.BackColor = System.Drawing.Color.Black;
-            stackedBarSeriesLabel2.Border.Color = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            stackedBarSeriesLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel2.LineVisibility = DevExpress.Utils.DefaultBoolean.True;
-            stackedBarSeriesLabel2.Position = DevExpress.XtraCharts.BarSeriesLabelPosition.Auto;
-            stackedBarSeriesLabel2.Shadow.Visible = true;
-            stackedBarSeriesLabel2.TextColor = System.Drawing.Color.White;
-            stackedBarSeriesLabel2.TextOrientation = DevExpress.XtraCharts.TextOrientation.BottomToTop;
-            stackedBarSeriesLabel2.TextPattern = "{V:#,0}";
-            series2.Label = stackedBarSeriesLabel2;
-            series2.Name = "Stockfit Incoming Set";
-            stackedBarSeriesView2.Color = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            series2.View = stackedBarSeriesView2;
-            series3.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedBarSeriesLabel3.TextPattern = "{V:#,0}";
-            series3.Label = stackedBarSeriesLabel3;
-            series3.Name = "Bottom Set";
-            stackedBarSeriesView3.Color = System.Drawing.Color.YellowGreen;
-            series3.View = stackedBarSeriesView3;
-            series4.CrosshairLabelPattern = "{S} : {V:#,0}";
-            stackedLineSeriesLabel1.TextPattern = "{V:#,0}";
-            series4.Label = stackedLineSeriesLabel1;
-            series4.Name = "Target Finished Sole Inventory";
-            stackedLineSeriesView1.Color = System.Drawing.Color.RoyalBlue;
-            stackedLineSeriesView1.LineStyle.Thickness = 3;
-            series4.View = stackedLineSeriesView1;
-            series5.CrosshairLabelPattern = "{S} : {V:#,0}";
-            series5.Name = "Target Stockfit Incoming Set";
-            stackedLineSeriesView2.Color = System.Drawing.Color.Tomato;
-            stackedLineSeriesView2.LineStyle.Thickness = 3;
-            series5.View = stackedLineSeriesView2;
-            series6.CrosshairLabelPattern = "{S} : {V:#,0}";
-            series6.Name = "Target Bottom Set";
-            stackedLineSeriesView3.Color = System.Drawing.Color.OliveDrab;
-            stackedLineSeriesView3.LineStyle.Thickness = 3;
-            series6.View = stackedLineSeriesView3;
-            this.chart2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series1,
-        series2,
-        series3,
-        series4,
-        series5,
-        series6};
-            this.chart2.Size = new System.Drawing.Size(1918, 310);
-            this.chart2.TabIndex = 428;
-            chartTitle1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartTitle1.Text = "Bottom Inventory Set Analysis";
-            this.chart2.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle1});
+            this.cmdAssInline.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdAssInline.Location = new System.Drawing.Point(486, 337);
+            this.cmdAssInline.Name = "cmdAssInline";
+            this.cmdAssInline.Size = new System.Drawing.Size(397, 23);
+            this.cmdAssInline.TabIndex = 20;
+            this.cmdAssInline.Text = "Assembly Inline Inventory";
+            this.cmdAssInline.UseVisualStyleBackColor = true;
+            this.cmdAssInline.Click += new System.EventHandler(this.cmdAssInline_Click);
+            // 
+            // cmdRunAssInLineChk
+            // 
+            this.cmdRunAssInLineChk.AutoSize = true;
+            this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(889, 337);
+            this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
+            this.cmdRunAssInLineChk.Size = new System.Drawing.Size(52, 19);
+            this.cmdRunAssInLineChk.TabIndex = 223;
+            this.cmdRunAssInLineChk.Text = "Auto";
+            this.cmdRunAssInLineChk.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -3969,6 +3993,7 @@
             this.Controls.Add(this.cmdPoToChk);
             this.Controls.Add(this.btnFeedbackChk);
             this.Controls.Add(this.cmd_BotDefChk);
+            this.Controls.Add(this.cmdRunAssInLineChk);
             this.Controls.Add(this.cmdRunProdChk);
             this.Controls.Add(this.cmdRunEscanChk);
             this.Controls.Add(this.cmdCuttingChk);
@@ -4011,6 +4036,7 @@
             this.Controls.Add(this.cmdRunAndon);
             this.Controls.Add(this.grdBase1);
             this.Controls.Add(this.grdBase4);
+            this.Controls.Add(this.cmdAssInline);
             this.Controls.Add(this.cmdRunProd);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.grdBase3);
@@ -4165,6 +4191,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.grdBase1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase1)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdBaseNpi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdViewNpi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx29)).EndInit();
@@ -4284,25 +4329,6 @@
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMold)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(secondaryAxisY1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesLabel3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedBarSeriesView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesLabel1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(stackedLineSeriesView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4581,6 +4607,8 @@
         private JPlatform.Client.Controls6.LabelEx lblFssSetQty;
         private JPlatform.Client.Controls6.LabelEx lblBotSetQty;
         private DevExpress.XtraCharts.ChartControl chart2;
+        private System.Windows.Forms.Button cmdAssInline;
+        private System.Windows.Forms.CheckBox cmdRunAssInLineChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
