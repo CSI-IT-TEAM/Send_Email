@@ -3958,6 +3958,8 @@
             // cmdRunAssInLineChk
             // 
             this.cmdRunAssInLineChk.AutoSize = true;
+            this.cmdRunAssInLineChk.Checked = true;
+            this.cmdRunAssInLineChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunAssInLineChk.Location = new System.Drawing.Point(889, 337);
             this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
