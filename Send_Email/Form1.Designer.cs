@@ -122,6 +122,10 @@
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView7 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle12 = new DevExpress.XtraCharts.ChartTitle();
+            DevExpress.XtraCharts.XYDiagram xyDiagram7 = new DevExpress.XtraCharts.XYDiagram();
+            DevExpress.XtraCharts.Series series29 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.LineSeriesView lineSeriesView3 = new DevExpress.XtraCharts.LineSeriesView();
+            DevExpress.XtraCharts.ChartTitle chartTitle13 = new DevExpress.XtraCharts.ChartTitle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.tmrLoad = new System.Windows.Forms.Timer(this.components);
@@ -397,6 +401,8 @@
             this.cmd_IeReliefChk = new System.Windows.Forms.CheckBox();
             this.cmdAssInline = new System.Windows.Forms.Button();
             this.cmdRunAssInLineChk = new System.Windows.Forms.CheckBox();
+            this.pnChartFGA_INV = new System.Windows.Forms.Panel();
+            this.chartFGA_INV = new DevExpress.XtraCharts.ChartControl();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -679,6 +685,11 @@
             ((System.ComponentModel.ISupportInitialize)(series28)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView7)).BeginInit();
+            this.pnChartFGA_INV.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFGA_INV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(series29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -700,7 +711,7 @@
             // grdBase2
             // 
             this.grdBase2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grdBase2.Location = new System.Drawing.Point(1380, 441);
+            this.grdBase2.Location = new System.Drawing.Point(1659, 477);
             this.grdBase2.MainView = this.gvwBase2;
             this.grdBase2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.grdBase2.Name = "grdBase2";
@@ -2978,7 +2989,7 @@
             // pnchartReworkPlant
             // 
             this.pnchartReworkPlant.Controls.Add(this.chartReworkPlant);
-            this.pnchartReworkPlant.Location = new System.Drawing.Point(1223, 25);
+            this.pnchartReworkPlant.Location = new System.Drawing.Point(1502, 61);
             this.pnchartReworkPlant.Name = "pnchartReworkPlant";
             this.pnchartReworkPlant.Size = new System.Drawing.Size(533, 149);
             this.pnchartReworkPlant.TabIndex = 221;
@@ -3035,7 +3046,7 @@
             // pnChartReworkReason
             // 
             this.pnChartReworkReason.Controls.Add(this.chartReworkReason);
-            this.pnChartReworkReason.Location = new System.Drawing.Point(1223, 189);
+            this.pnChartReworkReason.Location = new System.Drawing.Point(1502, 225);
             this.pnChartReworkReason.Name = "pnChartReworkReason";
             this.pnChartReworkReason.Size = new System.Drawing.Size(533, 149);
             this.pnChartReworkReason.TabIndex = 221;
@@ -3078,7 +3089,7 @@
             // pnchartBCGrade
             // 
             this.pnchartBCGrade.Controls.Add(this.chartBCGrade);
-            this.pnchartBCGrade.Location = new System.Drawing.Point(1223, 344);
+            this.pnchartBCGrade.Location = new System.Drawing.Point(1502, 380);
             this.pnchartBCGrade.Name = "pnchartBCGrade";
             this.pnchartBCGrade.Size = new System.Drawing.Size(533, 211);
             this.pnchartBCGrade.TabIndex = 221;
@@ -3311,7 +3322,7 @@
             this.btnRunTMSChk.Checked = true;
             this.btnRunTMSChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunTMSChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunTMSChk.Location = new System.Drawing.Point(1156, 245);
+            this.btnRunTMSChk.Location = new System.Drawing.Point(1435, 281);
             this.btnRunTMSChk.Name = "btnRunTMSChk";
             this.btnRunTMSChk.Size = new System.Drawing.Size(52, 19);
             this.btnRunTMSChk.TabIndex = 223;
@@ -3443,7 +3454,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(958, 41);
+            this.panel3.Size = new System.Drawing.Size(1904, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3958,8 +3969,6 @@
             // cmdRunAssInLineChk
             // 
             this.cmdRunAssInLineChk.AutoSize = true;
-            this.cmdRunAssInLineChk.Checked = true;
-            this.cmdRunAssInLineChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunAssInLineChk.Location = new System.Drawing.Point(889, 337);
             this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
@@ -3968,11 +3977,59 @@
             this.cmdRunAssInLineChk.Text = "Auto";
             this.cmdRunAssInLineChk.UseVisualStyleBackColor = true;
             // 
+            // pnChartFGA_INV
+            // 
+            this.pnChartFGA_INV.Controls.Add(this.chartFGA_INV);
+            this.pnChartFGA_INV.Location = new System.Drawing.Point(985, 124);
+            this.pnChartFGA_INV.Name = "pnChartFGA_INV";
+            this.pnChartFGA_INV.Size = new System.Drawing.Size(511, 250);
+            this.pnChartFGA_INV.TabIndex = 230;
+            // 
+            // chartFGA_INV
+            // 
+            this.chartFGA_INV.AppearanceNameSerializable = "Light";
+            xyDiagram7.AxisX.Label.Angle = 45;
+            xyDiagram7.AxisX.Title.Text = "Plant";
+            xyDiagram7.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram7.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram7.AxisY.Title.Text = "Rework Rate (%)";
+            xyDiagram7.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
+            xyDiagram7.AxisY.VisibleInPanesSerializable = "-1";
+            this.chartFGA_INV.Diagram = xyDiagram7;
+            this.chartFGA_INV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartFGA_INV.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
+            this.chartFGA_INV.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
+            this.chartFGA_INV.Legend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.chartFGA_INV.Legend.Direction = DevExpress.XtraCharts.LegendDirection.LeftToRight;
+            this.chartFGA_INV.Legend.Font = new System.Drawing.Font("Tahoma", 18F);
+            this.chartFGA_INV.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            this.chartFGA_INV.Location = new System.Drawing.Point(0, 0);
+            this.chartFGA_INV.Name = "chartFGA_INV";
+            this.chartFGA_INV.PaletteName = "Mixed";
+            this.chartFGA_INV.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(129)))), ((int)(((byte)(189))))), System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(90)))), ((int)(((byte)(136)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(80)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(52)))), ((int)(((byte)(49)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(187)))), ((int)(((byte)(89))))), System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(137)))), ((int)(((byte)(56)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(100)))), ((int)(((byte)(162))))), System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(69)))), ((int)(((byte)(115)))))),
+                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(150)))), ((int)(((byte)(70))))), System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(101)))), ((int)(((byte)(9))))))}));
+            series29.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
+            series29.Name = "Rework Rate";
+            series29.View = lineSeriesView3;
+            this.chartFGA_INV.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
+        series29};
+            this.chartFGA_INV.Size = new System.Drawing.Size(511, 250);
+            this.chartFGA_INV.TabIndex = 222;
+            chartTitle13.Font = new System.Drawing.Font("Times New Roman", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartTitle13.Text = "Ratio (%)";
+            this.chartFGA_INV.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
+            chartTitle13});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 544);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.pnChartFGA_INV);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmd_IeReliefChk);
             this.Controls.Add(this.cmd_IeRelief);
@@ -4331,6 +4388,11 @@
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartMold)).EndInit();
+            this.pnChartFGA_INV.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(series29)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartFGA_INV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4611,6 +4673,8 @@
         private DevExpress.XtraCharts.ChartControl chart2;
         private System.Windows.Forms.Button cmdAssInline;
         private System.Windows.Forms.CheckBox cmdRunAssInLineChk;
+        private System.Windows.Forms.Panel pnChartFGA_INV;
+        private DevExpress.XtraCharts.ChartControl chartFGA_INV;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

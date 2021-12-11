@@ -46,6 +46,9 @@ namespace Send_Email
             chartMold.Size = new Size(750, 700);
             grdMain.Size = new Size(1700, 300);
 
+            pnChartFGA_INV.Size = new Size(1400, 400);
+
+
             tmrLoad.Enabled = true;
             //this.Text = "20210710133500";
             //this.Text = "20211008083800";
@@ -81,7 +84,7 @@ namespace Send_Email
                 RunProduction("Q1");
 
             //12H - Phước thêm 2021/12/07
-            if (TimeNow.Equals("12:59"))
+            if (TimeNow.Equals("13:29"))
                 if (cmdRunAssInLineChk.Checked)
                     RunAssInLine("Q1");
 
@@ -5114,6 +5117,42 @@ namespace Send_Email
             }
         }
 
+        private void RunAssInLine_v2(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+               
+                DataSet dsData = SEL_FGA_INV_DATA_v2("Q1", DateTime.Now.ToString("yyyyMMdd")); //Get Data for HTML Table
+               
+
+                if (dsData == null) return;
+                WriteLog($"RunFGAInlineInv({argType}): BEGIN ");
+                DataTable dtData = dsData.Tables[0];
+                DataTable dtChart = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                BindingFGA_INVChart(dtChart);
+
+                CaptureControl(chartFGA_INV, "CHART_FGA_INV");
+
+                WriteLog("  " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                CreateMailFGAInlineInv_v2(dtData, dtEmail);
+                WriteLog($"RunFGAInlineInv({argType}): END ");
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"  RunProduction({argType}) " + ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
+        }
+
         private void CreateMailFGAInlineInv(DataTable dtDate, DataTable dtData, DataTable dtEmail)
         {
             try
@@ -5217,7 +5256,7 @@ namespace Send_Email
                     strDate += "<th bgcolor = '#ff9900' style = 'color:#ffffff' align = 'center' width = '70' >" + row["YMD"].ToString() + " </th >";
                 }
 
-                string html = "<img src='cid:"+imgInfo+ "'><br><img src='cid:" + imgInfo1 + "'><br><table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
+                string html = "<img src='cid:" + imgInfo + "'><br><img src='cid:" + imgInfo1 + "'><br><table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
                     "<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
                     "<tr><td align='left'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
                      "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
@@ -5254,6 +5293,168 @@ namespace Send_Email
             }
         }
 
+        private void CreateMailFGAInlineInv_v2( DataTable dtData, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+               // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+              //  Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\CHART_FGA_INV.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = "Assembly Set Balance Inventory";
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+             //   string imgInfo = "imgInfo";
+             //   string imgInfo1 = "imgInfo1";
+                string imgInfo2 = "imgInfo2";
+              //  oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+              //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo1);
+                oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                string rowValue = "";
+
+                string strRowFACSpan = "", strRowPLANTSpan="";
+
+                for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
+                {
+                    strRowFACSpan = dtData.Rows[iRow]["CNT_FAC"].ToString();
+                    strRowPLANTSpan = dtData.Rows[iRow]["CNT_PLANT"].ToString();
+                    string bg_tot_color = string.Empty;
+                    if (iRow == 0)
+                    {
+                        
+                        if (dtData.Rows[iRow]["FACTORY"].ToString().ToUpper().Equals("GRAND TOTAL"))
+                        {
+                            bg_tot_color = "#34c916";
+                        }
+
+                            rowValue += "<tr bgcolor='"+ bg_tot_color + "'>" +
+                                           "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
+                                           "<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                           "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
+                                           "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
+                                           "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
+                                           "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
+                                           "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                      "</tr>";
+                       
+                    }
+                    else
+                    {
+                        if (dtData.Rows[iRow]["FACTORY"].ToString() == dtData.Rows[iRow - 1]["FACTORY"].ToString())
+                        {
+                            if (dtData.Rows[iRow]["PLANT"].ToString() == dtData.Rows[iRow - 1]["PLANT"].ToString())
+                            {
+                                rowValue += "<tr>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                  "</tr>";
+                            }
+                            else
+                            {
+                                rowValue += "<tr>" +
+                                       "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                  "</tr>";
+                            }
+                        }
+                        else
+                        {
+                            if (dtData.Rows[iRow]["FACTORY"].ToString().ToUpper().Equals("GRAND TOTAL"))
+                            {
+                                bg_tot_color = "#34c916";
+                            }
+                            rowValue += "<tr bgcolor='" + bg_tot_color + "'>" +
+                                     "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
+                                     "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                     "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
+                                     "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
+                                     "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
+                                     "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
+                                     "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                "</tr>";
+                        }
+                    }
+                }
+
+                string html = "<img src='cid:" + imgInfo2 + "'><br><hr/>" +
+                    //"<table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
+                    //"<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
+                    //"<tr><td align='left'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
+                    // "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
+                    //  "<tr><td align='left'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
+                    //"</table>" +
+                    " <h3><strong>UNIT: PAIRS</strong></h3>" +
+                    "<p></p>" +
+                    "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='800'>" +
+                               "<tr bgcolor='#ffe5cc'>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150'>Factory</th>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150'>Plant</th>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150' >Line</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Upper Inventory</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Finish Sole Inventory</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Set Balance</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Set Ratio (%)</th>" +
+                               "</tr>" +
+                                 rowValue +
+                           "</table>";
+
+                //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
+                //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
+                //               "</p>";
+
+                mailItem.HTMLBody = html;
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("  CreateMailProduction: " + ex.ToString());
+            }
+        }
+        private void BindingFGA_INVChart(DataTable dt)
+        {
+            try
+            {
+                chartFGA_INV.DataSource = dt;
+                chartFGA_INV.Series[0].ArgumentDataMember = "PLANT";
+                chartFGA_INV.Series[0].ValueDataMembers.AddRange(new string[] { "SET_RATIO" });
+            }
+            catch
+            {
+
+            }
+        }
         public DataSet SEL_FGA_INV_DATA(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
@@ -5261,6 +5462,56 @@ namespace Send_Email
             try
             {
                 string process_name = "P_SEND_EMAIL_FGA_INV";
+                MyOraDB.ReDim_Parameter(5);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_1";
+                MyOraDB.Parameter_Name[3] = "CV_2";
+                MyOraDB.Parameter_Name[4] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_PROD: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_PROD_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        public DataSet SEL_FGA_INV_DATA_v2(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_INV_SET";
                 MyOraDB.ReDim_Parameter(5);
                 MyOraDB.Process_Name = process_name;
 
@@ -6413,7 +6664,7 @@ namespace Send_Email
         private void cmdAssInline_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunAssInLine("Q");
+                RunAssInLine_v2("Q");
         }
 
 
