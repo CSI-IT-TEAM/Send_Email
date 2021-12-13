@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "DO.IT@CHANGSHININC.COM" }; //"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = {  "DO.IT@CHANGSHININC.COM" }; //"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -2134,7 +2134,6 @@ namespace Send_Email
 
         #endregion Email ANDON
 
-
         #region Email Mold Monthly
 
         private void RunMoldRepairMonth(string argType)
@@ -2883,7 +2882,6 @@ namespace Send_Email
         }
 
         #endregion
-
 
         #region Email Bottom Inventory
 
@@ -5355,10 +5353,10 @@ namespace Send_Email
                                            "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
                                            "<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
                                            "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
-                                           "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
-                                           "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
-                                           "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
-                                           "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}",dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
+                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                       "</tr>";
                        
                     }
@@ -5370,10 +5368,10 @@ namespace Send_Email
                             {
                                 rowValue += "<tr>" +
                                        "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
-                                       "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
+                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                             else
@@ -5381,10 +5379,10 @@ namespace Send_Email
                                 rowValue += "<tr>" +
                                        "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
                                        "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
-                                       "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                        "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
+                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                         }
@@ -5398,16 +5396,16 @@ namespace Send_Email
                                      "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
                                      "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
                                      "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
-                                     "<td align='right'>" + dtData.Rows[iRow]["UP_QTY"].ToString() + "</td>" +
-                                     "<td align='right'>" + dtData.Rows[iRow]["FS_QTY"].ToString() + "</td>" +
-                                     "<td align='right'>" + dtData.Rows[iRow]["SET_QTY"].ToString() + "</td>" +
-                                     "<td align='center'>" + dtData.Rows[iRow]["SET_RATIO"].ToString() + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
+                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                 "</tr>";
                         }
                     }
                 }
 
-                string html = "<img src='cid:" + imgInfo2 + "'><br><hr/>" +
+                string html = "<img src='cid:" + imgInfo2 + "'><br>" +
                     //"<table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
                     //"<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
                     //"<tr><td align='left'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
@@ -5416,15 +5414,15 @@ namespace Send_Email
                     //"</table>" +
                     " <h3><strong>UNIT: PAIRS</strong></h3>" +
                     "<p></p>" +
-                    "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='800'>" +
+                    "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000'>" +
                                "<tr bgcolor='#ffe5cc'>" +
-                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150'>Factory</th>" +
-                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150'>Plant</th>" +
-                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='150' >Line</th>" +
-                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Upper Inventory</th>" +
-                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Finish Sole Inventory</th>" +
-                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Set Balance</th>" +
-                                  " <th bgcolor = '#f0ba07' align='center' width='350'>Set Ratio (%)</th>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='200'>Factory</th>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='200'>Plant</th>" +
+                                  " <th bgcolor = '#0760f0' style = 'color:#ffffff' align='center' width='200' >Line</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='400'>Upper Inventory</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='400'>Finish Sole Inventory</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='400'>Set Balance</th>" +
+                                  " <th bgcolor = '#f0ba07' align='center' width='400'>Set Ratio (%)</th>" +
                                "</tr>" +
                                  rowValue +
                            "</table>";
@@ -5555,7 +5553,6 @@ namespace Send_Email
             }
         }
         #endregion
-
         private string ColorNull(string argColor)
         {
             return argColor == "" ? "WHITE" : argColor;
@@ -6664,7 +6661,8 @@ namespace Send_Email
         private void cmdAssInline_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunAssInLine_v2("Q");
+                //RunAssInLine_v2("Q");
+                RunAssInLine("Q");
         }
 
 

@@ -3454,7 +3454,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1904, 41);
+            this.panel3.Size = new System.Drawing.Size(952, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3969,8 +3969,10 @@
             // cmdRunAssInLineChk
             // 
             this.cmdRunAssInLineChk.AutoSize = true;
+            this.cmdRunAssInLineChk.Checked = true;
+            this.cmdRunAssInLineChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(889, 337);
+            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(888, 339);
             this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
             this.cmdRunAssInLineChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAssInLineChk.TabIndex = 223;
@@ -3988,7 +3990,6 @@
             // chartFGA_INV
             // 
             this.chartFGA_INV.AppearanceNameSerializable = "Light";
-            xyDiagram7.AxisX.Label.Angle = 45;
             xyDiagram7.AxisX.Title.Text = "Plant";
             xyDiagram7.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             xyDiagram7.AxisX.VisibleInPanesSerializable = "-1";
@@ -4028,7 +4029,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(952, 536);
             this.Controls.Add(this.pnChartFGA_INV);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmd_IeReliefChk);
