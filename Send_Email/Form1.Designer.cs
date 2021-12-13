@@ -403,6 +403,8 @@
             this.cmdRunAssInLineChk = new System.Windows.Forms.CheckBox();
             this.pnChartFGA_INV = new System.Windows.Forms.Panel();
             this.chartFGA_INV = new DevExpress.XtraCharts.ChartControl();
+            this.cmdAssInvSet = new System.Windows.Forms.Button();
+            this.cmdRunAssInvSetChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -2561,7 +2563,7 @@
             // 
             this.btnRunTMS.Enabled = false;
             this.btnRunTMS.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunTMS.Location = new System.Drawing.Point(772, 368);
+            this.btnRunTMS.Location = new System.Drawing.Point(810, 322);
             this.btnRunTMS.Name = "btnRunTMS";
             this.btnRunTMS.Size = new System.Drawing.Size(130, 23);
             this.btnRunTMS.TabIndex = 208;
@@ -4025,6 +4027,28 @@
             this.chartFGA_INV.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
             chartTitle13});
             // 
+            // cmdAssInvSet
+            // 
+            this.cmdAssInvSet.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdAssInvSet.Location = new System.Drawing.Point(486, 366);
+            this.cmdAssInvSet.Name = "cmdAssInvSet";
+            this.cmdAssInvSet.Size = new System.Drawing.Size(397, 23);
+            this.cmdAssInvSet.TabIndex = 20;
+            this.cmdAssInvSet.Text = "Assembly Inventory Set Balance";
+            this.cmdAssInvSet.UseVisualStyleBackColor = true;
+            this.cmdAssInvSet.Click += new System.EventHandler(this.cmdAssInvSet_Click);
+            // 
+            // cmdRunAssInvSetChk
+            // 
+            this.cmdRunAssInvSetChk.AutoSize = true;
+            this.cmdRunAssInvSetChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdRunAssInvSetChk.Location = new System.Drawing.Point(888, 368);
+            this.cmdRunAssInvSetChk.Name = "cmdRunAssInvSetChk";
+            this.cmdRunAssInvSetChk.Size = new System.Drawing.Size(52, 19);
+            this.cmdRunAssInvSetChk.TabIndex = 223;
+            this.cmdRunAssInvSetChk.Text = "Auto";
+            this.cmdRunAssInvSetChk.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4053,6 +4077,7 @@
             this.Controls.Add(this.cmdPoToChk);
             this.Controls.Add(this.btnFeedbackChk);
             this.Controls.Add(this.cmd_BotDefChk);
+            this.Controls.Add(this.cmdRunAssInvSetChk);
             this.Controls.Add(this.cmdRunAssInLineChk);
             this.Controls.Add(this.cmdRunProdChk);
             this.Controls.Add(this.cmdRunEscanChk);
@@ -4096,6 +4121,7 @@
             this.Controls.Add(this.cmdRunAndon);
             this.Controls.Add(this.grdBase1);
             this.Controls.Add(this.grdBase4);
+            this.Controls.Add(this.cmdAssInvSet);
             this.Controls.Add(this.cmdAssInline);
             this.Controls.Add(this.cmdRunProd);
             this.Controls.Add(this.lblStatus);
@@ -4676,6 +4702,8 @@
         private System.Windows.Forms.CheckBox cmdRunAssInLineChk;
         private System.Windows.Forms.Panel pnChartFGA_INV;
         private DevExpress.XtraCharts.ChartControl chartFGA_INV;
+        private System.Windows.Forms.Button cmdAssInvSet;
+        private System.Windows.Forms.CheckBox cmdRunAssInvSetChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

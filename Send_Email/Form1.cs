@@ -5407,7 +5407,7 @@ namespace Send_Email
 
                 string html = "<img src='cid:" + imgInfo2 + "'><br>" +
                     //"<table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
-                    //"<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
+                    //"<tr ><td colspan='2' align='center'><strong>Assembly Inventory Set Balance Target</strong></td></tr>" +
                     //"<tr><td align='left'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
                     // "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
                     //  "<tr><td align='left'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
@@ -6665,7 +6665,11 @@ namespace Send_Email
                 RunAssInLine("Q");
         }
 
-
+        private void cmdAssInvSet_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunAssInLine_v2("Q");
+        }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
