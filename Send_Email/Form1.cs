@@ -1687,9 +1687,6 @@ namespace Send_Email
 
         #endregion Email Production
 
-
-
-
         #region Email ANDON
 
         private void RunAndon(string argType)
