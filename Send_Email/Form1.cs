@@ -5356,7 +5356,7 @@ namespace Send_Email
                                            "<td align='right'>" + string.Format("{0:n0}",dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                       "</tr>";
                        
                     }
@@ -5371,7 +5371,7 @@ namespace Send_Email
                                        "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                             else
@@ -5382,7 +5382,7 @@ namespace Send_Email
                                         "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                         }
@@ -5399,7 +5399,7 @@ namespace Send_Email
                                        "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                 "</tr>";
                         }
                     }
@@ -5412,7 +5412,7 @@ namespace Send_Email
                     // "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
                     //  "<tr><td align='left'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
                     //"</table>" +
-                    " <h3><strong>UNIT: PAIRS</strong></h3>" +
+                    " <h3><strong>Unit: pairs</strong></h3>" +
                     "<p></p>" +
                     "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000'>" +
                                "<tr bgcolor='#ffe5cc'>" +
