@@ -405,6 +405,8 @@
             this.chartFGA_INV = new DevExpress.XtraCharts.ChartControl();
             this.cmdAssInvSet = new System.Windows.Forms.Button();
             this.cmdRunAssInvSetChk = new System.Windows.Forms.CheckBox();
+            this.cmdCanteen = new System.Windows.Forms.Button();
+            this.cmdCanteenChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -2252,10 +2254,10 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(409, 421);
+            this.txtLog.Location = new System.Drawing.Point(503, 421);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(532, 107);
+            this.txtLog.Size = new System.Drawing.Size(438, 107);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
@@ -3456,7 +3458,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(952, 41);
+            this.panel3.Size = new System.Drawing.Size(973, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3472,7 +3474,7 @@
             // 
             // btnP
             // 
-            this.btnP.Location = new System.Drawing.Point(121, 421);
+            this.btnP.Location = new System.Drawing.Point(263, 506);
             this.btnP.Name = "btnP";
             this.btnP.Size = new System.Drawing.Size(117, 23);
             this.btnP.TabIndex = 225;
@@ -4049,11 +4051,37 @@
             this.cmdRunAssInvSetChk.Text = "Auto";
             this.cmdRunAssInvSetChk.UseVisualStyleBackColor = true;
             // 
+            // cmdCanteen
+            // 
+            this.cmdCanteen.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdCanteen.Location = new System.Drawing.Point(6, 405);
+            this.cmdCanteen.Name = "cmdCanteen";
+            this.cmdCanteen.Size = new System.Drawing.Size(397, 23);
+            this.cmdCanteen.TabIndex = 231;
+            this.cmdCanteen.Text = "Canteen";
+            this.cmdCanteen.UseVisualStyleBackColor = true;
+            this.cmdCanteen.Click += new System.EventHandler(this.cmdCanteen_Click);
+            // 
+            // cmdCanteenChk
+            // 
+            this.cmdCanteenChk.AutoSize = true;
+            this.cmdCanteenChk.Checked = true;
+            this.cmdCanteenChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cmdCanteenChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdCanteenChk.Location = new System.Drawing.Point(409, 409);
+            this.cmdCanteenChk.Name = "cmdCanteenChk";
+            this.cmdCanteenChk.Size = new System.Drawing.Size(52, 19);
+            this.cmdCanteenChk.TabIndex = 232;
+            this.cmdCanteenChk.Text = "Auto";
+            this.cmdCanteenChk.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 536);
+            this.ClientSize = new System.Drawing.Size(973, 541);
+            this.Controls.Add(this.cmdCanteenChk);
+            this.Controls.Add(this.cmdCanteen);
             this.Controls.Add(this.pnChartFGA_INV);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmd_IeReliefChk);
@@ -4704,6 +4732,8 @@
         private DevExpress.XtraCharts.ChartControl chartFGA_INV;
         private System.Windows.Forms.Button cmdAssInvSet;
         private System.Windows.Forms.CheckBox cmdRunAssInvSetChk;
+        private System.Windows.Forms.Button cmdCanteen;
+        private System.Windows.Forms.CheckBox cmdCanteenChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
