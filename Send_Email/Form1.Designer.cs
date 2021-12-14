@@ -124,6 +124,7 @@
             DevExpress.XtraCharts.ChartTitle chartTitle12 = new DevExpress.XtraCharts.ChartTitle();
             DevExpress.XtraCharts.XYDiagram xyDiagram7 = new DevExpress.XtraCharts.XYDiagram();
             DevExpress.XtraCharts.Series series29 = new DevExpress.XtraCharts.Series();
+            DevExpress.XtraCharts.PointSeriesLabel pointSeriesLabel1 = new DevExpress.XtraCharts.PointSeriesLabel();
             DevExpress.XtraCharts.LineSeriesView lineSeriesView3 = new DevExpress.XtraCharts.LineSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle13 = new DevExpress.XtraCharts.ChartTitle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
@@ -693,6 +694,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartFGA_INV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(series29)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pointSeriesLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).BeginInit();
             this.SuspendLayout();
             // 
@@ -3458,7 +3460,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(973, 41);
+            this.panel3.Size = new System.Drawing.Size(1580, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3986,20 +3988,29 @@
             // pnChartFGA_INV
             // 
             this.pnChartFGA_INV.Controls.Add(this.chartFGA_INV);
-            this.pnChartFGA_INV.Location = new System.Drawing.Point(985, 124);
+            this.pnChartFGA_INV.Location = new System.Drawing.Point(956, 124);
             this.pnChartFGA_INV.Name = "pnChartFGA_INV";
-            this.pnChartFGA_INV.Size = new System.Drawing.Size(511, 250);
+            this.pnChartFGA_INV.Size = new System.Drawing.Size(540, 334);
             this.pnChartFGA_INV.TabIndex = 230;
             // 
             // chartFGA_INV
             // 
-            this.chartFGA_INV.AppearanceNameSerializable = "Light";
+            this.chartFGA_INV.AppearanceNameSerializable = "Dark Flat";
+            this.chartFGA_INV.BackColor = System.Drawing.Color.Black;
+            this.chartFGA_INV.BorderOptions.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            xyDiagram7.AxisX.Label.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            xyDiagram7.AxisX.Title.Font = new System.Drawing.Font("Times New Roman", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             xyDiagram7.AxisX.Title.Text = "Plant";
+            xyDiagram7.AxisX.Title.TextColor = System.Drawing.Color.Aqua;
             xyDiagram7.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             xyDiagram7.AxisX.VisibleInPanesSerializable = "-1";
+            xyDiagram7.AxisY.GridLines.Visible = false;
+            xyDiagram7.AxisY.Label.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             xyDiagram7.AxisY.Title.Text = "Rework Rate (%)";
             xyDiagram7.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.True;
             xyDiagram7.AxisY.VisibleInPanesSerializable = "-1";
+            xyDiagram7.DefaultPane.BackColor = System.Drawing.Color.Black;
+            xyDiagram7.DefaultPane.BorderVisible = false;
             this.chartFGA_INV.Diagram = xyDiagram7;
             this.chartFGA_INV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartFGA_INV.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
@@ -4017,15 +4028,27 @@
                 new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(187)))), ((int)(((byte)(89))))), System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(137)))), ((int)(((byte)(56)))))),
                 new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(100)))), ((int)(((byte)(162))))), System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(69)))), ((int)(((byte)(115)))))),
                 new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(150)))), ((int)(((byte)(70))))), System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(101)))), ((int)(((byte)(9))))))}));
+            pointSeriesLabel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            pointSeriesLabel1.Border.Color = System.Drawing.Color.Lime;
+            pointSeriesLabel1.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            pointSeriesLabel1.LineColor = System.Drawing.Color.White;
+            series29.Label = pointSeriesLabel1;
             series29.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
             series29.Name = "Rework Rate";
+            lineSeriesView3.Color = System.Drawing.Color.Yellow;
+            lineSeriesView3.LineMarkerOptions.Color = System.Drawing.Color.FromArgb(((int)(((byte)(84)))), ((int)(((byte)(141)))), ((int)(((byte)(212)))));
+            lineSeriesView3.LineMarkerOptions.Size = 15;
+            lineSeriesView3.LineStyle.DashStyle = DevExpress.XtraCharts.DashStyle.DashDot;
+            lineSeriesView3.LineStyle.Thickness = 4;
+            lineSeriesView3.MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
+            lineSeriesView3.Shadow.Visible = true;
             series29.View = lineSeriesView3;
             this.chartFGA_INV.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series29};
-            this.chartFGA_INV.Size = new System.Drawing.Size(511, 250);
+            this.chartFGA_INV.Size = new System.Drawing.Size(540, 334);
             this.chartFGA_INV.TabIndex = 222;
             chartTitle13.Font = new System.Drawing.Font("Times New Roman", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartTitle13.Text = "Ratio (%)";
+            chartTitle13.Text = "Set balance situation in front of FGA by Plant (Unit: Ratio (%))";
             this.chartFGA_INV.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
             chartTitle13});
             // 
@@ -4036,7 +4059,7 @@
             this.cmdAssInvSet.Name = "cmdAssInvSet";
             this.cmdAssInvSet.Size = new System.Drawing.Size(397, 23);
             this.cmdAssInvSet.TabIndex = 20;
-            this.cmdAssInvSet.Text = "Assembly Inventory Set Balance";
+            this.cmdAssInvSet.Text = "Set balance situation in front of FGA";
             this.cmdAssInvSet.UseVisualStyleBackColor = true;
             this.cmdAssInvSet.Click += new System.EventHandler(this.cmdAssInvSet_Click);
             // 
@@ -4079,7 +4102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(973, 541);
+            this.ClientSize = new System.Drawing.Size(1580, 541);
             this.Controls.Add(this.cmdCanteenChk);
             this.Controls.Add(this.cmdCanteen);
             this.Controls.Add(this.pnChartFGA_INV);
@@ -4445,6 +4468,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartMold)).EndInit();
             this.pnChartFGA_INV.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(xyDiagram7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pointSeriesLabel1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(lineSeriesView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(series29)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartFGA_INV)).EndInit();

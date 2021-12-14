@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = {  "DO.IT@CHANGSHININC.COM" }; //"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -5300,7 +5300,7 @@ namespace Send_Email
                // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
               //  Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\CHART_FGA_INV.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "Assembly Set Balance Inventory";
+                mailItem.Subject = "Set balance situation in front of FGA";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
