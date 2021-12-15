@@ -388,8 +388,6 @@ namespace Send_Email
             }
         }
 
-
-
         private void CreateMailQuality(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
