@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = {  "DO.IT@CHANGSHININC.COM" }; //"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -387,8 +387,6 @@ namespace Send_Email
                 WriteLog("CreateMailProduction: " + ex.ToString());
             }
         }
-
-
 
         private void CreateMailQuality(string Subject, string htmlBody, DataTable dtEmail)
         {
@@ -5300,7 +5298,7 @@ namespace Send_Email
                // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
               //  Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\CHART_FGA_INV.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "Assembly Set Balance Inventory";
+                mailItem.Subject = "Set balance situation in front of FGA";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -5356,7 +5354,7 @@ namespace Send_Email
                                            "<td align='right'>" + string.Format("{0:n0}",dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                       "</tr>";
                        
                     }
@@ -5371,7 +5369,7 @@ namespace Send_Email
                                        "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                             else
@@ -5382,7 +5380,7 @@ namespace Send_Email
                                         "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                   "</tr>";
                             }
                         }
@@ -5399,7 +5397,7 @@ namespace Send_Email
                                        "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
                                            "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='center'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
                                 "</tr>";
                         }
                     }
@@ -5412,7 +5410,7 @@ namespace Send_Email
                     // "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
                     //  "<tr><td align='left'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
                     //"</table>" +
-                    " <h3><strong>UNIT: PAIRS</strong></h3>" +
+                    " <h3><strong>Unit: pairs</strong></h3>" +
                     "<p></p>" +
                     "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1000'>" +
                                "<tr bgcolor='#ffe5cc'>" +
