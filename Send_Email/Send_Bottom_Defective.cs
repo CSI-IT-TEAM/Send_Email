@@ -225,7 +225,6 @@ namespace Send_Email
                     strExplain = string.Format(strExplain, arrValue2);
                 }
                 
-
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex); 

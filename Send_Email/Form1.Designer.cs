@@ -408,6 +408,8 @@
             this.cmdRunAssInvSetChk = new System.Windows.Forms.CheckBox();
             this.cmdCanteen = new System.Windows.Forms.Button();
             this.cmdCanteenChk = new System.Windows.Forms.CheckBox();
+            this.cmdSumDaaS = new System.Windows.Forms.Button();
+            this.cmdRunSumDaaSChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -1306,7 +1308,7 @@
             // 
             this.lblStatus.AutoSize = true;
             this.lblStatus.BackColor = System.Drawing.Color.Wheat;
-            this.lblStatus.Location = new System.Drawing.Point(814, 402);
+            this.lblStatus.Location = new System.Drawing.Point(813, 425);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(35, 13);
             this.lblStatus.TabIndex = 19;
@@ -2213,7 +2215,7 @@
             // chkTest
             // 
             this.chkTest.AutoSize = true;
-            this.chkTest.Location = new System.Drawing.Point(866, 397);
+            this.chkTest.Location = new System.Drawing.Point(865, 428);
             this.chkTest.Name = "chkTest";
             this.chkTest.Size = new System.Drawing.Size(75, 17);
             this.chkTest.TabIndex = 200;
@@ -2223,7 +2225,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(752, 403);
+            this.checkBox1.Location = new System.Drawing.Point(751, 433);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(53, 17);
             this.checkBox1.TabIndex = 201;
@@ -2234,7 +2236,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(811, 402);
+            this.checkBox2.Location = new System.Drawing.Point(810, 432);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(53, 17);
             this.checkBox2.TabIndex = 202;
@@ -2256,10 +2258,10 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(503, 421);
+            this.txtLog.Location = new System.Drawing.Point(503, 443);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(438, 107);
+            this.txtLog.Size = new System.Drawing.Size(438, 85);
             this.txtLog.TabIndex = 204;
             // 
             // cmdPoTo
@@ -4098,6 +4100,28 @@
             this.cmdCanteenChk.Text = "Auto";
             this.cmdCanteenChk.UseVisualStyleBackColor = true;
             // 
+            // cmdSumDaaS
+            // 
+            this.cmdSumDaaS.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdSumDaaS.Location = new System.Drawing.Point(486, 405);
+            this.cmdSumDaaS.Name = "cmdSumDaaS";
+            this.cmdSumDaaS.Size = new System.Drawing.Size(397, 23);
+            this.cmdSumDaaS.TabIndex = 20;
+            this.cmdSumDaaS.Text = "Open Page Of DaaS";
+            this.cmdSumDaaS.UseVisualStyleBackColor = true;
+            this.cmdSumDaaS.Click += new System.EventHandler(this.cmdSumDaaS_Click);
+            // 
+            // cmdRunSumDaaSChk
+            // 
+            this.cmdRunSumDaaSChk.AutoSize = true;
+            this.cmdRunSumDaaSChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 407);
+            this.cmdRunSumDaaSChk.Name = "cmdRunSumDaaSChk";
+            this.cmdRunSumDaaSChk.Size = new System.Drawing.Size(52, 19);
+            this.cmdRunSumDaaSChk.TabIndex = 223;
+            this.cmdRunSumDaaSChk.Text = "Auto";
+            this.cmdRunSumDaaSChk.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4128,6 +4152,7 @@
             this.Controls.Add(this.cmdPoToChk);
             this.Controls.Add(this.btnFeedbackChk);
             this.Controls.Add(this.cmd_BotDefChk);
+            this.Controls.Add(this.cmdRunSumDaaSChk);
             this.Controls.Add(this.cmdRunAssInvSetChk);
             this.Controls.Add(this.cmdRunAssInLineChk);
             this.Controls.Add(this.cmdRunProdChk);
@@ -4172,6 +4197,7 @@
             this.Controls.Add(this.cmdRunAndon);
             this.Controls.Add(this.grdBase1);
             this.Controls.Add(this.grdBase4);
+            this.Controls.Add(this.cmdSumDaaS);
             this.Controls.Add(this.cmdAssInvSet);
             this.Controls.Add(this.cmdAssInline);
             this.Controls.Add(this.cmdRunProd);
@@ -4758,6 +4784,8 @@
         private System.Windows.Forms.CheckBox cmdRunAssInvSetChk;
         private System.Windows.Forms.Button cmdCanteen;
         private System.Windows.Forms.CheckBox cmdCanteenChk;
+        private System.Windows.Forms.Button cmdSumDaaS;
+        private System.Windows.Forms.CheckBox cmdRunSumDaaSChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

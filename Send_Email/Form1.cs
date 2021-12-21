@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "phuoc.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -418,7 +418,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                mailItem.BCC = "phuoc.it@changshininc.com";
                 string imgInfo = "imgInfo";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
@@ -5120,9 +5120,9 @@ namespace Send_Email
                 if (_isRun2) return;
 
                 _isRun2 = true;
-               
+
                 DataSet dsData = SEL_FGA_INV_DATA_v2("Q1", DateTime.Now.ToString("yyyyMMdd")); //Get Data for HTML Table
-               
+
 
                 if (dsData == null) return;
                 WriteLog($"RunFGAInlineInv({argType}): BEGIN ");
@@ -5289,14 +5289,14 @@ namespace Send_Email
             }
         }
 
-        private void CreateMailFGAInlineInv_v2( DataTable dtData, DataTable dtEmail)
+        private void CreateMailFGAInlineInv_v2(DataTable dtData, DataTable dtEmail)
         {
             try
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-               // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-              //  Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                //  Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\CHART_FGA_INV.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = "Set balance situation in front of FGA";
 
@@ -5324,15 +5324,15 @@ namespace Send_Email
                 oRecips = null;
                 mailItem.BCC = "phuoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
-             //   string imgInfo = "imgInfo";
-             //   string imgInfo1 = "imgInfo1";
+                //   string imgInfo = "imgInfo";
+                //   string imgInfo1 = "imgInfo1";
                 string imgInfo2 = "imgInfo2";
-              //  oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-              //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo1);
+                //  oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo1);
                 oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 string rowValue = "";
 
-                string strRowFACSpan = "", strRowPLANTSpan="";
+                string strRowFACSpan = "", strRowPLANTSpan = "";
 
                 for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
                 {
@@ -5341,22 +5341,22 @@ namespace Send_Email
                     string bg_tot_color = string.Empty;
                     if (iRow == 0)
                     {
-                        
+
                         if (dtData.Rows[iRow]["FACTORY"].ToString().ToUpper().Equals("GRAND TOTAL"))
                         {
                             bg_tot_color = "#34c916";
                         }
 
-                            rowValue += "<tr bgcolor='"+ bg_tot_color + "'>" +
-                                           "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
-                                           "<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
-                                           "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
-                                           "<td align='right'>" + string.Format("{0:n0}",dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
-                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
-                                           "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
-                                           "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
-                                      "</tr>";
-                       
+                        rowValue += "<tr bgcolor='" + bg_tot_color + "'>" +
+                                       "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["FACTORY"].ToString() + " </td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["PLANT"].ToString() + "</td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["LINE"].ToString() + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["UP_QTY"]) + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["FS_QTY"]) + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n0}", dtData.Rows[iRow]["SET_QTY"]) + "</td>" +
+                                       "<td align='right'>" + string.Format("{0:n1}", dtData.Rows[iRow]["SET_RATIO"]) + "</td>" +
+                                  "</tr>";
+
                     }
                     else
                     {
@@ -5552,6 +5552,384 @@ namespace Send_Email
         }
         #endregion
 
+        #region Sum DaaS
+
+        private void CreateMailSumOpenDaaS(DataTable dtData, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\OPEN_DAAS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = "Open Page of DaaS";
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+
+                oRecips = null;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.Body = "This is the message.";
+                string imgInfo = "imgInfo";
+
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                string rowValue = "";
+
+                string strRowFACSpan = "", strRowPLANTSpan = "";
+
+                for (int iRow = 0; iRow < dtData.Rows.Count; iRow++)
+                {
+                    strRowFACSpan = dtData.Rows[iRow]["CNT_FAC"].ToString();
+                    strRowPLANTSpan = dtData.Rows[iRow]["CNT_PLANT"].ToString();
+                    string bg_tot_color = string.Empty;
+                    if (iRow == 0)
+                    {
+
+
+                        rowValue += "<tr>" +
+                                       "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT_NAME"].ToString() + " </td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
+                                       "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
+                                       "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
+                                  "</tr>";
+                    }
+                    else
+                    {
+                        if (dtData.Rows[iRow]["PLANT_NAME"].ToString() == dtData.Rows[iRow - 1]["PLANT_NAME"].ToString())
+                        {
+                            if (dtData.Rows[iRow]["LINE_NAME"].ToString() == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
+                            {
+                                rowValue += "<tr>" +
+
+                            "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
+                            "</tr>";
+                            }
+                            else
+                            {
+                            rowValue += "<tr>" +
+                             "<td  rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
+                            "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
+                            "</tr>";
+                            }
+                        }
+                        else
+                        {
+                            rowValue += "<tr>" +
+                                      "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT_NAME"].ToString() + " </td>" +
+                                      "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
+                                      "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:'" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
+                                 "</tr>";
+                        }
+                    }
+                }
+
+                string style = "<style> " +
+                              "   .tblBoder { " +
+                              "             font-family: 'Times New Roman', Times, serif; " +
+                              "             font-style: italic; " +
+                              "   } " +
+                              "   .tblBoder td, .tblBoder th { " +
+                              "         border: 0px; " +
+                              "         padding: 3px 2px; " +
+                              "         white-space: nowrap; " +
+                              "         border: 1px solid #c0c0c0; " +
+                              "   } " +
+                              "   .tblBoder tbody td { " +
+                              "             font-size: 20px; " +
+                              "         } " +
+                              "   .tblBoder thead { " +
+                              "         background: #26A1B2; " +
+                              "         font-style: italic; " +
+                              "         border-bottom: 0px solid #444444; " +
+                              "   } " +
+                              "   .tblBoder thead th { " +
+                              "             font-size: 19px; " +
+                              "             font-weight: bold; " +
+                              "         color: #F0F0F0; " +
+                              "     background: #26A1B2; " +
+                              "     text-align: center; " +
+                              "         } " +
+                              "   .green{ " +
+                              "         background: green; " +
+                              "         color: white; " +
+                              "         } " +
+                              "   .yellow{ " +
+                              "         background: yellow; " +
+                              "         color: black; " +
+                              "         } " +
+                              "   .red{ " +
+                              "         background: red; " +
+                              "         color: white; " +
+                              "         } " +
+                              "   .orange{ " +
+                              "         background: orange; " +
+                              "         color: white; " +
+                              "         } " +
+                              "</style> ";
+                string text = "<img src='cid:" + imgInfo + "'><br><table class='tblBoder'> " +
+                              "  <tr> " +
+                              "    <td></ td >" +
+                              "    <td class='green'  align ='center'>Green</td>" +
+                              "    <td class='yellow'  align ='center'>Yellow</td>" +
+                              "    <td class='orange'  align ='center'>Orange</td>" +
+                              "    <td class='red'  align ='center'>Red</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "    <td>Andon DownTime</td>" +
+                              "    <td>&lt;10 minutes</td>" +
+                              "    <td>10 ~ 29:59 minutes</td>" +
+                              "    <td>30 ~ 59:59 minutes</td>" +
+                              "    <td>Over 1 hour</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>NPI</td>" +
+                              "      <td>On Time</td>" +
+                              "      <td>Late 1 day</td>" +
+                              "      <td></td>" +
+                              "      <td>Late >= 2 days</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Time Contraint</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Mold Repair</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Rework</td>" +
+                              "      <td>0 ~ 3</td>" +
+                              "      <td>3 ~ 4</td>" +
+                              "      <td></td>" +
+                              "      <td>>4</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Bottom Defective</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Inventory Set Analysis</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>Meet Target</td>" +
+                              "      <td>&gt;=98</td>" +
+                              "      <td>95~97</td>" +
+                              "      <td></td>" +
+                              "      <td>&lt; 95</td>" +
+                              "  </tr>" +
+                              "  <tr>" +
+                              "      <td>TMS</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "      <td>POD</td>" +
+                              "      <td>97 ~ 103</td>" +
+                              "      <td>103 ~ 105</td>" +
+                              "      <td></td>" +
+                              "      <td>&lt; 95</td>" +
+                              "  </tr>" +
+                              "      <td>TO/PO</td>" +
+                              "      <td>97 ~ 103</td>" +
+                              "      <td>103 ~ 105</td>" +
+                              "      <td></td>" +
+                              "      <td>&lt; 95</td>" +
+                              "  </tr>" +
+                              "      <td>Absenteeism</td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "      <td></td>" +
+                              "  </tr>" +
+                              "</table>";
+
+
+                string html = "<head>" + style + "</head>" +
+                               "<body>" + text + "<br>" +
+                    "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1920'>" +
+                               "<tr bgcolor='#ffe5cc'>" +
+                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
+                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
+                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Line</th>" +
+                                  " <th colspan = '6' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='400' >Quality</th>" +
+                                  " <th colspan = '4' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='350'>Production/Inventory/Logistics</th>" +
+                                  " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='300'>HR</th>" +
+                               "</tr>" +
+                               "<tr bgcolor='#ffe5cc'>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>Andon<br>D/T</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>NPI</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Rework</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Inventory<br>Set Analysis</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Meet Target</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absenteeism</th>" +
+                               "</tr>" +
+                               "<tr bgcolor='#ffe49c'>" +
+                                  " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>HH:MM:SS</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Count</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                               "</tr>" +
+                               rowValue +
+                           "</table></body>";
+
+                //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
+                //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
+                //               "</p>";
+
+                mailItem.HTMLBody = html;
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("  CreateMailProduction: " + ex.ToString());
+            }
+        }
+
+        public DataSet SEL_SUM_OPEN_DAAS(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_OPEN_DAAS";
+                MyOraDB.ReDim_Parameter(5);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_1";
+                MyOraDB.Parameter_Name[3] = "CV_2";
+                MyOraDB.Parameter_Name[4] = "CV_EMAIL";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        WriteLog("P_SEND_EMAIL_PROD: null");
+                    }
+                    return null;
+                }
+
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                WriteLog("SEL_PROD_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        #endregion
+
         #region Email Canteen
         private void cmdCanteen_Click(object sender, EventArgs e)
         {
@@ -5598,8 +5976,8 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-               // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_kr.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-               // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_vi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_kr.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_vi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -5625,10 +6003,10 @@ namespace Send_Email
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 //string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
-               // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-               // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 mailItem.HTMLBody = htmlBody;
-              //  mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgInfo, imgInfo2) + htmlBody;
+                //  mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgInfo, imgInfo2) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -6756,6 +7134,43 @@ namespace Send_Email
         {
             if (SendYN(((Button)sender).Text))
                 RunAssInLine_v2("Q");
+        }
+
+        private void cmdSumDaaS_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunSumDaaS("Q");
+        }
+
+        private void RunSumDaaS(string argType)
+        {
+            try
+            {
+                if (_isRun2) return;
+
+                _isRun2 = true;
+
+                DataSet dsData = SEL_SUM_OPEN_DAAS("Q1", DateTime.Now.ToString("yyyyMMdd")); //Get Data for HTML Table
+
+                if (dsData == null) return;
+                WriteLog($"RunSumDaaS({argType}): BEGIN ");
+                DataTable dtData = dsData.Tables[0];
+                DataTable dtChart = dsData.Tables[1];
+                DataTable dtEmail = dsData.Tables[2];
+
+                WriteLog("  " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
+
+                CreateMailSumOpenDaaS(dtData, dtEmail);
+                WriteLog($"RunSumDaaS({argType}): END ");
+            }
+            catch (Exception ex)
+            {
+                WriteLog($"  RunSumDaaS({argType}) " + ex.ToString());
+            }
+            finally
+            {
+                _isRun2 = false;
+            }
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
