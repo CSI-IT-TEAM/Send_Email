@@ -5789,7 +5789,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Meet Target</td>" +
-                              "      <td>&gt;=98</td>" +
+                              "      <td>&ge;98</td>" +
                               "      <td>95~97</td>" +
                               "      <td></td>" +
                               "      <td>&lt; 95</td>" +
