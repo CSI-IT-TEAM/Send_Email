@@ -5755,16 +5755,16 @@ namespace Send_Email
                               "  <tr>" +
                               "      <td>Time Contraint</td>" +
                               "      <td></td>" +
+                              "      <td>&gt;13 days</td>" +
                               "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
+                              "      <td>&gt;26 days</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Mold Repair</td>" +
+                              "      <td>&gt;98</td>" +
+                              "      <td>95~98</td>" +
                               "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
+                              "      <td>&lt;95</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Rework</td>" +
@@ -5775,17 +5775,17 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Bottom Defective</td>" +
+                              "      <td>0~1</td>" +
+                              "      <td>1~2</td>" +
                               "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
+                              "      <td>&gt;2</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Inventory Set Analysis</td>" +
+                              "      <td>&gt;80</td>" +
+                              "      <td>70~80</td>" +
                               "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
+                              "      <td>&lt;70</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Meet Target</td>" +
@@ -5814,13 +5814,12 @@ namespace Send_Email
                               "      <td>&lt; 95</td>" +
                               "  </tr>" +
                               "      <td>Absenteeism</td>" +
+                              "      <td>1~2</td>" +
+                              "      <td>2~5</td>" +
                               "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
+                              "      <td>&gt;5</td>" +
                               "  </tr>" +
                               "</table>";
-
 
                 string html = "<head>" + style + "</head>" +
                                "<body>" + text + "<br>" +
