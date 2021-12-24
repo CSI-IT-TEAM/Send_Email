@@ -5610,8 +5610,8 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
@@ -5633,8 +5633,8 @@ namespace Send_Email
                             "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
+                             "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
@@ -5652,8 +5652,8 @@ namespace Send_Email
                             "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
                             "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
@@ -5673,8 +5673,8 @@ namespace Send_Email
                                       "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:'" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
+                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
                                       "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
@@ -5760,18 +5760,18 @@ namespace Send_Email
                               "      <td>&gt;26 days</td>" +
                               "  </tr>" +
                               "  <tr>" +
-                              "      <td>Mold Repair</td>" +
-                              "      <td>&gt;98</td>" +
-                              "      <td>95~98</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt;95</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
                               "      <td>Rework</td>" +
                               "      <td>0 ~ 3</td>" +
                               "      <td>3 ~ 4</td>" +
                               "      <td></td>" +
                               "      <td>>4</td>" +
+                              "  </tr>" +
+                               "  <tr>" +
+                              "      <td>Mold Repair</td>" +
+                              "      <td>&gt;98</td>" +
+                              "      <td>95~98</td>" +
+                              "      <td></td>" +
+                              "      <td>&lt;95</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Bottom Defective</td>" +
@@ -5830,21 +5830,21 @@ namespace Send_Email
                                   " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Line</th>" +
                                   " <th colspan = '6' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='400' >Quality</th>" +
                                   " <th colspan = '4' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='350'>Production/Inventory/Logistics</th>" +
-                                  " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='300'>HR</th>" +
+                                  " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='200'>HR</th>" +
                                "</tr>" +
                                "<tr bgcolor='#ffe5cc'>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>Andon<br>D/T</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>NPI</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Rework</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Inventory<br>Set Analysis</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Meet Target</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Production<br> Target</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
                                   " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absenteeism</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
+                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
                                "</tr>" +
                                "<tr bgcolor='#ffe49c'>" +
                                   " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
