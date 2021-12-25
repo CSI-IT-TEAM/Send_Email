@@ -116,6 +116,9 @@ namespace Send_Email
             if (cmdCanteenChk.Checked)
                 RunCanteen("Q1");
 
+            if (cmdMoldRepairMonthChk.Checked)
+                RunMoldRepairMonth("Q1");
+
             //15h
             if (cmd_IeReliefChk.Checked)
                 RunIeRelief("Q1");
@@ -2265,61 +2268,71 @@ namespace Send_Email
             dt.Clear();
             dt.Columns.Add("ERR_NM");
             dt.Columns.Add("ERR", typeof(int));
-
-            DataTable dtData = argDt.Select($"WORKSHOP = '{argLocation}'").CopyToDataTable();
-
-            for (int i = 1; i <= 5; i++)
+            try
             {
-                string errName = dtData.Rows[0]["ERR_NM" + i].ToString();
-                if (errName == "") continue;
-                DataRow row = dt.NewRow();
-                row["ERR_NM"] = dtData.Rows[0]["ERR_NM" + i].ToString();
-                row["ERR"] = int.Parse(dtData.Rows[0]["ERR" + i].ToString());
-                dt.Rows.Add(row);
-            }
 
 
-            /*
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("WORKSHOP");
-            dt.Columns.Add("ERR_NM");
-            dt.Columns.Add("ERR");
-            foreach (DataRow dataRow in argDt.Rows)
-            {
-                for(int i = 1; i < 6; i++)
+                DataTable dtData = argDt.Select($"WORKSHOP = '{argLocation}'").CopyToDataTable();
+
+                for (int i = 1; i <= 5; i++)
                 {
-                    if (dataRow["ERR_NM" + i.ToString()].ToString() == "") continue;
+                    string errName = dtData.Rows[0]["ERR_NM" + i].ToString();
+                    if (errName == "") continue;
                     DataRow row = dt.NewRow();
-                    row["WORKSHOP"] = dataRow["WORKSHOP"].ToString();
-                    row["ERR_NM"] = dataRow["ERR_NM" + i.ToString()].ToString();
-                    row["ERR"] = dataRow["ERR" + i.ToString()].ToString();
+                    row["ERR_NM"] = dtData.Rows[0]["ERR_NM" + i].ToString();
+                    row["ERR"] = int.Parse(dtData.Rows[0]["ERR" + i].ToString());
                     dt.Rows.Add(row);
-                }                    
-            }
-            */
-            /*
-            DataTable dt = new DataTable();
-            dt.Clear();
-            dt.Columns.Add("PARENTID");
-            dt.Columns.Add("ID");
-            dt.Columns.Add("MENU_NM");
-            foreach (DataRow dataRow in argDt.Rows)
-            {
-                foreach(DataColumn dataColumn in argDt.Columns)
-                {
-                    if (dataColumn.ColumnName.Contains("ERR_NM"))
-                    {
-                        if (dataRow[dataColumn].ToString() == "") continue;
-                        DataRow row = dt.NewRow();
-                        row["PARENTID"] = dataRow["WORKSHOP"].ToString();
-                        row["ID"] = dataRow["WORKSHOP"].ToString() + "|" + dataRow[dataColumn].ToString();
-                        row["MENU_NM"] = dataRow[dataColumn].ToString();
-                        dt.Rows.Add(row);
-                    }
-                    
                 }
-            }*/
+
+
+                /*
+                DataTable dt = new DataTable();
+                dt.Clear();
+                dt.Columns.Add("WORKSHOP");
+                dt.Columns.Add("ERR_NM");
+                dt.Columns.Add("ERR");
+                foreach (DataRow dataRow in argDt.Rows)
+                {
+                    for(int i = 1; i < 6; i++)
+                    {
+                        if (dataRow["ERR_NM" + i.ToString()].ToString() == "") continue;
+                        DataRow row = dt.NewRow();
+                        row["WORKSHOP"] = dataRow["WORKSHOP"].ToString();
+                        row["ERR_NM"] = dataRow["ERR_NM" + i.ToString()].ToString();
+                        row["ERR"] = dataRow["ERR" + i.ToString()].ToString();
+                        dt.Rows.Add(row);
+                    }                    
+                }
+                */
+                /*
+                DataTable dt = new DataTable();
+                dt.Clear();
+                dt.Columns.Add("PARENTID");
+                dt.Columns.Add("ID");
+                dt.Columns.Add("MENU_NM");
+                foreach (DataRow dataRow in argDt.Rows)
+                {
+                    foreach(DataColumn dataColumn in argDt.Columns)
+                    {
+                        if (dataColumn.ColumnName.Contains("ERR_NM"))
+                        {
+                            if (dataRow[dataColumn].ToString() == "") continue;
+                            DataRow row = dt.NewRow();
+                            row["PARENTID"] = dataRow["WORKSHOP"].ToString();
+                            row["ID"] = dataRow["WORKSHOP"].ToString() + "|" + dataRow[dataColumn].ToString();
+                            row["MENU_NM"] = dataRow[dataColumn].ToString();
+                            dt.Rows.Add(row);
+                        }
+
+                    }
+                }*/
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+
+            }
             return dt;
         }
 
