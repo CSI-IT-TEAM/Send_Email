@@ -65,10 +65,12 @@ namespace Send_Email
                 string strTBody1 = "";
                 string strTBody2= "";
                 string strTBody3 = "";
+                string strTBody4 = "";
 
                 //DataTable dtDataVsm = arg_DtDataVj1.Select("FACTORY in ('F1','F2','F3','F4','F5')").CopyToDataTable();
-               // DataTable dtDataVj2 = arg_DtDataVj1.Select("FACTORY = 'VJ2'").CopyToDataTable();
+                // DataTable dtDataVj2 = arg_DtDataVj1.Select("FACTORY = 'VJ2'").CopyToDataTable();
 
+                //VJ1
                 foreach (DataRow rowData in arg_DtDataVj1.Rows)
                 {
                     factory = rowData["FACTORY"].ToString();
@@ -114,7 +116,7 @@ namespace Send_Email
                     }
                 }
 
-
+                //VJ2
                 foreach (DataRow rowData in arg_DtDataVj2.Rows)
                 {
                     factory = rowData["FACTORY"].ToString();
@@ -160,10 +162,57 @@ namespace Send_Email
                     }
                 }
 
+                //VJ3
+                foreach (DataRow rowData in arg_DtDataVj3.Rows)
+                {
+                    factory = rowData["FACTORY"].ToString();
+                    plant = rowData["PLANT"].ToString();
+
+                    if (factoryPre == "" || factory != factoryPre)
+                    {
+                        factoryPre = factory;
+                        plantPre = plant;
+                        strRow = rowCol1Span;
+
+                        rowSpanFactory = (int)arg_DtDataVj3.Compute("COUNT(FACTORY)", $"FACTORY ='{factory}' ");
+                        rowSpanPlan = (int)arg_DtDataVj3.Compute("COUNT(PLANT)", $" PLANT ='{plant}'");
+                        fnReplace(ref strRow, "{COL1_SPAN}", rowSpanFactory.ToString());
+                        fnReplace(ref strRow, "{COL2_SPAN}", rowSpanPlan.ToString());
+                        fnReplace(ref strRow, "{BCOLOR}", rowData["BCOLOR"].ToString());
+                        fnReplace(ref strRow, "{FCOLOR}", rowData["FCOLOR"].ToString());
+                        strTBody4 += fnReplaceRow(strRow, rowData);
+                    }
+                    else
+                    {
+                        if (plantPre == "" || plant != plantPre)
+                        {
+                            factoryPre = factory;
+                            plantPre = plant;
+                            strRow = rowCol2Span;
+
+                            rowSpanPlan = (int)arg_DtDataVj3.Compute("COUNT(PLANT)", $" PLANT ='{plant}'");
+                            fnReplace(ref strRow, "{COL2_SPAN}", rowSpanPlan.ToString());
+                            fnReplace(ref strRow, "{BCOLOR}", rowData["BCOLOR"].ToString());
+                            fnReplace(ref strRow, "{FCOLOR}", rowData["FCOLOR"].ToString());
+                            strTBody4 += fnReplaceRow(strRow, rowData);
+                        }
+                        else
+                        {
+                            factoryPre = factory;
+                            plantPre = plant;
+                            strRow = rowColMerge;
+                            fnReplace(ref strRow, "{BCOLOR}", rowData["BCOLOR"].ToString());
+                            fnReplace(ref strRow, "{FCOLOR}", rowData["FCOLOR"].ToString());
+                            strTBody4 += fnReplaceRow(strRow, rowData);
+                        }
+                    }
+                }
+
                 rowCol1Span = arg_DtHtml.Rows[2]["TEXT1"].ToString();
                 rowColMerge = arg_DtHtml.Rows[2]["TEXT3"].ToString();
                 rowRowSpan = arg_DtHtml.Rows[2]["TEXT4"].ToString();
 
+                //Bottom
                 foreach (DataRow rowData in arg_DtDataBot.Rows)
                 {
                     factory = rowData["FACTORY"].ToString();
@@ -196,11 +245,14 @@ namespace Send_Email
                 htmlReturn = htmlReturn.Replace("{IE_BOT_CNT}", arg_DtDataVj1.Rows[0]["IE_BOT_CNT"].ToString());
                 htmlReturn = htmlReturn.Replace("{ABS_VJ2_CNT}", arg_DtDataVj1.Rows[0]["ABS_VJ2_CNT"].ToString());
                 htmlReturn = htmlReturn.Replace("{IE_VJ2_CNT}", arg_DtDataVj1.Rows[0]["IE_VJ2_CNT"].ToString());
+                htmlReturn = htmlReturn.Replace("{ABS_VJ3_CNT}", arg_DtDataVj1.Rows[0]["ABS_VJ3_CNT"].ToString());
+                htmlReturn = htmlReturn.Replace("{IE_VJ3_CNT}", arg_DtDataVj1.Rows[0]["IE_VJ3_CNT"].ToString());
                 htmlReturn = htmlReturn.Replace("{ABS_TOT_CNT}", arg_DtDataVj1.Rows[0]["ABS_TOT_CNT"].ToString());
                 htmlReturn = htmlReturn.Replace("{IE_TOT_CNT}", arg_DtDataVj1.Rows[0]["IE_TOT_CNT"].ToString());
                 htmlReturn = htmlReturn.Replace("{tbody1}", strTBody1);
                 htmlReturn = htmlReturn.Replace("{tbody2}", strTBody2);
                 htmlReturn = htmlReturn.Replace("{tbody3}", strTBody3);
+                htmlReturn = htmlReturn.Replace("{tbody4}", strTBody4);
 
                 return htmlReturn;
             }

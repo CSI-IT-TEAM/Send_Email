@@ -2855,7 +2855,7 @@ namespace Send_Email
             {
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
                 string process_name = "P_SEND_EMAIL_MOLD_REPAIR_MONTH";
-                MyOraDB.ShowErr = true;
+               // MyOraDB.ShowErr = true;
                 MyOraDB.ReDim_Parameter(6);
                 MyOraDB.Process_Name = process_name;
 
