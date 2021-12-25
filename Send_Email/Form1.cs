@@ -5729,10 +5729,15 @@ namespace Send_Email
                               "         background: orange; " +
                               "         color: white; " +
                               "         } " +
+                              "   .gray{ " +
+                              "         background: silver; " +
+                              "         color: black; " +
+                              "         } " +
                               "</style> ";
                 string text = "<img src='cid:" + imgInfo + "'><br><table class='tblBoder'> " +
                               "  <tr> " +
-                              "    <td></ td >" +
+                              "    <td>Items</ td >" +
+                               "   <td class='gray'  align ='center'>Unit</td>" +
                               "    <td class='green'  align ='center'>Green</td>" +
                               "    <td class='yellow'  align ='center'>Yellow</td>" +
                               "    <td class='orange'  align ='center'>Orange</td>" +
@@ -5740,6 +5745,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "    <td>Andon DownTime</td>" +
+                              "    <td>Time</td>" +
                               "    <td>&lt;10 minutes</td>" +
                               "    <td>10 ~ 29:59 minutes</td>" +
                               "    <td>30 ~ 59:59 minutes</td>" +
@@ -5747,6 +5753,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>NPI</td>" +
+                              "      <td>Day</td>" +
                               "      <td>On Time</td>" +
                               "      <td>Late 1 day</td>" +
                               "      <td></td>" +
@@ -5754,6 +5761,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Time Contraint</td>" +
+                              "      <td>Day</td>" +
                               "      <td></td>" +
                               "      <td>&gt;13 days</td>" +
                               "      <td></td>" +
@@ -5761,6 +5769,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Rework</td>" +
+                              "      <td>%</td>" +
                               "      <td>0 ~ 3</td>" +
                               "      <td>3 ~ 4</td>" +
                               "      <td></td>" +
@@ -5768,6 +5777,7 @@ namespace Send_Email
                               "  </tr>" +
                                "  <tr>" +
                               "      <td>Mold Repair</td>" +
+                              "      <td>Count</td>" +
                               "      <td>&gt;98</td>" +
                               "      <td>95~98</td>" +
                               "      <td></td>" +
@@ -5775,6 +5785,7 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Bottom Defective</td>" +
+                              "      <td>%</td>" +
                               "      <td>0~1</td>" +
                               "      <td>1~2</td>" +
                               "      <td></td>" +
@@ -5782,13 +5793,15 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Inventory Set Analysis</td>" +
+                              "      <td>%</td>" +
                               "      <td>&gt;80</td>" +
                               "      <td>70~80</td>" +
                               "      <td></td>" +
                               "      <td>&lt;70</td>" +
                               "  </tr>" +
                               "  <tr>" +
-                              "      <td>Meet Target</td>" +
+                              "      <td>Production Target</td>" +
+                              "      <td>%</td>" +
                               "      <td>&ge;98</td>" +
                               "      <td>95~97</td>" +
                               "      <td></td>" +
@@ -5796,24 +5809,28 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>TMS</td>" +
+                              "      <td>%</td>" +
                               "      <td></td>" +
                               "      <td></td>" +
                               "      <td></td>" +
                               "      <td></td>" +
                               "  </tr>" +
                               "      <td>POD</td>" +
+                              "      <td>%</td>" +
                               "      <td>97 ~ 103</td>" +
                               "      <td>103 ~ 105</td>" +
                               "      <td></td>" +
                               "      <td>&lt; 95</td>" +
                               "  </tr>" +
                               "      <td>TO/PO</td>" +
+                              "      <td>%</td>" +
                               "      <td>97 ~ 103</td>" +
                               "      <td>103 ~ 105</td>" +
                               "      <td></td>" +
                               "      <td>&lt; 95</td>" +
                               "  </tr>" +
                               "      <td>Absenteeism</td>" +
+                              "      <td>%</td>" +
                               "      <td>1~2</td>" +
                               "      <td>2~5</td>" +
                               "      <td></td>" +
@@ -5848,11 +5865,11 @@ namespace Send_Email
                                "</tr>" +
                                "<tr bgcolor='#ffe49c'>" +
                                   " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>HH:MM:SS</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>%</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Time</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Day</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Day</th>" +
+                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                   " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Count</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                   " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                   " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                   " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
