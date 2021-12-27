@@ -5267,9 +5267,8 @@ namespace Send_Email
 
                 string html = "<img src='cid:" + imgInfo + "'><br><img src='cid:" + imgInfo1 + "'><br><table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
                     "<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
-                    "<tr><td align='left'>Under 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
-                     "<tr><td align='left'>2~3 Hours</td><td align='center' bgcolor = 'yellow' style = 'color:black'>Yellow</td></tr>" +
-                      "<tr><td align='left'>Over 3 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
+                    "<tr><td align='left'>&le; 1 Hour</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
+                      "<tr><td align='left'>&gt; 1 Hour</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
                     "</table> <h3><strong>UNIT: PAIRS</strong></h3>" +
                     "<p></p>" +
                     "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
@@ -5277,12 +5276,12 @@ namespace Send_Email
                                   " <th rowspan = '2' align='center' width='70'>Plant</th>" +
                                   " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
                                   " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day inventory</th>" +
-                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'> Before lunch on today inventory</th>" +
+                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'> Yesterday inventory</th>" +
                                "</tr>" +
                                "<tr>" +
                                   strDate +
                                   "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
-                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>2 Hours Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>1 Hour Plan</th>" +
                                   "<th bgcolor='#f7d231' style='color:#000000' align='center' width='100'>Inline Inventory</th>" +
                                "</tr>" +
                                  rowValue +
@@ -5574,6 +5573,7 @@ namespace Send_Email
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\OPEN_DAAS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Open_Daas_Explain.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = "Open Page of DaaS";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -5598,12 +5598,13 @@ namespace Send_Email
                 }
 
                 oRecips = null;
-                mailItem.BCC = "phuoc.it@changshininc.com";
+                mailItem.BCC = "ngoc.it@changshininc.com";
                 mailItem.Body = "This is the message.";
-                string imgInfo = "imgInfo";
+                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
 
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-                string rowValue = "";
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                string rowValueVSM = "", rowValueBot = "";
 
                 string strRowFACSpan = "", strRowPLANTSpan = "";
 
@@ -5612,90 +5613,194 @@ namespace Send_Email
                     strRowFACSpan = dtData.Rows[iRow]["CNT_FAC"].ToString();
                     strRowPLANTSpan = dtData.Rows[iRow]["CNT_PLANT"].ToString();
                     string bg_tot_color = string.Empty;
+                    string strFactory = dtData.Rows[iRow]["PLANT_NAME"].ToString();
+                    string strPlant = dtData.Rows[iRow]["LINE_NAME"].ToString();
+                    string strLine = dtData.Rows[iRow]["MLINE_CD"].ToString();
+
+                    string strAndonDt = dtData.Rows[iRow]["ANDON_DT"].ToString();
+                    string strAndonDtBc = dtData.Rows[iRow]["ANDON_DT_BC"].ToString();
+                    string strAndonDtFc = dtData.Rows[iRow]["ANDON_DT_FC"].ToString();
+
+                    string strNpi = dtData.Rows[iRow]["NPI"].ToString();
+                    string strNpiBc = dtData.Rows[iRow]["NPI_BC"].ToString();
+                    string strNpiFc = dtData.Rows[iRow]["NPI_FC"].ToString();
+
+                    string strTimeContraint = dtData.Rows[iRow]["TIME_CONTRAINT"].ToString();
+                    string strTimeContraintBc = dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString();
+                    string strTimeContraintFc = dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString();
+
+                    string strRework = dtData.Rows[iRow]["REWORK"].ToString();
+                    string strReworkBc = dtData.Rows[iRow]["REWORK_BC"].ToString();
+                    string strReworkFc = dtData.Rows[iRow]["REWORK_FC"].ToString();
+
+                    string strMoldRepair = dtData.Rows[iRow]["MOLD_RP"].ToString();
+                    string strMoldRepairBc = dtData.Rows[iRow]["MOLD_RP_BC"].ToString();
+                    string strMoldRepairFc = dtData.Rows[iRow]["MOLD_RP_FC"].ToString();
+
+                    string strBottomDefective = dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString();
+                    string strBottomDefectiveBc = dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString();
+                    string strBottomDefectiveFc = dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString();
+
+                    string strIsb = dtData.Rows[iRow]["FGA_INV_SET"].ToString();
+                    string strIsbBc = dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString();
+                    string strIsbFc = dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString();
+
+                    string strProductionTarget = dtData.Rows[iRow]["MEET_TARGET"].ToString();
+                    string strProductionTargetBc = dtData.Rows[iRow]["MEET_TARGET_BC"].ToString();
+                    string strProductionTargetFc = dtData.Rows[iRow]["MEET_TARGET_FC"].ToString();
+
+                    string strTms = dtData.Rows[iRow]["TMS"].ToString();
+                    string strTmsBc = dtData.Rows[iRow]["TMS_BC"].ToString();
+                    string strTmsFc = dtData.Rows[iRow]["TMS_FC"].ToString();
+
+                    string strPod = dtData.Rows[iRow]["POD"].ToString();
+                    string strPodBc = dtData.Rows[iRow]["POD_BC"].ToString();
+                    string strPodFc = dtData.Rows[iRow]["POD_FC"].ToString();
+
+                    string strTopo = dtData.Rows[iRow]["TO_PO"].ToString();
+                    string strTopoBc = dtData.Rows[iRow]["TO_PO_BC"].ToString();
+                    string strTopoFc = dtData.Rows[iRow]["TO_PO_FC"].ToString();
+
+                    string strAbsent = dtData.Rows[iRow]["ABS_RATE"].ToString();
+                    string strAbsentBc = dtData.Rows[iRow]["ABS_RATE_BC"].ToString();
+                    string strAbsentFc = dtData.Rows[iRow]["ABS_RATE_FC"].ToString();
+
+
                     if (iRow == 0)
                     {
-
-
-                        rowValue += "<tr>" +
-                                       "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT_NAME"].ToString() + " </td>" +
-                                       "<td align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
-                                       "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
-                                       "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
+                        rowValueVSM += "<tr>" +
+                                       "<td rowspan='" + strRowFACSpan + "' align ='center'>" + strFactory + " </td>" +
+                                       "<td align='center'>" + strPlant + "</td>" +
+                                       "<td align='center'>" + strLine + "</td>" +
+                                       "<td bgcolor='" + strAndonDtBc + "' style = 'color:" + strAndonDtFc + "' align='center' >" + strAndonDt + "</td>" +
+                                       "<td bgcolor='" + strNpiBc + "' style = 'color:" + strNpiFc + "' align='right' >" + strNpi + "</td>" +
+                                       "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                       "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +                                     
+                                       "<td bgcolor='" + strIsbBc + "' style = 'color:" + strIsbFc + "' align='right' >" + strIsb + "</td>" +
+                                       "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                       "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                       "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                       "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                       "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
                                   "</tr>";
+
+
                     }
                     else
                     {
-                        if (dtData.Rows[iRow]["PLANT_NAME"].ToString() == dtData.Rows[iRow - 1]["PLANT_NAME"].ToString())
+                        if (strFactory == dtData.Rows[iRow - 1]["PLANT_NAME"].ToString())
                         {
-                            if (dtData.Rows[iRow]["LINE_NAME"].ToString() == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
+                            if (strPlant == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
                             {
-                                rowValue += "<tr>" +
-
-                            "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                             "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
-                            "</tr>";
+                                
+                                if (strFactory.Contains("Bottom"))
+                                {
+                                    rowValueBot += "<tr>" +
+                                                        
+                                                        "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                                        "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
+                                                        "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +                                                       
+                                                        "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                        "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                                        "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                                        "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                                        "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                                    "</tr>";
+                                }
+                                else
+                                {
+                                    rowValueVSM += "<tr>" +
+                                                    "<td align='center'>" + strLine + "</td>" +
+                                                    "<td bgcolor='" + strAndonDtBc + "' style = 'color:" + strAndonDtFc + "' align='center' >" + strAndonDt + "</td>" +
+                                                    "<td bgcolor='" + strNpiBc + "' style = 'color:" + strNpiFc + "' align='left' >" + strNpi + "</td>" +
+                                                    "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                                    "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +
+                                                    "<td bgcolor='" + strIsbBc + "' style = 'color:" + strIsbFc + "' align='right' >" + strIsb + "</td>" +
+                                                    "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                    "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                                    "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                                    "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                                    "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                                "</tr>";
+                                }
+                                    
                             }
                             else
                             {
-                            rowValue += "<tr>" +
-                             "<td  rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
-                            "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
-                            "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
-                            "</tr>";
+                                
+                                if (strFactory.Contains("Bottom"))
+                                {
+                                    rowValueBot += "<tr>" +
+                                                    "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
+                                                    
+                                                    "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                                    "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
+                                                    "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
+                                                    "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                    "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                                    "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                                    "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                                    "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                                "</tr>";
+                                }
+                                else
+                                {
+                                    rowValueVSM += "<tr>" +
+                                                    "<td  rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
+                                                    "<td align='center'>" + strLine + "</td>" +
+                                                    "<td bgcolor='" + strAndonDtBc + "' style = 'color:" + strAndonDtFc + "' align='center' >" + strAndonDt + "</td>" +
+                                                    "<td bgcolor='" + strNpiBc + "' style = 'color:" + strNpiFc + "' align='left' >" + strNpi + "</td>" +
+                                                    "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                                    "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +
+                                                    "<td bgcolor='" + strIsbBc + "' style = 'color:" + strIsbFc + "' align='right' >" + strIsb + "</td>" +
+                                                    "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                    "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                                    "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                                    "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                                    "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                                "</tr>";
+                                }
+                                    
                             }
                         }
                         else
                         {
-                            rowValue += "<tr>" +
-                                      "<td rowspan='" + strRowFACSpan + "' align ='center'>" + dtData.Rows[iRow]["PLANT_NAME"].ToString() + " </td>" +
-                                      "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + dtData.Rows[iRow]["LINE_NAME"].ToString() + "</td>" +
-                                      "<td align='center'>" + dtData.Rows[iRow]["MLINE_CD"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["ANDON_DT_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ANDON_DT_FC"].ToString() + "' align='center' >" + dtData.Rows[iRow]["ANDON_DT"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["NPI_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["NPI_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["NPI"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["TIME_CONTRAINT_BC"].ToString() + "' style = 'color:'" + dtData.Rows[iRow]["TIME_CONTRAINT_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TIME_CONTRAINT"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["REWORK_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["REWORK_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["REWORK"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["MOLD_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MOLD_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MOLD_RP"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["BOTTOM_DEF_RP_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["BOTTOM_DEF_RP_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["BOTTOM_DEF_RP"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["FGA_INV_SET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["FGA_INV_SET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["FGA_INV_SET"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["MEET_TARGET_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["MEET_TARGET_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["MEET_TARGET"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["TMS_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TMS_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TMS"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["POD_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["POD_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["POD"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["TO_PO_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["TO_PO_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["TO_PO"].ToString() + "</td>" +
-                                      "<td bgcolor='" + dtData.Rows[iRow]["ABS_RATE_BC"].ToString() + "' style = 'color:" + dtData.Rows[iRow]["ABS_RATE_FC"].ToString() + "' align='right' >" + dtData.Rows[iRow]["ABS_RATE"].ToString() + "</td>" +
-                                 "</tr>";
+                            
+
+                            if (strFactory.Contains("Bottom"))
+                            {
+                                rowValueBot += "<tr>" +
+                                              "<td rowspan='" + strRowFACSpan + "' align ='center'>" + strFactory + " </td>" +
+                                              "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
+                                              
+                                              "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                              "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
+                                              "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
+                                              "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                              "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                              "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                              "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                              "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                            "</tr>";
+                            }
+                            else
+                            {
+                                rowValueVSM += "<tr>" +
+                                              "<td rowspan='" + strRowFACSpan + "' align ='center'>" + strFactory + " </td>" +
+                                              "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
+                                              "<td align='center'>" + strLine + "</td>" +
+                                              "<td bgcolor='" + strAndonDtBc + "' style = 'color:" + strAndonDtFc + "' align='center' >" + strAndonDt + "</td>" +
+                                              "<td bgcolor='" + strNpiBc + "' style = 'color:" + strNpiFc + "' align='left' >" + strNpi + "</td>" +
+                                              "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
+                                              "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +
+                                              "<td bgcolor='" + strIsbBc + "' style = 'color:" + strIsbFc + "' align='right' >" + strIsb + "</td>" +
+                                              "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                              "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
+                                              "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
+                                              "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
+                                              "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
+                                           "</tr>";
+                            }
                         }
                     }
                 }
@@ -5747,152 +5852,88 @@ namespace Send_Email
                               "         color: black; " +
                               "         } " +
                               "</style> ";
-                string text = "<img src='cid:" + imgInfo + "'><br><table class='tblBoder'> " +
-                              "  <tr> " +
-                              "    <td>Items</ td >" +
-                               "   <td class='gray'  align ='center'>Unit</td>" +
-                              "    <td class='green'  align ='center'>Green</td>" +
-                              "    <td class='yellow'  align ='center'>Yellow</td>" +
-                              "    <td class='orange'  align ='center'>Orange</td>" +
-                              "    <td class='red'  align ='center'>Red</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "    <td>Andon DownTime</td>" +
-                              "    <td>Time</td>" +
-                              "    <td>&lt;10 minutes</td>" +
-                              "    <td>10 ~ 29:59 minutes</td>" +
-                              "    <td>30 ~ 59:59 minutes</td>" +
-                              "    <td>Over 1 hour</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>NPI</td>" +
-                              "      <td>Day</td>" +
-                              "      <td>On Time</td>" +
-                              "      <td>Late 1 day</td>" +
-                              "      <td></td>" +
-                              "      <td>Late >= 2 days</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Time Contraint</td>" +
-                              "      <td>Day</td>" +
-                              "      <td></td>" +
-                              "      <td>&gt;13 days</td>" +
-                              "      <td></td>" +
-                              "      <td>&gt;26 days</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Rework</td>" +
-                              "      <td>%</td>" +
-                              "      <td>0 ~ 3</td>" +
-                              "      <td>3 ~ 4</td>" +
-                              "      <td></td>" +
-                              "      <td>>4</td>" +
-                              "  </tr>" +
-                               "  <tr>" +
-                              "      <td>Mold Repair</td>" +
-                              "      <td>Count</td>" +
-                              "      <td>&gt;98</td>" +
-                              "      <td>95~98</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt;95</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Bottom Defective</td>" +
-                              "      <td>%</td>" +
-                              "      <td>0~1</td>" +
-                              "      <td>1~2</td>" +
-                              "      <td></td>" +
-                              "      <td>&gt;2</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Inventory Set Analysis</td>" +
-                              "      <td>%</td>" +
-                              "      <td>&gt;80</td>" +
-                              "      <td>70~80</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt;70</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>Production Target</td>" +
-                              "      <td>%</td>" +
-                              "      <td>&ge;98</td>" +
-                              "      <td>95~97</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt; 95</td>" +
-                              "  </tr>" +
-                              "  <tr>" +
-                              "      <td>TMS</td>" +
-                              "      <td>%</td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "      <td></td>" +
-                              "  </tr>" +
-                              "      <td>POD</td>" +
-                              "      <td>%</td>" +
-                              "      <td>97 ~ 103</td>" +
-                              "      <td>103 ~ 105</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt; 95</td>" +
-                              "  </tr>" +
-                              "      <td>TO/PO</td>" +
-                              "      <td>%</td>" +
-                              "      <td>97 ~ 103</td>" +
-                              "      <td>103 ~ 105</td>" +
-                              "      <td></td>" +
-                              "      <td>&lt; 95</td>" +
-                              "  </tr>" +
-                              "      <td>Absenteeism</td>" +
-                              "      <td>%</td>" +
-                              "      <td>1~2</td>" +
-                              "      <td>2~5</td>" +
-                              "      <td></td>" +
-                              "      <td>&gt;5</td>" +
-                              "  </tr>" +
-                              "</table>";
+                string text = "<img src='cid:" + imgInfo + "'><br>" +
+                              "<img src='cid:" + imgInfo2 + "'>";
+                              
 
                 string html = "<head>" + style + "</head>" +
                                "<body>" + text + "<br>" +
-                    "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1920'>" +
-                               "<tr bgcolor='#ffe5cc'>" +
-                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
-                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
-                                  " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Line</th>" +
-                                  " <th colspan = '6' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='400' >Quality</th>" +
-                                  " <th colspan = '4' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='350'>Production/Inventory/Logistics</th>" +
-                                  " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='200'>HR</th>" +
-                               "</tr>" +
-                               "<tr bgcolor='#ffe5cc'>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>Andon<br>D/T</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>NPI</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Rework</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Inventory<br>Set Analysis</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Production<br> Target</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
-                                  " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
-                               "</tr>" +
-                               "<tr bgcolor='#ffe49c'>" +
-                                  " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Time</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Day</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Day</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Count</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                                  " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
-                               "</tr>" +
-                               rowValue +
-                           "</table></body>";
+                               "<p style='font-family:Times New Roman; font-size:20px'>VSM</p>" +
+                        "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1920'>" +
+                                   "<tr bgcolor='#ffe5cc'>" +
+                                      " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
+                                      " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
+                                      " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Line</th>" +
+                                      " <th colspan = '4' bgcolor = '#18213C' style = 'color:#ffffff' align='center' >Quality</th>" +
+                                      " <th colspan = '4' bgcolor = '#18213C' style = 'color:#ffffff' align='center' >Production/Inventory/Logistics</th>" +
+                                      " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' >HR</th>" +
+                                   "</tr>" +
+                                   "<tr bgcolor='#ffe5cc'>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>Andon<br>D/T</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100'>NPI</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint By<br>Stockfit</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Rework</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >ISB</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Production<br> Target</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
+                                   "</tr>" +
+                                   "<tr bgcolor='#ffe49c'>" +
+                                      " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Time</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Day</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Prs</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                   "</tr>" +
+                                   rowValueVSM +
+                               "</table>" +
+
+                           "<p style='font-family:Times New Roman; font-size:20px' >Bottom</p>" +
+                           "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1500'>" +
+                                   "<tr bgcolor='#ffe5cc'>" +
+                                      " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
+                                      " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
+                                     
+                                      " <th colspan = '3' bgcolor = '#18213C' style = 'color:#ffffff' align='center' ' >Quality</th>" +
+                                      " <th colspan = '3' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>Production/Inventory/Logistics</th>" +
+                                      " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>HR</th>" +
+                                   "</tr>" +
+                                   "<tr bgcolor='#ffe5cc'>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint By<br>Bottom</th>" +        
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
+
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Production<br> Target</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
+
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
+                                   "</tr>" +
+                                   "<tr bgcolor='#ffe49c'>" +
+                                      " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Prs</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Count</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                   "</tr>" +
+                                   rowValueBot +
+                               "</table>" +
+                           "</body>";
 
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
                 //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
