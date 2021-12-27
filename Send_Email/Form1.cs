@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "phuoc.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -84,7 +84,7 @@ namespace Send_Email
                 RunProduction("Q1");
 
             //12H - Phước thêm 2021/12/07
-            if (TimeNow.Equals("13:29"))
+            if (TimeNow.Equals("06:29"))
                 if (cmdRunAssInLineChk.Checked)
                     RunAssInLine("Q1");
 
@@ -5168,7 +5168,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = "Inline inventory by each assembly line";
 
@@ -5219,7 +5219,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
                                        "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_1H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "'  align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
                     }
@@ -5236,7 +5236,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
                                        "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_1H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
                         }
@@ -5252,7 +5252,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
                                        "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
-                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
+                                       "<td align='right'>" + dtData.Rows[iRow]["PLAN_1H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
                         }
@@ -5276,7 +5276,7 @@ namespace Send_Email
                                   " <th rowspan = '2' align='center' width='70'>Plant</th>" +
                                   " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
                                   " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day inventory</th>" +
-                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'> Yesterday inventory</th>" +
+                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'>Yesterday inventory</th>" +
                                "</tr>" +
                                "<tr>" +
                                   strDate +
