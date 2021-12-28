@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -5259,7 +5259,7 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_KOR.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\FGA_INV_VIE.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = "Inline inventory by each assembly line";
 
@@ -5309,7 +5309,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                      // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "'  align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -5326,7 +5326,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                     //  "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -5342,7 +5342,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                       "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                      // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -5358,8 +5358,8 @@ namespace Send_Email
 
                 string html = "<img src='cid:" + imgInfo + "'><br><img src='cid:" + imgInfo1 + "'><br><table style='font-family:Times New Roman; font-size:20px; font-style: italic;' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0'>" +
                     "<tr ><td colspan='2' align='center'><strong>Assembly Inline Inventory Target</strong></td></tr>" +
-                    "<tr><td align='left'>&le; 2 Hours</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
-                      "<tr><td align='left'>&gt; 2 Hours</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
+                    "<tr><td align='left'>&le; 1 Hour</td><td align='center' bgcolor = 'green' style = 'color:#ffffff'>Green</td></tr>" +
+                      "<tr><td align='left'>&gt; 1 Hour</td><td align='center' bgcolor = 'red' style = 'color:#ffffff'>Red</td></tr>" +
                     "</table> <h3><strong>UNIT: PAIRS</strong></h3>" +
                     "<p></p>" +
                     "          <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1400'>" +
@@ -5367,12 +5367,12 @@ namespace Send_Email
                                   " <th rowspan = '2' align='center' width='70'>Plant</th>" +
                                   " <th rowspan = '2' align='center' width='70'>Mini Line</th>" +
                                   " <th bgcolor = '#ff9900' style = 'color:#ffffff' colspan = '6' align='center'>Full time on previous day inventory</th>" +
-                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '3' align='center'>Yesterday inventory</th>" +
+                                  " <th bgcolor = '#366cc9' style = 'color:#ffffff' colspan = '2' align='center'>Yesterday inventory</th>" +
                                "</tr>" +
                                "<tr>" +
                                   strDate +
-                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
-                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>2 Hours Plan</th>" +
+                                  //"<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>Daily Plan</th>" +
+                                  "<th bgcolor='#366cc9' style='color:#ffffff' align='center' width='100'>1 Hour Plan</th>" +
                                   "<th bgcolor='#f7d231' style='color:#000000' align='center' width='100'>Inline Inventory</th>" +
                                "</tr>" +
                                  rowValue +
