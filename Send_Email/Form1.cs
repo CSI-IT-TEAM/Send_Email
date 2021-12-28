@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -5700,7 +5700,7 @@ namespace Send_Email
                                                         "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                                         "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
                                                         "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +                                                       
-                                                        "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                        
                                                         "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                                         "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                                         "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -5736,7 +5736,7 @@ namespace Send_Email
                                                     "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                                     "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
                                                     "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
-                                                    "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                                    
                                                     "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                                     "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                                     "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -5776,7 +5776,7 @@ namespace Send_Email
                                               "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                               "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
                                               "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
-                                              "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
+                                              
                                               "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                               "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                               "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -5819,6 +5819,11 @@ namespace Send_Email
                               "   .tblBoder tbody td { " +
                               "             font-size: 20px; " +
                               "         } " +
+                              ".title {" +
+                              "         font-family: 'Times New Roman';"+
+                              "         font-style: italic;"+
+                              "         font-size: 30px;"+
+                              "        }" +
                               "   .tblBoder thead { " +
                               "         background: #26A1B2; " +
                               "         font-style: italic; " +
@@ -5858,7 +5863,8 @@ namespace Send_Email
 
                 string html = "<head>" + style + "</head>" +
                                "<body>" + text + "<br>" +
-                               "<p style='font-family:Times New Roman; font-size:20px'>VSM</p>" +
+                               "<br>" +
+                               "<b class = 'title'>VMS</b>" +
                         "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1920'>" +
                                    "<tr bgcolor='#ffe5cc'>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
@@ -5878,7 +5884,7 @@ namespace Send_Email
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
-                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absenteeism</th>" +
                                    "</tr>" +
                                    "<tr bgcolor='#ffe49c'>" +
                                       " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
@@ -5895,15 +5901,15 @@ namespace Send_Email
                                    "</tr>" +
                                    rowValueVSM +
                                "</table>" +
-
-                           "<p style='font-family:Times New Roman; font-size:20px' >Bottom</p>" +
+                           "<br>" +
+                           "<b class = 'title'>Bottom</b>" +
                            "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1500'>" +
                                    "<tr bgcolor='#ffe5cc'>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
                                      
                                       " <th colspan = '3' bgcolor = '#18213C' style = 'color:#ffffff' align='center' ' >Quality</th>" +
-                                      " <th colspan = '3' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>Production/Inventory/Logistics</th>" +
+                                      " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>Production/Inventory/Logistics</th>" +
                                       " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>HR</th>" +
                                    "</tr>" +
                                    "<tr bgcolor='#ffe5cc'>" +
@@ -5911,20 +5917,20 @@ namespace Send_Email
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
 
-                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Production<br> Target</th>" +
+                                      
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
 
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TO/PO&nbsp;</th>" +
-                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absent</th>" +
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Absenteeism</th>" +
                                    "</tr>" +
                                    "<tr bgcolor='#ffe49c'>" +
-                                      " <th colspan = '3' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
+                                      " <th colspan = '2' bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100'>Unit</th>" +
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Prs</th>" +
-                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >Count</th>" +
+                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
 
-                                      " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
+                                      
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
 
@@ -5953,6 +5959,7 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             DataSet ds_ret;
+            MyOraDB.ShowErr = true;
             try
             {
                 string process_name = "P_SEND_EMAIL_OPEN_DAAS";
