@@ -410,6 +410,8 @@
             this.cmdCanteenChk = new System.Windows.Forms.CheckBox();
             this.cmdSumDaaS = new System.Windows.Forms.Button();
             this.cmdRunSumDaaSChk = new System.Windows.Forms.CheckBox();
+            this.cmd_HourlyProdTrackingChk = new System.Windows.Forms.CheckBox();
+            this.cmd_HourlyProdTracking = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -703,7 +705,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(6, 163);
+            this.button1.Location = new System.Drawing.Point(6, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(397, 23);
             this.button1.TabIndex = 100;
@@ -1318,7 +1320,7 @@
             // cmdRunProd
             // 
             this.cmdRunProd.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunProd.Location = new System.Drawing.Point(6, 326);
+            this.cmdRunProd.Location = new System.Drawing.Point(6, 276);
             this.cmdRunProd.Name = "cmdRunProd";
             this.cmdRunProd.Size = new System.Drawing.Size(397, 23);
             this.cmdRunProd.TabIndex = 20;
@@ -2198,7 +2200,7 @@
             // cmdRunAndon
             // 
             this.cmdRunAndon.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAndon.Location = new System.Drawing.Point(6, 134);
+            this.cmdRunAndon.Location = new System.Drawing.Point(6, 116);
             this.cmdRunAndon.Name = "cmdRunAndon";
             this.cmdRunAndon.Size = new System.Drawing.Size(397, 23);
             this.cmdRunAndon.TabIndex = 199;
@@ -2215,7 +2217,7 @@
             // chkTest
             // 
             this.chkTest.AutoSize = true;
-            this.chkTest.Location = new System.Drawing.Point(865, 428);
+            this.chkTest.Location = new System.Drawing.Point(865, 437);
             this.chkTest.Name = "chkTest";
             this.chkTest.Size = new System.Drawing.Size(75, 17);
             this.chkTest.TabIndex = 200;
@@ -2225,7 +2227,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(751, 433);
+            this.checkBox1.Location = new System.Drawing.Point(751, 435);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(53, 17);
             this.checkBox1.TabIndex = 201;
@@ -2236,7 +2238,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(810, 432);
+            this.checkBox2.Location = new System.Drawing.Point(810, 434);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(53, 17);
             this.checkBox2.TabIndex = 202;
@@ -2248,7 +2250,7 @@
             // cmdRunEscan
             // 
             this.cmdRunEscan.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunEscan.Location = new System.Drawing.Point(6, 192);
+            this.cmdRunEscan.Location = new System.Drawing.Point(6, 162);
             this.cmdRunEscan.Name = "cmdRunEscan";
             this.cmdRunEscan.Size = new System.Drawing.Size(397, 23);
             this.cmdRunEscan.TabIndex = 203;
@@ -2258,7 +2260,7 @@
             // 
             // txtLog
             // 
-            this.txtLog.Location = new System.Drawing.Point(503, 443);
+            this.txtLog.Location = new System.Drawing.Point(503, 454);
             this.txtLog.Multiline = true;
             this.txtLog.Name = "txtLog";
             this.txtLog.Size = new System.Drawing.Size(438, 85);
@@ -2267,7 +2269,7 @@
             // cmdPoTo
             // 
             this.cmdPoTo.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPoTo.Location = new System.Drawing.Point(6, 351);
+            this.cmdPoTo.Location = new System.Drawing.Point(6, 299);
             this.cmdPoTo.Name = "cmdPoTo";
             this.cmdPoTo.Size = new System.Drawing.Size(397, 23);
             this.cmdPoTo.TabIndex = 205;
@@ -2278,7 +2280,7 @@
             // cmdPoToIe
             // 
             this.cmdPoToIe.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPoToIe.Location = new System.Drawing.Point(486, 162);
+            this.cmdPoToIe.Location = new System.Drawing.Point(486, 138);
             this.cmdPoToIe.Name = "cmdPoToIe";
             this.cmdPoToIe.Size = new System.Drawing.Size(397, 23);
             this.cmdPoToIe.TabIndex = 206;
@@ -2289,7 +2291,7 @@
             // cmdCutting
             // 
             this.cmdCutting.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCutting.Location = new System.Drawing.Point(486, 192);
+            this.cmdCutting.Location = new System.Drawing.Point(486, 162);
             this.cmdCutting.Name = "cmdCutting";
             this.cmdCutting.Size = new System.Drawing.Size(397, 23);
             this.cmdCutting.TabIndex = 207;
@@ -2300,7 +2302,7 @@
             // cmdNpi
             // 
             this.cmdNpi.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdNpi.Location = new System.Drawing.Point(6, 250);
+            this.cmdNpi.Location = new System.Drawing.Point(6, 209);
             this.cmdNpi.Name = "cmdNpi";
             this.cmdNpi.Size = new System.Drawing.Size(397, 23);
             this.cmdNpi.TabIndex = 208;
@@ -2569,7 +2571,7 @@
             // 
             this.btnRunTMS.Enabled = false;
             this.btnRunTMS.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunTMS.Location = new System.Drawing.Point(810, 322);
+            this.btnRunTMS.Location = new System.Drawing.Point(117, 506);
             this.btnRunTMS.Name = "btnRunTMS";
             this.btnRunTMS.Size = new System.Drawing.Size(130, 23);
             this.btnRunTMS.TabIndex = 208;
@@ -2581,7 +2583,7 @@
             // btnTimeContraintStockfit
             // 
             this.btnTimeContraintStockfit.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimeContraintStockfit.Location = new System.Drawing.Point(6, 279);
+            this.btnTimeContraintStockfit.Location = new System.Drawing.Point(6, 231);
             this.btnTimeContraintStockfit.Name = "btnTimeContraintStockfit";
             this.btnTimeContraintStockfit.Size = new System.Drawing.Size(397, 23);
             this.btnTimeContraintStockfit.TabIndex = 208;
@@ -2779,7 +2781,7 @@
             // btnRunScada
             // 
             this.btnRunScada.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunScada.Location = new System.Drawing.Point(486, 75);
+            this.btnRunScada.Location = new System.Drawing.Point(486, 70);
             this.btnRunScada.Name = "btnRunScada";
             this.btnRunScada.Size = new System.Drawing.Size(397, 23);
             this.btnRunScada.TabIndex = 208;
@@ -2790,7 +2792,7 @@
             // btnTMS_Summary
             // 
             this.btnTMS_Summary.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTMS_Summary.Location = new System.Drawing.Point(486, 220);
+            this.btnTMS_Summary.Location = new System.Drawing.Point(486, 185);
             this.btnTMS_Summary.Name = "btnTMS_Summary";
             this.btnTMS_Summary.Size = new System.Drawing.Size(397, 23);
             this.btnTMS_Summary.TabIndex = 208;
@@ -2801,7 +2803,7 @@
             // cmdMoldRepair
             // 
             this.cmdMoldRepair.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdMoldRepair.Location = new System.Drawing.Point(6, 221);
+            this.cmdMoldRepair.Location = new System.Drawing.Point(6, 186);
             this.cmdMoldRepair.Name = "cmdMoldRepair";
             this.cmdMoldRepair.Size = new System.Drawing.Size(397, 23);
             this.cmdMoldRepair.TabIndex = 211;
@@ -2823,7 +2825,7 @@
             // cmd_Budget
             // 
             this.cmd_Budget.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_Budget.Location = new System.Drawing.Point(486, 104);
+            this.cmd_Budget.Location = new System.Drawing.Point(486, 93);
             this.cmd_Budget.Name = "cmd_Budget";
             this.cmd_Budget.Size = new System.Drawing.Size(397, 23);
             this.cmd_Budget.TabIndex = 212;
@@ -2834,7 +2836,7 @@
             // btnFeedback
             // 
             this.btnFeedback.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFeedback.Location = new System.Drawing.Point(486, 249);
+            this.btnFeedback.Location = new System.Drawing.Point(486, 208);
             this.btnFeedback.Name = "btnFeedback";
             this.btnFeedback.Size = new System.Drawing.Size(397, 23);
             this.btnFeedback.TabIndex = 211;
@@ -2845,7 +2847,7 @@
             // cmd_Quality
             // 
             this.cmd_Quality.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_Quality.Location = new System.Drawing.Point(6, 105);
+            this.cmd_Quality.Location = new System.Drawing.Point(6, 94);
             this.cmd_Quality.Name = "cmd_Quality";
             this.cmd_Quality.Size = new System.Drawing.Size(397, 23);
             this.cmd_Quality.TabIndex = 213;
@@ -2856,7 +2858,7 @@
             // cmd_BotDef
             // 
             this.cmd_BotDef.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_BotDef.Location = new System.Drawing.Point(6, 76);
+            this.cmd_BotDef.Location = new System.Drawing.Point(6, 71);
             this.cmd_BotDef.Name = "cmd_BotDef";
             this.cmd_BotDef.Size = new System.Drawing.Size(397, 23);
             this.cmd_BotDef.TabIndex = 214;
@@ -2867,7 +2869,7 @@
             // cmd_Quality2
             // 
             this.cmd_Quality2.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_Quality2.Location = new System.Drawing.Point(6, 376);
+            this.cmd_Quality2.Location = new System.Drawing.Point(6, 321);
             this.cmd_Quality2.Name = "cmd_Quality2";
             this.cmd_Quality2.Size = new System.Drawing.Size(397, 23);
             this.cmd_Quality2.TabIndex = 215;
@@ -2915,7 +2917,7 @@
             // cmdMoldRepairMonth
             // 
             this.cmdMoldRepairMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdMoldRepairMonth.Location = new System.Drawing.Point(486, 278);
+            this.cmdMoldRepairMonth.Location = new System.Drawing.Point(486, 232);
             this.cmdMoldRepairMonth.Name = "cmdMoldRepairMonth";
             this.cmdMoldRepairMonth.Size = new System.Drawing.Size(397, 23);
             this.cmdMoldRepairMonth.TabIndex = 219;
@@ -3043,7 +3045,7 @@
             // btnRunQualityMonth
             // 
             this.btnRunQualityMonth.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunQualityMonth.Location = new System.Drawing.Point(486, 134);
+            this.btnRunQualityMonth.Location = new System.Drawing.Point(486, 116);
             this.btnRunQualityMonth.Name = "btnRunQualityMonth";
             this.btnRunQualityMonth.Size = new System.Drawing.Size(397, 23);
             this.btnRunQualityMonth.TabIndex = 215;
@@ -3178,7 +3180,7 @@
             this.button1Chk.Checked = true;
             this.button1Chk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.button1Chk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1Chk.Location = new System.Drawing.Point(409, 166);
+            this.button1Chk.Location = new System.Drawing.Point(409, 142);
             this.button1Chk.Name = "button1Chk";
             this.button1Chk.Size = new System.Drawing.Size(52, 19);
             this.button1Chk.TabIndex = 223;
@@ -3202,7 +3204,7 @@
             this.cmdRunProdChk.Checked = true;
             this.cmdRunProdChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunProdChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunProdChk.Location = new System.Drawing.Point(409, 326);
+            this.cmdRunProdChk.Location = new System.Drawing.Point(409, 276);
             this.cmdRunProdChk.Name = "cmdRunProdChk";
             this.cmdRunProdChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunProdChk.TabIndex = 223;
@@ -3215,7 +3217,7 @@
             this.cmdMoldRepairChk.Checked = true;
             this.cmdMoldRepairChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdMoldRepairChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdMoldRepairChk.Location = new System.Drawing.Point(409, 225);
+            this.cmdMoldRepairChk.Location = new System.Drawing.Point(409, 190);
             this.cmdMoldRepairChk.Name = "cmdMoldRepairChk";
             this.cmdMoldRepairChk.Size = new System.Drawing.Size(52, 19);
             this.cmdMoldRepairChk.TabIndex = 223;
@@ -3228,7 +3230,7 @@
             this.cmdCuttingChk.Checked = true;
             this.cmdCuttingChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdCuttingChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCuttingChk.Location = new System.Drawing.Point(889, 194);
+            this.cmdCuttingChk.Location = new System.Drawing.Point(889, 164);
             this.cmdCuttingChk.Name = "cmdCuttingChk";
             this.cmdCuttingChk.Size = new System.Drawing.Size(52, 19);
             this.cmdCuttingChk.TabIndex = 223;
@@ -3241,7 +3243,7 @@
             this.btnFeedbackChk.Checked = true;
             this.btnFeedbackChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnFeedbackChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnFeedbackChk.Location = new System.Drawing.Point(889, 253);
+            this.btnFeedbackChk.Location = new System.Drawing.Point(889, 212);
             this.btnFeedbackChk.Name = "btnFeedbackChk";
             this.btnFeedbackChk.Size = new System.Drawing.Size(52, 19);
             this.btnFeedbackChk.TabIndex = 223;
@@ -3254,7 +3256,7 @@
             this.btnTimeContraintChk.Checked = true;
             this.btnTimeContraintChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnTimeContraintChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimeContraintChk.Location = new System.Drawing.Point(409, 293);
+            this.btnTimeContraintChk.Location = new System.Drawing.Point(409, 245);
             this.btnTimeContraintChk.Name = "btnTimeContraintChk";
             this.btnTimeContraintChk.Size = new System.Drawing.Size(52, 19);
             this.btnTimeContraintChk.TabIndex = 223;
@@ -3267,7 +3269,7 @@
             this.cmd_Quality2Chk.Checked = true;
             this.cmd_Quality2Chk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_Quality2Chk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_Quality2Chk.Location = new System.Drawing.Point(409, 380);
+            this.cmd_Quality2Chk.Location = new System.Drawing.Point(409, 325);
             this.cmd_Quality2Chk.Name = "cmd_Quality2Chk";
             this.cmd_Quality2Chk.Size = new System.Drawing.Size(52, 19);
             this.cmd_Quality2Chk.TabIndex = 223;
@@ -3278,7 +3280,7 @@
             // 
             this.btnTMS_SummaryChk.AutoSize = true;
             this.btnTMS_SummaryChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTMS_SummaryChk.Location = new System.Drawing.Point(889, 223);
+            this.btnTMS_SummaryChk.Location = new System.Drawing.Point(889, 188);
             this.btnTMS_SummaryChk.Name = "btnTMS_SummaryChk";
             this.btnTMS_SummaryChk.Size = new System.Drawing.Size(52, 19);
             this.btnTMS_SummaryChk.TabIndex = 223;
@@ -3291,7 +3293,7 @@
             this.cmdRunEscanChk.Checked = true;
             this.cmdRunEscanChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunEscanChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdRunEscanChk.Location = new System.Drawing.Point(409, 195);
+            this.cmdRunEscanChk.Location = new System.Drawing.Point(409, 165);
             this.cmdRunEscanChk.Name = "cmdRunEscanChk";
             this.cmdRunEscanChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunEscanChk.TabIndex = 223;
@@ -3304,7 +3306,7 @@
             this.cmd_BotDefChk.Checked = true;
             this.cmd_BotDefChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_BotDefChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_BotDefChk.Location = new System.Drawing.Point(409, 79);
+            this.cmd_BotDefChk.Location = new System.Drawing.Point(409, 74);
             this.cmd_BotDefChk.Name = "cmd_BotDefChk";
             this.cmd_BotDefChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_BotDefChk.TabIndex = 223;
@@ -3317,7 +3319,7 @@
             this.cmd_BudgetChk.Checked = true;
             this.cmd_BudgetChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_BudgetChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_BudgetChk.Location = new System.Drawing.Point(889, 109);
+            this.cmd_BudgetChk.Location = new System.Drawing.Point(889, 98);
             this.cmd_BudgetChk.Name = "cmd_BudgetChk";
             this.cmd_BudgetChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_BudgetChk.TabIndex = 223;
@@ -3344,7 +3346,7 @@
             this.cmdPoToIeChk.Checked = true;
             this.cmdPoToIeChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdPoToIeChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdPoToIeChk.Location = new System.Drawing.Point(889, 165);
+            this.cmdPoToIeChk.Location = new System.Drawing.Point(889, 141);
             this.cmdPoToIeChk.Name = "cmdPoToIeChk";
             this.cmdPoToIeChk.Size = new System.Drawing.Size(52, 19);
             this.cmdPoToIeChk.TabIndex = 223;
@@ -3357,7 +3359,7 @@
             this.cmdRunAndonChk.Checked = true;
             this.cmdRunAndonChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAndonChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAndonChk.Location = new System.Drawing.Point(409, 137);
+            this.cmdRunAndonChk.Location = new System.Drawing.Point(409, 119);
             this.cmdRunAndonChk.Name = "cmdRunAndonChk";
             this.cmdRunAndonChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAndonChk.TabIndex = 223;
@@ -3370,7 +3372,7 @@
             this.btnRunScadaChk.Checked = true;
             this.btnRunScadaChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunScadaChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunScadaChk.Location = new System.Drawing.Point(889, 78);
+            this.btnRunScadaChk.Location = new System.Drawing.Point(889, 73);
             this.btnRunScadaChk.Name = "btnRunScadaChk";
             this.btnRunScadaChk.Size = new System.Drawing.Size(52, 19);
             this.btnRunScadaChk.TabIndex = 223;
@@ -3383,7 +3385,7 @@
             this.cmdPoToChk.Checked = true;
             this.cmdPoToChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdPoToChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdPoToChk.Location = new System.Drawing.Point(409, 351);
+            this.cmdPoToChk.Location = new System.Drawing.Point(409, 299);
             this.cmdPoToChk.Name = "cmdPoToChk";
             this.cmdPoToChk.Size = new System.Drawing.Size(52, 19);
             this.cmdPoToChk.TabIndex = 223;
@@ -3409,7 +3411,7 @@
             this.cmdNpiChk.Checked = true;
             this.cmdNpiChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdNpiChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdNpiChk.Location = new System.Drawing.Point(409, 253);
+            this.cmdNpiChk.Location = new System.Drawing.Point(409, 212);
             this.cmdNpiChk.Name = "cmdNpiChk";
             this.cmdNpiChk.Size = new System.Drawing.Size(52, 19);
             this.cmdNpiChk.TabIndex = 223;
@@ -3422,7 +3424,7 @@
             this.cmd_QualityChk.Checked = true;
             this.cmd_QualityChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_QualityChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_QualityChk.Location = new System.Drawing.Point(409, 108);
+            this.cmd_QualityChk.Location = new System.Drawing.Point(409, 97);
             this.cmd_QualityChk.Name = "cmd_QualityChk";
             this.cmd_QualityChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_QualityChk.TabIndex = 223;
@@ -3435,7 +3437,7 @@
             this.cmdMoldRepairMonthChk.Checked = true;
             this.cmdMoldRepairMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdMoldRepairMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 282);
+            this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 236);
             this.cmdMoldRepairMonthChk.Name = "cmdMoldRepairMonthChk";
             this.cmdMoldRepairMonthChk.Size = new System.Drawing.Size(52, 19);
             this.cmdMoldRepairMonthChk.TabIndex = 223;
@@ -3448,7 +3450,7 @@
             this.btnRunQualityMonthChk.Checked = true;
             this.btnRunQualityMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunQualityMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunQualityMonthChk.Location = new System.Drawing.Point(889, 138);
+            this.btnRunQualityMonthChk.Location = new System.Drawing.Point(889, 120);
             this.btnRunQualityMonthChk.Name = "btnRunQualityMonthChk";
             this.btnRunQualityMonthChk.Size = new System.Drawing.Size(52, 19);
             this.btnRunQualityMonthChk.TabIndex = 223;
@@ -3931,7 +3933,7 @@
             // btnTimeContraintBottom
             // 
             this.btnTimeContraintBottom.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimeContraintBottom.Location = new System.Drawing.Point(6, 301);
+            this.btnTimeContraintBottom.Location = new System.Drawing.Point(6, 253);
             this.btnTimeContraintBottom.Name = "btnTimeContraintBottom";
             this.btnTimeContraintBottom.Size = new System.Drawing.Size(397, 23);
             this.btnTimeContraintBottom.TabIndex = 227;
@@ -3942,7 +3944,7 @@
             // cmd_IeRelief
             // 
             this.cmd_IeRelief.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_IeRelief.Location = new System.Drawing.Point(486, 308);
+            this.cmd_IeRelief.Location = new System.Drawing.Point(486, 255);
             this.cmd_IeRelief.Name = "cmd_IeRelief";
             this.cmd_IeRelief.Size = new System.Drawing.Size(397, 23);
             this.cmd_IeRelief.TabIndex = 228;
@@ -3956,7 +3958,7 @@
             this.cmd_IeReliefChk.Checked = true;
             this.cmd_IeReliefChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_IeReliefChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_IeReliefChk.Location = new System.Drawing.Point(889, 310);
+            this.cmd_IeReliefChk.Location = new System.Drawing.Point(889, 257);
             this.cmd_IeReliefChk.Name = "cmd_IeReliefChk";
             this.cmd_IeReliefChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_IeReliefChk.TabIndex = 229;
@@ -3966,7 +3968,7 @@
             // cmdAssInline
             // 
             this.cmdAssInline.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAssInline.Location = new System.Drawing.Point(486, 337);
+            this.cmdAssInline.Location = new System.Drawing.Point(486, 278);
             this.cmdAssInline.Name = "cmdAssInline";
             this.cmdAssInline.Size = new System.Drawing.Size(397, 23);
             this.cmdAssInline.TabIndex = 20;
@@ -3980,7 +3982,7 @@
             this.cmdRunAssInLineChk.Checked = true;
             this.cmdRunAssInLineChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(888, 339);
+            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(888, 280);
             this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
             this.cmdRunAssInLineChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAssInLineChk.TabIndex = 223;
@@ -4057,7 +4059,7 @@
             // cmdAssInvSet
             // 
             this.cmdAssInvSet.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAssInvSet.Location = new System.Drawing.Point(486, 366);
+            this.cmdAssInvSet.Location = new System.Drawing.Point(486, 300);
             this.cmdAssInvSet.Name = "cmdAssInvSet";
             this.cmdAssInvSet.Size = new System.Drawing.Size(397, 23);
             this.cmdAssInvSet.TabIndex = 20;
@@ -4069,7 +4071,7 @@
             // 
             this.cmdRunAssInvSetChk.AutoSize = true;
             this.cmdRunAssInvSetChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAssInvSetChk.Location = new System.Drawing.Point(888, 368);
+            this.cmdRunAssInvSetChk.Location = new System.Drawing.Point(888, 302);
             this.cmdRunAssInvSetChk.Name = "cmdRunAssInvSetChk";
             this.cmdRunAssInvSetChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAssInvSetChk.TabIndex = 223;
@@ -4079,7 +4081,7 @@
             // cmdCanteen
             // 
             this.cmdCanteen.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdCanteen.Location = new System.Drawing.Point(6, 405);
+            this.cmdCanteen.Location = new System.Drawing.Point(6, 345);
             this.cmdCanteen.Name = "cmdCanteen";
             this.cmdCanteen.Size = new System.Drawing.Size(397, 23);
             this.cmdCanteen.TabIndex = 231;
@@ -4093,7 +4095,7 @@
             this.cmdCanteenChk.Checked = true;
             this.cmdCanteenChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdCanteenChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdCanteenChk.Location = new System.Drawing.Point(409, 409);
+            this.cmdCanteenChk.Location = new System.Drawing.Point(409, 349);
             this.cmdCanteenChk.Name = "cmdCanteenChk";
             this.cmdCanteenChk.Size = new System.Drawing.Size(52, 19);
             this.cmdCanteenChk.TabIndex = 232;
@@ -4103,7 +4105,7 @@
             // cmdSumDaaS
             // 
             this.cmdSumDaaS.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdSumDaaS.Location = new System.Drawing.Point(486, 405);
+            this.cmdSumDaaS.Location = new System.Drawing.Point(486, 323);
             this.cmdSumDaaS.Name = "cmdSumDaaS";
             this.cmdSumDaaS.Size = new System.Drawing.Size(397, 23);
             this.cmdSumDaaS.TabIndex = 20;
@@ -4115,18 +4117,42 @@
             // 
             this.cmdRunSumDaaSChk.AutoSize = true;
             this.cmdRunSumDaaSChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 407);
+            this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 325);
             this.cmdRunSumDaaSChk.Name = "cmdRunSumDaaSChk";
             this.cmdRunSumDaaSChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunSumDaaSChk.TabIndex = 223;
             this.cmdRunSumDaaSChk.Text = "Auto";
             this.cmdRunSumDaaSChk.UseVisualStyleBackColor = true;
             // 
+            // cmd_HourlyProdTrackingChk
+            // 
+            this.cmd_HourlyProdTrackingChk.AutoSize = true;
+            this.cmd_HourlyProdTrackingChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_HourlyProdTrackingChk.Location = new System.Drawing.Point(889, 347);
+            this.cmd_HourlyProdTrackingChk.Name = "cmd_HourlyProdTrackingChk";
+            this.cmd_HourlyProdTrackingChk.Size = new System.Drawing.Size(52, 19);
+            this.cmd_HourlyProdTrackingChk.TabIndex = 234;
+            this.cmd_HourlyProdTrackingChk.Text = "Auto";
+            this.cmd_HourlyProdTrackingChk.UseVisualStyleBackColor = true;
+            // 
+            // cmd_HourlyProdTracking
+            // 
+            this.cmd_HourlyProdTracking.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmd_HourlyProdTracking.Location = new System.Drawing.Point(486, 345);
+            this.cmd_HourlyProdTracking.Name = "cmd_HourlyProdTracking";
+            this.cmd_HourlyProdTracking.Size = new System.Drawing.Size(397, 23);
+            this.cmd_HourlyProdTracking.TabIndex = 233;
+            this.cmd_HourlyProdTracking.Text = "Hourly Production  Tracking";
+            this.cmd_HourlyProdTracking.UseVisualStyleBackColor = true;
+            this.cmd_HourlyProdTracking.Click += new System.EventHandler(this.cmd_HourlyProdTracking_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 541);
+            this.Controls.Add(this.cmd_HourlyProdTrackingChk);
+            this.Controls.Add(this.cmd_HourlyProdTracking);
             this.Controls.Add(this.cmdCanteenChk);
             this.Controls.Add(this.cmdCanteen);
             this.Controls.Add(this.pnChartFGA_INV);
@@ -4786,6 +4812,8 @@
         private System.Windows.Forms.CheckBox cmdCanteenChk;
         private System.Windows.Forms.Button cmdSumDaaS;
         private System.Windows.Forms.CheckBox cmdRunSumDaaSChk;
+        private System.Windows.Forms.CheckBox cmd_HourlyProdTrackingChk;
+        private System.Windows.Forms.Button cmd_HourlyProdTracking;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
