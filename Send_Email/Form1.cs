@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -5955,7 +5955,7 @@ namespace Send_Email
                 string html = "<head>" + style + "</head>" +
                                "<body>" + text + "<br>" +
                                "<br>" +
-                               "<b class = 'title'>VMS</b>" +
+                               "<b class = 'title'>VSM</b>" +
                         "           <table style='font-family:Calibri; font-size:20px' bgcolor='#f5f3ed' border='1' cellpadding='0' cellspacing='0' width='1920'>" +
                                    "<tr bgcolor='#ffe5cc'>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
