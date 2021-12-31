@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -4185,6 +4185,8 @@ namespace Send_Email
                     string styleCode = dtData.Rows[iRowData]["STYLE_CODE"].ToString();
                     string prodDate = dtData.Rows[iRowData]["PROD_DATE"].ToString();
                     string backColor = dtData.Rows[iRowData]["BCOLOR"].ToString();
+                    string foreColor = dtData.Rows[iRowData]["FCOLOR"].ToString();
+                    string trackingDate = dtData.Rows[iRowData]["TRACKING_DATE"].ToString();
 
                     string plantNm_prev = "";
                     string lineCd_prev = "";
@@ -4217,7 +4219,7 @@ namespace Send_Email
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='left' >{styleCode }</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='left'   >{ modelName }</td>" +
                                 $"<td bgcolor='WHITE' style='color:BLACK' align='center' >{ prodDate }</td>" +
-                                $"<td bgcolor='{backColor}' style='color:BLACK' width = '50' align='center' ></td>"
+                                $"<td bgcolor='{backColor}' style='color:{foreColor}' width = '50' align='center' >{trackingDate}</td>"
                               ;
                     }
                     else
@@ -4846,13 +4848,13 @@ namespace Send_Email
 
         #region Hourly Production Tracking
 
-        private void cmd_HourlyProdTracking_Click(object sender, EventArgs e)
+        private void cmd_EscanSituationTracking_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunHourlyProdTracking("Q");
+                RunEscanSituationTracking("Q");
         }
 
-        private void RunHourlyProdTracking(string argType)
+        private void RunEscanSituationTracking(string argType)
         {
             try
             {
@@ -4861,10 +4863,10 @@ namespace Send_Email
                 _isRun2 = true;
 
                 //if (dsData == null) return;
-                Send_Hourly_Prod_Tracking Hourly_Prod_Tracking = new Send_Hourly_Prod_Tracking();
+                Send_Escan_Situation_Tracking Hourly_Prod_Tracking = new Send_Escan_Situation_Tracking();
                 string html = Hourly_Prod_Tracking.Html(argType);
                 if (html == "") return;
-                WriteLog("Hourly_Prod_Tracking: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                WriteLog("Escan Situation Tracking: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 if (html.StartsWith("Error"))
                 {
                     WriteLog(html);
@@ -4872,7 +4874,7 @@ namespace Send_Email
                 }
                 // WriteLog("RunMoldRepair: Run --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
-                CreateMailHourlyProdTracking(Hourly_Prod_Tracking._subject, html, Hourly_Prod_Tracking._email);
+                CreateMailEscanSituationTracking(Hourly_Prod_Tracking._subject, html, Hourly_Prod_Tracking._email);
                 //  WriteLog("RunMoldRepair: End --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
@@ -4885,7 +4887,7 @@ namespace Send_Email
             }
         }
 
-        private void CreateMailHourlyProdTracking(string Subject, string htmlBody, DataTable dtEmail)
+        private void CreateMailEscanSituationTracking(string Subject, string htmlBody, DataTable dtEmail)
         {
             try
             {
@@ -4925,11 +4927,11 @@ namespace Send_Email
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
-                WriteLog("Hourly_Prod_Tracking: Send Ok -->" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                WriteLog("Escan Situation Tracking: Send Ok -->" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             }
             catch (Exception ex)
             {
-                WriteLog("Hourly_Prod_Tracking: " + ex.Message);
+                WriteLog("Escan Situation Tracking: " + ex.Message);
             }
         }
 

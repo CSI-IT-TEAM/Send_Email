@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Send_Email
 {
-    class Send_Hourly_Prod_Tracking
+    class Send_Escan_Situation_Tracking
     {
         public string _subject = "";
         public DataTable _email;
@@ -172,7 +172,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_EMAIL_HOUR_PROD_TRACKING";
+                string process_name = "P_EMAIL_ESCAN_SITUA_TRACKING";
                 MyOraDB.ReDim_Parameter(9);
                 MyOraDB.Process_Name = process_name;
 

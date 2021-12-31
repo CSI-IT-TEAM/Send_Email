@@ -169,7 +169,7 @@
     </Compile>
     <Compile Include="Send_Bottom_Defective.cs" />
     <Compile Include="Send_Canteen.cs" />
-    <Compile Include="Send_Hourly_Prod_Tracking.cs" />
+    <Compile Include="Send_Escan_Situation_Tracking.cs" />
     <Compile Include="Send_IE_Relief.cs" />
     <Compile Include="Send_Quality_Monthly.cs" />
     <Compile Include="Send_Quality2.cs" />

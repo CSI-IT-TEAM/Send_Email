@@ -4142,9 +4142,9 @@
             this.cmd_HourlyProdTracking.Name = "cmd_HourlyProdTracking";
             this.cmd_HourlyProdTracking.Size = new System.Drawing.Size(397, 23);
             this.cmd_HourlyProdTracking.TabIndex = 233;
-            this.cmd_HourlyProdTracking.Text = "Hourly Production  Tracking";
+            this.cmd_HourlyProdTracking.Text = "E-Scan Situation Tracking";
             this.cmd_HourlyProdTracking.UseVisualStyleBackColor = true;
-            this.cmd_HourlyProdTracking.Click += new System.EventHandler(this.cmd_HourlyProdTracking_Click);
+            this.cmd_HourlyProdTracking.Click += new System.EventHandler(this.cmd_EscanSituationTracking_Click);
             // 
             // Form1
             // 
