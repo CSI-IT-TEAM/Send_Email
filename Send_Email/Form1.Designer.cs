@@ -412,6 +412,8 @@
             this.cmdRunSumDaaSChk = new System.Windows.Forms.CheckBox();
             this.cmd_HourlyProdTrackingChk = new System.Windows.Forms.CheckBox();
             this.cmd_HourlyProdTracking = new System.Windows.Forms.Button();
+            this.cmd_BolRR = new System.Windows.Forms.Button();
+            this.cmd_BolRrChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -4146,11 +4148,35 @@
             this.cmd_HourlyProdTracking.UseVisualStyleBackColor = true;
             this.cmd_HourlyProdTracking.Click += new System.EventHandler(this.cmd_EscanSituationTracking_Click);
             // 
+            // cmd_BolRR
+            // 
+            this.cmd_BolRR.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmd_BolRR.Location = new System.Drawing.Point(6, 367);
+            this.cmd_BolRR.Name = "cmd_BolRR";
+            this.cmd_BolRR.Size = new System.Drawing.Size(397, 23);
+            this.cmd_BolRR.TabIndex = 235;
+            this.cmd_BolRR.Text = "Bol RR";
+            this.cmd_BolRR.UseVisualStyleBackColor = true;
+            this.cmd_BolRR.Click += new System.EventHandler(this.cmd_BolRR_Click);
+            // 
+            // cmd_BolRrChk
+            // 
+            this.cmd_BolRrChk.AutoSize = true;
+            this.cmd_BolRrChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmd_BolRrChk.Location = new System.Drawing.Point(408, 369);
+            this.cmd_BolRrChk.Name = "cmd_BolRrChk";
+            this.cmd_BolRrChk.Size = new System.Drawing.Size(52, 19);
+            this.cmd_BolRrChk.TabIndex = 236;
+            this.cmd_BolRrChk.Text = "Auto";
+            this.cmd_BolRrChk.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(956, 541);
+            this.Controls.Add(this.cmd_BolRrChk);
+            this.Controls.Add(this.cmd_BolRR);
             this.Controls.Add(this.cmd_HourlyProdTrackingChk);
             this.Controls.Add(this.cmd_HourlyProdTracking);
             this.Controls.Add(this.cmdCanteenChk);
@@ -4814,6 +4840,8 @@
         private System.Windows.Forms.CheckBox cmdRunSumDaaSChk;
         private System.Windows.Forms.CheckBox cmd_HourlyProdTrackingChk;
         private System.Windows.Forms.Button cmd_HourlyProdTracking;
+        private System.Windows.Forms.Button cmd_BolRR;
+        private System.Windows.Forms.CheckBox cmd_BolRrChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
