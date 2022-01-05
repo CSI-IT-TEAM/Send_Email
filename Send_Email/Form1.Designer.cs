@@ -4129,6 +4129,8 @@
             // cmd_HourlyProdTrackingChk
             // 
             this.cmd_HourlyProdTrackingChk.AutoSize = true;
+            this.cmd_HourlyProdTrackingChk.Checked = true;
+            this.cmd_HourlyProdTrackingChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_HourlyProdTrackingChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmd_HourlyProdTrackingChk.Location = new System.Drawing.Point(889, 347);
             this.cmd_HourlyProdTrackingChk.Name = "cmd_HourlyProdTrackingChk";
