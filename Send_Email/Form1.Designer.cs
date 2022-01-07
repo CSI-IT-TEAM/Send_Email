@@ -4164,6 +4164,8 @@
             // cmd_BolRrChk
             // 
             this.cmd_BolRrChk.AutoSize = true;
+            this.cmd_BolRrChk.Checked = true;
+            this.cmd_BolRrChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_BolRrChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmd_BolRrChk.Location = new System.Drawing.Point(408, 369);
             this.cmd_BolRrChk.Name = "cmd_BolRrChk";
