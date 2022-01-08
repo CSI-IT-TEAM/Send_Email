@@ -5018,7 +5018,15 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                mailItem.BCC = "ngoc.it@changshininc.com";
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    mailItem.BCC = "ngoc.it@changshininc.com, nguyen.it @changshininc.com, dien.it @changshininc.com";
+                }
+                else
+                {
+                    mailItem.BCC = "ngoc.it@changshininc.com";
+                }
+                
                 string imgInfo = "imgInfo";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
