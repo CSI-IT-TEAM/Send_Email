@@ -284,7 +284,7 @@ namespace Send_Email
                         oRecip.Resolve();
                     }
                 }
-
+                
                 if (chkTest.Checked)
                 {
                     for (int i = 0; i < _emailTest.Length; i++)
@@ -5018,9 +5018,10 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
+                
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
-                    mailItem.BCC = "ngoc.it@changshininc.com, nguyen.it @changshininc.com, dien.it @changshininc.com";
+                    mailItem.BCC = "nguyen.it@changshininc.com; dien.it@changshininc.com; ngoc.it@changshininc.com";
                 }
                 else
                 {
