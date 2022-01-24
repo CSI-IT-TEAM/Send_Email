@@ -67,18 +67,6 @@ namespace Send_Email
             DevExpress.XtraCharts.SideBySideBarSeriesLabel sideBySideBarSeriesLabel1 = new DevExpress.XtraCharts.SideBySideBarSeriesLabel();
             DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView1 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle7 = new DevExpress.XtraCharts.ChartTitle();
-            DevExpress.XtraCharts.XYDiagram xyDiagram2 = new DevExpress.XtraCharts.XYDiagram();
-            DevExpress.XtraCharts.Series series8 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView2 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.Series series9 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView3 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.Series series10 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView4 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.Series series11 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView5 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.Series series12 = new DevExpress.XtraCharts.Series();
-            DevExpress.XtraCharts.SideBySideBarSeriesView sideBySideBarSeriesView6 = new DevExpress.XtraCharts.SideBySideBarSeriesView();
-            DevExpress.XtraCharts.ChartTitle chartTitle8 = new DevExpress.XtraCharts.ChartTitle();
             this.pnMold = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -93,7 +81,6 @@ namespace Send_Email
             this.chartMold = new DevExpress.XtraCharts.ChartControl();
             this.grdMain = new JPlatform.Client.Controls6.GridControlEx();
             this.grdView = new JPlatform.Client.Controls6.BandedGridViewEx();
-            this.chartControl1 = new DevExpress.XtraCharts.ChartControl();
             this.pnMold2 = new System.Windows.Forms.Panel();
             this.grdMain2 = new JPlatform.Client.Controls6.GridControlEx();
             this.grdView2 = new JPlatform.Client.Controls6.BandedGridViewEx();
@@ -152,18 +139,6 @@ namespace Send_Email
             ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(series12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView6)).BeginInit();
             this.pnMold2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdView2)).BeginInit();
@@ -201,10 +176,10 @@ namespace Send_Email
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(188, 0);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 3, 3);
+            this.label2.Location = new System.Drawing.Point(185, 0);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(176, 37);
+            this.label2.Size = new System.Drawing.Size(182, 40);
             this.label2.TabIndex = 232;
             this.label2.Text = "TOP 5 DEFECTIVE";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -492,10 +467,10 @@ namespace Send_Email
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 0, 0, 3);
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(180, 37);
+            this.label3.Size = new System.Drawing.Size(182, 40);
             this.label3.TabIndex = 231;
             this.label3.Text = "MOLD REPAIR RATIO";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -650,83 +625,12 @@ namespace Send_Email
             this.grdView.ViewSPName = null;
             this.grdView.CustomDrawBandHeader += new DevExpress.XtraGrid.Views.BandedGrid.BandHeaderCustomDrawEventHandler(this.grdView_CustomDrawBandHeader);
             // 
-            // chartControl1
-            // 
-            this.chartControl1.AppearanceNameSerializable = "Light";
-            xyDiagram2.AxisX.Label.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram2.AxisX.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram2.AxisX.Title.Text = "Location";
-            xyDiagram2.AxisX.Title.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            xyDiagram2.AxisX.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
-            xyDiagram2.AxisY.Label.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram2.AxisY.MinorCount = 1;
-            xyDiagram2.AxisY.Tickmarks.Visible = false;
-            xyDiagram2.AxisY.Title.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            xyDiagram2.AxisY.Title.Text = "Issue Times (Count)";
-            xyDiagram2.AxisY.Title.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            xyDiagram2.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
-            xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram2.AxisY.WholeRange.AutoSideMargins = false;
-            xyDiagram2.AxisY.WholeRange.SideMarginsValue = 0.99D;
-            this.chartControl1.Diagram = xyDiagram2;
-            this.chartControl1.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Left;
-            this.chartControl1.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.TopOutside;
-            this.chartControl1.Legend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.chartControl1.Legend.Direction = DevExpress.XtraCharts.LegendDirection.LeftToRight;
-            this.chartControl1.Legend.Font = new System.Drawing.Font("Tahoma", 18F);
-            this.chartControl1.Legend.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartControl1.Location = new System.Drawing.Point(566, 25);
-            this.chartControl1.Name = "chartControl1";
-            this.chartControl1.PaletteName = "Mixed";
-            this.chartControl1.PaletteRepository.Add("Palette 2", new DevExpress.XtraCharts.Palette("Palette 2", DevExpress.XtraCharts.PaletteScaleMode.Repeat, new DevExpress.XtraCharts.PaletteEntry[] {
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(79)))), ((int)(((byte)(129)))), ((int)(((byte)(189))))), System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(90)))), ((int)(((byte)(136)))))),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(80)))), ((int)(((byte)(77))))), System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(52)))), ((int)(((byte)(49)))))),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(187)))), ((int)(((byte)(89))))), System.Drawing.Color.FromArgb(((int)(((byte)(111)))), ((int)(((byte)(137)))), ((int)(((byte)(56)))))),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(100)))), ((int)(((byte)(162))))), System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(69)))), ((int)(((byte)(115)))))),
-                new DevExpress.XtraCharts.PaletteEntry(System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(150)))), ((int)(((byte)(70))))), System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(101)))), ((int)(((byte)(9))))))}));
-            series8.CheckableInLegend = false;
-            series8.CheckedInLegend = false;
-            series8.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series8.Name = "Series 1";
-            sideBySideBarSeriesView2.ColorEach = true;
-            series8.View = sideBySideBarSeriesView2;
-            series9.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series9.Name = "Series 2";
-            sideBySideBarSeriesView3.ColorEach = true;
-            series9.View = sideBySideBarSeriesView3;
-            series10.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series10.Name = "Series 3";
-            sideBySideBarSeriesView4.ColorEach = true;
-            series10.View = sideBySideBarSeriesView4;
-            series11.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series11.Name = "Series 4";
-            sideBySideBarSeriesView5.ColorEach = true;
-            series11.View = sideBySideBarSeriesView5;
-            series12.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
-            series12.Name = "Series 5";
-            sideBySideBarSeriesView6.ColorEach = true;
-            series12.View = sideBySideBarSeriesView6;
-            this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
-        series8,
-        series9,
-        series10,
-        series11,
-        series12};
-            this.chartControl1.Size = new System.Drawing.Size(222, 188);
-            this.chartControl1.TabIndex = 229;
-            chartTitle8.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartTitle8.Text = "Top 20 Machine Have Many Issue";
-            chartTitle8.Visibility = DevExpress.Utils.DefaultBoolean.False;
-            this.chartControl1.Titles.AddRange(new DevExpress.XtraCharts.ChartTitle[] {
-            chartTitle8});
-            // 
             // pnMold2
             // 
             this.pnMold2.Controls.Add(this.grdMain2);
             this.pnMold2.Controls.Add(this.panel1);
             this.pnMold2.Controls.Add(this.label1);
-            this.pnMold2.Location = new System.Drawing.Point(480, 201);
+            this.pnMold2.Location = new System.Drawing.Point(467, 210);
             this.pnMold2.Name = "pnMold2";
             this.pnMold2.Size = new System.Drawing.Size(291, 245);
             this.pnMold2.TabIndex = 231;
@@ -939,9 +843,8 @@ namespace Send_Email
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1189, 552);
             this.Controls.Add(this.pnMold2);
-            this.Controls.Add(this.chartControl1);
             this.Controls.Add(this.grdMain);
             this.Controls.Add(this.pnMold);
             this.Name = "Mold_Repair_Monthly";
@@ -988,18 +891,6 @@ namespace Send_Email
             ((System.ComponentModel.ISupportInitialize)(this.chartMold)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(xyDiagram2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(sideBySideBarSeriesView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(series12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartControl1)).EndInit();
             this.pnMold2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdMain2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdView2)).EndInit();
@@ -1023,7 +914,6 @@ namespace Send_Email
         private DevExpress.XtraCharts.ChartControl chartMold;
         private JPlatform.Client.Controls6.GridControlEx grdMain;
         private JPlatform.Client.Controls6.BandedGridViewEx grdView;
-        private DevExpress.XtraCharts.ChartControl chartControl1;
         private System.Windows.Forms.Panel pnMold2;
         private System.Windows.Forms.Label label1;
         private JPlatform.Client.Controls6.GridControlEx grdMain2;

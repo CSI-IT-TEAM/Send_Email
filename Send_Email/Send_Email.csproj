@@ -161,11 +161,11 @@
   <ItemGroup>
     <Compile Include="Emoji.cs" />
     <Compile Include="EncryptExtend.cs" />
-    <Compile Include="Form\Mold_Repair_Monthly2.cs">
+    <Compile Include="Form\Mold_Repair_Monthly_WH.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\Mold_Repair_Monthly2.Designer.cs">
-      <DependentUpon>Mold_Repair_Monthly2.cs</DependentUpon>
+    <Compile Include="Form\Mold_Repair_Monthly_WH.Designer.cs">
+      <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -193,8 +193,8 @@
     <Compile Include="Class\Mold_Repair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form\Mold_Repair_Monthly2.resx">
-      <DependentUpon>Mold_Repair_Monthly2.cs</DependentUpon>
+    <EmbeddedResource Include="Form\Mold_Repair_Monthly_WH.resx">
+      <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

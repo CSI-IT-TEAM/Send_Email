@@ -2941,7 +2941,7 @@ namespace Send_Email
             string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
             DataTable dtEmail = ds.Tables[3];
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
-            using (Mold_Repair_Monthly frmMold = new Mold_Repair_Monthly())
+            using (Mold_Repair_Monthly_WH frmMold = new Mold_Repair_Monthly_WH())
             {
                 frmMold._dt1 = dtData;
                 frmMold._dt2 = ds.Tables[1];
@@ -3030,7 +3030,7 @@ namespace Send_Email
             {
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
                 string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_WH";
-                // MyOraDB.ShowErr = true;
+               // MyOraDB.ShowErr = true;
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 

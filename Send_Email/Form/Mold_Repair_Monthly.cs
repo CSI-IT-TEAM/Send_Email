@@ -89,23 +89,7 @@ namespace Send_Email
 
         }
 
-        private void SetDataChart(DataTable argDt)
-        {
-            try
-            {
-                chartControl1.DataSource = argDt;
-                for (int i = 0; i < 5; i++)
-                {
-                    chartControl1.Series[i].ArgumentDataMember = "WORKSHOP";
-                    chartControl1.Series[i].ValueDataMembers.AddRange(new string[] { "ERR" + (i + 1).ToString() });
-                }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-            }
-
-        }
+        
 
         private void setChartRound(ChartControl argChart, DataTable argData)
         {
