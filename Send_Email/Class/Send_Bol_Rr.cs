@@ -49,9 +49,9 @@ namespace Send_Email
                 string htmlReturn = arg_DtHtml.Rows[0]["TEXT1"].ToString();
 
                 string strTBody1 = GetDataTboby(arg_DtData1, arg_DtHtml, 1);
-                string strTBody2= GetDataTboby(arg_DtData2, arg_DtHtml, 1);
-                string strTBody3 = GetDataTboby(arg_DtData3, arg_DtHtml, 1);
-                string strTBody4 = GetDataTboby(arg_DtData4, arg_DtHtml, 1);
+                string strTBody2 = GetDataTbody2(arg_DtData2, arg_DtHtml, 2);
+                string strTBody3 = GetDataTboby(arg_DtData3, arg_DtHtml, 3);
+                string strTBody4 = GetDataTboby(arg_DtData4, arg_DtHtml, 4);
 
                 htmlReturn = htmlReturn.Replace("{tbody1}", strTBody1);
                 htmlReturn = htmlReturn.Replace("{tbody2}", strTBody2);
@@ -64,6 +64,13 @@ namespace Send_Email
             {
                 return "Error: " + ex.Message;
             }
+        }
+
+        private string GetDataTbody2(DataTable argDtData, DataTable argDtHtml, int row = 1)
+        {
+            string strTbodyRtn = argDtHtml.Rows[row]["TEXT1"].ToString();
+            strTbodyRtn = fnReplaceRow(strTbodyRtn, argDtData.Rows[0]);
+            return strTbodyRtn;
         }
 
         private string GetDataTboby(DataTable argDtData, DataTable argDtHtml, int row = 1)

@@ -1,6 +1,6 @@
 ﻿namespace Send_Email
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// Required designer variable.
@@ -127,7 +127,7 @@
             DevExpress.XtraCharts.PointSeriesLabel pointSeriesLabel1 = new DevExpress.XtraCharts.PointSeriesLabel();
             DevExpress.XtraCharts.LineSeriesView lineSeriesView3 = new DevExpress.XtraCharts.LineSeriesView();
             DevExpress.XtraCharts.ChartTitle chartTitle13 = new DevExpress.XtraCharts.ChartTitle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.button1 = new System.Windows.Forms.Button();
             this.tmrLoad = new System.Windows.Forms.Timer(this.components);
             this.grdBase2 = new JPlatform.Client.Controls6.GridControlEx();
@@ -414,6 +414,7 @@
             this.cmd_HourlyProdTracking = new System.Windows.Forms.Button();
             this.cmd_BolRR = new System.Windows.Forms.Button();
             this.cmd_BolRrChk = new System.Windows.Forms.CheckBox();
+            this.cmdMoldRepairMonthWh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -3439,7 +3440,7 @@
             this.cmdMoldRepairMonthChk.Checked = true;
             this.cmdMoldRepairMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdMoldRepairMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 236);
+            this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 247);
             this.cmdMoldRepairMonthChk.Name = "cmdMoldRepairMonthChk";
             this.cmdMoldRepairMonthChk.Size = new System.Drawing.Size(52, 19);
             this.cmdMoldRepairMonthChk.TabIndex = 223;
@@ -3466,7 +3467,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(956, 41);
+            this.panel3.Size = new System.Drawing.Size(945, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -3946,7 +3947,7 @@
             // cmd_IeRelief
             // 
             this.cmd_IeRelief.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_IeRelief.Location = new System.Drawing.Point(486, 255);
+            this.cmd_IeRelief.Location = new System.Drawing.Point(486, 278);
             this.cmd_IeRelief.Name = "cmd_IeRelief";
             this.cmd_IeRelief.Size = new System.Drawing.Size(397, 23);
             this.cmd_IeRelief.TabIndex = 228;
@@ -3960,7 +3961,7 @@
             this.cmd_IeReliefChk.Checked = true;
             this.cmd_IeReliefChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_IeReliefChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_IeReliefChk.Location = new System.Drawing.Point(889, 257);
+            this.cmd_IeReliefChk.Location = new System.Drawing.Point(889, 280);
             this.cmd_IeReliefChk.Name = "cmd_IeReliefChk";
             this.cmd_IeReliefChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_IeReliefChk.TabIndex = 229;
@@ -3970,7 +3971,7 @@
             // cmdAssInline
             // 
             this.cmdAssInline.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAssInline.Location = new System.Drawing.Point(486, 278);
+            this.cmdAssInline.Location = new System.Drawing.Point(486, 301);
             this.cmdAssInline.Name = "cmdAssInline";
             this.cmdAssInline.Size = new System.Drawing.Size(397, 23);
             this.cmdAssInline.TabIndex = 20;
@@ -3984,7 +3985,7 @@
             this.cmdRunAssInLineChk.Checked = true;
             this.cmdRunAssInLineChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunAssInLineChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(888, 280);
+            this.cmdRunAssInLineChk.Location = new System.Drawing.Point(888, 303);
             this.cmdRunAssInLineChk.Name = "cmdRunAssInLineChk";
             this.cmdRunAssInLineChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAssInLineChk.TabIndex = 223;
@@ -4061,7 +4062,7 @@
             // cmdAssInvSet
             // 
             this.cmdAssInvSet.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdAssInvSet.Location = new System.Drawing.Point(486, 300);
+            this.cmdAssInvSet.Location = new System.Drawing.Point(486, 323);
             this.cmdAssInvSet.Name = "cmdAssInvSet";
             this.cmdAssInvSet.Size = new System.Drawing.Size(397, 23);
             this.cmdAssInvSet.TabIndex = 20;
@@ -4073,7 +4074,7 @@
             // 
             this.cmdRunAssInvSetChk.AutoSize = true;
             this.cmdRunAssInvSetChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunAssInvSetChk.Location = new System.Drawing.Point(888, 302);
+            this.cmdRunAssInvSetChk.Location = new System.Drawing.Point(888, 325);
             this.cmdRunAssInvSetChk.Name = "cmdRunAssInvSetChk";
             this.cmdRunAssInvSetChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunAssInvSetChk.TabIndex = 223;
@@ -4107,7 +4108,7 @@
             // cmdSumDaaS
             // 
             this.cmdSumDaaS.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdSumDaaS.Location = new System.Drawing.Point(486, 323);
+            this.cmdSumDaaS.Location = new System.Drawing.Point(486, 346);
             this.cmdSumDaaS.Name = "cmdSumDaaS";
             this.cmdSumDaaS.Size = new System.Drawing.Size(397, 23);
             this.cmdSumDaaS.TabIndex = 20;
@@ -4119,7 +4120,7 @@
             // 
             this.cmdRunSumDaaSChk.AutoSize = true;
             this.cmdRunSumDaaSChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 325);
+            this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 348);
             this.cmdRunSumDaaSChk.Name = "cmdRunSumDaaSChk";
             this.cmdRunSumDaaSChk.Size = new System.Drawing.Size(52, 19);
             this.cmdRunSumDaaSChk.TabIndex = 223;
@@ -4132,7 +4133,7 @@
             this.cmd_HourlyProdTrackingChk.Checked = true;
             this.cmd_HourlyProdTrackingChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmd_HourlyProdTrackingChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.cmd_HourlyProdTrackingChk.Location = new System.Drawing.Point(889, 347);
+            this.cmd_HourlyProdTrackingChk.Location = new System.Drawing.Point(889, 370);
             this.cmd_HourlyProdTrackingChk.Name = "cmd_HourlyProdTrackingChk";
             this.cmd_HourlyProdTrackingChk.Size = new System.Drawing.Size(52, 19);
             this.cmd_HourlyProdTrackingChk.TabIndex = 234;
@@ -4142,7 +4143,7 @@
             // cmd_HourlyProdTracking
             // 
             this.cmd_HourlyProdTracking.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmd_HourlyProdTracking.Location = new System.Drawing.Point(486, 345);
+            this.cmd_HourlyProdTracking.Location = new System.Drawing.Point(486, 368);
             this.cmd_HourlyProdTracking.Name = "cmd_HourlyProdTracking";
             this.cmd_HourlyProdTracking.Size = new System.Drawing.Size(397, 23);
             this.cmd_HourlyProdTracking.TabIndex = 233;
@@ -4174,11 +4175,23 @@
             this.cmd_BolRrChk.Text = "Auto";
             this.cmd_BolRrChk.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // cmdMoldRepairMonthWh
+            // 
+            this.cmdMoldRepairMonthWh.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdMoldRepairMonthWh.Location = new System.Drawing.Point(486, 254);
+            this.cmdMoldRepairMonthWh.Name = "cmdMoldRepairMonthWh";
+            this.cmdMoldRepairMonthWh.Size = new System.Drawing.Size(397, 23);
+            this.cmdMoldRepairMonthWh.TabIndex = 237;
+            this.cmdMoldRepairMonthWh.Text = "Mold Repair List by Monthly By W/H";
+            this.cmdMoldRepairMonthWh.UseVisualStyleBackColor = true;
+            this.cmdMoldRepairMonthWh.Click += new System.EventHandler(this.cmdMoldRepairMonthWh_Click);
+            // 
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(956, 541);
+            this.ClientSize = new System.Drawing.Size(945, 544);
+            this.Controls.Add(this.cmdMoldRepairMonthWh);
             this.Controls.Add(this.cmd_BolRrChk);
             this.Controls.Add(this.cmd_BolRR);
             this.Controls.Add(this.cmd_HourlyProdTrackingChk);
@@ -4262,7 +4275,7 @@
             this.Controls.Add(this.grdBase2);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "20211026140000";
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).EndInit();
@@ -4846,6 +4859,7 @@
         private System.Windows.Forms.Button cmd_HourlyProdTracking;
         private System.Windows.Forms.Button cmd_BolRR;
         private System.Windows.Forms.CheckBox cmd_BolRrChk;
+        private System.Windows.Forms.Button cmdMoldRepairMonthWh;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

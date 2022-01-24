@@ -161,28 +161,46 @@
   <ItemGroup>
     <Compile Include="Emoji.cs" />
     <Compile Include="EncryptExtend.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Form\Mold_Repair_Monthly2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Form\Mold_Repair_Monthly2.Designer.cs">
+      <DependentUpon>Mold_Repair_Monthly2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Send_Bottom_Defective.cs" />
-    <Compile Include="Send_Canteen.cs" />
-    <Compile Include="Send_Bol_Rr.cs" />
-    <Compile Include="Send_Escan_Situation_Tracking.cs" />
-    <Compile Include="Send_IE_Relief.cs" />
-    <Compile Include="Send_Quality_Monthly.cs" />
-    <Compile Include="Send_Quality2.cs" />
-    <Compile Include="Send_Quality.cs" />
-    <Compile Include="Send_Feedback.cs" />
-    <Compile Include="Send_Budget.cs" />
-    <Compile Include="OS_Red_Machine.cs" />
-    <Compile Include="Mold_Repair.cs" />
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\Mold_Repair_Monthly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Mold_Repair_Monthly.Designer.cs">
+      <DependentUpon>Mold_Repair_Monthly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Class\Send_Bottom_Defective.cs" />
+    <Compile Include="Class\Send_Canteen.cs" />
+    <Compile Include="Class\Send_Bol_Rr.cs" />
+    <Compile Include="Class\Send_Escan_Situation_Tracking.cs" />
+    <Compile Include="Class\Send_IE_Relief.cs" />
+    <Compile Include="Class\Send_Quality_Monthly.cs" />
+    <Compile Include="Class\Send_Quality2.cs" />
+    <Compile Include="Class\Send_Quality.cs" />
+    <Compile Include="Class\Send_Feedback.cs" />
+    <Compile Include="Class\Send_Budget.cs" />
+    <Compile Include="Class\OS_Red_Machine.cs" />
+    <Compile Include="Class\Mold_Repair.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Form\Mold_Repair_Monthly2.resx">
+      <DependentUpon>Mold_Repair_Monthly2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Mold_Repair_Monthly.resx">
+      <DependentUpon>Mold_Repair_Monthly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

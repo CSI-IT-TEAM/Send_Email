@@ -16,9 +16,9 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace Send_Email
 {
-    public partial class Form1 : Form
+    public partial class Main : Form
     {
-        public Form1()
+        public Main()
         {
             InitializeComponent();
 
@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -119,6 +119,8 @@ namespace Send_Email
             if (cmdMoldRepairMonthChk.Checked)
                 RunMoldRepairMonth("Q1");
 
+            if (cmdMoldRepairMonthChk.Checked)
+                RunMoldRepairMonthWh("Q1");
             //15h
             if (cmd_IeReliefChk.Checked)
                 RunIeRelief("Q1");
@@ -2151,18 +2153,29 @@ namespace Send_Email
             DataSet ds = SEL_LOAD_MOLD_DATA(argType);
             if (ds == null || ds.Tables.Count == 0) return;
             DataTable dtData = ds.Tables[0];
-            DataTable dtData2 = ds.Tables[1];
             if (dtData == null || dtData.Rows.Count == 0) return;
+
             string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
             DataTable dtEmail = ds.Tables[3];
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
-            if (LoadDataMold(dtData, dtData2))
+            using (Mold_Repair_Monthly frmMold = new Mold_Repair_Monthly())
             {
-                CaptureControl(pnMold, "MoldChart");
-                CaptureControl(grdMain, "MoldGrid");
-
+                frmMold._dt1 = dtData;
+                frmMold._dt2 = ds.Tables[1];
+                frmMold._dt3 = ds.Tables[4];
+                frmMold.Show();
+                frmMold.SendToBack();
                 CreateMailMoldMonth(subject, "", dtEmail);
             }
+
+            //if (LoadDataMold(dtData, dtData2))
+            //{
+            //    CaptureControl(pnMold, "MoldChart");
+            //    CaptureControl(grdMain, "MoldGrid");
+            //    CreateMailMoldMonth(subject, "", dtEmail);
+
+            //}
+
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
 
@@ -2815,6 +2828,7 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -2839,13 +2853,23 @@ namespace Send_Email
                 }
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
-                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
+                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2", imgInfo3 = "imgInfo3";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
                 mailItem.HTMLBody = String.Format(@"<body>
-                                                        <img src='cid:{0}'><br>
-                                                         <img src='cid:{1}'><br>                                                       
-                                                    </body>", imgInfo, imgInfo2) + htmlBody;
+                                                        <table>
+                                                           <tr>
+                                                                <td colspan = '2'><img src='cid:{0}'></td>
+                                                           </tr>
+                                                           <tr>
+                                                                <td width = '70%'><img src='cid:{1}'> </td>   
+                                                                <td width = '30%'><img src='cid:{2}'></td>
+                                                           </tr>
+                                                        <table>
+                                                        
+                                                                                                              
+                                                    </body>", imgInfo, imgInfo2, imgInfo3) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -2863,9 +2887,9 @@ namespace Send_Email
             try
             {
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
-                string process_name = "P_SEND_EMAIL_MOLD_REPAIR_MONTH";
+                string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_V2";
                // MyOraDB.ShowErr = true;
-                MyOraDB.ReDim_Parameter(6);
+                MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 
                 MyOraDB.Parameter_Name[0] = "V_P_TYPE";
@@ -2874,6 +2898,7 @@ namespace Send_Email
                 MyOraDB.Parameter_Name[3] = "CV_COL";
                 MyOraDB.Parameter_Name[4] = "CV_SUBJECT";
                 MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+                MyOraDB.Parameter_Name[6] = "CV_DATA2";
 
                 MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
@@ -2881,6 +2906,7 @@ namespace Send_Email
                 MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
                 MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
                 MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[6] = (int)OracleType.Cursor;
 
                 MyOraDB.Parameter_Values[0] = V_P_TYPE;
                 MyOraDB.Parameter_Values[1] = "";
@@ -2888,6 +2914,7 @@ namespace Send_Email
                 MyOraDB.Parameter_Values[3] = "";
                 MyOraDB.Parameter_Values[4] = "";
                 MyOraDB.Parameter_Values[5] = "";
+                MyOraDB.Parameter_Values[6] = "";
 
                 MyOraDB.Add_Select_Parameter(true);
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -2902,6 +2929,149 @@ namespace Send_Email
         }
 
         #endregion
+
+        #region Email Mold Monthly By Warehouse
+        private void RunMoldRepairMonthWh(string argType)
+        {
+            DataSet ds = SEL_LOAD_MOLD_DATA_WH(argType);
+            if (ds == null || ds.Tables.Count == 0) return;
+            DataTable dtData = ds.Tables[0];
+            if (dtData == null || dtData.Rows.Count == 0) return;
+
+            string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
+            DataTable dtEmail = ds.Tables[3];
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
+            using (Mold_Repair_Monthly frmMold = new Mold_Repair_Monthly())
+            {
+                frmMold._dt1 = dtData;
+                frmMold._dt2 = ds.Tables[1];
+                frmMold._dt3 = ds.Tables[4];
+                frmMold.Show();
+                frmMold.SendToBack();
+                //CreateMailMoldMonthWh(subject, "", dtEmail);
+            }
+
+            //if (LoadDataMold(dtData, dtData2))
+            //{
+            //    CaptureControl(pnMold, "MoldChart");
+            //    CaptureControl(grdMain, "MoldGrid");
+            //    CreateMailMoldMonth(subject, "", dtEmail);
+
+            //}
+
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
+        }
+
+        private void CreateMailMoldMonthWh(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (chkTest.Checked)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "ngoc.it@changshininc.com";
+                string imgInfo = "imgInfo", imgInfo2 = "imgInfo2", imgInfo3 = "imgInfo3";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
+                mailItem.HTMLBody = String.Format(@"<body>
+                                                        <table>
+                                                           <tr>
+                                                                <td colspan = '2'><img src='cid:{0}'></td>
+                                                           </tr>
+                                                           <tr>
+                                                                <td width = '70%'><img src='cid:{1}'> </td>   
+                                                                <td width = '30%'><img src='cid:{2}'></td>
+                                                           </tr>
+                                                        <table>
+                                                        
+                                                                                                              
+                                                    </body>", imgInfo, imgInfo2, imgInfo3) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                WriteLog("CreateMailMoldMonthWh: " + ex.ToString());
+            }
+        }
+
+        private DataSet SEL_LOAD_MOLD_DATA_WH(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+                string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_WH";
+                // MyOraDB.ShowErr = true;
+                MyOraDB.ReDim_Parameter(7);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_DATA";
+                MyOraDB.Parameter_Name[3] = "CV_COL";
+                MyOraDB.Parameter_Name[4] = "CV_SUBJECT";
+                MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+                MyOraDB.Parameter_Name[6] = "CV_DATA2";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[6] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+                MyOraDB.Parameter_Values[6] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null) return null;
+                return ds_ret;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
 
         #region Email Bottom Inventory
 
@@ -6301,8 +6471,9 @@ namespace Send_Email
         {
             return argColor == "" ? "WHITE" : argColor;
         }
+        
 
-        private void WriteLog(string argText)
+        public void WriteLog(string argText)
         {
             txtLog.BeginInvoke(new Action(() =>
             {
@@ -7351,6 +7522,12 @@ namespace Send_Email
                 RunMoldRepairMonth("Q");
         }
 
+        private void cmdMoldRepairMonthWh_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunMoldRepairMonthWh("Q");
+        }
+
         private void btnRunQualityMonth_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
@@ -7451,8 +7628,6 @@ namespace Send_Email
                 _isRun2 = false;
             }
         }
-
-        
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {
