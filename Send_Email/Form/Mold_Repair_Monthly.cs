@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.OracleClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 
 namespace Send_Email
 {
@@ -21,9 +23,9 @@ namespace Send_Email
             InitializeComponent();
 
             pnMold.Size = new Size(2000, 1000);
-            chartMold.Size = new Size(750, 700);
-            grdMain.Size = new Size(1500, 300);
-            pnMold2.Size = new Size(500, 300);
+            chartMold.Size = new Size(1000, 1000);
+            tblGrid.Size = new Size(2200, 260);
+           // pnMold2.Size = new Size(500, 300);
         }
 
         Main frmMain = new Main();
@@ -32,25 +34,14 @@ namespace Send_Email
         {
             LoadDataMold(_dt1, _dt2, _dt3);
             CaptureControl(pnMold, "MoldChart");
-            CaptureControl(grdMain, "MoldGrid");
-            CaptureControl(pnMold2, "MoldGrid2");
+            CaptureControl(tblGrid, "MoldGrid");
+           // CaptureControl(pnMold2, "MoldGrid2");
 
         }
 
-        private void CaptureControl(Control control, string nameImg)
-        {
-            //  MemoryStream ms = new MemoryStream();
-            string Path = Application.StartupPath + @"\Capture\";
-            Bitmap bmp = new Bitmap(control.Width, control.Height);
-            if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
-            control.DrawToBitmap(bmp, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
-            bmp.Save(Path + nameImg + @".png", System.Drawing.Imaging.ImageFormat.Png); //you could ave in BPM, PNG  etc format.
-                                                                                        //byte[] Pic_arr = new byte[ms.Length];
-                                                                                        //ms.Position = 0;
-                                                                                        //ms.Read(Pic_arr, 0, Pic_arr.Length);
-                                                                                        //ms.Close();
-        }
+        
 
+        
         DataTable _dtPivot = null;
         private bool LoadDataMold(DataTable argDt, DataTable argDt2, DataTable argDt3)
         {
@@ -72,18 +63,18 @@ namespace Send_Email
                 BindingChart(_dtPivot);
                 //SetDataChart(argDt2);
 
-                setChartRound(chartControl2, GetDataTemp(argDt2, "PU"));
-                setChartRound(chartControl3, GetDataTemp(argDt2, "IP"));
-                setChartRound(chartControl4, GetDataTemp(argDt2, "DMP"));
-                setChartRound(chartControl5, GetDataTemp(argDt2, "Outsole"));
-                setChartRound(chartControl6, GetDataTemp(argDt2, "Phylon"));
-                setChartRound(chartControl7, GetDataTemp(argDt2, "CMP"));
+                setChartRound(chartPu, GetDataTemp(argDt2, "PU"));
+                setChartRound(chartIp, GetDataTemp(argDt2, "IP"));
+                setChartRound(chartDmp, GetDataTemp(argDt2, "DMP"));
+                setChartRound(chartOutsole, GetDataTemp(argDt2, "Outsole"));
+                setChartRound(chartPhylon, GetDataTemp(argDt2, "Phylon"));
+                setChartRound(chartCmp, GetDataTemp(argDt2, "CMP"));
                 // SetTreelist(argDt2);
                 return true;
             }
             catch (Exception ex)
             {
-                frmMain.WriteLog($"  LoadDataMold: {ex.Message}");
+                Debug.WriteLine(ex.Message);
                 return false;
             }
 
@@ -291,6 +282,8 @@ namespace Send_Email
                 WORK_BOTTOM.Name = "WORK_BOTTOM";
                 WORK_BOTTOM.Visible = true;
                 WORK_BOTTOM.Width = 50;
+                WORK_BOTTOM.AppearanceHeader.BorderColor = Color.White;
+
                 // 
                 // WORK_PLACE_NM
                 // 
@@ -299,6 +292,7 @@ namespace Send_Email
                 WORK_PLACE_NM.Name = "WORK_PLACE_NM";
                 WORK_PLACE_NM.Visible = true;
                 WORK_PLACE_NM.Width = 50;
+                WORK_PLACE_NM.AppearanceHeader.BorderColor = Color.White;
 
                 // 
                 // TOTAL_MOLD_RP
@@ -307,6 +301,7 @@ namespace Send_Email
                 TOTAL_MOLD_RP.FieldName = "TOTAL_MOLD_RP";
                 TOTAL_MOLD_RP.Name = "TOTAL_MOLD_RP";
                 TOTAL_MOLD_RP.Visible = true;
+                TOTAL_MOLD_RP.AppearanceHeader.BorderColor = Color.White;
 
                 // 
                 // AVG_MOLD
@@ -315,6 +310,8 @@ namespace Send_Email
                 AVG_MOLD.FieldName = "AVG_MOLD_RP";
                 AVG_MOLD.Name = "AVG_MOLD";
                 AVG_MOLD.Visible = true;
+                AVG_MOLD.Width = 100;
+                AVG_MOLD.AppearanceHeader.BorderColor = Color.White;
 
                 // 
                 // PER_MOLD
@@ -323,13 +320,17 @@ namespace Send_Email
                 PER_MOLD.FieldName = "PER_MOLD_RP";
                 PER_MOLD.Name = "PER_MOLD";
                 PER_MOLD.Visible = true;
+                PER_MOLD.AppearanceHeader.BorderColor = Color.White;
 
                 gridBandBottom.Columns.Add(WORK_BOTTOM);
                 gridBandBottom.Columns.Add(WORK_PLACE_NM);
                 gridBandTotalMold.Columns.Add(TOTAL_MOLD_RP);
+                gridBandTotalMold.AppearanceHeader.BorderColor = Color.White;
+                gridBandBottom.AppearanceHeader.BorderColor = Color.White;
 
                 gridBandAvgMold.Columns.Add(AVG_MOLD);
                 gridBandPerMold.Columns.Add(PER_MOLD);
+                gridBandPerMold.AppearanceHeader.BorderColor = Color.White;
 
                 grdView.Bands.AddRange(new GridBand[] { gridBandBottom, gridBandTotalMold, gridBandMonth, gridBandAvgMold, gridBandPerMold });
                 grdView.Columns.AddRange(new BandedGridColumn[] {
@@ -339,14 +340,22 @@ namespace Send_Email
                 // 
                 // gridBandMonth
                 // 
-                string date = DateTime.Now.AddMonths(-1).ToString("MMM-yyyy");
+                DateTime date1;
+                DateTime.TryParseExact(dt.Rows[0]["WORK_YMD"].ToString(),"yyyyMMdd"
+                                      , System.Globalization.CultureInfo.InvariantCulture
+                                      , System.Globalization.DateTimeStyles.None 
+                                      , out date1);
+                string date = date1.ToString("MMM-yyyy");
                 gridBandMonth.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandMonth.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
                 gridBandMonth.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
                 gridBandMonth.Caption = date;
                 gridBandMonth.Name = "gridBandMonth";
                 gridBandMonth.VisibleIndex = 2;
+                gridBandMonth.AppearanceHeader.BorderColor = Color.White;
 
+                
+               _numDays = dt.Rows.Count;
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
 
@@ -373,12 +382,12 @@ namespace Send_Email
                     ColumnsDays.FieldName = Days;
                     ColumnsDays.Name = Days;
                     ColumnsDays.Visible = true;
-                    ColumnsDays.Width = 37;
-
+                    ColumnsDays.Width = 40;
+                    ColumnsDays.AppearanceHeader.BorderColor = Color.White;
                     gridbandDays.Columns.Add(ColumnsDays);
                     grdView.Columns.AddRange(new BandedGridColumn[] { ColumnsDays });
                 }
-
+                grdView.PaintStyleName = "Flat";
 
             }
             catch (Exception ex)
@@ -387,27 +396,53 @@ namespace Send_Email
                 throw;
             }
         }
+        int _numDays;
         private void FormatGrid(BandedGridView grid)
         {
             try
             {
                 // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
                 grdView.OptionsView.AllowCellMerge = true;
-                grdView.BandPanelRowHeight = 30;
+                // grdView.BandPanelRowHeight = 30;
+                int gridWidth = 0;
+                int gridColCount = grid.Columns.Count;
+                int width = (grdMain.Width - (52 + (82 *3) + 112)) / _numDays;
 
-                for (int i = 0; i < grid.Columns.Count; i++)
+                
+                for (int i = 0; i < gridColCount; i++)
                 {
                     if (grid.Columns[i].OwnerBand.ParentBand != null)
                     {
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.Orange;
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 15, FontStyle.Bold);
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
                         grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
 
                     }
-                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
-                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
-                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.DodgerBlue;
+                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 15, FontStyle.Bold);
+                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 16, FontStyle.Regular);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
                     grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
+
+                    switch (grid.Columns[i].Name)
+                    {
+                        case "WORK_BOTTOM":
+                            grid.Columns[i].Width = 52;                           
+                            break;
+
+                        case "PER_MOLD":
+                        case "TOTAL_MOLD_RP":
+                        case "WORK_PLACE_NM":
+                            grid.Columns[i].Width = 82;
+                            break;
+                        case "AVG_MOLD":
+                            grid.Columns[i].Width = 112;
+                            break;
+                        default:
+                            grid.Columns[i].Width = width;
+                            break;
+                    }
+                    gridWidth += grid.Columns[i].Width;
+
                     if (i <= 1)
                     {
                         grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.True;
@@ -439,11 +474,14 @@ namespace Send_Email
 
                 for (int i = 0; i < grid.Columns.Count; i++)
                 {
-                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Bold);
-                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.Orange;
+                    grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 14, FontStyle.Bold);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
                     grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
 
-                    grid.Columns[i].Width = 83;
+                    if (i==1) 
+                        grid.Columns[i].Width = 80;
+                    else
+                        grid.Columns[i].Width = 93;
                     grid.Columns[i].OptionsColumn.AllowMerge = DefaultBoolean.False;
                     if (i == 0)
                         grid.Columns[i].AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -452,7 +490,7 @@ namespace Send_Email
                     grid.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
                     grid.Columns[i].DisplayFormat.FormatString = "#,0.##";
 
-                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 12);
+                    grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 16);
                 }
             }
             catch
@@ -544,6 +582,21 @@ namespace Send_Email
             catch (Exception ex) { return null; }
         }
 
+        private void CaptureControl(Control control, string nameImg)
+        {
+            //  MemoryStream ms = new MemoryStream();
+            string Path = Application.StartupPath + @"\Capture\";
+            Bitmap bmp = new Bitmap(control.Width, control.Height);
+            if (!Directory.Exists(Path)) Directory.CreateDirectory(Path);
+            control.DrawToBitmap(bmp, new System.Drawing.Rectangle(0, 0, control.Width, control.Height));
+            bmp.Save(Path + nameImg + @".png", System.Drawing.Imaging.ImageFormat.Png); //you could ave in BPM, PNG  etc format.
+                                                                                        //byte[] Pic_arr = new byte[ms.Length];
+                                                                                        //ms.Position = 0;
+                                                                                        //ms.Read(Pic_arr, 0, Pic_arr.Length);
+                                                                                        //ms.Close();
+        }
+
         
+
     }
 }

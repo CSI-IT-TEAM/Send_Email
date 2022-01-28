@@ -3467,7 +3467,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(945, 41);
+            this.panel3.Size = new System.Drawing.Size(946, 41);
             this.panel3.TabIndex = 224;
             // 
             // label1
@@ -4190,7 +4190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(945, 544);
+            this.ClientSize = new System.Drawing.Size(946, 548);
             this.Controls.Add(this.cmdMoldRepairMonthWh);
             this.Controls.Add(this.cmd_BolRrChk);
             this.Controls.Add(this.cmd_BolRR);

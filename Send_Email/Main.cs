@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -2857,19 +2857,9 @@ namespace Send_Email
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
-                mailItem.HTMLBody = String.Format(@"<body>
-                                                        <table>
-                                                           <tr>
-                                                                <td colspan = '2'><img src='cid:{0}'></td>
-                                                           </tr>
-                                                           <tr>
-                                                                <td width = '70%'><img src='cid:{1}'> </td>   
-                                                                <td width = '30%'><img src='cid:{2}'></td>
-                                                           </tr>
-                                                        <table>
-                                                        
-                                                                                                              
-                                                    </body>", imgInfo, imgInfo2, imgInfo3) + htmlBody;
+                mailItem.HTMLBody = String.Format(@"<img src='cid:{0}'><br>
+                                                    <img src='cid:{1}'>"
+                                                , imgInfo, imgInfo2) ;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -2938,17 +2928,18 @@ namespace Send_Email
             DataTable dtData = ds.Tables[0];
             if (dtData == null || dtData.Rows.Count == 0) return;
 
-            string subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
-            DataTable dtEmail = ds.Tables[3];
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): BEGIN");
             using (Mold_Repair_Monthly_WH frmMold = new Mold_Repair_Monthly_WH())
             {
+                frmMold._chkTest = chkTest.Checked;
+                frmMold._subject = ds.Tables[2].Rows[0]["SUBJECT"].ToString();
                 frmMold._dt1 = dtData;
                 frmMold._dt2 = ds.Tables[1];
                 frmMold._dt3 = ds.Tables[4];
+                frmMold._dtEmail = ds.Tables[3];
                 frmMold.Show();
                 frmMold.SendToBack();
-                //CreateMailMoldMonthWh(subject, "", dtEmail);
+               // CreateMailMoldMonthWh(subject, "", dtEmail);
             }
 
             //if (LoadDataMold(dtData, dtData2))
@@ -2968,9 +2959,9 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-                Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChartWh.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+               // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+               // Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -2997,21 +2988,9 @@ namespace Send_Email
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 string imgInfo = "imgInfo", imgInfo2 = "imgInfo2", imgInfo3 = "imgInfo3";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-                oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
-                oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
-                mailItem.HTMLBody = String.Format(@"<body>
-                                                        <table>
-                                                           <tr>
-                                                                <td colspan = '2'><img src='cid:{0}'></td>
-                                                           </tr>
-                                                           <tr>
-                                                                <td width = '70%'><img src='cid:{1}'> </td>   
-                                                                <td width = '30%'><img src='cid:{2}'></td>
-                                                           </tr>
-                                                        <table>
-                                                        
-                                                                                                              
-                                                    </body>", imgInfo, imgInfo2, imgInfo3) + htmlBody;
+              //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+             //   oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
+                mailItem.HTMLBody = String.Format(@"<img src='cid:{0}'>", imgInfo) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
