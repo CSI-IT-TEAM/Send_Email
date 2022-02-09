@@ -41,24 +41,24 @@ namespace Send_Email
         private string _subjectSend = "";
 
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com"
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; 
+        private readonly string[] _emailTest = { "dien.it@changshininc.com" }; 
 
         Main frmMain = new Main();
         public DataTable _dt1, _dt2,_dt3;
         private void Mold_Repair_Monthly_Load(object sender, EventArgs e)
         {
-            //foreach (WH warehouse in Enum.GetValues(typeof(WH)))
-            //{
-            //    LoadDataMold(_dt1, _dt2, _dt3, warehouse);
-            //    CaptureControl(tblMold, "MoldChartWh");
+            foreach (WH warehouse in Enum.GetValues(typeof(WH)))
+            {
+                LoadDataMold(_dt1, _dt2, _dt3, warehouse);
+                CaptureControl(tblMold, "MoldChartWh");
 
-            //    CreateMailMoldMonthWh(_subjectSend, "", _dtEmail);
-            //}
+                CreateMailMoldMonthWh(_subjectSend, "", _dtEmail);
+            }
+            
+            //LoadDataMold(_dt1, _dt2, _dt3, WH.OUTSOLE);
+            //CaptureControl(tblMold, "MoldChartWh");
 
-            LoadDataMold(_dt1, _dt2, _dt3, WH.OUTSOLE);
-            CaptureControl(tblMold, "MoldChartWh");
-
-            CreateMailMoldMonthWh(_subjectSend, "", _dtEmail);
+            //CreateMailMoldMonthWh(_subjectSend, "", _dtEmail);
         }
 
 
@@ -273,6 +273,8 @@ namespace Send_Email
                 chart1.DataSource = dt;
                 chart1.Series[0].ArgumentDataMember = "TXT";
                 chart1.Series[0].ValueDataMembers.AddRange(new string[] { "VAL" });
+                chart1.Series[1].ArgumentDataMember = "TXT";
+                chart1.Series[1].ValueDataMembers.AddRange(new string[] { "QTY" });
             }
             catch (Exception ex)
             {
