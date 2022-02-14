@@ -67,21 +67,26 @@ namespace Send_Email
 
                 //Row
                 string TableRow = "";
-
+                string bgColor = "",fcColor="";
+                
                 foreach (DataRow rowData in dtData.Rows)
                 {
                     TableRow += "<tr> ";
                     foreach (DataRow rowHeader in dtHeader.Rows)
                     {
-                        if (rowHeader["FIELD_NAME"].ToString() == "SCAN_FINISHED")
+                        bgColor = rowData["OUT_BCOLOR"].ToString();
+                        fcColor = rowData["OUT_FCOLOR"].ToString();
+                        
+                        if (rowHeader["FIELD_NAME"].ToString() == "SCAN_FINISHED" && bgColor == "WHITE")
                         {
+                           
                             TableRow += $"<td bgcolor='{rowData["STATUS_BCOLOR"]}' style='color:{rowData["STATUS_FCOLOR"]}' align='{rowHeader["ALIGN"]}'>" +
                                         $"{rowData[rowHeader["FIELD_NAME"].ToString()]}" +
                                     $"</td>";
                         }
                         else
                         {
-                            TableRow += $"<td bgcolor='WHITE' style='color:BLACK' align='{rowHeader["ALIGN"]}'>" +
+                            TableRow += $"<td bgcolor='{bgColor}' style='color:{fcColor}' align='{rowHeader["ALIGN"]}'>" +
                                         $"{rowData[rowHeader["FIELD_NAME"].ToString()]}" +
                                     $"</td>";
                         }
@@ -92,7 +97,21 @@ namespace Send_Email
 
                 }
 
-                return "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='2' cellspacing='0' >" +
+                return "<table style='font-family:Times New Roman; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='2' cellspacing='0' >" +
+                          "<tr bgcolor='white' style='color:black'>" +
+                          "<td colspan='2' style='font-size:20px' align='center'><i><b>Color explanation<b></i></td>" +
+                          "</tr>" +
+                          "<tr>" +
+                            "<td bgcolor='white' style='color:black' ><i>Outgoing Time >= 5 days</i></td>" +
+                            "<td bgcolor='red' style='color:white'><i>Red</i></td>" +
+                          "</tr>" +
+                          "<tr>" +
+                            "<td bgcolor='white' style='color:black'><i>Outgoing Time from 3~4 days</i></td>" +
+                            "<td bgcolor='yellow' style='color:black'><i>Yellow</i></td>" +
+                          "</tr>" +
+                        "</table>" +
+                        "<br>" +
+                        "<table style='font-family:Calibri; font-size:15px' bgcolor='#f5f3ed' border='1' cellpadding='2' cellspacing='0' >" +
                             TableHeader + TableRow +
                        "</table>";
             }

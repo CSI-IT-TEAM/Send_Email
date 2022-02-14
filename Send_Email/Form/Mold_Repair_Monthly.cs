@@ -22,7 +22,7 @@ namespace Send_Email
         {
             InitializeComponent();
 
-            pnMold.Size = new Size(2000, 1000);
+            pnMold.Size = new Size(3000, 1300);
             chartMold.Size = new Size(1000, 1000);
             tblGrid.Size = new Size(2200, 260);
            // pnMold2.Size = new Size(500, 300);
@@ -519,7 +519,7 @@ namespace Send_Email
                     if (e.SeriesPoint.Argument.ToString().Equals(_dtPivot.Rows[i]["WORK_PLACE_NM"].ToString()))
                     {
                         e.LabelText = $"Ratio: { _dtPivot.Rows[i]["PER_MOLD_RP"].ToString().TrimEnd('0')}%\n" +
-                                      $"Avg Mold: {_dtPivot.Rows[i]["AVG_MOLD_RP"].ToString().TrimEnd('0')}";
+                                      $"Total Mold Repair: {_dtPivot.Rows[i]["SUM_MOLD_RP"].ToString().TrimEnd('0')}";
                     }
                 }
             }
