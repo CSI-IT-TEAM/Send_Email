@@ -1950,31 +1950,31 @@ namespace Send_Email
                               "  </tr>" +
                               "  <tr>" +
                               "    <td>Total Downtime per Line</td>" +
-                              "    <td>&lt;10 minutes</td>" +
-                              "    <td>10 ~ 29:59 minutes</td>" +
-                              "    <td>30 ~ 59:59 minutes</td>" +
-                              "    <td>Over 1 hour</td>" +
+                              "    <td>&lt;9 minutes</td>" +
+                              "    <td>10 ~ 25 minutes</td>" +
+                              "    <td>25 ~ 50 minutes</td>" +
+                              "    <td>Over 50 minutes</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Total average measure</td>" +
-                              "      <td>&lt;02 minutes</td>" +
-                              "      <td>02 ~ 04:59 minutes</td>" +
-                              "      <td>05 ~ 09:59 minutes</td>" +
-                              "      <td>Over 10 minutes</td>" +
+                              "      <td>&lt;1.5 minutes</td>" +
+                              "      <td>1.5 ~ 04 minutes</td>" +
+                              "      <td>04 ~ 09 minutes</td>" +
+                              "      <td>Over 09 minutes</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Downtime by line</td>" +
-                              "      <td>&lt;10 minutes</td>" +
-                              "      <td>10 ~ 29:59 minutes</td>" +
-                              "      <td>30 ~ 59:59 minutes</td>" +
-                              "      <td>Over 1 hour</td>" +
+                              "      <td>&lt;9 minutes</td>" +
+                              "      <td>10 ~ 25 minutes</td>" +
+                              "      <td>30 ~ 50 minutes</td>" +
+                              "      <td>Over 50 minutes</td>" +
                               "  </tr>" +
                               "  <tr>" +
                               "      <td>Downtime average by line</td>" +
-                              "      <td>&lt;02 minutes</td>" +
-                              "      <td>02 ~ 04:59 minutes</td>" +
-                              "      <td>05 ~ 09:59 minutes</td>" +
-                              "      <td>Over 10 minutes</td>" +
+                              "      <td>&lt;1.5 minutes</td>" +
+                              "      <td>1.5 ~ 04 minutes</td>" +
+                              "      <td>04 ~ 09 minutes</td>" +
+                              "      <td>Over 09 minutes</td>" +
                               "  </tr>       " +
                               "</table>";
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic;' >" +
