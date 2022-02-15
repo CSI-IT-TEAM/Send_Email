@@ -1408,7 +1408,7 @@ namespace Send_Email
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(697, 513);
+            this.ClientSize = new System.Drawing.Size(701, 527);
             this.Controls.Add(this.tblMold);
             this.Name = "Mold_Repair_Monthly_WH";
             this.Text = "Mold_Repair_Monthly";

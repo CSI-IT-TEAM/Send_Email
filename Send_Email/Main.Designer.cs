@@ -415,6 +415,8 @@
             this.cmd_BolRR = new System.Windows.Forms.Button();
             this.cmd_BolRrChk = new System.Windows.Forms.CheckBox();
             this.cmdMoldRepairMonthWh = new System.Windows.Forms.Button();
+            this.btnRunOS_Monthly = new System.Windows.Forms.Button();
+            this.btnRunOS_MonthlyChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -4186,6 +4188,30 @@
             this.cmdMoldRepairMonthWh.UseVisualStyleBackColor = true;
             this.cmdMoldRepairMonthWh.Click += new System.EventHandler(this.cmdMoldRepairMonthWh_Click);
             // 
+            // btnRunOS_Monthly
+            // 
+            this.btnRunOS_Monthly.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRunOS_Monthly.Location = new System.Drawing.Point(6, 392);
+            this.btnRunOS_Monthly.Name = "btnRunOS_Monthly";
+            this.btnRunOS_Monthly.Size = new System.Drawing.Size(397, 23);
+            this.btnRunOS_Monthly.TabIndex = 211;
+            this.btnRunOS_Monthly.Text = "Outsole press machine drawback list Monthly";
+            this.btnRunOS_Monthly.UseVisualStyleBackColor = true;
+            this.btnRunOS_Monthly.Click += new System.EventHandler(this.btnRunOS_Monthly_Click);
+            // 
+            // btnRunOS_MonthlyChk
+            // 
+            this.btnRunOS_MonthlyChk.AutoSize = true;
+            this.btnRunOS_MonthlyChk.Checked = true;
+            this.btnRunOS_MonthlyChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnRunOS_MonthlyChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunOS_MonthlyChk.Location = new System.Drawing.Point(409, 395);
+            this.btnRunOS_MonthlyChk.Name = "btnRunOS_MonthlyChk";
+            this.btnRunOS_MonthlyChk.Size = new System.Drawing.Size(52, 19);
+            this.btnRunOS_MonthlyChk.TabIndex = 223;
+            this.btnRunOS_MonthlyChk.Text = "Auto";
+            this.btnRunOS_MonthlyChk.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4213,6 +4239,7 @@
             this.Controls.Add(this.cmd_Quality2Chk);
             this.Controls.Add(this.cmdPoToIeChk);
             this.Controls.Add(this.btnTimeContraintChk);
+            this.Controls.Add(this.btnRunOS_MonthlyChk);
             this.Controls.Add(this.btnRunOS_RedChk);
             this.Controls.Add(this.btnRunTMSChk);
             this.Controls.Add(this.btnRunQualityMonthChk);
@@ -4244,6 +4271,7 @@
             this.Controls.Add(this.cmd_Quality);
             this.Controls.Add(this.cmd_Budget);
             this.Controls.Add(this.btnFeedback);
+            this.Controls.Add(this.btnRunOS_Monthly);
             this.Controls.Add(this.btnRunOS_Red);
             this.Controls.Add(this.cmdMoldRepair);
             this.Controls.Add(this.pnTMSDassGrid);
@@ -4860,6 +4888,8 @@
         private System.Windows.Forms.Button cmd_BolRR;
         private System.Windows.Forms.CheckBox cmd_BolRrChk;
         private System.Windows.Forms.Button cmdMoldRepairMonthWh;
+        private System.Windows.Forms.Button btnRunOS_Monthly;
+        private System.Windows.Forms.CheckBox btnRunOS_MonthlyChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
