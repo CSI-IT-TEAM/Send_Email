@@ -183,6 +183,7 @@ namespace Send_Email
             }
         }
 
+
         private void cmdRunProd_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
@@ -245,6 +246,11 @@ namespace Send_Email
             if (SendYN(((Button)sender).Text))
                 RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("HH"));
 
+        }
+        private void btnRunOS_Monthly_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM01"), DateTime.Now.ToString("yyyyMMdd"));
         }
 
         private void cmd_Budget_Click(object sender, EventArgs e)
@@ -3049,6 +3055,55 @@ namespace Send_Email
             }
         }
 
+
+        private DataSet SEL_OS_PRESS_MONTHLY(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            DataSet ds_ret;
+            try
+            {
+                MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+                string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_WH";
+                // MyOraDB.ShowErr = true;
+                MyOraDB.ReDim_Parameter(7);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_DATA";
+                MyOraDB.Parameter_Name[3] = "CV_COL";
+                MyOraDB.Parameter_Name[4] = "CV_SUBJECT";
+                MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+                MyOraDB.Parameter_Name[6] = "CV_DATA2";
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[6] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+                MyOraDB.Parameter_Values[6] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null) return null;
+                return ds_ret;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         #endregion
 
 
@@ -4753,6 +4808,57 @@ namespace Send_Email
         }
 
         #endregion OS Red Machine
+
+        #region OS Red Machine Monthly
+        private DataTable SEL_DATA_OS_MACHINE_MONTHLY(string V_P_TYPE,string V_P_DATEF,string V_P_DATET)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_OUTSOLE_MONTHLY";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATEF";
+                MyOraDB.Parameter_Name[2] = "V_P_DATET";
+                MyOraDB.Parameter_Name[3] = "CV_1";
+               
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATEF;
+                MyOraDB.Parameter_Values[2] = V_P_DATET;
+                MyOraDB.Parameter_Values[3] = "";
+               
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        //WriteLog("P_SEND_EMAIL_NPI: null");
+                    }
+                    return null;
+                }
+                return ds_ret.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        #endregion
 
         #region Run Feedback
 
@@ -7606,6 +7712,38 @@ namespace Send_Email
             {
                 _isRun2 = false;
             }
+        }
+
+        private void RunOSMonthly(string argType,string argDateF,string argDateT)
+        {
+            DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDateF, argDateT);//MACHINE TIMES
+            DataTable dtChart2 = SEL_DATA_OS_MACHINE_MONTHLY("CHART2", argDateF, argDateT);//LINE
+            DataTable dtChart3 = SEL_DATA_OS_MACHINE_MONTHLY("CHART3", argDateF, argDateT);//REASON
+            DataTable dtChart4 = SEL_DATA_OS_MACHINE_MONTHLY("CHART4", argDateF, argDateT);// HOURS
+            DataTable dtChart5 = SEL_DATA_OS_MACHINE_MONTHLY("CHART5", argDateF, argDateT);//SHIFT
+            DataTable dtChart6 = SEL_DATA_OS_MACHINE_MONTHLY("CHART6", argDateF, argDateT);//DAILY
+            DataTable dtEmail = SEL_DATA_OS_MACHINE_MONTHLY("EMAIL", argDateF, argDateT); //Email Send
+
+            if (dtChart1 == null || dtChart2 == null || dtChart3 == null || dtChart4 == null || dtChart5 == null || dtChart6 == null || dtEmail == null)
+                return;
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunOSMonthly({argType}): BEGIN");
+          
+            using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
+            {
+                frmOsMonthly._chkTest = chkTest.Checked;
+                frmOsMonthly._subject = "Outsole press machine drawback list by Month";
+                frmOsMonthly._dtChart1 =dtChart1;
+                frmOsMonthly._dtChart2 =dtChart2;
+                frmOsMonthly._dtChart3 =dtChart3;
+                frmOsMonthly._dtChart4 =dtChart4;
+                frmOsMonthly._dtChart5 =dtChart5;
+                frmOsMonthly._dtChart6 =dtChart6;
+                frmOsMonthly._dtEmail = dtEmail;
+                frmOsMonthly.Show();
+                frmOsMonthly.SendToBack();
+            }
+
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)

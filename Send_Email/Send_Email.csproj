@@ -167,6 +167,12 @@
     <Compile Include="Form\Mold_Repair_Monthly_WH.Designer.cs">
       <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Outsole_Drawback_List_Monthly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Outsole_Drawback_List_Monthly.Designer.cs">
+      <DependentUpon>Outsole_Drawback_List_Monthly.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Mold_Repair_Monthly_WH.resx">
       <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Outsole_Drawback_List_Monthly.resx">
+      <DependentUpon>Outsole_Drawback_List_Monthly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
