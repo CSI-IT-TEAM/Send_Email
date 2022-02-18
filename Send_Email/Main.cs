@@ -1957,7 +1957,7 @@ namespace Send_Email
                               "  <tr>" +
                               "    <td>Total Downtime per Line</td>" +
                               "    <td>&lt;9 minutes</td>" +
-                              "    <td>10 ~ 25 minutes</td>" +
+                              "    <td>9 ~ 25 minutes</td>" +
                               "    <td>25 ~ 50 minutes</td>" +
                               "    <td>Over 50 minutes</td>" +
                               "  </tr>" +
@@ -1971,8 +1971,8 @@ namespace Send_Email
                               "  <tr>" +
                               "      <td>Downtime by line</td>" +
                               "      <td>&lt;9 minutes</td>" +
-                              "      <td>10 ~ 25 minutes</td>" +
-                              "      <td>30 ~ 50 minutes</td>" +
+                              "      <td>9 ~ 25 minutes</td>" +
+                              "      <td>25 ~ 50 minutes</td>" +
                               "      <td>Over 50 minutes</td>" +
                               "  </tr>" +
                               "  <tr>" +
