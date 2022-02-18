@@ -128,7 +128,7 @@ namespace Send_Email
             // 
             // tblOutsole
             // 
-            this.tblOutsole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(65)))), ((int)(((byte)(87)))));
+            this.tblOutsole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             this.tblOutsole.ColumnCount = 3;
             this.tblOutsole.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tblOutsole.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -144,16 +144,16 @@ namespace Send_Email
             this.tblOutsole.RowCount = 2;
             this.tblOutsole.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tblOutsole.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tblOutsole.Size = new System.Drawing.Size(1221, 644);
+            this.tblOutsole.Size = new System.Drawing.Size(1420, 933);
             this.tblOutsole.TabIndex = 0;
             // 
             // panel6
             // 
             this.panel6.Controls.Add(this.spl6);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(817, 325);
+            this.panel6.Location = new System.Drawing.Point(949, 469);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(401, 316);
+            this.panel6.Size = new System.Drawing.Size(468, 461);
             this.panel6.TabIndex = 5;
             // 
             // spl6
@@ -170,13 +170,14 @@ namespace Send_Email
             // spl6.Panel2
             // 
             this.spl6.Panel2.Controls.Add(this.grd6);
-            this.spl6.Size = new System.Drawing.Size(401, 316);
-            this.spl6.SplitterDistance = 276;
+            this.spl6.Size = new System.Drawing.Size(468, 461);
+            this.spl6.SplitterDistance = 402;
             this.spl6.TabIndex = 0;
             // 
             // chartControl6
             // 
-            this.chartControl6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl6.BorderOptions.Color = System.Drawing.Color.White;
             xyDiagram1.AxisX.Label.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
             xyDiagram1.AxisX.Label.TextColor = System.Drawing.Color.White;
             xyDiagram1.AxisX.VisibleInPanesSerializable = "-1";
@@ -189,7 +190,7 @@ namespace Send_Email
             xyDiagram1.AxisY.Title.Visibility = DevExpress.Utils.DefaultBoolean.True;
             xyDiagram1.AxisY.Visibility = DevExpress.Utils.DefaultBoolean.False;
             xyDiagram1.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram1.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            xyDiagram1.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             xyDiagram1.DefaultPane.BorderVisible = false;
             this.chartControl6.Diagram = xyDiagram1;
             this.chartControl6.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -211,7 +212,7 @@ namespace Send_Email
             series1.View = sideBySideBarSeriesView1;
             this.chartControl6.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1};
-            this.chartControl6.Size = new System.Drawing.Size(401, 276);
+            this.chartControl6.Size = new System.Drawing.Size(468, 402);
             this.chartControl6.TabIndex = 1;
             chartTitle1.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle1.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -232,7 +233,7 @@ namespace Send_Email
             this.grd6.LookAndFeel.UseWindowsXPTheme = true;
             this.grd6.MainView = this.gvw6;
             this.grd6.Name = "grd6";
-            this.grd6.Size = new System.Drawing.Size(401, 36);
+            this.grd6.Size = new System.Drawing.Size(468, 55);
             this.grd6.TabIndex = 0;
             this.grd6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvw6});
@@ -292,14 +293,15 @@ namespace Send_Email
             // 
             this.panel5.Controls.Add(this.chartControl5);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(410, 325);
+            this.panel5.Location = new System.Drawing.Point(476, 469);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(401, 316);
+            this.panel5.Size = new System.Drawing.Size(467, 461);
             this.panel5.TabIndex = 4;
             // 
             // chartControl5
             // 
-            this.chartControl5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl5.BorderOptions.Color = System.Drawing.Color.White;
             this.chartControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl5.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Center;
             this.chartControl5.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.BottomOutside;
@@ -317,7 +319,7 @@ namespace Send_Email
             series2.View = pieSeriesView1;
             this.chartControl5.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series2};
-            this.chartControl5.Size = new System.Drawing.Size(401, 316);
+            this.chartControl5.Size = new System.Drawing.Size(467, 461);
             this.chartControl5.TabIndex = 3;
             chartTitle2.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle2.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -331,14 +333,15 @@ namespace Send_Email
             // 
             this.panel4.Controls.Add(this.chartControl4);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 325);
+            this.panel4.Location = new System.Drawing.Point(3, 469);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(401, 316);
+            this.panel4.Size = new System.Drawing.Size(467, 461);
             this.panel4.TabIndex = 3;
             // 
             // chartControl4
             // 
-            this.chartControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl4.BorderOptions.Color = System.Drawing.Color.White;
             xyDiagram2.AxisX.Label.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
             xyDiagram2.AxisX.Label.TextColor = System.Drawing.Color.White;
             xyDiagram2.AxisX.VisibleInPanesSerializable = "-1";
@@ -350,7 +353,7 @@ namespace Send_Email
             xyDiagram2.AxisY.Title.Text = "Unit: Hours";
             xyDiagram2.AxisY.Title.TextColor = System.Drawing.Color.Yellow;
             xyDiagram2.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram2.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            xyDiagram2.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             xyDiagram2.DefaultPane.BorderVisible = false;
             xyDiagram2.Rotated = true;
             this.chartControl4.Diagram = xyDiagram2;
@@ -373,7 +376,7 @@ namespace Send_Email
             series3.View = sideBySideBarSeriesView2;
             this.chartControl4.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series3};
-            this.chartControl4.Size = new System.Drawing.Size(401, 316);
+            this.chartControl4.Size = new System.Drawing.Size(467, 461);
             this.chartControl4.TabIndex = 1;
             chartTitle3.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle3.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -391,14 +394,15 @@ namespace Send_Email
             // 
             this.panel3.Controls.Add(this.chartControl3);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(817, 3);
+            this.panel3.Location = new System.Drawing.Point(949, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(401, 316);
+            this.panel3.Size = new System.Drawing.Size(468, 460);
             this.panel3.TabIndex = 2;
             // 
             // chartControl3
             // 
-            this.chartControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl3.BorderOptions.Color = System.Drawing.Color.White;
             this.chartControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartControl3.Legend.AlignmentHorizontal = DevExpress.XtraCharts.LegendAlignmentHorizontal.Center;
             this.chartControl3.Legend.AlignmentVertical = DevExpress.XtraCharts.LegendAlignmentVertical.BottomOutside;
@@ -416,7 +420,7 @@ namespace Send_Email
             series4.View = pieSeriesView2;
             this.chartControl3.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series4};
-            this.chartControl3.Size = new System.Drawing.Size(401, 316);
+            this.chartControl3.Size = new System.Drawing.Size(468, 460);
             this.chartControl3.TabIndex = 2;
             chartTitle5.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle5.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -430,14 +434,15 @@ namespace Send_Email
             // 
             this.panel2.Controls.Add(this.chartControl2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(410, 3);
+            this.panel2.Location = new System.Drawing.Point(476, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(401, 316);
+            this.panel2.Size = new System.Drawing.Size(467, 460);
             this.panel2.TabIndex = 1;
             // 
             // chartControl2
             // 
-            this.chartControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl2.BorderOptions.Color = System.Drawing.Color.White;
             xyDiagram3.AxisX.Label.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
             xyDiagram3.AxisX.Label.TextColor = System.Drawing.Color.White;
             xyDiagram3.AxisX.VisibleInPanesSerializable = "-1";
@@ -449,7 +454,7 @@ namespace Send_Email
             xyDiagram3.AxisY.Title.Text = "Unit: Machine Quantity";
             xyDiagram3.AxisY.Title.TextColor = System.Drawing.Color.Yellow;
             xyDiagram3.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram3.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            xyDiagram3.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             xyDiagram3.DefaultPane.BorderVisible = false;
             this.chartControl2.Diagram = xyDiagram3;
             this.chartControl2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -471,7 +476,7 @@ namespace Send_Email
             series5.View = sideBySideBarSeriesView3;
             this.chartControl2.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series5};
-            this.chartControl2.Size = new System.Drawing.Size(401, 316);
+            this.chartControl2.Size = new System.Drawing.Size(467, 460);
             this.chartControl2.TabIndex = 1;
             chartTitle6.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle6.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
@@ -491,12 +496,13 @@ namespace Send_Email
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(401, 316);
+            this.panel1.Size = new System.Drawing.Size(467, 460);
             this.panel1.TabIndex = 0;
             // 
             // chartControl1
             // 
-            this.chartControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            this.chartControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
+            this.chartControl1.BorderOptions.Color = System.Drawing.Color.White;
             xyDiagram4.AxisX.Label.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
             xyDiagram4.AxisX.Label.TextColor = System.Drawing.Color.White;
             xyDiagram4.AxisX.VisibleInPanesSerializable = "-1";
@@ -508,7 +514,7 @@ namespace Send_Email
             xyDiagram4.AxisY.Title.Text = "Unit: Times";
             xyDiagram4.AxisY.Title.TextColor = System.Drawing.Color.Yellow;
             xyDiagram4.AxisY.VisibleInPanesSerializable = "-1";
-            xyDiagram4.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(84)))), ((int)(((byte)(111)))));
+            xyDiagram4.DefaultPane.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             xyDiagram4.DefaultPane.BorderVisible = false;
             this.chartControl1.Diagram = xyDiagram4;
             this.chartControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -530,10 +536,11 @@ namespace Send_Email
             series7.Name = "Drawback Production";
             splineSeriesView1.Color = System.Drawing.Color.FromArgb(((int)(((byte)(167)))), ((int)(((byte)(116)))), ((int)(((byte)(77)))));
             series7.View = splineSeriesView1;
+            series7.Visible = false;
             this.chartControl1.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series6,
         series7};
-            this.chartControl1.Size = new System.Drawing.Size(401, 316);
+            this.chartControl1.Size = new System.Drawing.Size(467, 460);
             this.chartControl1.TabIndex = 0;
             chartTitle8.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle8.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
