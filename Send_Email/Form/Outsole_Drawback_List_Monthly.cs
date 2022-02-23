@@ -154,8 +154,8 @@ namespace Send_Email
                         chartControl1.DataSource = argDt;
                         chartControl1.Series[0].ArgumentDataMember = "RESOURCE_CD";
                         chartControl1.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
-                        //chartControl1.Series[1].ArgumentDataMember = "TXT";
-                        //chartControl1.Series[1].ValueDataMembers.AddRange(new string[] { "QTY" });
+                        chartControl1.Series[1].ArgumentDataMember = "RESOURCE_CD";
+                        chartControl1.Series[1].ValueDataMembers.AddRange(new string[] { "DRAWBACK_PROD" });
                         break;
                     case "CHART2":
                         chartControl2.DataSource = argDt;
