@@ -7732,7 +7732,7 @@ namespace Send_Email
             using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
             {
                 frmOsMonthly._chkTest = chkTest.Checked;
-                frmOsMonthly._subject = "Outsole press machine drawback list by Month";
+                frmOsMonthly._subject = "Monthly Os Press Machine Drawback(2022,Jan)";
                 frmOsMonthly._dtChart1 =dtChart1;
                 frmOsMonthly._dtChart2 =dtChart2;
                 frmOsMonthly._dtChart3 =dtChart3;
