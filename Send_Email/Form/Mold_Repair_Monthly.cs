@@ -25,7 +25,12 @@ namespace Send_Email
             pnMold.Size = new Size(3000, 1300);
             chartMold.Size = new Size(1000, 1000);
             tblGrid.Size = new Size(2200, 260);
-           // pnMold2.Size = new Size(500, 300);
+            // pnMold2.Size = new Size(500, 300);
+            grdMain.Size = new Size(pnGrid1.Size.Width + 2, pnGrid1.Size.Height);
+            grdMain.Location = new Point(-2, 0);
+
+            grdMain2.Size = new Size(pnGrid2.Size.Width + 2, pnGrid2.Size.Height);
+            grdMain2.Location = new Point(-2, 0);
         }
 
         Main frmMain = new Main();
@@ -345,7 +350,7 @@ namespace Send_Email
                                       , System.Globalization.CultureInfo.InvariantCulture
                                       , System.Globalization.DateTimeStyles.None 
                                       , out date1);
-                string date = date1.ToString("MMM-yyyy");
+                string date = date1.ToString("MMMM-yyyy");
                 gridBandMonth.AppearanceHeader.Options.UseTextOptions = true;
                 gridBandMonth.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
                 gridBandMonth.AppearanceHeader.TextOptions.VAlignment = VertAlignment.Center;
@@ -406,9 +411,9 @@ namespace Send_Email
                 // grdView.BandPanelRowHeight = 30;
                 int gridWidth = 0;
                 int gridColCount = grid.Columns.Count;
-                int width = (grdMain.Width - (52 + (82 *3) + 112)) / _numDays;
+                int width = (grdMain.Width - (52 + (82 * 3) + 112)) / _numDays;
+                int widthLost = grdMain.Width - (52 + (82 * 3) + 112) - (_numDays * width);
 
-                
                 for (int i = 0; i < gridColCount; i++)
                 {
                     if (grid.Columns[i].OwnerBand.ParentBand != null)
@@ -426,7 +431,7 @@ namespace Send_Email
                     switch (grid.Columns[i].Name)
                     {
                         case "WORK_BOTTOM":
-                            grid.Columns[i].Width = 52;                           
+                            grid.Columns[i].Width = 52 + widthLost;
                             break;
 
                         case "PER_MOLD":
@@ -534,7 +539,7 @@ namespace Send_Email
             {
                 chartMold.DataSource = dt;
                 chartMold.Series[0].ArgumentDataMember = "WORK_PLACE_NM";
-                chartMold.Series[0].ValueDataMembers.AddRange(new string[] { "PER_MOLD_RP" });
+                chartMold.Series[0].ValueDataMembers.AddRange(new string[] { "SUM_MOLD_RP" });
             }
             catch
             {
