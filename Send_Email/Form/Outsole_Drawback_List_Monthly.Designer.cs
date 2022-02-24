@@ -173,7 +173,7 @@ namespace Send_Email
             // 
             this.spl6.Panel2.Controls.Add(this.grd6);
             this.spl6.Size = new System.Drawing.Size(575, 508);
-            this.spl6.SplitterDistance = 429;
+            this.spl6.SplitterDistance = 428;
             this.spl6.TabIndex = 0;
             // 
             // chartControl6
@@ -216,7 +216,7 @@ namespace Send_Email
             series1.View = sideBySideBarSeriesView1;
             this.chartControl6.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series1};
-            this.chartControl6.Size = new System.Drawing.Size(575, 429);
+            this.chartControl6.Size = new System.Drawing.Size(575, 428);
             this.chartControl6.TabIndex = 1;
             chartTitle1.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
@@ -234,7 +234,7 @@ namespace Send_Email
             this.grd6.LookAndFeel.SkinName = "Office 2016 Colorful";
             this.grd6.MainView = this.gvw6;
             this.grd6.Name = "grd6";
-            this.grd6.Size = new System.Drawing.Size(575, 75);
+            this.grd6.Size = new System.Drawing.Size(575, 76);
             this.grd6.TabIndex = 0;
             this.grd6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvw6});
@@ -326,10 +326,11 @@ namespace Send_Email
             this.chartControl5.Name = "chartControl5";
             this.chartControl5.PaletteName = "Slipstream";
             pieSeriesLabel1.BackColor = System.Drawing.Color.Transparent;
-            pieSeriesLabel1.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            pieSeriesLabel1.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
             pieSeriesLabel1.Font = new System.Drawing.Font("Calibri", 22F, System.Drawing.FontStyle.Bold);
             pieSeriesLabel1.Position = DevExpress.XtraCharts.PieSeriesLabelPosition.TwoColumns;
             pieSeriesLabel1.ResolveOverlappingMode = DevExpress.XtraCharts.ResolveOverlappingMode.Default;
+            pieSeriesLabel1.TextColor = System.Drawing.Color.White;
             pieSeriesLabel1.TextPattern = "{A} ({V:#,#})";
             series2.Label = pieSeriesLabel1;
             series2.Name = "Drawback Reason";
@@ -435,10 +436,11 @@ namespace Send_Email
             this.chartControl3.Name = "chartControl3";
             this.chartControl3.PaletteName = "Slipstream";
             pieSeriesLabel2.BackColor = System.Drawing.Color.Transparent;
-            pieSeriesLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.False;
+            pieSeriesLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
             pieSeriesLabel2.Font = new System.Drawing.Font("Calibri", 22F, System.Drawing.FontStyle.Bold);
             pieSeriesLabel2.Position = DevExpress.XtraCharts.PieSeriesLabelPosition.TwoColumns;
             pieSeriesLabel2.ResolveOverlappingMode = DevExpress.XtraCharts.ResolveOverlappingMode.Default;
+            pieSeriesLabel2.TextColor = System.Drawing.Color.White;
             pieSeriesLabel2.TextPattern = "{A} ({V:#,#})";
             series4.Label = pieSeriesLabel2;
             series4.Name = "Drawback Reason";
