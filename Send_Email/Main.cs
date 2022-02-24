@@ -7716,7 +7716,7 @@ namespace Send_Email
 
         private void RunOSMonthly(string argType,string argDateF,string argDateT)
         {
-            DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//MACHINE TIMES
+          //  DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//MACHINE TIMES
             DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDateF, argDateT);//MACHINE TIMES
             DataTable dtChart2 = SEL_DATA_OS_MACHINE_MONTHLY("CHART2", argDateF, argDateT);//LINE
             DataTable dtChart3 = SEL_DATA_OS_MACHINE_MONTHLY("CHART3", argDateF, argDateT);//REASON

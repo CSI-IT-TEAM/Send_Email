@@ -219,7 +219,7 @@ namespace Send_Email
             this.chartControl6.Size = new System.Drawing.Size(575, 428);
             this.chartControl6.TabIndex = 1;
             chartTitle1.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle1.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle1.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle1.Text = "DAILY AVERAGE MACHINE DRAWBACK";
             chartTitle1.TextColor = System.Drawing.Color.White;
             chartTitle1.WordWrap = true;
@@ -336,13 +336,14 @@ namespace Send_Email
             series2.Name = "Drawback Reason";
             pieSeriesView1.Border.Color = System.Drawing.Color.White;
             pieSeriesView1.Border.Thickness = 2;
+            pieSeriesView1.MinAllowedSizePercentage = 100D;
             series2.View = pieSeriesView1;
             this.chartControl5.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series2};
             this.chartControl5.Size = new System.Drawing.Size(573, 508);
             this.chartControl5.TabIndex = 3;
             chartTitle2.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle2.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle2.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle2.Text = "MACHINE DRAWBACK BY SHIFT";
             chartTitle2.TextColor = System.Drawing.Color.White;
             chartTitle2.WordWrap = true;
@@ -401,7 +402,7 @@ namespace Send_Email
             this.chartControl4.Size = new System.Drawing.Size(573, 508);
             this.chartControl4.TabIndex = 1;
             chartTitle3.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle3.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle3.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle3.Text = "TOP 10 SHORTAGE CYCLE MACHINE DRAWBACK";
             chartTitle3.TextColor = System.Drawing.Color.White;
             chartTitle3.WordWrap = true;
@@ -423,6 +424,7 @@ namespace Send_Email
             // 
             // chartControl3
             // 
+            this.chartControl3.AppearanceNameSerializable = "Northern Lights";
             this.chartControl3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(106)))), ((int)(((byte)(142)))));
             this.chartControl3.BorderOptions.Color = System.Drawing.Color.White;
             this.chartControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -434,7 +436,7 @@ namespace Send_Email
             this.chartControl3.Legend.TextColor = System.Drawing.Color.White;
             this.chartControl3.Location = new System.Drawing.Point(0, 0);
             this.chartControl3.Name = "chartControl3";
-            this.chartControl3.PaletteName = "Slipstream";
+            this.chartControl3.PaletteName = "Metro";
             pieSeriesLabel2.BackColor = System.Drawing.Color.Transparent;
             pieSeriesLabel2.Border.Visibility = DevExpress.Utils.DefaultBoolean.True;
             pieSeriesLabel2.Font = new System.Drawing.Font("Calibri", 22F, System.Drawing.FontStyle.Bold);
@@ -444,15 +446,18 @@ namespace Send_Email
             pieSeriesLabel2.TextPattern = "{A} ({V:#,#})";
             series4.Label = pieSeriesLabel2;
             series4.Name = "Drawback Reason";
-            pieSeriesView2.Border.Color = System.Drawing.Color.Gray;
+            pieSeriesView2.Border.Color = System.Drawing.Color.White;
             pieSeriesView2.Border.Thickness = 2;
+            pieSeriesView2.ExplodeMode = DevExpress.XtraCharts.PieExplodeMode.UsePoints;
+            pieSeriesView2.MinAllowedSizePercentage = 100D;
+            pieSeriesView2.RuntimeExploding = true;
             series4.View = pieSeriesView2;
             this.chartControl3.SeriesSerializable = new DevExpress.XtraCharts.Series[] {
         series4};
             this.chartControl3.Size = new System.Drawing.Size(575, 507);
             this.chartControl3.TabIndex = 2;
             chartTitle5.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle5.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle5.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle5.Text = "MACHINE DRAWBACK BY REASON";
             chartTitle5.TextColor = System.Drawing.Color.White;
             chartTitle5.WordWrap = true;
@@ -510,7 +515,7 @@ namespace Send_Email
             this.chartControl2.Size = new System.Drawing.Size(573, 507);
             this.chartControl2.TabIndex = 1;
             chartTitle6.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle6.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle6.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle6.Text = "MACHINE DRAWBACK BY LINE";
             chartTitle6.TextColor = System.Drawing.Color.White;
             chartTitle6.WordWrap = true;
@@ -584,7 +589,7 @@ namespace Send_Email
             this.chartControl1.Size = new System.Drawing.Size(573, 507);
             this.chartControl1.TabIndex = 0;
             chartTitle8.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
-            chartTitle8.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
+            chartTitle8.Font = new System.Drawing.Font("Calibri", 25.25F, System.Drawing.FontStyle.Bold);
             chartTitle8.Text = "TOP 10 MACHINE DRAWBACK QUANTITY";
             chartTitle8.TextColor = System.Drawing.Color.White;
             chartTitle8.WordWrap = true;
