@@ -186,7 +186,7 @@ namespace Send_Email
                         chartControl6.DataSource = argDt;
                         chartControl6.Series[0].ArgumentDataMember = "YMD";
                         chartControl6.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
-                        createGrid(argDt);
+                      //  createGrid(argDt);
 
                         break;
                     default:
@@ -202,64 +202,64 @@ namespace Send_Email
 
         }
 
-        private void createGrid(DataTable argDt)
-        {
-            try
-            {
-                //Khởi tạo lại lưới.
-                gvw6.Columns.Clear();
-                gvw6.Bands.Clear();
+        //private void createGrid(DataTable argDt)
+        //{
+        //    try
+        //    {
+        //        //Khởi tạo lại lưới.
+        //        gvw6.Columns.Clear();
+        //        gvw6.Bands.Clear();
                
-                GridBand BandMonth = new GridBand();
-                BandMonth.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
-                BandMonth.AppearanceHeader.Options.UseFont = true;
-                BandMonth.AppearanceHeader.Options.UseTextOptions = true;
-                BandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                BandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                //  BandMonth.Caption = "Month";
-                BandMonth.Caption = argDt.Rows[0]["CUR_MONTH"].ToString();
-                BandMonth.Name = "gvwBandMonth";
-                BandMonth.VisibleIndex = 0;
-                BandMonth.Width = 75;
-                gvw6.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandMonth});
-                int iDx = 0;
-                foreach (DataRow dr in argDt.Rows)
-                {
-                    GridBand BandDays = new GridBand();
-                    BandDays.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
-                    BandDays.AppearanceHeader.Options.UseFont = true;
-                    BandDays.AppearanceHeader.Options.UseTextOptions = true;
-                    BandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-                    BandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                    BandDays.Caption = dr["YMD"].ToString();
-                    BandDays.Name = "gridBand"+ (iDx+1);
-                    BandDays.VisibleIndex = iDx;
-                    BandDays.Width = 75;
+        //        GridBand BandMonth = new GridBand();
+        //        BandMonth.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
+        //        BandMonth.AppearanceHeader.Options.UseFont = true;
+        //        BandMonth.AppearanceHeader.Options.UseTextOptions = true;
+        //        BandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //        BandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //        //  BandMonth.Caption = "Month";
+        //        BandMonth.Caption = argDt.Rows[0]["CUR_MONTH"].ToString();
+        //        BandMonth.Name = "gvwBandMonth";
+        //        BandMonth.VisibleIndex = 0;
+        //        BandMonth.Width = 75;
+        //        gvw6.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandMonth});
+        //        int iDx = 0;
+        //        foreach (DataRow dr in argDt.Rows)
+        //        {
+        //            GridBand BandDays = new GridBand();
+        //            BandDays.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
+        //            BandDays.AppearanceHeader.Options.UseFont = true;
+        //            BandDays.AppearanceHeader.Options.UseTextOptions = true;
+        //            BandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+        //            BandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+        //            BandDays.Caption = dr["YMD"].ToString();
+        //            BandDays.Name = "gridBand"+ (iDx+1);
+        //            BandDays.VisibleIndex = iDx;
+        //            BandDays.Width = 75;
 
-                    BandedGridColumn ColumnDays = new BandedGridColumn();
-                    ColumnDays.Caption = dr["YMD"].ToString();
-                    ColumnDays.FieldName = dr["YMD"].ToString();
-                    ColumnDays.Name = dr["YMD"].ToString();
-                    ColumnDays.Visible = true;
-                    BandDays.Columns.Add(ColumnDays);
-                    BandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandDays});
-                    gvw6.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {ColumnDays});
-                    iDx++;
-                }
-                DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
-                grd6.DataSource = dt;
-                for (int i = 0; i < gvw6.Columns.Count; i++)
-                {
-                    gvw6.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
-                    gvw6.Columns[i].DisplayFormat.FormatString = "{0:n0}";
-                }
+        //            BandedGridColumn ColumnDays = new BandedGridColumn();
+        //            ColumnDays.Caption = dr["YMD"].ToString();
+        //            ColumnDays.FieldName = dr["YMD"].ToString();
+        //            ColumnDays.Name = dr["YMD"].ToString();
+        //            ColumnDays.Visible = true;
+        //            BandDays.Columns.Add(ColumnDays);
+        //            BandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandDays});
+        //            gvw6.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {ColumnDays});
+        //            iDx++;
+        //        }
+        //        DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
+        //        grd6.DataSource = dt;
+        //        for (int i = 0; i < gvw6.Columns.Count; i++)
+        //        {
+        //            gvw6.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+        //            gvw6.Columns[i].DisplayFormat.FormatString = "{0:n0}";
+        //        }
                
-            }
-            catch
-            {
+        //    }
+        //    catch
+        //    {
                
-            }
-        }
+        //    }
+        //}
 
         private DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {
