@@ -58,6 +58,7 @@ namespace Send_Email
                 SetChart("CHART3", argChart3Dt);
                 SetChart("CHART4", argChart4Dt);
                 SetChart("CHART5", argChart5Dt);
+                
                 SetChart("CHART6", argChart6Dt);
                 //SetChart2(argDt, argWh);
                 //SetChart3(argDt, argWh);
@@ -208,14 +209,15 @@ namespace Send_Email
                 //Khởi tạo lại lưới.
                 gvw6.Columns.Clear();
                 gvw6.Bands.Clear();
-                bandMonth.Caption = argDt.Rows[0]["CUR_MONTH"].ToString();
+               
                 GridBand BandMonth = new GridBand();
                 BandMonth.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
                 BandMonth.AppearanceHeader.Options.UseFont = true;
                 BandMonth.AppearanceHeader.Options.UseTextOptions = true;
                 BandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
                 BandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-                BandMonth.Caption = "Month";
+                //  BandMonth.Caption = "Month";
+                BandMonth.Caption = argDt.Rows[0]["CUR_MONTH"].ToString();
                 BandMonth.Name = "gvwBandMonth";
                 BandMonth.VisibleIndex = 0;
                 BandMonth.Width = 75;
@@ -244,7 +246,6 @@ namespace Send_Email
                     gvw6.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {ColumnDays});
                     iDx++;
                 }
-
                 DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
                 grd6.DataSource = dt;
                 for (int i = 0; i < gvw6.Columns.Count; i++)
@@ -252,6 +253,7 @@ namespace Send_Email
                     gvw6.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
                     gvw6.Columns[i].DisplayFormat.FormatString = "{0:n0}";
                 }
+               
             }
             catch
             {
