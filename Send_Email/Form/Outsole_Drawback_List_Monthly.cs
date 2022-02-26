@@ -57,7 +57,6 @@ namespace Send_Email
                 SetChart("CHART3", argChart3Dt);
                 SetChart("CHART4", argChart4Dt);
                 SetChart("CHART5", argChart5Dt);
-                
                 SetChart("CHART6", argChart6Dt);
                 //SetChart2(argDt, argWh);
                 //SetChart3(argDt, argWh);
