@@ -34,7 +34,6 @@ namespace Send_Email
             {
                 LoadDataOusoleMonthly(_dtChart1, _dtChart2, _dtChart3, _dtChart4, _dtChart5, _dtChart6);
                 CaptureControl(tblOutsole, "OSMonthly");
-
                 CreateMail(_subject, "", _dtEmail);
             }
             catch (Exception)
