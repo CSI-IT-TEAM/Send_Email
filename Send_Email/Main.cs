@@ -75,6 +75,12 @@ namespace Send_Email
         {
             string TimeNow = System.DateTime.Now.ToString("HH:mm");
             DateTime today = DateTime.Today;
+
+            if (TimeNow.Equals("09:00"))
+                if (cmdPORegisterChk.Checked)
+                    RunPORegReport("Q");
+
+
             //12h
             if (cmdPoToChk.Checked)
                 RunToPo("Q1");
@@ -148,7 +154,7 @@ namespace Send_Email
             {
                 RunBolRr("Q1");
             }
-            
+
 
             //16h
 
@@ -250,9 +256,16 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                //RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM01"), DateTime.Now.ToString("yyyyMMdd"));
-                RunOSMonthly("Q", "20220101", "20220131");
+                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM01"), DateTime.Now.ToString("yyyyMMdd"));
+            //  RunOSMonthly("Q", "20220101", "20220131");
         }
+
+        private void cmdPORegister_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunPORegReport("Q");
+        }
+
 
         private void cmd_Budget_Click(object sender, EventArgs e)
         {
@@ -293,7 +306,7 @@ namespace Send_Email
                         oRecip.Resolve();
                     }
                 }
-                
+
                 if (chkTest.Checked)
                 {
                     for (int i = 0; i < _emailTest.Length; i++)
@@ -2835,7 +2848,7 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChart.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-               // Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -2863,10 +2876,10 @@ namespace Send_Email
                 string imgInfo = "imgInfo", imgInfo2 = "imgInfo2", imgInfo3 = "imgInfo3";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
-               // oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
+                // oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
                 mailItem.HTMLBody = String.Format(@"<img src='cid:{0}'><br>
                                                     <img src='cid:{1}'>"
-                                                , imgInfo, imgInfo2) ;
+                                                , imgInfo, imgInfo2);
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -2885,7 +2898,7 @@ namespace Send_Email
             {
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
                 string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_V2";
-               // MyOraDB.ShowErr = true;
+                // MyOraDB.ShowErr = true;
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 
@@ -2946,7 +2959,7 @@ namespace Send_Email
                 frmMold._dtEmail = ds.Tables[3];
                 frmMold.Show();
                 frmMold.SendToBack();
-               // CreateMailMoldMonthWh(subject, "", dtEmail);
+                // CreateMailMoldMonthWh(subject, "", dtEmail);
             }
 
             //if (LoadDataMold(dtData, dtData2))
@@ -2967,8 +2980,8 @@ namespace Send_Email
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldChartWh.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-               // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-               // Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic3 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\MoldGrid2.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -2995,8 +3008,8 @@ namespace Send_Email
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 string imgInfo = "imgInfo", imgInfo2 = "imgInfo2", imgInfo3 = "imgInfo3";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-              //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
-             //   oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
+                //  oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                //   oAttachPic3.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo3);
                 mailItem.HTMLBody = String.Format(@"<img src='cid:{0}'>", imgInfo) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
@@ -3016,7 +3029,7 @@ namespace Send_Email
             {
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
                 string process_name = "P_EMAIL_MOLD_REPAIR_MONTH_WH";
-               // MyOraDB.ShowErr = true;
+                // MyOraDB.ShowErr = true;
                 MyOraDB.ReDim_Parameter(7);
                 MyOraDB.Process_Name = process_name;
 
@@ -4810,8 +4823,52 @@ namespace Send_Email
 
         #endregion OS Red Machine
 
+        #region Po Relief Manual Register Report
+
+        private DataSet SEL_DATA_PO_REG_REPORT(string V_P_TYPE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_POTO_REG";
+                MyOraDB.ReDim_Parameter(3);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "CV_DATA";
+                MyOraDB.Parameter_Name[2] = "CV_EMAIL";
+
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = "";
+                MyOraDB.Parameter_Values[2] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    return null;
+                }
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        #endregion
+
         #region OS Red Machine Monthly
-        private DataTable SEL_DATA_OS_MACHINE_MONTHLY(string V_P_TYPE,string V_P_DATEF,string V_P_DATET)
+        private DataTable SEL_DATA_OS_MACHINE_MONTHLY(string V_P_TYPE, string V_P_DATEF, string V_P_DATET)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
@@ -4826,19 +4883,19 @@ namespace Send_Email
                 MyOraDB.Parameter_Name[1] = "V_P_DATEF";
                 MyOraDB.Parameter_Name[2] = "V_P_DATET";
                 MyOraDB.Parameter_Name[3] = "CV_1";
-               
+
 
                 MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[2] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
-                
+
 
                 MyOraDB.Parameter_Values[0] = V_P_TYPE;
                 MyOraDB.Parameter_Values[1] = V_P_DATEF;
                 MyOraDB.Parameter_Values[2] = V_P_DATET;
                 MyOraDB.Parameter_Values[3] = "";
-               
+
                 MyOraDB.Add_Select_Parameter(true);
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
@@ -5158,8 +5215,8 @@ namespace Send_Email
             {
                 Outlook.Application app = new Outlook.Application();
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
-              //  Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_kr.png", Outlook.OlAttachmentType.olByValue, null, "tr");
-               // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_vi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                //  Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_kr.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                // Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\ie_relief_vi.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
@@ -5185,10 +5242,10 @@ namespace Send_Email
                 oRecips = null;
                 mailItem.BCC = "ngoc.it@changshininc.com";
                 //string imgInfo = "imgInfo", imgInfo2 = "imgInfo2";
-               // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
-               // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
+                // oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 mailItem.HTMLBody = htmlBody;
-               // mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgInfo, imgInfo2) + htmlBody;
+                // mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'><br><img src='cid:{1}'></body>", imgInfo, imgInfo2) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -5274,7 +5331,7 @@ namespace Send_Email
                     }
                 }
                 oRecips = null;
-                
+
                 if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
                 {
                     mailItem.BCC = "nguyen.it@changshininc.com; dien.it@changshininc.com; ngoc.it@changshininc.com";
@@ -5283,12 +5340,12 @@ namespace Send_Email
                 {
                     mailItem.BCC = "ngoc.it@changshininc.com";
                 }
-                
+
                 string imgInfo = "imgInfo";
                 oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
                 // oAttachPic2.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo2);
                 //mailItem.HTMLBody = htmlBody;
-                 mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
+                mailItem.HTMLBody = String.Format(@"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
                 mailItem.Send();
@@ -5676,7 +5733,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                      // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "'  align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -5693,7 +5750,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                     //  "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       //  "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -5709,7 +5766,7 @@ namespace Send_Email
                                        "<td bgcolor='" + dtData.Rows[iRow]["D3_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D3_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D3"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D2_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D2_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D2"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["D1_BG_COLOR"].ToString() + "' style='color:" + dtData.Rows[iRow]["D1_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["D1"].ToString() + "</td>" +
-                                      // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
+                                       // "<td align='right' >" + dtData.Rows[iRow]["PLAN"].ToString() + "</td>" +
                                        "<td align='right'>" + dtData.Rows[iRow]["PLAN_2H"].ToString() + "</td>" +
                                        "<td bgcolor='" + dtData.Rows[iRow]["TODAY_BG_COLOR"].ToString() + "'  style='color:" + dtData.Rows[iRow]["TODAY_FORE_COLOR"].ToString() + "' align='right'>" + dtData.Rows[iRow]["INV"].ToString() + "</td>" +
                                   "</tr>";
@@ -6133,7 +6190,7 @@ namespace Send_Email
                                        "<td bgcolor='" + strAndonDtBc + "' style = 'color:" + strAndonDtFc + "' align='center' >" + strAndonDt + "</td>" +
                                        "<td bgcolor='" + strNpiBc + "' style = 'color:" + strNpiFc + "' align='right' >" + strNpi + "</td>" +
                                        "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
-                                       "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +                                     
+                                       "<td bgcolor='" + strReworkBc + "' style = 'color:" + strReworkFc + "' align='right' >" + strRework + "</td>" +
                                        "<td bgcolor='" + strIsbBc + "' style = 'color:" + strIsbFc + "' align='right' >" + strIsb + "</td>" +
                                        "<td bgcolor='" + strProductionTargetBc + "' style = 'color:" + strProductionTargetFc + "' align='right' >" + strProductionTarget + "</td>" +
                                        "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
@@ -6150,15 +6207,15 @@ namespace Send_Email
                         {
                             if (strPlant == dtData.Rows[iRow - 1]["LINE_NAME"].ToString())
                             {
-                                
+
                                 if (strFactory.Contains("Bottom"))
                                 {
                                     rowValueBot += "<tr>" +
-                                                        
+
                                                         "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                                         "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
-                                                        "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +                                                       
-                                                        
+                                                        "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
+
                                                         "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                                         "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                                         "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -6181,20 +6238,20 @@ namespace Send_Email
                                                     "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
                                                 "</tr>";
                                 }
-                                    
+
                             }
                             else
                             {
-                                
+
                                 if (strFactory.Contains("Bottom"))
                                 {
                                     rowValueBot += "<tr>" +
                                                     "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
-                                                    
+
                                                     "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                                     "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
                                                     "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
-                                                    
+
                                                     "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                                     "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                                     "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -6218,23 +6275,23 @@ namespace Send_Email
                                                     "<td bgcolor='" + strAbsentBc + "' style = 'color:" + strAbsentFc + "' align='right' >" + strAbsent + "</td>" +
                                                 "</tr>";
                                 }
-                                    
+
                             }
                         }
                         else
                         {
-                            
+
 
                             if (strFactory.Contains("Bottom"))
                             {
                                 rowValueBot += "<tr>" +
                                               "<td rowspan='" + strRowFACSpan + "' align ='center'>" + strFactory + " </td>" +
                                               "<td rowspan='" + strRowPLANTSpan + "' align='center'>" + strPlant + "</td>" +
-                                              
+
                                               "<td bgcolor='" + strTimeContraintBc + "' style = 'color:" + strTimeContraintFc + "' align='right' >" + strTimeContraint + "</td>" +
                                               "<td bgcolor='" + strMoldRepairBc + "' style = 'color:" + strMoldRepairFc + "' align='right' >" + strMoldRepair + "</td>" +
                                               "<td bgcolor='" + strBottomDefectiveBc + "' style = 'color:" + strBottomDefectiveFc + "' align='right' >" + strBottomDefective + "</td>" +
-                                              
+
                                               "<td bgcolor='" + strTmsBc + "' style = 'color:" + strTmsFc + "' align='right' >" + strTms + "</td>" +
                                               "<td bgcolor='" + strPodBc + "' style = 'color:" + strPodFc + "' align='right' >" + strPod + "</td>" +
                                               "<td bgcolor='" + strTopoBc + "' style = 'color:" + strTopoFc + "' align='right' >" + strTopo + "</td>" +
@@ -6278,9 +6335,9 @@ namespace Send_Email
                               "             font-size: 20px; " +
                               "         } " +
                               ".title {" +
-                              "         font-family: 'Times New Roman';"+
-                              "         font-style: italic;"+
-                              "         font-size: 30px;"+
+                              "         font-family: 'Times New Roman';" +
+                              "         font-style: italic;" +
+                              "         font-size: 30px;" +
                               "        }" +
                               "   .tblBoder thead { " +
                               "         background: #26A1B2; " +
@@ -6317,7 +6374,7 @@ namespace Send_Email
                               "</style> ";
                 string text = "<img src='cid:" + imgInfo + "'><br>" +
                               "<img src='cid:" + imgInfo2 + "'>";
-                              
+
 
                 string html = "<head>" + style + "</head>" +
                                "<body>" + text + "<br>" +
@@ -6365,17 +6422,17 @@ namespace Send_Email
                                    "<tr bgcolor='#ffe5cc'>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Factory</th>" +
                                       " <th rowspan= '2'  bgcolor = '#18213C' style = 'color:#ffffff' align='center' width='100'>Plant</th>" +
-                                     
+
                                       " <th colspan = '3' bgcolor = '#18213C' style = 'color:#ffffff' align='center' ' >Quality</th>" +
                                       " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>Production/Inventory/Logistics</th>" +
                                       " <th colspan = '2' bgcolor = '#18213C' style = 'color:#ffffff' align='center' '>HR</th>" +
                                    "</tr>" +
                                    "<tr bgcolor='#ffe5cc'>" +
-                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint By<br>Bottom</th>" +        
+                                      " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Time<br>Contraint By<br>Bottom</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Mold Repair</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >Bottom<br>Defective</th>" +
 
-                                      
+
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >TMS</th>" +
                                       " <th bgcolor = '#CCCCCE' style = 'color:#000' align='center' width='100' >POD</th>" +
 
@@ -6388,7 +6445,7 @@ namespace Send_Email
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
 
-                                      
+
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
                                       " <th bgcolor = '#ffe49c' style = 'color:#000' align='center' width='100' >%</th>" +
 
@@ -6398,7 +6455,7 @@ namespace Send_Email
                                    rowValueBot +
                                "</table>" +
                            "</body>";
-                
+
                 //string text = "<p style='font-family:Times New Roman; font-size:18px; font-style:Italic; color:#0000ff' >" +
                 //                    "SPR(Sequence Production Ratio) = How many follow passcard scan sequence of ratio" +
                 //               "</p>";
@@ -6557,7 +6614,7 @@ namespace Send_Email
         {
             return argColor == "" ? "WHITE" : argColor;
         }
-        
+
 
         public void WriteLog(string argText)
         {
@@ -7714,10 +7771,26 @@ namespace Send_Email
                 _isRun2 = false;
             }
         }
-
-        private void RunOSMonthly(string argType,string argDateF,string argDateT)
+        private void RunPORegReport(string argType)
         {
-          //  DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//get data
+            DataSet ds = SEL_DATA_PO_REG_REPORT(argType);//MACHINE TIMES
+            if (ds == null) return;
+            using (Releif_AVSM_Report_Daily f = new Releif_AVSM_Report_Daily())
+            {
+                f._chkTest = chkTest.Checked;
+                f._subject = "Daily Relief Manual Register Report On Today (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
+                f._dtData = ds.Tables[0];
+                f._dtEmail = ds.Tables[1];
+                f.Show();
+                f.SendToBack();
+            }
+
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
+        }
+
+        private void RunOSMonthly(string argType, string argDateF, string argDateT)
+        {
+            //  DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//get data
             DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDateF, argDateT);//MACHINE TIMES
             DataTable dtChart2 = SEL_DATA_OS_MACHINE_MONTHLY("CHART2", argDateF, argDateT);//LINE
             DataTable dtChart3 = SEL_DATA_OS_MACHINE_MONTHLY("CHART3", argDateF, argDateT);//REASON
@@ -7729,17 +7802,17 @@ namespace Send_Email
             if (dtChart1 == null || dtChart2 == null || dtChart3 == null || dtChart4 == null || dtChart5 == null || dtChart6 == null || dtEmail == null)
                 return;
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunOSMonthly({argType}): BEGIN");
-          
+
             using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
             {
                 frmOsMonthly._chkTest = chkTest.Checked;
-                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.ToString("yyyy") +"/"+DateTime.Now.ToString("MMM") + ")";
-                frmOsMonthly._dtChart1 =dtChart1;
-                frmOsMonthly._dtChart2 =dtChart2;
-                frmOsMonthly._dtChart3 =dtChart3;
-                frmOsMonthly._dtChart4 =dtChart4;
-                frmOsMonthly._dtChart5 =dtChart5;
-                frmOsMonthly._dtChart6 =dtChart6;
+                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + ")";
+                frmOsMonthly._dtChart1 = dtChart1;
+                frmOsMonthly._dtChart2 = dtChart2;
+                frmOsMonthly._dtChart3 = dtChart3;
+                frmOsMonthly._dtChart4 = dtChart4;
+                frmOsMonthly._dtChart5 = dtChart5;
+                frmOsMonthly._dtChart6 = dtChart6;
                 frmOsMonthly._dtEmail = dtEmail;
                 frmOsMonthly.Show();
                 frmOsMonthly.SendToBack();
@@ -7747,6 +7820,8 @@ namespace Send_Email
 
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
+
+
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

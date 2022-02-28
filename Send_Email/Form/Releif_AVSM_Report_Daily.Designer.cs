@@ -40,10 +40,12 @@ namespace Send_Email
             this.TO_QTY = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.PO_WS = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.PO_RELIEF = new JPlatform.Client.Controls6.BandedGridColumnEx();
-            this.PO_MAT_HANDLER = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.PO_OTHER_LINE = new JPlatform.Client.Controls6.BandedGridColumnEx();
+            this.PO_MAT_HANDLER = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.PO_TOTAL = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.BALANCE = new JPlatform.Client.Controls6.BandedGridColumnEx();
+            this.AREA_NAME = new JPlatform.Client.Controls6.BandedGridColumnEx();
+            this.PROCESS_NAME = new JPlatform.Client.Controls6.BandedGridColumnEx();
             this.gridBand1 = new JPlatform.Client.Controls6.GridBandEx();
             this.gridBand2 = new JPlatform.Client.Controls6.GridBandEx();
             this.gridBand3 = new JPlatform.Client.Controls6.GridBandEx();
@@ -66,7 +68,7 @@ namespace Send_Email
             this.panel1.Controls.Add(this.grdMain2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1031, 212);
+            this.panel1.Size = new System.Drawing.Size(1131, 212);
             this.panel1.TabIndex = 0;
             // 
             // grdMain2
@@ -75,7 +77,7 @@ namespace Send_Email
             this.grdMain2.Location = new System.Drawing.Point(0, 0);
             this.grdMain2.MainView = this.grdView2;
             this.grdMain2.Name = "grdMain2";
-            this.grdMain2.Size = new System.Drawing.Size(1031, 212);
+            this.grdMain2.Size = new System.Drawing.Size(1131, 212);
             this.grdMain2.TabIndex = 240;
             this.grdMain2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grdView2});
@@ -105,7 +107,9 @@ namespace Send_Email
             this.PLANT_NM,
             this.LINE_CD,
             this.AREA_NM,
+            this.AREA_NAME,
             this.PROCESS_CD,
+            this.PROCESS_NAME,
             this.TO_QTY,
             this.PO_WS,
             this.PO_RELIEF,
@@ -132,6 +136,7 @@ namespace Send_Email
             this.grdView2.SaveSPName = null;
             this.grdView2.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Never;
             this.grdView2.ViewSPName = null;
+            this.grdView2.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.grdView2_RowCellStyle);
             // 
             // PLANT_CD
             // 
@@ -141,35 +146,35 @@ namespace Send_Email
             this.PLANT_CD.FieldName = "PLANT_CD";
             this.PLANT_CD.Name = "PLANT_CD";
             this.PLANT_CD.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
-            this.PLANT_CD.Visible = true;
             // 
             // PLANT_NM
             // 
-            this.PLANT_NM.BindingField = "PLANT_NM";
-            this.PLANT_NM.Caption = "PLANT_NM";
+            this.PLANT_NM.BindingField = "PLANT_NAME";
+            this.PLANT_NM.Caption = "PLANT_NAME";
             this.PLANT_NM.ColumnEdit = null;
-            this.PLANT_NM.FieldName = "PLANT_NM";
+            this.PLANT_NM.FieldName = "PLANT_NAME";
             this.PLANT_NM.Name = "PLANT_NM";
             this.PLANT_NM.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
             this.PLANT_NM.Visible = true;
             // 
             // LINE_CD
             // 
+            this.LINE_CD.BindingField = "LINE_CD";
             this.LINE_CD.Caption = "LINE_CD";
             this.LINE_CD.ColumnEdit = null;
+            this.LINE_CD.FieldName = "LINE_CD";
             this.LINE_CD.Name = "LINE_CD";
             this.LINE_CD.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
             this.LINE_CD.Visible = true;
             // 
             // AREA_NM
             // 
-            this.AREA_NM.BindingField = "AREA_NM";
-            this.AREA_NM.Caption = "AREA_NM";
+            this.AREA_NM.BindingField = "AREA_CD";
+            this.AREA_NM.Caption = "AREA_CD";
             this.AREA_NM.ColumnEdit = null;
-            this.AREA_NM.FieldName = "AREA_NM";
+            this.AREA_NM.FieldName = "AREA_CD";
             this.AREA_NM.Name = "AREA_NM";
             this.AREA_NM.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
-            this.AREA_NM.Visible = true;
             // 
             // PROCESS_CD
             // 
@@ -179,7 +184,6 @@ namespace Send_Email
             this.PROCESS_CD.FieldName = "PROCESS_CD";
             this.PROCESS_CD.Name = "PROCESS_CD";
             this.PROCESS_CD.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
-            this.PROCESS_CD.Visible = true;
             // 
             // TO_QTY
             // 
@@ -213,6 +217,17 @@ namespace Send_Email
             this.PO_RELIEF.Visible = true;
             this.PO_RELIEF.Width = 100;
             // 
+            // PO_OTHER_LINE
+            // 
+            this.PO_OTHER_LINE.BindingField = "PO_OTHER_LINE";
+            this.PO_OTHER_LINE.Caption = "PO_OTHER_LINE";
+            this.PO_OTHER_LINE.ColumnEdit = null;
+            this.PO_OTHER_LINE.FieldName = "PO_OTHER_LINE";
+            this.PO_OTHER_LINE.Name = "PO_OTHER_LINE";
+            this.PO_OTHER_LINE.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
+            this.PO_OTHER_LINE.Visible = true;
+            this.PO_OTHER_LINE.Width = 87;
+            // 
             // PO_MAT_HANDLER
             // 
             this.PO_MAT_HANDLER.BindingField = "PO_MAT_HANDLER";
@@ -223,17 +238,6 @@ namespace Send_Email
             this.PO_MAT_HANDLER.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
             this.PO_MAT_HANDLER.Visible = true;
             this.PO_MAT_HANDLER.Width = 100;
-            // 
-            // PO_OTHER_LINE
-            // 
-            this.PO_OTHER_LINE.BindingField = "PO_OTHER_LINE";
-            this.PO_OTHER_LINE.Caption = "PO_OTHER_LINE";
-            this.PO_OTHER_LINE.ColumnEdit = null;
-            this.PO_OTHER_LINE.FieldName = "PO_OTHER_LINE";
-            this.PO_OTHER_LINE.Name = "PO_OTHER_LINE";
-            this.PO_OTHER_LINE.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
-            this.PO_OTHER_LINE.Visible = true;
-            this.PO_OTHER_LINE.Width = 100;
             // 
             // PO_TOTAL
             // 
@@ -256,6 +260,28 @@ namespace Send_Email
             this.BALANCE.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
             this.BALANCE.Visible = true;
             // 
+            // AREA_NAME
+            // 
+            this.AREA_NAME.BindingField = "AREA_NAME";
+            this.AREA_NAME.Caption = "AREA_NAME";
+            this.AREA_NAME.ColumnEdit = null;
+            this.AREA_NAME.FieldName = "AREA_NAME";
+            this.AREA_NAME.Name = "AREA_NAME";
+            this.AREA_NAME.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
+            this.AREA_NAME.Visible = true;
+            this.AREA_NAME.Width = 145;
+            // 
+            // PROCESS_NAME
+            // 
+            this.PROCESS_NAME.BindingField = "PROCESS_NAME";
+            this.PROCESS_NAME.Caption = "PROCESS_NAME";
+            this.PROCESS_NAME.ColumnEdit = null;
+            this.PROCESS_NAME.FieldName = "PROCESS_NAME";
+            this.PROCESS_NAME.Name = "PROCESS_NAME";
+            this.PROCESS_NAME.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
+            this.PROCESS_NAME.Visible = true;
+            this.PROCESS_NAME.Width = 165;
+            // 
             // gridBand1
             // 
             this.gridBand1.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -268,7 +294,7 @@ namespace Send_Email
             this.gridBand1.Columns.Add(this.PLANT_NM);
             this.gridBand1.Name = "gridBand1";
             this.gridBand1.VisibleIndex = 0;
-            this.gridBand1.Width = 150;
+            this.gridBand1.Width = 75;
             // 
             // gridBand2
             // 
@@ -292,9 +318,10 @@ namespace Send_Email
             this.gridBand3.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gridBand3.Caption = "Area";
             this.gridBand3.Columns.Add(this.AREA_NM);
+            this.gridBand3.Columns.Add(this.AREA_NAME);
             this.gridBand3.Name = "gridBand3";
             this.gridBand3.VisibleIndex = 2;
-            this.gridBand3.Width = 75;
+            this.gridBand3.Width = 145;
             // 
             // gridBand4
             // 
@@ -305,9 +332,10 @@ namespace Send_Email
             this.gridBand4.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.gridBand4.Caption = "Process";
             this.gridBand4.Columns.Add(this.PROCESS_CD);
+            this.gridBand4.Columns.Add(this.PROCESS_NAME);
             this.gridBand4.Name = "gridBand4";
             this.gridBand4.VisibleIndex = 3;
-            this.gridBand4.Width = 75;
+            this.gridBand4.Width = 165;
             // 
             // gridBand5
             // 
@@ -338,7 +366,7 @@ namespace Send_Email
             this.gridBand10});
             this.gridBand6.Name = "gridBand6";
             this.gridBand6.VisibleIndex = 5;
-            this.gridBand6.Width = 500;
+            this.gridBand6.Width = 487;
             // 
             // gridBand7
             // 
@@ -350,6 +378,7 @@ namespace Send_Email
             this.gridBand7.Caption = "Workshop";
             this.gridBand7.Columns.Add(this.PO_WS);
             this.gridBand7.Name = "gridBand7";
+            this.gridBand7.RowCount = 2;
             this.gridBand7.VisibleIndex = 0;
             this.gridBand7.Width = 100;
             // 
@@ -373,11 +402,12 @@ namespace Send_Email
             this.gridBand8.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand8.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridBand8.Caption = "Other line";
+            this.gridBand8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridBand8.Caption = "Other      Line";
             this.gridBand8.Columns.Add(this.PO_OTHER_LINE);
             this.gridBand8.Name = "gridBand8";
             this.gridBand8.VisibleIndex = 2;
-            this.gridBand8.Width = 100;
+            this.gridBand8.Width = 87;
             // 
             // gridBand11
             // 
@@ -386,7 +416,8 @@ namespace Send_Email
             this.gridBand11.AppearanceHeader.Options.UseTextOptions = true;
             this.gridBand11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridBand11.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.gridBand11.Caption = "Material handler";
+            this.gridBand11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridBand11.Caption = "Material Handler";
             this.gridBand11.Columns.Add(this.PO_MAT_HANDLER);
             this.gridBand11.Name = "gridBand11";
             this.gridBand11.VisibleIndex = 3;
@@ -422,10 +453,11 @@ namespace Send_Email
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 408);
+            this.ClientSize = new System.Drawing.Size(1269, 408);
             this.Controls.Add(this.panel1);
             this.Name = "Releif_AVSM_Report_Daily";
             this.Text = "Releif_AVSM_Report_Daily";
+            this.Load += new System.EventHandler(this.Releif_AVSM_Report_Daily_Load);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdMain2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdView2)).EndInit();
@@ -438,29 +470,31 @@ namespace Send_Email
         private System.Windows.Forms.Panel panel1;
         private JPlatform.Client.Controls6.GridControlEx grdMain2;
         private JPlatform.Client.Controls6.BandedGridViewEx grdView2;
-        private JPlatform.Client.Controls6.GridBandEx gridBand1;
         private JPlatform.Client.Controls6.BandedGridColumnEx PLANT_CD;
         private JPlatform.Client.Controls6.BandedGridColumnEx PLANT_NM;
-        private JPlatform.Client.Controls6.GridBandEx gridBand2;
         private JPlatform.Client.Controls6.BandedGridColumnEx LINE_CD;
-        private JPlatform.Client.Controls6.GridBandEx gridBand3;
         private JPlatform.Client.Controls6.BandedGridColumnEx AREA_NM;
-        private JPlatform.Client.Controls6.GridBandEx gridBand4;
         private JPlatform.Client.Controls6.BandedGridColumnEx PROCESS_CD;
-        private JPlatform.Client.Controls6.GridBandEx gridBand5;
         private JPlatform.Client.Controls6.BandedGridColumnEx TO_QTY;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PO_WS;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PO_RELIEF;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PO_OTHER_LINE;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PO_MAT_HANDLER;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PO_TOTAL;
+        private JPlatform.Client.Controls6.BandedGridColumnEx BALANCE;
+        private JPlatform.Client.Controls6.BandedGridColumnEx AREA_NAME;
+        private JPlatform.Client.Controls6.BandedGridColumnEx PROCESS_NAME;
+        private JPlatform.Client.Controls6.GridBandEx gridBand1;
+        private JPlatform.Client.Controls6.GridBandEx gridBand2;
+        private JPlatform.Client.Controls6.GridBandEx gridBand3;
+        private JPlatform.Client.Controls6.GridBandEx gridBand4;
+        private JPlatform.Client.Controls6.GridBandEx gridBand5;
         private JPlatform.Client.Controls6.GridBandEx gridBand6;
         private JPlatform.Client.Controls6.GridBandEx gridBand7;
-        private JPlatform.Client.Controls6.BandedGridColumnEx PO_WS;
         private JPlatform.Client.Controls6.GridBandEx gridBand9;
-        private JPlatform.Client.Controls6.BandedGridColumnEx PO_RELIEF;
         private JPlatform.Client.Controls6.GridBandEx gridBand8;
-        private JPlatform.Client.Controls6.BandedGridColumnEx PO_OTHER_LINE;
         private JPlatform.Client.Controls6.GridBandEx gridBand11;
-        private JPlatform.Client.Controls6.BandedGridColumnEx PO_MAT_HANDLER;
         private JPlatform.Client.Controls6.GridBandEx gridBand10;
-        private JPlatform.Client.Controls6.BandedGridColumnEx PO_TOTAL;
         private JPlatform.Client.Controls6.GridBandEx gridBand12;
-        private JPlatform.Client.Controls6.BandedGridColumnEx BALANCE;
     }
 }
