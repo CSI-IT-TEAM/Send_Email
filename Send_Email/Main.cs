@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "dien.it@changshininc.com", "man.spt@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -7809,7 +7809,7 @@ namespace Send_Email
             using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
             {
                 frmOsMonthly._chkTest = chkTest.Checked;
-                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + ")";
+                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.AddMonths(-1).ToString("MMM") + ")";
                 frmOsMonthly._dtChart1 = dtChart1;
                 frmOsMonthly._dtChart2 = dtChart2;
                 frmOsMonthly._dtChart3 = dtChart3;

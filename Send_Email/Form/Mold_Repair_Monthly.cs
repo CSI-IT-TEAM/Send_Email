@@ -22,7 +22,7 @@ namespace Send_Email
         {
             InitializeComponent();
 
-            pnMold.Size = new Size(3000, 1300);
+            pnMold.Size = new Size(3000, 800);
             chartMold.Size = new Size(1000, 1000);
             tblGrid.Size = new Size(2200, 260);
             // pnMold2.Size = new Size(500, 300);

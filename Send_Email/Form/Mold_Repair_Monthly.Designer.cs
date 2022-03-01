@@ -837,7 +837,7 @@ namespace Send_Email
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(283, 35);
             this.label3.TabIndex = 231;
-            this.label3.Text = "MONTHLY MOLD REPAIR QUATITY";
+            this.label3.Text = "MONTHLY MOLD REPAIR QUANTITY";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // chartMold
