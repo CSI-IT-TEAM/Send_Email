@@ -235,7 +235,7 @@ namespace Send_Email
             pieSeriesLabel1.Position = DevExpress.XtraCharts.PieSeriesLabelPosition.TwoColumns;
             pieSeriesLabel1.ResolveOverlappingMode = DevExpress.XtraCharts.ResolveOverlappingMode.Default;
             pieSeriesLabel1.TextColor = System.Drawing.Color.White;
-            pieSeriesLabel1.TextPattern = "{A} ({V:#,#})";
+            pieSeriesLabel1.TextPattern = "{A} ({V:#,#}) {VP:0%}";
             series2.Label = pieSeriesLabel1;
             series2.Name = "Drawback Reason";
             pieSeriesView1.Border.Color = System.Drawing.Color.White;
@@ -307,7 +307,7 @@ namespace Send_Email
             this.chartControl4.TabIndex = 1;
             chartTitle3.EnableAntialiasing = DevExpress.Utils.DefaultBoolean.True;
             chartTitle3.Font = new System.Drawing.Font("Times New Roman", 30F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
-            chartTitle3.Text = "TOP 10 SHORTAGE CYCLE MACHINE DRAWBACK";
+            chartTitle3.Text = "TOP 10 SHORTEST CYCLE MACHINE DRAWBACK";
             chartTitle3.TextColor = System.Drawing.Color.White;
             chartTitle3.WordWrap = true;
             chartTitle4.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Bold);
