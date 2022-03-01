@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "do.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -99,6 +99,9 @@ namespace Send_Email
             //8h
             if (btnRunTMSChk.Checked)
                 RunTMSDash("Q1");
+
+            if(cmdRunSumDaaSChk.Checked)
+                RunSumDaaS("Q1");
 
             if (cmdNpiChk.Checked)
                 RunNPI("Q1");
@@ -6416,7 +6419,7 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             DataSet ds_ret;
-            MyOraDB.ShowErr = true;
+          //  MyOraDB.ShowErr = true;
             try
             {
                 string process_name = "P_SEND_EMAIL_OPEN_DAAS";
@@ -7691,7 +7694,7 @@ namespace Send_Email
 
                 _isRun2 = true;
 
-                DataSet dsData = SEL_SUM_OPEN_DAAS("Q1", DateTime.Now.ToString("yyyyMMdd")); //Get Data for HTML Table
+                DataSet dsData = SEL_SUM_OPEN_DAAS(argType, DateTime.Now.ToString("yyyyMMdd")); //Get Data for HTML Table
 
                 if (dsData == null) return;
                 WriteLog($"RunSumDaaS({argType}): BEGIN ");

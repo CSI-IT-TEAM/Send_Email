@@ -419,13 +419,13 @@ namespace Send_Email
                     if (grid.Columns[i].OwnerBand.ParentBand != null)
                     {
                         grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.Font = new Font("Calibri", 15, FontStyle.Bold);
-                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
+                        grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.BackColor = Color.FromArgb(34, 106, 142);
                         grid.Columns[i].OwnerBand.ParentBand.AppearanceHeader.ForeColor = Color.White;
 
                     }
                     grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 15, FontStyle.Bold);
                     grid.Columns[i].AppearanceCell.Font = new Font("Calibri", 16, FontStyle.Regular);
-                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(34, 106, 142);
                     grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
 
                     switch (grid.Columns[i].Name)
@@ -480,7 +480,7 @@ namespace Send_Email
                 for (int i = 0; i < grid.Columns.Count; i++)
                 {
                     grid.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 14, FontStyle.Bold);
-                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(30, 84, 111);
+                    grid.Columns[i].OwnerBand.AppearanceHeader.BackColor = Color.FromArgb(34, 106, 142);
                     grid.Columns[i].OwnerBand.AppearanceHeader.ForeColor = Color.White;
 
                     if (i==1) 
