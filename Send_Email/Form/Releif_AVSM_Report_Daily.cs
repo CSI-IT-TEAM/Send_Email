@@ -21,7 +21,7 @@ namespace Send_Email
         public bool _chkTest = false;
         public string _subject = "";
         private string _subjectSend = "";
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "jungbo.shim@dskorea.com" };
         Main frmMain = new Main();
         public DataTable _dtData, _dtEmail;
 

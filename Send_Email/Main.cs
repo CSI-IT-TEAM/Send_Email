@@ -256,8 +256,8 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM01"), DateTime.Now.ToString("yyyyMMdd"));
-            //  RunOSMonthly("Q", "20220101", "20220131");
+               // RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM01"), DateTime.Now.ToString("yyyyMMdd"));
+             RunOSMonthly("Q", "20220201", "20220228");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
@@ -7790,7 +7790,7 @@ namespace Send_Email
 
         private void RunOSMonthly(string argType, string argDateF, string argDateT)
         {
-            //  DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//get data
+            DataTable dtS = SEL_DATA_OS_MACHINE_MONTHLY("S", argDateF, argDateT);//get data
             DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDateF, argDateT);//MACHINE TIMES
             DataTable dtChart2 = SEL_DATA_OS_MACHINE_MONTHLY("CHART2", argDateF, argDateT);//LINE
             DataTable dtChart3 = SEL_DATA_OS_MACHINE_MONTHLY("CHART3", argDateF, argDateT);//REASON
