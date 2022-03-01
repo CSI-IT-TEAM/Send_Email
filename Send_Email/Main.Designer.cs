@@ -4123,6 +4123,8 @@
             // cmdRunSumDaaSChk
             // 
             this.cmdRunSumDaaSChk.AutoSize = true;
+            this.cmdRunSumDaaSChk.Checked = true;
+            this.cmdRunSumDaaSChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdRunSumDaaSChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdRunSumDaaSChk.Location = new System.Drawing.Point(888, 348);
             this.cmdRunSumDaaSChk.Name = "cmdRunSumDaaSChk";
