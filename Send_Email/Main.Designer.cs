@@ -417,6 +417,8 @@
             this.cmdMoldRepairMonthWh = new System.Windows.Forms.Button();
             this.btnRunOS_Monthly = new System.Windows.Forms.Button();
             this.btnRunOS_MonthlyChk = new System.Windows.Forms.CheckBox();
+            this.cmdPORegister = new System.Windows.Forms.Button();
+            this.cmdPORegisterChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -4214,6 +4216,28 @@
             this.btnRunOS_MonthlyChk.Text = "Auto";
             this.btnRunOS_MonthlyChk.UseVisualStyleBackColor = true;
             // 
+            // cmdPORegister
+            // 
+            this.cmdPORegister.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmdPORegister.Location = new System.Drawing.Point(6, 415);
+            this.cmdPORegister.Name = "cmdPORegister";
+            this.cmdPORegister.Size = new System.Drawing.Size(397, 23);
+            this.cmdPORegister.TabIndex = 211;
+            this.cmdPORegister.Text = "PO Manual Register Report";
+            this.cmdPORegister.UseVisualStyleBackColor = true;
+            this.cmdPORegister.Click += new System.EventHandler(this.cmdPORegister_Click);
+            // 
+            // cmdPORegisterChk
+            // 
+            this.cmdPORegisterChk.AutoSize = true;
+            this.cmdPORegisterChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.cmdPORegisterChk.Location = new System.Drawing.Point(409, 418);
+            this.cmdPORegisterChk.Name = "cmdPORegisterChk";
+            this.cmdPORegisterChk.Size = new System.Drawing.Size(52, 19);
+            this.cmdPORegisterChk.TabIndex = 223;
+            this.cmdPORegisterChk.Text = "Auto";
+            this.cmdPORegisterChk.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4241,6 +4265,7 @@
             this.Controls.Add(this.cmd_Quality2Chk);
             this.Controls.Add(this.cmdPoToIeChk);
             this.Controls.Add(this.btnTimeContraintChk);
+            this.Controls.Add(this.cmdPORegisterChk);
             this.Controls.Add(this.btnRunOS_MonthlyChk);
             this.Controls.Add(this.btnRunOS_RedChk);
             this.Controls.Add(this.btnRunTMSChk);
@@ -4273,6 +4298,7 @@
             this.Controls.Add(this.cmd_Quality);
             this.Controls.Add(this.cmd_Budget);
             this.Controls.Add(this.btnFeedback);
+            this.Controls.Add(this.cmdPORegister);
             this.Controls.Add(this.btnRunOS_Monthly);
             this.Controls.Add(this.btnRunOS_Red);
             this.Controls.Add(this.cmdMoldRepair);
@@ -4892,6 +4918,8 @@
         private System.Windows.Forms.Button cmdMoldRepairMonthWh;
         private System.Windows.Forms.Button btnRunOS_Monthly;
         private System.Windows.Forms.CheckBox btnRunOS_MonthlyChk;
+        private System.Windows.Forms.Button cmdPORegister;
+        private System.Windows.Forms.CheckBox cmdPORegisterChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
