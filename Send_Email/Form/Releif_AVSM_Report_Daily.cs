@@ -208,9 +208,26 @@ namespace Send_Email
                 }
 
                 return @"<html>" + style + "" +
-                                  $"<table class= 'tblBoder'>" +
-                                  $"<thead>" + header + "</thead>" +
-                                  $"<tbody>" + body + "</tbody>" +
+                                $"<table class='tblBoder'> " +
+                                 $"<tr>" +
+                                 $" <td colspan = '2' class = 'rework'>Relief Register Target</td>" +
+                                 $"</tr>" +
+                                 $"<tr>" +
+                                 $" <td>97 ~ 100%</td>" +
+                                 $" <td bgcolor = 'Green' style='color: white;'>Green</td>" +
+                                 $"</tr>" +
+                                 $"<tr>" +
+                                 $"  <td>95 ~ 97%</td>" +
+                                 $"  <td bgcolor = 'Yellow' > Yellow </ td >" +
+                                 $"</tr>" +
+                                 $" <tr>" +
+                                 $" <td>Less than 95% and over 100%</ td >" +
+                                 $" <td bgcolor='Red' style='color: white;'>Red</td>" +
+                                 $"</tr>" +
+                                 $"</table><br />"+
+                                 $"<table class= 'tblBoder'>" +
+                                 $"<thead>" + header + "</thead>" +
+                                 $"<tbody>" + body + "</tbody>" +
                                 $"</table>" +
                                 $"</html>";
             }

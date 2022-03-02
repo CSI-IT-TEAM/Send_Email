@@ -4206,8 +4206,6 @@
             // btnRunOS_MonthlyChk
             // 
             this.btnRunOS_MonthlyChk.AutoSize = true;
-            this.btnRunOS_MonthlyChk.Checked = true;
-            this.btnRunOS_MonthlyChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunOS_MonthlyChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRunOS_MonthlyChk.Location = new System.Drawing.Point(409, 395);
             this.btnRunOS_MonthlyChk.Name = "btnRunOS_MonthlyChk";
@@ -4230,6 +4228,8 @@
             // cmdPORegisterChk
             // 
             this.cmdPORegisterChk.AutoSize = true;
+            this.cmdPORegisterChk.Checked = true;
+            this.cmdPORegisterChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdPORegisterChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdPORegisterChk.Location = new System.Drawing.Point(409, 418);
             this.cmdPORegisterChk.Name = "cmdPORegisterChk";
