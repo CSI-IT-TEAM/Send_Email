@@ -7781,7 +7781,7 @@ namespace Send_Email
             using (Releif_AVSM_Report_Daily f = new Releif_AVSM_Report_Daily())
             {
                 f._chkTest = chkTest.Checked;
-                f._subject = "Daily Relief Manual Register Report On Today (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
+                f._subject = "Relief Management System Report Daily (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
                 f._dtData = ds.Tables[0];
                 f._dtEmail = ds.Tables[1];
                 f.Show();
