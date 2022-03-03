@@ -3441,8 +3441,7 @@
             // cmdMoldRepairMonthChk
             // 
             this.cmdMoldRepairMonthChk.AutoSize = true;
-            this.cmdMoldRepairMonthChk.Checked = true;
-            this.cmdMoldRepairMonthChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cmdMoldRepairMonthChk.CheckAlign = System.Drawing.ContentAlignment.TopLeft;
             this.cmdMoldRepairMonthChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdMoldRepairMonthChk.Location = new System.Drawing.Point(889, 247);
             this.cmdMoldRepairMonthChk.Name = "cmdMoldRepairMonthChk";
@@ -4116,7 +4115,7 @@
             this.cmdSumDaaS.Name = "cmdSumDaaS";
             this.cmdSumDaaS.Size = new System.Drawing.Size(397, 23);
             this.cmdSumDaaS.TabIndex = 20;
-            this.cmdSumDaaS.Text = "Open Page Of DaaS";
+            this.cmdSumDaaS.Text = "One Page Of DaaS";
             this.cmdSumDaaS.UseVisualStyleBackColor = true;
             this.cmdSumDaaS.Click += new System.EventHandler(this.cmdSumDaaS_Click);
             // 

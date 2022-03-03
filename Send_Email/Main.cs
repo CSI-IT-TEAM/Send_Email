@@ -6092,7 +6092,7 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\OPEN_DAAS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Open_Daas_Explain.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "Open Page of DaaS";
+                mailItem.Subject = "One Page of DaaS";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
