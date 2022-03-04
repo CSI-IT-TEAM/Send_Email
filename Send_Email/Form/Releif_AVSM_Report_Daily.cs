@@ -115,6 +115,7 @@ namespace Send_Email
                                   $"<th align='center' rowspan = '2'> TO </th> " +
                                   $"<th align='center' colspan = '5' >PO</th> " +
                                   $"<th align='center' rowspan = '2'> Balance</th>" +
+                                   $"<th align='center' rowspan = '2'> Rate</th>" +
                                   $"</tr>" +
                                   $"<tr>" +
                                   $"<th align='center'> Workshop </th>" +
@@ -142,7 +143,8 @@ namespace Send_Email
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_OTHER_LINE"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_MAT_HANDLER"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_TOTAL"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                             $"</tr>";
                         _PLANT_NAME_TEMP = dr["PLANT_NAME"].ToString();
                         _LINE_CD_TEMP = dr["LINE_CD"].ToString();
@@ -163,7 +165,8 @@ namespace Send_Email
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                           $"</tr>";
                             _LINE_CD_TEMP = dr["LINE_CD"].ToString();
                             _AREA_NAME_TEMP = dr["AREA_NAME"].ToString();
@@ -182,7 +185,8 @@ namespace Send_Email
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                              $"</tr>";
                                 _AREA_NAME_TEMP = dr["AREA_NAME"].ToString();
 
@@ -198,7 +202,8 @@ namespace Send_Email
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                             $"</tr>";
                             }
                         }
