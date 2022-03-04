@@ -24,7 +24,7 @@ namespace Send_Email
 
             pnMold.Size = new Size(3000, 800);
             chartMold.Size = new Size(1000, 1000);
-            tblGrid.Size = new Size(2200, 260);
+            tblGrid.Size = new Size(2200, 500);
             // pnMold2.Size = new Size(500, 300);
             grdMain.Size = new Size(pnGrid1.Size.Width + 2, pnGrid1.Size.Height);
             grdMain.Location = new Point(-2, 0);
@@ -407,8 +407,9 @@ namespace Send_Email
             try
             {
                 // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
-                grdView.OptionsView.AllowCellMerge = true;
-                // grdView.BandPanelRowHeight = 30;
+                grid.OptionsView.AllowCellMerge = true;
+                grid.BandPanelRowHeight = 50;
+                grid.RowHeight = 50;
                 int gridWidth = 0;
                 int gridColCount = grid.Columns.Count;
                 int width = (grdMain.Width - (52 + (82 * 3) + 112)) / _numDays;
@@ -474,8 +475,9 @@ namespace Send_Email
             try
             {
                 // grdMain.Font = new Font("Calibri", 15, FontStyle.Bold);
-                grdView.OptionsView.AllowCellMerge = true;
-                grdView.BandPanelRowHeight = 30;
+                grid.OptionsView.AllowCellMerge = true;
+                grid.BandPanelRowHeight = 50;
+                grid.RowHeight = 50;
 
                 for (int i = 0; i < grid.Columns.Count; i++)
                 {
