@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "dien.it@changshininc.com", "man.spt@changshininc.com" }; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com"}; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -6092,7 +6092,7 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\OPEN_DAAS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Open_Daas_Explain.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "One Page of DaaS";
+                mailItem.Subject = "One Page DaaS";
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
