@@ -24,7 +24,7 @@ namespace Send_Email
         public bool _chkTest = false;
         public string _subject = "";
         private string _subjectSend = "";
-        private readonly string[] _emailTest = { "dien.it@changshininc.com","ngoc.it@changshininc.com","MAN.SPT@changshininc.com" };
+        private readonly string[] _emailTest = { "dien.it@changshininc.com", "ngoc.it@changshininc.com", "MAN.SPT@changshininc.com" };
         Main frmMain = new Main();
         public DataTable _dtChart1, _dtChart2, _dtChart3, _dtChart4, _dtChart5, _dtChart6, _dtEmail;
 
@@ -44,7 +44,7 @@ namespace Send_Email
         }
 
         private bool LoadDataOusoleMonthly(DataTable argChart1Dt,
-                                           DataTable argChart2Dt, 
+                                           DataTable argChart2Dt,
                                            DataTable argChart3Dt,
                                            DataTable argChart4Dt,
                                            DataTable argChart5Dt,
@@ -160,13 +160,13 @@ namespace Send_Email
                         chartControl2.DataSource = argDt;
                         chartControl2.Series[0].ArgumentDataMember = "LINE";
                         chartControl2.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
-                    
+
                         break;
                     case "CHART3":
                         chartControl3.DataSource = argDt;
                         chartControl3.Series[0].ArgumentDataMember = "REASON_NAME";
                         chartControl3.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
-                    
+
                         break;
                     case "CHART4":
                         chartControl4.DataSource = argDt;
@@ -184,13 +184,14 @@ namespace Send_Email
                         chartControl6.DataSource = argDt;
                         chartControl6.Series[0].ArgumentDataMember = "YMD";
                         chartControl6.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
-                      //  createGrid(argDt);
 
+                        DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
+                        createGrid(dt);
                         break;
                     default:
                         break;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -200,64 +201,32 @@ namespace Send_Email
 
         }
 
-        //private void createGrid(DataTable argDt)
-        //{
-        //    try
-        //    {
-        //        //Khởi tạo lại lưới.
-        //        gvw6.Columns.Clear();
-        //        gvw6.Bands.Clear();
-               
-        //        GridBand BandMonth = new GridBand();
-        //        BandMonth.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
-        //        BandMonth.AppearanceHeader.Options.UseFont = true;
-        //        BandMonth.AppearanceHeader.Options.UseTextOptions = true;
-        //        BandMonth.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-        //        BandMonth.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-        //        //  BandMonth.Caption = "Month";
-        //        BandMonth.Caption = argDt.Rows[0]["CUR_MONTH"].ToString();
-        //        BandMonth.Name = "gvwBandMonth";
-        //        BandMonth.VisibleIndex = 0;
-        //        BandMonth.Width = 75;
-        //        gvw6.Bands.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandMonth});
-        //        int iDx = 0;
-        //        foreach (DataRow dr in argDt.Rows)
-        //        {
-        //            GridBand BandDays = new GridBand();
-        //            BandDays.AppearanceHeader.Font = new System.Drawing.Font("Calibri", 20F, System.Drawing.FontStyle.Bold);
-        //            BandDays.AppearanceHeader.Options.UseFont = true;
-        //            BandDays.AppearanceHeader.Options.UseTextOptions = true;
-        //            BandDays.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-        //            BandDays.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-        //            BandDays.Caption = dr["YMD"].ToString();
-        //            BandDays.Name = "gridBand"+ (iDx+1);
-        //            BandDays.VisibleIndex = iDx;
-        //            BandDays.Width = 75;
+        private void createGrid(DataTable argDt)
+        {
+            try
+            {
+                grdMain.DataSource = argDt;
+                for (int i = 0; i < grdView.Columns.Count; i++)
+                {
+                    grdView.Columns[i].OptionsColumn.AllowEdit = false;
+                    grdView.Columns[i].OptionsColumn.ReadOnly = true;
+                    grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                    grdView.Columns[i].AppearanceCell.TextOptions.VAlignment =  VertAlignment.Center;
+                    grdView.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 20, FontStyle.Bold);
+                    grdView.Columns[i].AppearanceCell.Font = new Font("Calibri", 20, FontStyle.Regular);
+                    if (i > 0)
+                    {
+                        grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
+                        grdView.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+                        grdView.Columns[i].DisplayFormat.FormatString = "{0:n0}";
+                    }
+                }
+            }
+            catch
+            {
 
-        //            BandedGridColumn ColumnDays = new BandedGridColumn();
-        //            ColumnDays.Caption = dr["YMD"].ToString();
-        //            ColumnDays.FieldName = dr["YMD"].ToString();
-        //            ColumnDays.Name = dr["YMD"].ToString();
-        //            ColumnDays.Visible = true;
-        //            BandDays.Columns.Add(ColumnDays);
-        //            BandMonth.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {BandDays});
-        //            gvw6.Columns.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn[] {ColumnDays});
-        //            iDx++;
-        //        }
-        //        DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
-        //        grd6.DataSource = dt;
-        //        for (int i = 0; i < gvw6.Columns.Count; i++)
-        //        {
-        //            gvw6.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
-        //            gvw6.Columns[i].DisplayFormat.FormatString = "{0:n0}";
-        //        }
-               
-        //    }
-        //    catch
-        //    {
-               
-        //    }
-        //}
+            }
+        }
 
         private DataTable Pivot(DataTable dt, DataColumn pivotColumn, DataColumn pivotValue)
         {
