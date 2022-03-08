@@ -4115,7 +4115,7 @@
             this.cmdSumDaaS.Name = "cmdSumDaaS";
             this.cmdSumDaaS.Size = new System.Drawing.Size(397, 23);
             this.cmdSumDaaS.TabIndex = 20;
-            this.cmdSumDaaS.Text = "One Page Of DaaS";
+            this.cmdSumDaaS.Text = "One Page";
             this.cmdSumDaaS.UseVisualStyleBackColor = true;
             this.cmdSumDaaS.Click += new System.EventHandler(this.cmdSumDaaS_Click);
             // 

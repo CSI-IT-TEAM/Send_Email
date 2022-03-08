@@ -67,7 +67,7 @@ namespace Send_Email
         //"jungbo.shim@dskorea.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "do.it@changshininc.com"
         //, "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com"
         //readonly string[] _emailTest = {   "do.it@changshininc.com", "nguyen.it@changshininc.com", "dien.it@changshininc.com", "ngoc.it@changshininc.com", "yen.it@changshininc.com" };
-        private readonly string[] _emailTest = { "jungbo.shim@dskorea.com", "nguyen.it@changshininc.com"}; //,"nguyen.it@changshininc.com",
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "dien.it@changshininc.com" }; //,"nguyen.it@changshininc.com",
 
         #region Event
 
@@ -6084,7 +6084,7 @@ namespace Send_Email
 
         #region Sum DaaS
 
-        private void CreateMailSumOpenDaaS(DataTable dtData, DataTable dtEmail)
+        private void CreateMailSumOpenDaaS(DataTable dtData, string Subject, DataTable dtEmail)
         {
             try
             {
@@ -6092,7 +6092,7 @@ namespace Send_Email
                 Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
                 Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\OPEN_DAAS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
                 Outlook.Attachment oAttachPic2 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\Open_Daas_Explain.jpg", Outlook.OlAttachmentType.olByValue, null, "tr");
-                mailItem.Subject = "One Page DaaS";
+                mailItem.Subject = Subject;
 
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
@@ -7757,12 +7757,12 @@ namespace Send_Email
                 if (dsData == null) return;
                 WriteLog($"RunSumDaaS({argType}): BEGIN ");
                 DataTable dtData = dsData.Tables[0];
-                DataTable dtChart = dsData.Tables[1];
+                DataTable dtData2 = dsData.Tables[1];
                 DataTable dtEmail = dsData.Tables[2];
-
+                string Subject = dtData2.Rows[0]["SUBJECT"].ToString();
                 WriteLog("  " + dtData.Rows.Count.ToString() + " " + dtEmail.Rows.Count.ToString());
 
-                CreateMailSumOpenDaaS(dtData, dtEmail);
+                CreateMailSumOpenDaaS(dtData, Subject, dtEmail);
                 WriteLog($"RunSumDaaS({argType}): END ");
             }
             catch (Exception ex)

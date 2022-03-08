@@ -49,14 +49,14 @@ namespace Send_Email
                 string htmlReturn = arg_DtHtml.Rows[0]["TEXT1"].ToString();
 
                 string strTBody1 = GetDataTboby(arg_DtData1, arg_DtHtml, 1);
-                string strTBody2 = GetDataTbody2(arg_DtData2, arg_DtHtml, 2);
-                string strTBody3 = GetDataTboby(arg_DtData3, arg_DtHtml, 3);
-                string strTBody4 = GetDataTboby(arg_DtData4, arg_DtHtml, 4);
+                //string strTBody2 = GetDataTbody2(arg_DtData2, arg_DtHtml, 2);
+                //string strTBody3 = GetDataTboby(arg_DtData3, arg_DtHtml, 3);
+                //string strTBody4 = GetDataTboby(arg_DtData4, arg_DtHtml, 4);
 
                 htmlReturn = htmlReturn.Replace("{tbody1}", strTBody1);
-                htmlReturn = htmlReturn.Replace("{tbody2}", strTBody2);
-                htmlReturn = htmlReturn.Replace("{tbody3}", strTBody3);
-                htmlReturn = htmlReturn.Replace("{tbody4}", strTBody4);
+                //htmlReturn = htmlReturn.Replace("{tbody2}", strTBody2);
+                //htmlReturn = htmlReturn.Replace("{tbody3}", strTBody3);
+                //htmlReturn = htmlReturn.Replace("{tbody4}", strTBody4);
 
                 return htmlReturn;
             }
@@ -86,9 +86,9 @@ namespace Send_Email
                 string strCol2Span = "", strCol2SpanPre = "";
 
                 string rowCol1Span = argDtHtml.Rows[row]["TEXT1"].ToString();
-                string rowCol2Span = argDtHtml.Rows[row]["TEXT2"].ToString();
-                string rowColMerge = argDtHtml.Rows[row]["TEXT3"].ToString();
-                string rowRowSpan = argDtHtml.Rows[row]["TEXT4"].ToString();
+                //string rowCol2Span = argDtHtml.Rows[row]["TEXT2"].ToString();
+                //string rowColMerge = argDtHtml.Rows[row]["TEXT3"].ToString();
+                string rowRowSpan = argDtHtml.Rows[row]["TEXT2"].ToString();
 
                 foreach (DataRow rowData in argDtData.Rows)
                 {
@@ -107,28 +107,28 @@ namespace Send_Email
                         strRow = rowCol1Span;
 
                         iCol1Span = (int)argDtData.Compute("COUNT(COL1_SPAN)", $"COL1_SPAN ='{strCol1Span}'");
-                        iCol2Span = (int)argDtData.Compute("COUNT(COL2_SPAN)", $"COL2_SPAN ='{strCol2Span}'");
+                        //iCol2Span = (int)argDtData.Compute("COUNT(COL2_SPAN)", $"COL2_SPAN ='{strCol2Span}'");
 
                         fnReplace(ref strRow, "{COL1_SPAN}", iCol1Span == 0 ? "1" : iCol1Span.ToString());
-                        fnReplace(ref strRow, "{COL2_SPAN}", iCol2Span.ToString());
+                       // fnReplace(ref strRow, "{COL2_SPAN}", iCol2Span.ToString());
                         strTbodyRtn += fnReplaceRow(strRow, rowData);
 
                     }
-                    else if (strCol2Span != strCol2SpanPre)
-                    {
-                        strCol1SpanPre = strCol1Span;
-                        strCol2SpanPre = strCol2Span;
-                        strRow = rowCol2Span;
+                    //else if (strCol2Span != strCol2SpanPre)
+                    //{
+                    //    strCol1SpanPre = strCol1Span;
+                    //    strCol2SpanPre = strCol2Span;
+                    //    strRow = rowCol2Span;
 
-                        iCol2Span = (int)argDtData.Compute("COUNT(COL2_SPAN)", $"COL2_SPAN ='{strCol2Span}'");
-                        fnReplace(ref strRow, "{COL2_SPAN}", iCol2Span.ToString());
-                        strTbodyRtn += fnReplaceRow(strRow, rowData);
-                    }
+                    //    iCol2Span = (int)argDtData.Compute("COUNT(COL2_SPAN)", $"COL2_SPAN ='{strCol2Span}'");
+                    //    fnReplace(ref strRow, "{COL2_SPAN}", iCol2Span.ToString());
+                    //    strTbodyRtn += fnReplaceRow(strRow, rowData);
+                    //}
                     else
                     {
                         strCol1SpanPre = strCol1Span;
                         strCol2SpanPre = strCol2Span;
-                        strRow = rowColMerge;
+                        strRow = rowRowSpan;
                         strTbodyRtn += fnReplaceRow(strRow, rowData);
                     }
 
@@ -177,7 +177,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_EMAIL_BOL_RR";
+                string process_name = "P_EMAIL_BOL_RR_V2";
                 MyOraDB.ReDim_Parameter(9);
                 MyOraDB.Process_Name = process_name;
 
