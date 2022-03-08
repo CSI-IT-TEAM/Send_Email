@@ -76,9 +76,9 @@ namespace Send_Email
             string TimeNow = System.DateTime.Now.ToString("HH:mm");
             DateTime today = DateTime.Today;
 
-            if (TimeNow.Equals("09:00"))
-                if (cmdPORegisterChk.Checked)
-                    RunPORegReport("Q");
+            //if (TimeNow.Equals("09:00"))
+            //    if (cmdPORegisterChk.Checked)
+            //        RunPORegReport("Q");
 
 
             //12h
