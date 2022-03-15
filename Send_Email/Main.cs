@@ -259,8 +259,8 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM"));
-             //RunOSMonthly("Q", "20220201", "20220228");
+               // RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
+             RunOSMonthly("Q", "20220314");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
@@ -7787,7 +7787,20 @@ namespace Send_Email
 
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
+        public static int GetIso8601WeekOfYear(DateTime time)
+        {
+            // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
+            // be the same week# as whatever Thursday, Friday or Saturday are,
+            // and we always get those right
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                time = time.AddDays(3);
+            }
 
+            // Return the week of our adjusted day
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
         private void RunOSMonthly(string argType, string argDate)
         {
             DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDate);//MACHINE TIMES
@@ -7805,7 +7818,7 @@ namespace Send_Email
             using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
             {
                 frmOsMonthly._chkTest = chkTest.Checked;
-                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.AddMonths(-1).ToString("MMM") + ")";
+                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + "/" + GetIso8601WeekOfYear(DateTime.Now.AddDays(-2)).ToString() + ")";
                 frmOsMonthly._dtChart1 = dtChart1;
                 frmOsMonthly._dtChart2 = dtChart2;
                 frmOsMonthly._dtChart3 = dtChart3;
