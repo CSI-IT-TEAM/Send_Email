@@ -259,8 +259,8 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-               // RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
-             RunOSMonthly("Q", "20220314");
+                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
+           //  RunOSMonthly("Q", "20220314");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
