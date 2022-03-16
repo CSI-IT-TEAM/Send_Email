@@ -4835,7 +4835,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_POTO_REG";
+                string process_name = "P_SEND_EMAIL_POTO_REG_V2";
                 MyOraDB.ReDim_Parameter(3);
                 MyOraDB.Process_Name = process_name;
 
