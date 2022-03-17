@@ -21,7 +21,7 @@ namespace Send_Email
         public bool _chkTest = false;
         public string _subject = "";
         private string _subjectSend = "";
-        private readonly string[] _emailTest = { "nguyen.it@changshininc.com", "jungbo.shim@dskorea.com" };
+        private readonly string[] _emailTest = { "nguyen.it@changshininc.com" };
         Main frmMain = new Main();
         public DataTable _dtData, _dtEmail;
 
@@ -108,22 +108,17 @@ namespace Send_Email
                                 </style>
                             </head>";
                 string header = @"<tr>" +
-                                  $"<th align='center' rowspan = '2'> Plant </th>" +
-                                  $"<th align='center' rowspan = '2'> Line </th>" +
-                                  $"<th align='center' rowspan = '2'> Area </th> " +
-                                  $"<th align='center' rowspan = '2'> Process </th> " +
-                                  $"<th align='center' rowspan = '2'> TO </th> " +
-                                  $"<th align='center' colspan = '5' >PO</th> " +
-                                  $"<th align='center' rowspan = '2'> Balance</th>" +
-                                   $"<th align='center' rowspan = '2'> Rate</th>" +
-                                  $"</tr>" +
-                                  $"<tr>" +
-                                  $"<th align='center'> Workshop </th>" +
-                                  $"<th align='center'> Relief </th>" +
-                                  $"<th align='center'> Other Line </th>" +
-                                  $"<th align='center'> Material Handler </th>" +
-                                  $"<th align='center'> Total</th>" +
+                                  $"<th align='center'  rowspan = '1'>Plant </th>" +
+                                  $"<th align='center'  rowspan = '1'>Line </th>" +
+                                  $"<th align='center'  rowspan = '1'>Area </th> " +
+                                  $"<th align='center'  rowspan = '1'>Process </th> " +
+                                  $"<th align='center'  rowspan = '1'>TO </th> " +
+                                  $"<th align='center'  colspan = '1'>PO</th> " +
+                                  $"<th align='center'  colspan = '1'>Absent</th> " +
+                                  $"<th align='center'  rowspan = '1'>Net Man</th>" +
+                                  $"<th align='center' rowspan = '1'>Balance</th>" +
                                   $"</tr>";
+                                 
                 string body = string.Empty;
                 string _PLANT_NAME_TEMP = string.Empty;
                 string _LINE_CD_TEMP = string.Empty;
@@ -138,13 +133,11 @@ namespace Send_Email
                             $"<td  width: 80' align='center' rowspan ={dr["AREA_NAME_CNT"]}>{dr["AREA_NAME"]}</td>" +
                             $"<td  width: 80' align='center'>{dr["PROCESS_NAME"]}</td>" +
                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["TO_QTY"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_WS"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_RELIEF"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_OTHER_LINE"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_MAT_HANDLER"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_TOTAL"])}</td>" +
-                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["PO_QTY"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}",dr["ABSENT"])}</td>" +
+                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["NET_MAN"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            //$"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                             $"</tr>";
                         _PLANT_NAME_TEMP = dr["PLANT_NAME"].ToString();
                         _LINE_CD_TEMP = dr["LINE_CD"].ToString();
@@ -160,13 +153,11 @@ namespace Send_Email
                           $"<td  width: 80' align='center'>{dr["AREA_NAME"]}</td>" +
                           $"<td  width: 80' align='center'>{dr["PROCESS_NAME"]}</td>" +
                           $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["TO_QTY"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_WS"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_RELIEF"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_QTY"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["ABSENT"])}</td>" +
+                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["NET_MAN"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            //$"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                           $"</tr>";
                             _LINE_CD_TEMP = dr["LINE_CD"].ToString();
                             _AREA_NAME_TEMP = dr["AREA_NAME"].ToString();
@@ -180,13 +171,11 @@ namespace Send_Email
                              $"<td  width: 80' align='center' rowspan ={dr["AREA_NAME_CNT"]}>{dr["AREA_NAME"]}</td>" +
                              $"<td  width: 80' align='center'>{dr["PROCESS_NAME"]}</td>" +
                              $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["TO_QTY"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_WS"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_RELIEF"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_QTY"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["ABSENT"])}</td>" +
+                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["NET_MAN"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                             //$"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                              $"</tr>";
                                 _AREA_NAME_TEMP = dr["AREA_NAME"].ToString();
 
@@ -196,14 +185,12 @@ namespace Send_Email
                                 body += @"
                             <tr class=" + dr["TOTAL_STYLESHEET"] + ">" +
                             $"<td  width: 80' align='center'>{dr["PROCESS_NAME"]}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["TO_QTY"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_WS"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_RELIEF"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_OTHER_LINE"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_MAT_HANDLER"])}</td>" +
-                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_TOTAL"])}</td>" +
-                            $"<td width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
-                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
+                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["TO_QTY"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["PO_QTY"])}</td>" +
+                            $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["ABSENT"])}</td>" +
+                             $"<td  width: 80' align='center'>{string.Format("{0:n0}", dr["NET_MAN"])}</td>" +
+                            $"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n0}", dr["BALANCE"])}</td>" +
+                            //$"<td class={dr["BAL_COLOR"]} width: 80' align='center'>{string.Format("{0:n1}", dr["RATE"])}</td>" +
                             $"</tr>";
                             }
                         }

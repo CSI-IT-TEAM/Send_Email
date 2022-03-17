@@ -259,8 +259,8 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-               // RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
-             RunOSMonthly("Q", "20220314");
+                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
+           //  RunOSMonthly("Q", "20220314");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
@@ -4835,7 +4835,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_POTO_REG";
+                string process_name = "P_SEND_EMAIL_POTO_REG_V2";
                 MyOraDB.ReDim_Parameter(3);
                 MyOraDB.Process_Name = process_name;
 
@@ -7826,7 +7826,7 @@ namespace Send_Email
             using (Releif_AVSM_Report_Daily f = new Releif_AVSM_Report_Daily())
             {
                 f._chkTest = chkTest.Checked;
-                f._subject = "Relief Management System Report Daily (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
+                f._subject = "Workforce Management Systems Report Daily (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
                 f._dtData = ds.Tables[0];
                 f._dtEmail = ds.Tables[1];
                 f.Show();
