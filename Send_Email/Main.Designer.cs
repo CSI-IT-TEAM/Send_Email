@@ -419,6 +419,8 @@
             this.btnRunOS_MonthlyChk = new System.Windows.Forms.CheckBox();
             this.cmdPORegister = new System.Windows.Forms.Button();
             this.cmdPORegisterChk = new System.Windows.Forms.CheckBox();
+            this.btnRunWeekly_Bottom_Constraint = new System.Windows.Forms.Button();
+            this.btnRunWeekly_B_CChk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -4237,6 +4239,30 @@
             this.cmdPORegisterChk.Text = "Auto";
             this.cmdPORegisterChk.UseVisualStyleBackColor = true;
             // 
+            // btnRunWeekly_Bottom_Constraint
+            // 
+            this.btnRunWeekly_Bottom_Constraint.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRunWeekly_Bottom_Constraint.Location = new System.Drawing.Point(6, 440);
+            this.btnRunWeekly_Bottom_Constraint.Name = "btnRunWeekly_Bottom_Constraint";
+            this.btnRunWeekly_Bottom_Constraint.Size = new System.Drawing.Size(397, 23);
+            this.btnRunWeekly_Bottom_Constraint.TabIndex = 211;
+            this.btnRunWeekly_Bottom_Constraint.Text = "Weekly_Bottom_Constraint";
+            this.btnRunWeekly_Bottom_Constraint.UseVisualStyleBackColor = true;
+            this.btnRunWeekly_Bottom_Constraint.Click += new System.EventHandler(this.btnRunWeekly_Bottom_Constraint_Click);
+            // 
+            // btnRunWeekly_B_CChk
+            // 
+            this.btnRunWeekly_B_CChk.AutoSize = true;
+            this.btnRunWeekly_B_CChk.Checked = true;
+            this.btnRunWeekly_B_CChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnRunWeekly_B_CChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunWeekly_B_CChk.Location = new System.Drawing.Point(409, 442);
+            this.btnRunWeekly_B_CChk.Name = "btnRunWeekly_B_CChk";
+            this.btnRunWeekly_B_CChk.Size = new System.Drawing.Size(52, 19);
+            this.btnRunWeekly_B_CChk.TabIndex = 223;
+            this.btnRunWeekly_B_CChk.Text = "Auto";
+            this.btnRunWeekly_B_CChk.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -4264,6 +4290,7 @@
             this.Controls.Add(this.cmd_Quality2Chk);
             this.Controls.Add(this.cmdPoToIeChk);
             this.Controls.Add(this.btnTimeContraintChk);
+            this.Controls.Add(this.btnRunWeekly_B_CChk);
             this.Controls.Add(this.cmdPORegisterChk);
             this.Controls.Add(this.btnRunOS_MonthlyChk);
             this.Controls.Add(this.btnRunOS_RedChk);
@@ -4298,6 +4325,7 @@
             this.Controls.Add(this.cmd_Budget);
             this.Controls.Add(this.btnFeedback);
             this.Controls.Add(this.cmdPORegister);
+            this.Controls.Add(this.btnRunWeekly_Bottom_Constraint);
             this.Controls.Add(this.btnRunOS_Monthly);
             this.Controls.Add(this.btnRunOS_Red);
             this.Controls.Add(this.cmdMoldRepair);
@@ -4919,6 +4947,8 @@
         private System.Windows.Forms.CheckBox btnRunOS_MonthlyChk;
         private System.Windows.Forms.Button cmdPORegister;
         private System.Windows.Forms.CheckBox cmdPORegisterChk;
+        private System.Windows.Forms.Button btnRunWeekly_Bottom_Constraint;
+        private System.Windows.Forms.CheckBox btnRunWeekly_B_CChk;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }
