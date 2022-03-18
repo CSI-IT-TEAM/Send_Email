@@ -259,8 +259,8 @@ namespace Send_Email
         private void btnRunOS_Monthly_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
-                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMM"));
-             //RunOSMonthly("Q", "20220201", "20220228");
+                RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
+           //  RunOSMonthly("Q", "20220314");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
@@ -4835,7 +4835,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_POTO_REG";
+                string process_name = "P_SEND_EMAIL_POTO_REG_V2";
                 MyOraDB.ReDim_Parameter(3);
                 MyOraDB.Process_Name = process_name;
 
@@ -4865,6 +4865,54 @@ namespace Send_Email
             }
             catch (Exception ex)
             {
+                return null;
+            }
+        }
+        #endregion
+
+        #region OS Red Machine Monthly
+        private DataTable SEL_DATA_WEEKLY_B_C(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_WEEKLY_B_C";
+                MyOraDB.ReDim_Parameter(3);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_1";
+
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        //WriteLog("P_SEND_EMAIL_NPI: null");
+                    }
+                    return null;
+                }
+                return ds_ret.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
                 return null;
             }
         }
@@ -7778,7 +7826,7 @@ namespace Send_Email
             using (Releif_AVSM_Report_Daily f = new Releif_AVSM_Report_Daily())
             {
                 f._chkTest = chkTest.Checked;
-                f._subject = "Relief Management System Report Daily (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
+                f._subject = "Workforce Management Systems Report Daily (" + DateTime.Now.ToString("yyyy/MM/dd") + ")";
                 f._dtData = ds.Tables[0];
                 f._dtEmail = ds.Tables[1];
                 f.Show();
@@ -7787,7 +7835,74 @@ namespace Send_Email
 
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
+        public static int GetIso8601WeekOfYear(DateTime time)
+        {
+            // Seriously cheat.  If its Monday, Tuesday or Wednesday, then it'll 
+            // be the same week# as whatever Thursday, Friday or Saturday are,
+            // and we always get those right
+            DayOfWeek day = CultureInfo.InvariantCulture.Calendar.GetDayOfWeek(time);
+            if (day >= DayOfWeek.Monday && day <= DayOfWeek.Wednesday)
+            {
+                time = time.AddDays(3);
+            }
 
+            // Return the week of our adjusted day
+            return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        #region RunWeeklyBC
+        private void RunWeeklyBC(string argType, string argDate)
+        {
+            DataTable dtChart1 = SEL_DATA_WEEKLY_B_C("CHART1", argDate);//BOTTOM CONSTRAINT
+            DataTable dtChart2 = SEL_DATA_WEEKLY_B_C("CHART2", argDate);//LINE
+            DataTable dtData2 = SEL_DATA_WEEKLY_B_C("GRID2", argDate);
+            DataTable dtData21 = SEL_DATA_WEEKLY_B_C("GRID21", argDate);
+            //DataTable dtChart3 = SEL_DATA_OS_MACHINE_MONTHLY("CHART3", argDate);//REASON
+            //DataTable dtChart4 = SEL_DATA_OS_MACHINE_MONTHLY("CHART4", argDate);// HOURS
+            //DataTable dtChart5 = SEL_DATA_OS_MACHINE_MONTHLY("CHART5", argDate);//SHIFT
+            //DataTable dtChart6 = SEL_DATA_OS_MACHINE_MONTHLY("CHART6", argDate);//DAILY
+            //DataTable dtEmail = SEL_DATA_OS_MACHINE_MONTHLY("EMAIL", argDate); //Email Send
+
+            //if (dtChart1 == null || dtChart2 == null || dtChart3 == null || dtChart4 == null || dtChart5 == null || dtChart6 == null || dtEmail == null)
+            //    return;
+            // WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunOSMonthly({argType}): BEGIN");
+
+            using (frmWeekly_Bottom_Constraint frmWeeklyBC = new frmWeekly_Bottom_Constraint())
+            {
+                frmWeeklyBC._chkTest = chkTest.Checked;
+                frmWeeklyBC._subject = "Weekly Bottom Constraint (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + "/" + GetIso8601WeekOfYear(DateTime.Now.AddDays(-2)).ToString() + ")";
+                frmWeeklyBC._dtChart1 = dtChart1;
+                frmWeeklyBC._dtChart2 = dtChart2;
+                frmWeeklyBC.dtGrid2 = dtData2;
+                frmWeeklyBC._dtChart21 = dtData2;
+                frmWeeklyBC.dtGrid21 = dtData21;
+                //frmWeeklyBC._dtChart5 = dtChart5;
+                //frmWeeklyBC._dtChart6 = dtChart6;
+                //frmWeeklyBC._dtEmail = dtEmail;
+                frmWeeklyBC.Show();
+                frmWeeklyBC.SendToBack();
+                
+            }
+
+            // frmWeekly_Bottom_Constraint frmWeeklyBC = new frmWeekly_Bottom_Constraint();
+
+            // frmWeeklyBC._chkTest = chkTest.Checked;
+            // // frmWeeklyBC._subject = "Weekly Bottom Constraint (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + "/" + GetIso8601WeekOfYear(DateTime.Now.AddDays(-2)).ToString() + ")";
+            // frmWeeklyBC._dtChart1 = dtChart1;
+            // frmWeeklyBC._dtChart2 = dtChart2;
+            // //frmWeeklyBC._dtChart3 = dtChart3;
+            // //frmWeeklyBC._dtChart4 = dtChart4;
+            // //frmWeeklyBC._dtChart5 = dtChart5;
+            // //frmWeeklyBC._dtChart6 = dtChart6;
+            // //frmWeeklyBC._dtEmail = dtEmail;
+            // frmWeeklyBC.Show();
+            //// frmWeeklyBC.SendToBack();
+
+
+
+            // WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
+        }
+        #endregion RunWeeklyBC
         private void RunOSMonthly(string argType, string argDate)
         {
             DataTable dtChart1 = SEL_DATA_OS_MACHINE_MONTHLY("CHART1", argDate);//MACHINE TIMES
@@ -7802,10 +7917,10 @@ namespace Send_Email
                 return;
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunOSMonthly({argType}): BEGIN");
 
-            using (Outsole_Drawback_List_Monthly frmOsMonthly = new Outsole_Drawback_List_Monthly())
+            using (frmWeekly_Bottom_Constraint frmOsMonthly = new frmWeekly_Bottom_Constraint())
             {
                 frmOsMonthly._chkTest = chkTest.Checked;
-                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.AddMonths(-1).ToString("MMM") + ")";
+                frmOsMonthly._subject = "Monthly Os Press Machine Drawback (" + DateTime.Now.AddMonths(-1).ToString("yyyy") + "/" + DateTime.Now.ToString("MMM") + "/" + GetIso8601WeekOfYear(DateTime.Now.AddDays(-2)).ToString() + ")";
                 frmOsMonthly._dtChart1 = dtChart1;
                 frmOsMonthly._dtChart2 = dtChart2;
                 frmOsMonthly._dtChart3 = dtChart3;
@@ -7821,6 +7936,13 @@ namespace Send_Email
         }
 
 
+       
+
+        private void btnRunWeekly_Bottom_Constraint_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunWeeklyBC("Q", "20220314");
+        }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

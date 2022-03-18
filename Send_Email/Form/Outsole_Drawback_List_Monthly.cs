@@ -185,8 +185,8 @@ namespace Send_Email
                         chartControl6.Series[0].ArgumentDataMember = "YMD";
                         chartControl6.Series[0].ValueDataMembers.AddRange(new string[] { "CNT" });
 
-                        DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
-                        createGrid(dt);
+                      //  DataTable dt = Pivot(argDt, argDt.Columns["YMD"], argDt.Columns["CNT"]);
+                        //createGrid(dt);
                         break;
                     default:
                         break;
@@ -205,22 +205,22 @@ namespace Send_Email
         {
             try
             {
-                grdMain.DataSource = argDt;
-                for (int i = 0; i < grdView.Columns.Count; i++)
-                {
-                    grdView.Columns[i].OptionsColumn.AllowEdit = false;
-                    grdView.Columns[i].OptionsColumn.ReadOnly = true;
-                    grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-                    grdView.Columns[i].AppearanceCell.TextOptions.VAlignment =  VertAlignment.Center;
-                    grdView.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 20, FontStyle.Bold);
-                    grdView.Columns[i].AppearanceCell.Font = new Font("Calibri", 20, FontStyle.Regular);
-                    if (i > 0)
-                    {
-                        grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
-                        grdView.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
-                        grdView.Columns[i].DisplayFormat.FormatString = "{0:n0}";
-                    }
-                }
+                //grdMain.DataSource = argDt;
+                //for (int i = 0; i < grdView.Columns.Count; i++)
+                //{
+                //    grdView.Columns[i].OptionsColumn.AllowEdit = false;
+                //    grdView.Columns[i].OptionsColumn.ReadOnly = true;
+                //    grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                //    grdView.Columns[i].AppearanceCell.TextOptions.VAlignment =  VertAlignment.Center;
+                //    grdView.Columns[i].OwnerBand.AppearanceHeader.Font = new Font("Calibri", 20, FontStyle.Bold);
+                //    grdView.Columns[i].AppearanceCell.Font = new Font("Calibri", 20, FontStyle.Regular);
+                //    if (i > 0)
+                //    {
+                //        grdView.Columns[i].AppearanceCell.TextOptions.HAlignment = HorzAlignment.Far;
+                //        grdView.Columns[i].DisplayFormat.FormatType = FormatType.Numeric;
+                //        grdView.Columns[i].DisplayFormat.FormatString = "{0:n0}";
+                //    }
+                //}
             }
             catch
             {
