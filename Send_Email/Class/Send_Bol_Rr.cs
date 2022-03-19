@@ -173,7 +173,7 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
-            MyOraDB.ShowErr = true;
+            MyOraDB.TimeOut = 1000000000;
             DataSet ds_ret;
             try
             {
