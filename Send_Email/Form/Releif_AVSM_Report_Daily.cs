@@ -202,7 +202,7 @@ namespace Send_Email
                 return @"<html>" + style + "" +
                                 $"<table class='tblBoder'> " +
                                  $"<tr>" +
-                                 $" <td colspan = '2' class = 'rework'>Relief Register Target</td>" +
+                                 $" <td colspan = '2' class = 'rework'>Workforce Register Target</td>" +
                                  $"</tr>" +
                                  $"<tr>" +
                                  $" <td>97 ~ 100%</td>" +
