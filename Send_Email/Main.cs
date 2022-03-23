@@ -6666,7 +6666,7 @@ namespace Send_Email
 
         public void WriteLog(string argText)
         {
-            txtLog.BeginInvoke(new Action(() =>
+            txtLog.Invoke((MethodInvoker)(() =>
             {
                 txtLog.Text += argText + "\r\n";
                 txtLog.SelectionStart = txtLog.TextLength;
