@@ -17,7 +17,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 namespace Send_Email
 {
     public partial class Main : Form
-    {
+    { 
         public Main()
         {
             InitializeComponent();
