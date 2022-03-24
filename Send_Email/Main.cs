@@ -8046,8 +8046,9 @@ namespace Send_Email
         {
             if (SendYN(((Button)sender).Text))
             {
-                //RunWeeklyBC("BOTTOM", DateTime.Now.ToString("yyyyMMdd"));
-                RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+                //Upper Inventory
+                if (btnRunUpperInvChk.Checked)
+                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
             }
         }
 
