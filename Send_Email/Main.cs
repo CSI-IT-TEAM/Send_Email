@@ -6770,7 +6770,7 @@ namespace Send_Email
             //    txtLog.SelectionStart = txtLog.TextLength;
             //    txtLog.ScrollToCaret();
             //    txtLog.Refresh();
-            //}));
+            //}));  
         }
 
         private void btnRunTMS_Click(object sender, EventArgs e)
