@@ -90,8 +90,12 @@ namespace Send_Email
 
             //12H - Phước thêm 2021/12/07
             if (TimeNow.Equals("06:59"))
+            {
                 if (cmdRunAssInLineChk.Checked)
                     RunAssInLine("Q1");
+                if (btnRunUpperInvChk.Checked)
+                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+            }
 
             //7h
             if (cmdRunEscanChk.Checked)
@@ -190,10 +194,10 @@ namespace Send_Email
                 }
             }
 
-            //07 - Do IT thêm 2022/03/24
-            if (TimeNow.Equals("06:59"))
-                if (btnRunUpperInvChk.Checked)
-                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+            ////07 - Do IT thêm 2022/03/24
+            //if (TimeNow.Equals("06:59"))
+            //    if (btnRunUpperInvChk.Checked)
+            //        RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
         }
 
 
