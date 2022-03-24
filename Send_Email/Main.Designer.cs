@@ -421,6 +421,8 @@
             this.cmdPORegisterChk = new System.Windows.Forms.CheckBox();
             this.btnRunWeekly_Bottom_Constraint = new System.Windows.Forms.Button();
             this.btnRunWeekly_B_CChk = new System.Windows.Forms.CheckBox();
+            this.btnRunUpperInvChk = new System.Windows.Forms.CheckBox();
+            this.btnUpperInv = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -4251,8 +4253,6 @@
             // btnRunWeekly_B_CChk
             // 
             this.btnRunWeekly_B_CChk.AutoSize = true;
-            this.btnRunWeekly_B_CChk.Checked = true;
-            this.btnRunWeekly_B_CChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunWeekly_B_CChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRunWeekly_B_CChk.Location = new System.Drawing.Point(409, 442);
             this.btnRunWeekly_B_CChk.Name = "btnRunWeekly_B_CChk";
@@ -4261,11 +4261,37 @@
             this.btnRunWeekly_B_CChk.Text = "Auto";
             this.btnRunWeekly_B_CChk.UseVisualStyleBackColor = true;
             // 
+            // btnRunUpperInvChk
+            // 
+            this.btnRunUpperInvChk.AutoSize = true;
+            this.btnRunUpperInvChk.Checked = true;
+            this.btnRunUpperInvChk.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnRunUpperInvChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.btnRunUpperInvChk.Location = new System.Drawing.Point(409, 467);
+            this.btnRunUpperInvChk.Name = "btnRunUpperInvChk";
+            this.btnRunUpperInvChk.Size = new System.Drawing.Size(52, 19);
+            this.btnRunUpperInvChk.TabIndex = 239;
+            this.btnRunUpperInvChk.Text = "Auto";
+            this.btnRunUpperInvChk.UseVisualStyleBackColor = true;
+            // 
+            // btnUpperInv
+            // 
+            this.btnUpperInv.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpperInv.Location = new System.Drawing.Point(6, 465);
+            this.btnUpperInv.Name = "btnUpperInv";
+            this.btnUpperInv.Size = new System.Drawing.Size(397, 23);
+            this.btnUpperInv.TabIndex = 238;
+            this.btnUpperInv.Text = "Upper Inventory";
+            this.btnUpperInv.UseVisualStyleBackColor = true;
+            this.btnUpperInv.Click += new System.EventHandler(this.btnUpperInv_Click);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 548);
+            this.Controls.Add(this.btnRunUpperInvChk);
+            this.Controls.Add(this.btnUpperInv);
             this.Controls.Add(this.cmdMoldRepairMonthWh);
             this.Controls.Add(this.cmd_BolRrChk);
             this.Controls.Add(this.cmd_BolRR);
@@ -4947,6 +4973,8 @@
         private System.Windows.Forms.CheckBox cmdPORegisterChk;
         private System.Windows.Forms.Button btnRunWeekly_Bottom_Constraint;
         private System.Windows.Forms.CheckBox btnRunWeekly_B_CChk;
+        private System.Windows.Forms.CheckBox btnRunUpperInvChk;
+        private System.Windows.Forms.Button btnUpperInv;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

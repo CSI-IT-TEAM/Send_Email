@@ -189,6 +189,11 @@ namespace Send_Email
                         break;
                 }
             }
+
+            //07 - Do IT thêm 2022/03/24
+            if (TimeNow.Equals("06:59"))
+                if (btnRunUpperInvChk.Checked)
+                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
         }
 
 
@@ -6657,6 +6662,91 @@ namespace Send_Email
             }
         }
         #endregion
+
+        #region Upper Inventory
+        private DataSet SEL_DATA_UPPER_INV(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_UPPER_INV";
+                MyOraDB.ReDim_Parameter(6);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_1";
+                MyOraDB.Parameter_Name[3] = "CV_2";
+                MyOraDB.Parameter_Name[4] = "CV_3";
+                MyOraDB.Parameter_Name[5] = "CV_EMAIL";
+
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[4] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[5] = (int)OracleType.Cursor;
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+                MyOraDB.Parameter_Values[4] = "";
+                MyOraDB.Parameter_Values[5] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        //WriteLog("P_SEND_EMAIL_NPI: null");
+                    }
+                    return null;
+                }
+                return ds_ret;
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+
+        private void RunUpperInv(string argType, string argDate)
+        {
+            if (argType == "Q")
+            {
+                DataSet ds = SEL_DATA_UPPER_INV("Q", argDate);//UPPER INVENTORY
+
+                if (ds == null)
+                    return;
+                WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunUpperInv({argType}): BEGIN");
+
+                using (frmUpper_Inventory frmUpperInv = new frmUpper_Inventory())
+                {
+                    frmUpperInv._chkTest = chkTest.Checked;
+                    frmUpperInv._subject = "Upper Inventory";
+                    frmUpperInv._dt1 = ds.Tables[0];
+                    frmUpperInv._dt2 = ds.Tables[1];
+                    frmUpperInv._dt3 = ds.Tables[2];
+                    frmUpperInv._dt4 = ds.Tables[3];
+                    frmUpperInv.Show();
+                    frmUpperInv.SendToBack();
+                }
+
+                WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunUpperInv({argType}): END");
+            }
+        }
+
+
+        #endregion
+
         private string ColorNull(string argColor)
         {
             return argColor == "" ? "WHITE" : argColor;
@@ -7934,13 +8024,22 @@ namespace Send_Email
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
 
+        
 
-       
 
         private void btnRunWeekly_Bottom_Constraint_Click(object sender, EventArgs e)
         {
             if (SendYN(((Button)sender).Text))
                 RunWeeklyBC("Q", "20220314");
+        }
+
+        private void btnUpperInv_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+            {
+                //RunWeeklyBC("BOTTOM", DateTime.Now.ToString("yyyyMMdd"));
+                RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+            }
         }
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
