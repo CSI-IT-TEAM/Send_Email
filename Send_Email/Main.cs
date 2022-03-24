@@ -88,14 +88,19 @@ namespace Send_Email
             if (cmdRunProdChk.Checked)
                 RunProduction("Q1");
 
+            
+
             //12H - Phước thêm 2021/12/07
             if (TimeNow.Equals("06:59"))
             {
                 if (cmdRunAssInLineChk.Checked)
                     RunAssInLine("Q1");
-                if (btnRunUpperInvChk.Checked)
-                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
             }
+
+            //Upper Inventory
+            if (btnRunUpperInvChk.Checked)
+                RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+
 
             //7h
             if (cmdRunEscanChk.Checked)
