@@ -6764,13 +6764,13 @@ namespace Send_Email
 
         public void WriteLog(string argText)
         {
-            txtLog.Invoke((MethodInvoker)(() =>
-            {
-                txtLog.Text += argText + "\r\n";
-                txtLog.SelectionStart = txtLog.TextLength;
-                txtLog.ScrollToCaret();
-                txtLog.Refresh();
-            }));
+            //txtLog.Invoke((MethodInvoker)(() =>
+            //{
+            //    txtLog.Text += argText + "\r\n";
+            //    txtLog.SelectionStart = txtLog.TextLength;
+            //    txtLog.ScrollToCaret();
+            //    txtLog.Refresh();
+            //}));
         }
 
         private void btnRunTMS_Click(object sender, EventArgs e)
