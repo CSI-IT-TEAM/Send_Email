@@ -80,7 +80,6 @@ namespace Send_Email
                 if (cmdPORegisterChk.Checked)
                     RunPORegReport("Q");
 
-
             //12h
             if (cmdPoToChk.Checked)
                 RunToPo("Q1");
