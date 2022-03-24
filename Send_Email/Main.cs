@@ -7833,7 +7833,7 @@ namespace Send_Email
                 f.SendToBack();
             }
 
-            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
+            WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunPORegReport({argType}): END");
         }
         public static int GetIso8601WeekOfYear(DateTime time)
         {
