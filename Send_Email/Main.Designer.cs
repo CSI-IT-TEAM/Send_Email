@@ -4229,8 +4229,6 @@
             // cmdPORegisterChk
             // 
             this.cmdPORegisterChk.AutoSize = true;
-            this.cmdPORegisterChk.Checked = true;
-            this.cmdPORegisterChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdPORegisterChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdPORegisterChk.Location = new System.Drawing.Point(409, 418);
             this.cmdPORegisterChk.Name = "cmdPORegisterChk";
