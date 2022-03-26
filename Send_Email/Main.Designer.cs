@@ -726,7 +726,7 @@
             // 
             // tmrLoad
             // 
-            this.tmrLoad.Interval = 60000;
+            this.tmrLoad.Interval = 1000;
             this.tmrLoad.Tick += new System.EventHandler(this.tmrLoad_Tick);
             // 
             // grdBase2

@@ -71,8 +71,13 @@ namespace Send_Email
 
         #region Event
 
+        int _iCount = 0;
         private void tmrLoad_Tick(object sender, EventArgs e)
         {
+            _iCount++;
+            if (_iCount < 60) return;
+            _iCount = 0;
+
             string TimeNow = System.DateTime.Now.ToString("HH:mm");
             DateTime today = DateTime.Today;
 
