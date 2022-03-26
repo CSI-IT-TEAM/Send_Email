@@ -6729,9 +6729,9 @@ namespace Send_Email
 
         private void RunUpperInv(string argType, string argDate)
         {
-            if (argType == "Q")
+            if (argType == "Q" || argType == "Q1")
             {
-                DataSet ds = SEL_DATA_UPPER_INV("Q", argDate);//UPPER INVENTORY
+                DataSet ds = SEL_DATA_UPPER_INV(argType, argDate);//UPPER INVENTORY
 
                 if (ds == null)
                     return;
@@ -8048,7 +8048,7 @@ namespace Send_Email
             {
                 //Upper Inventory
                 if (btnRunUpperInvChk.Checked)
-                    RunUpperInv("Q", DateTime.Now.ToString("yyyyMMdd"));
+                    RunUpperInv("Q1", DateTime.Now.ToString("yyyyMMdd"));
             }
         }
 
