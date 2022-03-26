@@ -195,7 +195,7 @@ namespace Send_Email
                 mailItem.Subject = Subject;
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
                 //Get List Send email
-                if (app.Session.CurrentUser.AddressEntry.Address.Contains("IT.GMES"))
+                if (app.Session.CurrentUser.AddressEntry.Address.ToUpper().Contains("IT.DAAS"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
