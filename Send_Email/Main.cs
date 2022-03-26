@@ -81,13 +81,14 @@ namespace Send_Email
             //        RunPORegReport("Q");
 
             //12h
+            Debug.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             if (cmdPoToChk.Checked)
                 RunToPo("Q1");
             if (cmdPoToIeChk.Checked)
                 RunToPoIe("Q1");
             if (cmdRunProdChk.Checked)
                 RunProduction("Q1");
-
+            
             
 
             //12H - Phước thêm 2021/12/07
@@ -6764,13 +6765,20 @@ namespace Send_Email
 
         public void WriteLog(string argText)
         {
-            //txtLog.Invoke((MethodInvoker)(() =>
-            //{
-            //    txtLog.Text += argText + "\r\n";
-            //    txtLog.SelectionStart = txtLog.TextLength;
-            //    txtLog.ScrollToCaret();
-            //    txtLog.Refresh();
-            //}));  
+            try
+            {
+                txtLog.Invoke((MethodInvoker)(() =>
+                {
+                    txtLog.Text += argText + "\r\n";
+                    txtLog.SelectionStart = txtLog.TextLength;
+                    txtLog.ScrollToCaret();
+                    txtLog.Refresh();
+                }));
+            }
+            catch (Exception ex)
+            {
+            }
+            
         }
 
         private void btnRunTMS_Click(object sender, EventArgs e)
