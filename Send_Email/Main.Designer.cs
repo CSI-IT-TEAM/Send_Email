@@ -4102,8 +4102,6 @@
             // cmdCanteenChk
             // 
             this.cmdCanteenChk.AutoSize = true;
-            this.cmdCanteenChk.Checked = true;
-            this.cmdCanteenChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmdCanteenChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.cmdCanteenChk.Location = new System.Drawing.Point(409, 349);
             this.cmdCanteenChk.Name = "cmdCanteenChk";

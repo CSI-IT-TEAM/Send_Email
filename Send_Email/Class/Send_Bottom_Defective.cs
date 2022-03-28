@@ -20,7 +20,13 @@ namespace Send_Email
                 string htmlReturn = "";
 
                 DataSet dsData = SEL_DATA(argType, DateTime.Now.ToString("yyyyMMdd"));
-                if (dsData == null || dsData.Tables.Count <=1) return "";
+
+                if (dsData == null || dsData.Tables.Count <= 1) 
+                {
+                    Debug.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss --> No Data" ));
+                    return "";
+                
+                };
                 //WriteLog("RunNPI: Start --> " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                 DataTable dtData = dsData.Tables[0];
                 DataTable dtData2 = dsData.Tables[1];
@@ -263,7 +269,7 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
            // MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
-            MyOraDB.ShowErr = true;
+           // MyOraDB.ShowErr = true;
             DataSet ds_ret;
             try
             {
@@ -296,19 +302,19 @@ namespace Send_Email
 
                 ds_ret = MyOraDB.Exe_Select_Procedure();
 
-                if (ds_ret == null)
-                {
-                    if (V_P_TYPE == "Q")
-                    {
-                       // WriteLog("P_SEND_EMAIL_NPI: null");
-                    }
-                    return null;
-                }
+                //if (ds_ret == null)
+                //{
+                //    if (V_P_TYPE == "Q")
+                //    {
+                //       // WriteLog("P_SEND_EMAIL_NPI: null");
+                //    }
+                //    return null;
+                //}
                 return ds_ret;
             }
             catch (Exception ex)
             {
-               // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                //WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
                 return null;
             }
         }

@@ -156,11 +156,17 @@ namespace Send_Email
             //10h
             if (btnTimeContraintChk.Checked)
             {
-                if (TimeNow.Equals("10:29"))
+                if (TimeNow.Equals("09:59"))
                 {
                     RunTimeContraint("Bottom", "Q1"); //BOTTOM
-                    RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+                    
                 }
+                if (TimeNow.Equals("10:03"))
+                {
+                    RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
+
+                }
+                
             }
 
             if (cmd_HourlyProdTrackingChk.Checked)
@@ -193,6 +199,14 @@ namespace Send_Email
 
             if (btnRunOS_RedChk.Checked)
             {
+                //int min = int.Parse(TimeNow.Substring(3, 2));
+                //Debug.WriteLine("OS: " + min % 5);
+                //if (min % 5 == 0)
+                //{
+                //    RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), "10");
+                //}
+
+
                 switch (TimeNow)
                 {
                     case "06:10":
@@ -201,10 +215,11 @@ namespace Send_Email
                     case "18:10":
                     case "22:10":
                     case "02:10":
-                        RunOSRedMachine("Q", DateTime.Now.ToString("yyyyMMdd"), TimeNow.Substring(0, 2));
+                        RunOSRedMachine("Q1", DateTime.Now.ToString("yyyyMMdd"), TimeNow.Substring(0, 2));
+                
                         break;
                 }
-            }
+        }
 
             ////07 - Do IT thêm 2022/03/24
             //if (TimeNow.Equals("06:59"))
@@ -681,7 +696,7 @@ namespace Send_Email
                 Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
 
                 //Get List Send email
-                if (app.Session.CurrentUser.AddressEntry.Address.ToUpper().Contains("IT.GMES"))
+                if (app.Session.CurrentUser.AddressEntry.Address.ToUpper().Contains("IT.DAAS"))
                 {
                     foreach (DataRow row in dtEmail.Rows)
                     {
@@ -706,6 +721,7 @@ namespace Send_Email
                     @"<body><img src='cid:{0}'></body>", imgInfo) + htmlBody;
 
                 mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                WriteLog("CreateMailOS: send");
                 mailItem.Send();
             }
             catch (Exception ex)
@@ -1472,7 +1488,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_ESCAN_TEST";
+                string process_name = "P_SEND_EMAIL_ESCAN_V2";
 
                 MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
                 // MyOraDB.ShowErr = true;
