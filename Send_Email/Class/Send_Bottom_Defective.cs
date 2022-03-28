@@ -268,9 +268,10 @@ namespace Send_Email
         private DataSet SEL_DATA(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
-           // MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
-           // MyOraDB.ShowErr = true;
-            DataSet ds_ret;
+            // MyOraDB.ConnectName = COM.OraDB.ConnectDB.SEPHIROTH;
+            // MyOraDB.ShowErr = true;
+            MyOraDB.TimeOut = 100000000;
+             DataSet ds_ret;
             try
             {
                 string process_name = "P_SEND_EMAIL_BOTTOM_DEFECTIVE";

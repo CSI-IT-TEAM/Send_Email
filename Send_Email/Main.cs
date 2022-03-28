@@ -98,7 +98,7 @@ namespace Send_Email
             
 
             //12H - Phước thêm 2021/12/07
-            if (TimeNow.Equals("06:59"))
+            if (TimeNow.Equals("06:58"))
             {
                 if (cmdRunAssInLineChk.Checked)
                     RunAssInLine("Q1");
