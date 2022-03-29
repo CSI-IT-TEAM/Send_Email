@@ -423,6 +423,8 @@
             this.btnRunWeekly_B_CChk = new System.Windows.Forms.CheckBox();
             this.btnRunUpperInvChk = new System.Windows.Forms.CheckBox();
             this.btnUpperInv = new System.Windows.Forms.Button();
+            this.btnMonthlyBottomAnalysis = new System.Windows.Forms.Button();
+            this.chkMonthlyBottomAnalysis = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvwBase2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditEx1)).BeginInit();
@@ -2582,7 +2584,7 @@
             // 
             this.btnRunTMS.Enabled = false;
             this.btnRunTMS.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnRunTMS.Location = new System.Drawing.Point(117, 506);
+            this.btnRunTMS.Location = new System.Drawing.Point(234, 516);
             this.btnRunTMS.Name = "btnRunTMS";
             this.btnRunTMS.Size = new System.Drawing.Size(130, 23);
             this.btnRunTMS.TabIndex = 208;
@@ -3490,7 +3492,7 @@
             // 
             // btnP
             // 
-            this.btnP.Location = new System.Drawing.Point(263, 506);
+            this.btnP.Location = new System.Drawing.Point(380, 516);
             this.btnP.Name = "btnP";
             this.btnP.Size = new System.Drawing.Size(117, 23);
             this.btnP.TabIndex = 225;
@@ -4281,12 +4283,36 @@
             this.btnUpperInv.UseVisualStyleBackColor = true;
             this.btnUpperInv.Click += new System.EventHandler(this.btnUpperInv_Click);
             // 
+            // btnMonthlyBottomAnalysis
+            // 
+            this.btnMonthlyBottomAnalysis.Font = new System.Drawing.Font("Times New Roman", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMonthlyBottomAnalysis.Location = new System.Drawing.Point(486, 395);
+            this.btnMonthlyBottomAnalysis.Name = "btnMonthlyBottomAnalysis";
+            this.btnMonthlyBottomAnalysis.Size = new System.Drawing.Size(397, 23);
+            this.btnMonthlyBottomAnalysis.TabIndex = 238;
+            this.btnMonthlyBottomAnalysis.Text = "Monthly Bottom Analysis";
+            this.btnMonthlyBottomAnalysis.UseVisualStyleBackColor = true;
+            this.btnMonthlyBottomAnalysis.Click += new System.EventHandler(this.btnMonthlyBottomAnalysis_Click);
+            // 
+            // chkMonthlyBottomAnalysis
+            // 
+            this.chkMonthlyBottomAnalysis.AutoSize = true;
+            this.chkMonthlyBottomAnalysis.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
+            this.chkMonthlyBottomAnalysis.Location = new System.Drawing.Point(889, 397);
+            this.chkMonthlyBottomAnalysis.Name = "chkMonthlyBottomAnalysis";
+            this.chkMonthlyBottomAnalysis.Size = new System.Drawing.Size(52, 19);
+            this.chkMonthlyBottomAnalysis.TabIndex = 239;
+            this.chkMonthlyBottomAnalysis.Text = "Auto";
+            this.chkMonthlyBottomAnalysis.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(946, 548);
+            this.Controls.Add(this.chkMonthlyBottomAnalysis);
             this.Controls.Add(this.btnRunUpperInvChk);
+            this.Controls.Add(this.btnMonthlyBottomAnalysis);
             this.Controls.Add(this.btnUpperInv);
             this.Controls.Add(this.cmdMoldRepairMonthWh);
             this.Controls.Add(this.cmd_BolRrChk);
@@ -4971,6 +4997,8 @@
         private System.Windows.Forms.CheckBox btnRunWeekly_B_CChk;
         private System.Windows.Forms.CheckBox btnRunUpperInvChk;
         private System.Windows.Forms.Button btnUpperInv;
+        private System.Windows.Forms.Button btnMonthlyBottomAnalysis;
+        private System.Windows.Forms.CheckBox chkMonthlyBottomAnalysis;
         // private DevExpress.XtraCharts.ChartControl chart2;
     }
 }

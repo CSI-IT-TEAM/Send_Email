@@ -17,7 +17,7 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 namespace Send_Email
 {
     public partial class Main : Form
-    { 
+    {
         public Main()
         {
             InitializeComponent();
@@ -94,8 +94,8 @@ namespace Send_Email
                 RunToPoIe("Q1");
             if (cmdRunProdChk.Checked)
                 RunProduction("Q1");
-            
-            
+
+
 
             //12H - Phước thêm 2021/12/07
             if (TimeNow.Equals("06:58"))
@@ -121,7 +121,7 @@ namespace Send_Email
             if (btnRunTMSChk.Checked)
                 RunTMSDash("Q1");
 
-            if(cmdRunSumDaaSChk.Checked)
+            if (cmdRunSumDaaSChk.Checked)
                 RunSumDaaS("Q1");
 
             if (cmdNpiChk.Checked)
@@ -159,14 +159,14 @@ namespace Send_Email
                 if (TimeNow.Equals("09:59"))
                 {
                     RunTimeContraint("Bottom", "Q1"); //BOTTOM
-                    
+
                 }
                 if (TimeNow.Equals("10:03"))
                 {
                     RunTimeContraint("Stockfit", "Q2"); //STOCKFIT
 
                 }
-                
+
             }
 
             if (cmd_HourlyProdTrackingChk.Checked)
@@ -216,10 +216,10 @@ namespace Send_Email
                     case "22:10":
                     case "02:10":
                         RunOSRedMachine("Q1", DateTime.Now.ToString("yyyyMMdd"), TimeNow.Substring(0, 2));
-                
+
                         break;
                 }
-        }
+            }
 
             ////07 - Do IT thêm 2022/03/24
             //if (TimeNow.Equals("06:59"))
@@ -295,7 +295,7 @@ namespace Send_Email
         {
             if (SendYN(((Button)sender).Text))
                 RunOSMonthly("Q", DateTime.Now.ToString("yyyyMMdd"));
-           //  RunOSMonthly("Q", "20220314");
+            //  RunOSMonthly("Q", "20220314");
         }
 
         private void cmdPORegister_Click(object sender, EventArgs e)
@@ -4906,6 +4906,57 @@ namespace Send_Email
         }
         #endregion
 
+        #region BOTTOM MONTHLY INVENTORY ANALYSIS
+        private DataTable SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(string V_P_TYPE, string V_P_DATE)
+        {
+            COM.OraDB MyOraDB = new COM.OraDB();
+            MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
+            DataSet ds_ret;
+            try
+            {
+                string process_name = "P_SEND_EMAIL_BT_MONTHLY_INV";
+                MyOraDB.ReDim_Parameter(4);
+                MyOraDB.Process_Name = process_name;
+
+                MyOraDB.Parameter_Name[0] = "V_P_TYPE";
+                MyOraDB.Parameter_Name[1] = "V_P_DATE";
+                MyOraDB.Parameter_Name[2] = "CV_DATA";
+                MyOraDB.Parameter_Name[3] = "CV_EMAIL";
+
+
+                MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
+                MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
+                MyOraDB.Parameter_Type[3] = (int)OracleType.Cursor;
+
+
+                MyOraDB.Parameter_Values[0] = V_P_TYPE;
+                MyOraDB.Parameter_Values[1] = V_P_DATE;
+                MyOraDB.Parameter_Values[2] = "";
+                MyOraDB.Parameter_Values[3] = "";
+
+                MyOraDB.Add_Select_Parameter(true);
+
+                ds_ret = MyOraDB.Exe_Select_Procedure();
+
+                if (ds_ret == null)
+                {
+                    if (V_P_TYPE == "Q")
+                    {
+                        //WriteLog("P_SEND_EMAIL_NPI: null");
+                    }
+                    return null;
+                }
+                return ds_ret.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                // WriteLog("SEL_CUTTING_DATA: " + ex.ToString());
+                return null;
+            }
+        }
+        #endregion
+
         #region OS Red Machine Monthly
         private DataTable SEL_DATA_WEEKLY_B_C(string V_P_TYPE, string V_P_DATE)
         {
@@ -4926,7 +4977,6 @@ namespace Send_Email
                 MyOraDB.Parameter_Type[0] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[1] = (int)OracleType.VarChar;
                 MyOraDB.Parameter_Type[2] = (int)OracleType.Cursor;
-
 
                 MyOraDB.Parameter_Values[0] = V_P_TYPE;
                 MyOraDB.Parameter_Values[1] = V_P_DATE;
@@ -6558,7 +6608,7 @@ namespace Send_Email
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             DataSet ds_ret;
-          //  MyOraDB.ShowErr = true;
+            //  MyOraDB.ShowErr = true;
             try
             {
                 string process_name = "P_SEND_EMAIL_OPEN_DAAS";
@@ -6800,7 +6850,7 @@ namespace Send_Email
             catch (Exception ex)
             {
             }
-            
+
         }
 
         private void btnRunTMS_Click(object sender, EventArgs e)
@@ -8009,7 +8059,7 @@ namespace Send_Email
                 //frmWeeklyBC._dtEmail = dtEmail;
                 frmWeeklyBC.Show();
                 frmWeeklyBC.SendToBack();
-                
+
             }
 
             // frmWeekly_Bottom_Constraint frmWeeklyBC = new frmWeekly_Bottom_Constraint();
@@ -8063,7 +8113,7 @@ namespace Send_Email
             WriteLog($"{DateTime.Now:yyyy-MM-dd hh:mm:ss} RunMoldRepairMonth({argType}): END");
         }
 
-        
+
 
 
         private void btnRunWeekly_Bottom_Constraint_Click(object sender, EventArgs e)
@@ -8081,6 +8131,41 @@ namespace Send_Email
                     RunUpperInv("Q1", DateTime.Now.ToString("yyyyMMdd"));
             }
         }
+
+        private void btnMonthlyBottomAnalysis_Click(object sender, EventArgs e)
+        {
+            if (SendYN(((Button)sender).Text))
+                RunMonthBottomAnalysis("Q");
+
+
+        }
+
+        private void RunMonthBottomAnalysis(string ARG_TYPE)
+        {
+            try
+            {
+                //Prepairing Data
+                string ARG_DATE = DateTime.Now.ToString("yyyyMMdd");
+                DataTable dtChart = SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(ARG_TYPE, ARG_DATE);//BOTTOM CONSTRAINT
+                Monthly_Bottom_Analysis f = new Monthly_Bottom_Analysis();
+                f._dtChart = dtChart;
+                f._subject = "Phuoc Test Email Bottom Inventory Analysis by Monthly";
+                f.Show();
+                //using (Monthly_Bottom_Analysis f = new Monthly_Bottom_Analysis())
+                //{
+                //    f._dtChart = dtChart;
+                //    f._subject = "Phuoc Test Email Bottom Inventory Analysis by Monthly";
+                //    f.Show();
+                //    f.SendToBack();
+                //}
+            }
+            catch (Exception ex)
+            {
+                Debug.Write(ex.Message);
+            }
+        }
+
+
 
         private string getHTMLBodyHeaderTimeContraint(string Qtype, DataTable dtHead, DataTable dtData)
         {

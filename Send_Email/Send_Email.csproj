@@ -167,6 +167,12 @@
     <Compile Include="Form\Mold_Repair_Monthly_WH.Designer.cs">
       <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Monthly_Bottom_Analysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Monthly_Bottom_Analysis.Designer.cs">
+      <DependentUpon>Monthly_Bottom_Analysis.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Releif_AVSM_Report_Daily.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,6 +219,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form\Mold_Repair_Monthly_WH.resx">
       <DependentUpon>Mold_Repair_Monthly_WH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Monthly_Bottom_Analysis.resx">
+      <DependentUpon>Monthly_Bottom_Analysis.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Releif_AVSM_Report_Daily.resx">
       <DependentUpon>Releif_AVSM_Report_Daily.cs</DependentUpon>
