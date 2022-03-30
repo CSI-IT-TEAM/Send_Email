@@ -42,6 +42,7 @@ namespace Send_Email
 
         private bool BindingDataForChart(DataTable dt)
         {
+            //Bottom & Stockfit Set
             try
             {
                 chartBottomSet.DataSource = dt;
@@ -49,6 +50,18 @@ namespace Send_Email
                 chartBottomSet.Series[0].ValueDataMembers.AddRange(new string[] { "BT_HOURS" });
                 chartBottomSet.Series[1].ArgumentDataMember = "FA_WC_NM";
                 chartBottomSet.Series[1].ValueDataMembers.AddRange(new string[] { "STK_HOURS" });
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            //Finished Sole Set
+            try
+            {
+                chartFS.DataSource = dt;
+                chartFS.Series[0].ArgumentDataMember = "FA_WC_NM";
+                chartFS.Series[0].ValueDataMembers.AddRange(new string[] { "FS_HOURS" });
             }
             catch (Exception ex)
             {
@@ -77,6 +90,19 @@ namespace Send_Email
                 chartTop5STK.DataSource = dtSTKChart;
                 chartTop5STK.Series[0].ArgumentDataMember = "FA_WC_NM";
                 chartTop5STK.Series[0].ValueDataMembers.AddRange(new string[] { "STK_HOURS" });
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            //Top 5 finised sole-upper sets
+            try
+            {
+                DataTable dtFSUPChart = dt.Select("FS_UP_HOURS_SEQ <=5", "FS_UP_HOURS_SEQ").CopyToDataTable();
+                chartTop5FSUP.DataSource = dtFSUPChart;
+                chartTop5FSUP.Series[0].ArgumentDataMember = "FA_WC_NM";
+                chartTop5FSUP.Series[0].ValueDataMembers.AddRange(new string[] { "FS_UP_HOURS" });
             }
             catch (Exception ex)
             {
