@@ -6753,7 +6753,7 @@ namespace Send_Email
             DataSet ds_ret;
             try
             {
-                string process_name = "P_SEND_EMAIL_UPPER_INV";
+                string process_name = "P_SEND_EMAIL_UPPER_INV_V2";
                 MyOraDB.ReDim_Parameter(6);
                 MyOraDB.Process_Name = process_name;
 
