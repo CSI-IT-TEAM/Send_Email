@@ -30,7 +30,7 @@ namespace Send_Email
             //tblGridInv.Size = new Size(3000, 300);
 
             tblChart.Size = new Size(2500, 600);
-            tblAssy.Size = new Size(2500, 200);
+            tblAssy.Size = new Size(2500, 170);
             //tblGridInv.Size = new Size(3000, 2800);
             tblGridInv.Size = new Size(2500, 1500);
             tblGridInv2.Size = new Size(2500, 1500);
