@@ -173,6 +173,12 @@
     <Compile Include="Form\Monthly_Bottom_Analysis.Designer.cs">
       <DependentUpon>Monthly_Bottom_Analysis.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\Outsole_Drawback_List_Monthly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\Outsole_Drawback_List_Monthly.Designer.cs">
+      <DependentUpon>Outsole_Drawback_List_Monthly.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form\Releif_AVSM_Report_Daily.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Monthly_Bottom_Analysis.resx">
       <DependentUpon>Monthly_Bottom_Analysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\Outsole_Drawback_List_Monthly.resx">
+      <DependentUpon>Outsole_Drawback_List_Monthly.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\Releif_AVSM_Report_Daily.resx">
       <DependentUpon>Releif_AVSM_Report_Daily.cs</DependentUpon>
