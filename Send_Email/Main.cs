@@ -4907,7 +4907,7 @@ namespace Send_Email
         #endregion
 
         #region BOTTOM MONTHLY INVENTORY ANALYSIS
-        private DataTable SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(string V_P_TYPE, string V_P_DATE)
+        private DataSet SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(string V_P_TYPE, string V_P_DATE)
         {
             COM.OraDB MyOraDB = new COM.OraDB();
             MyOraDB.ConnectName = COM.OraDB.ConnectDB.LMES;
@@ -4947,7 +4947,7 @@ namespace Send_Email
                     }
                     return null;
                 }
-                return ds_ret.Tables[0];
+                return ds_ret;
             }
             catch (Exception ex)
             {
@@ -8146,15 +8146,22 @@ namespace Send_Email
             {
                 //Prepairing Data
                 string ARG_DATE = DateTime.Now.ToString("yyyyMMdd");
-                DataTable dtChart = SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(ARG_TYPE, ARG_DATE);//BOTTOM CONSTRAINT
+                DataSet ds = SEL_DATA_MONTHLY_BOTTOM_ANALYSIS(ARG_TYPE, ARG_DATE);//BOTTOM CONSTRAINT
+
+
                 Monthly_Bottom_Analysis f = new Monthly_Bottom_Analysis();
-                f._dtChart = dtChart;
-                f._subject = "Phuoc Test Email Bottom Inventory Analysis by Monthly";
+                f._dtChart = ds.Tables[0];
+                f._dtEmail = ds.Tables[1];
+                f._subjectSend = "Phuoc Test Email Bottom Inventory Analysis by Monthly";
                 f.Show();
+
+
                 //using (Monthly_Bottom_Analysis f = new Monthly_Bottom_Analysis())
                 //{
-                //    f._dtChart = dtChart;
-                //    f._subject = "Phuoc Test Email Bottom Inventory Analysis by Monthly";
+                //    f._dtChart = ds.Tables[0];
+                //    f._dtEmail = ds.Tables[1];
+                //    f._chkTest = chkTest.Checked;
+                //    f._subjectSend = "Test Email Bottom Inventory Analysis by Monthly";
                 //    f.Show();
                 //    f.SendToBack();
                 //}

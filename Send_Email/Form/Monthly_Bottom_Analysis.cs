@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using Outlook = Microsoft.Office.Interop.Outlook;
 namespace Send_Email
 {
     public partial class Monthly_Bottom_Analysis : Form
@@ -20,9 +20,9 @@ namespace Send_Email
         }
         private readonly string[] _emailTest = {  "MAN.SPT@changshininc.com" };
         Main frmMain = new Main();
-        public DataTable _dtChart;
-        public string _subject = "";
-        private string _subjectSend = "";
+        public DataTable _dtChart, _dtEmail;
+        public bool _chkTest = false;
+        public string _subjectSend = "";
 
         private void Monthly_Bottom_Analysis_Load(object sender, EventArgs e)
         {
@@ -32,6 +32,7 @@ namespace Send_Email
                 BindingDataForChart(_dtChart))
                 {
                     CaptureControl(pnMain,"BT_INV_ANALYSIS");
+                  //  CreateMail(_subjectSend, "", _dtEmail);
                 }
             }
             catch (Exception ex)
@@ -126,6 +127,49 @@ namespace Send_Email
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+            }
+        }
+
+        private void CreateMail(string Subject, string htmlBody, DataTable dtEmail)
+        {
+            try
+            {
+                Outlook.Application app = new Outlook.Application();
+                Outlook.MailItem mailItem = (Outlook.MailItem)app.CreateItem(Outlook.OlItemType.olMailItem);
+                Outlook.Attachment oAttachPic1 = mailItem.Attachments.Add(Application.StartupPath + @"\Capture\BT_INV_ANALYSIS.png", Outlook.OlAttachmentType.olByValue, null, "tr");
+                mailItem.Subject = Subject;
+                Outlook.Recipients oRecips = (Outlook.Recipients)mailItem.Recipients;
+                //Get List Send email
+                if (app.Session.CurrentUser.AddressEntry.Address.ToUpper().Contains("IT.DAAS"))
+                {
+                    foreach (DataRow row in dtEmail.Rows)
+                    {
+                        Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(row["EMAIL"].ToString());
+                        oRecip.Resolve();
+                    }
+                }
+
+                if (_chkTest)
+                {
+                    for (int i = 0; i < _emailTest.Length; i++)
+                    {
+                        Microsoft.Office.Interop.Outlook.Recipient oRecip = (Outlook.Recipient)oRecips.Add(_emailTest[i]);
+                        oRecip.Resolve();
+                    }
+                }
+                oRecips = null;
+                mailItem.BCC = "phuoc.it@changshininc.com";
+                string imgInfo = "imgInfo";
+                oAttachPic1.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001E", imgInfo);
+                mailItem.HTMLBody = String.Format(@"<img src='cid:{0}'>", imgInfo) + htmlBody;
+
+                mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                mailItem.Send();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                // WriteLog("CreateMailMoldMonthWh: " + ex.ToString());
             }
         }
 
