@@ -30,7 +30,7 @@ namespace Send_Email
             //tblGridInv.Size = new Size(3000, 300);
 
             tblChart.Size = new Size(2500, 600);
-            tblAssy.Size = new Size(2600, 130);
+            tblAssy.Size = new Size(2500, 170);
             //tblGridInv.Size = new Size(3000, 2800);
             tblGridInv.Size = new Size(2500, 1500);
             tblGridInv2.Size = new Size(2500, 1500);
@@ -269,22 +269,60 @@ namespace Send_Email
                 }
                 if (argdt2.Rows.Count > 0)
                 {
-                    DataTable dtpivot = Pivot(argdt2, argdt2.Columns["LINE"], argdt2.Columns["PROD"]);
-                    grdAssy.DataSource = dtpivot;
-                    gvwAssy.ColumnPanelRowHeight = 25;
-                    gvwAssy.RowHeight = 25;
-                    for (int i = 0; i < gvwAssy.Columns.Count; i++)
+                    DataTable dt1 = null;
+                    DataTable dt2 = null;
+                    if (argdt2.Select("FTY in ('Factory 1','Factory 2','Factory 3')").Count() > 0)
                     {
-                        GridColumn col = gvwAssy.Columns[i];
-                        col.AppearanceHeader.Font = new Font("Calibri", 9, FontStyle.Regular);
-                        col.AppearanceCell.Font = new Font("Calibri", 9, FontStyle.Regular);
-                        if (i == 0) col.Visible = false;
-                        col.Width = 35;
-                        col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
-                        col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
-                        col.DisplayFormat.FormatType = FormatType.Numeric;
-                        col.DisplayFormat.FormatString = "#,#";
+                        dt1 = argdt2.Select("FTY in ('Factory 1','Factory 2','Factory 3')", "FTY, RN, LINE").CopyToDataTable();
+                        dt1.Columns.Remove("FTY");
+                        dt1.Columns.Remove("RN");
+                    }
+                    if (argdt2.Select("FTY not in ('Factory 1','Factory 2','Factory 3')").Count() > 0)
+                    {
+                        dt2 = argdt2.Select("FTY not in ('Factory 1','Factory 2','Factory 3')", "FTY, RN, LINE").CopyToDataTable();
+                        dt2.Columns.Remove("FTY");
+                        dt2.Columns.Remove("RN");
+                    }
 
+                    if (dt1.Rows.Count > 0)
+                    {
+                        DataTable dtpivot = Pivot(dt1, dt1.Columns["LINE"], dt1.Columns["PROD"]);
+                        grdAssy.DataSource = dtpivot;
+                        gvwAssy.ColumnPanelRowHeight = 25;
+                        gvwAssy.RowHeight = 25;
+                        for (int i = 0; i < gvwAssy.Columns.Count; i++)
+                        {
+                            GridColumn col = gvwAssy.Columns[i];
+                            col.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Regular);
+                            col.AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
+                            if (i == 0) col.Visible = false;
+                            col.Width = 47;
+                            col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                            col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                            //col.DisplayFormat.FormatType = FormatType.Numeric;
+                            //col.DisplayFormat.FormatString = "#,#";
+
+                        }
+                    }
+                    if (dt2.Rows.Count > 0)
+                    {
+                        DataTable dtpivot = Pivot(dt2, dt2.Columns["LINE"], dt2.Columns["PROD"]);
+                        grdAssy2.DataSource = dtpivot;
+                        gvwAssy2.ColumnPanelRowHeight = 25;
+                        gvwAssy2.RowHeight = 25;
+                        for (int i = 0; i < gvwAssy2.Columns.Count; i++)
+                        {
+                            GridColumn col = gvwAssy2.Columns[i];
+                            col.AppearanceHeader.Font = new Font("Calibri", 12, FontStyle.Regular);
+                            col.AppearanceCell.Font = new Font("Calibri", 12, FontStyle.Regular);
+                            if (i == 0) col.Visible = false;
+                            col.Width = 47;
+                            col.AppearanceHeader.TextOptions.HAlignment = HorzAlignment.Center;
+                            col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                            //col.DisplayFormat.FormatType = FormatType.Numeric;
+                            //col.DisplayFormat.FormatString = "#,#";
+
+                        }
                     }
                 }
 
@@ -410,7 +448,51 @@ namespace Send_Email
             }
         }
 
-        
+        private void gvwAssy_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                if(e.CellValue.ToString().Contains("GREEN"))
+                {
+                    e.Appearance.BackColor = Color.Green;
+                    e.Appearance.ForeColor = Color.White;
+                }
+                else if (e.CellValue.ToString().Contains("YELLOW"))
+                {
+                    e.Appearance.BackColor = Color.Yellow;
+                    e.Appearance.ForeColor = Color.Black;
+                }
+                else if (e.CellValue.ToString().Contains("RED"))
+                {
+                    e.Appearance.BackColor = Color.Red;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch { }
+        }
+
+        private void gvwAssy2_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            try
+            {
+                if (e.CellValue.ToString().Contains("GREEN"))
+                {
+                    e.Appearance.BackColor = Color.Green;
+                    e.Appearance.ForeColor = Color.White;
+                }
+                else if (e.CellValue.ToString().Contains("YELLOW"))
+                {
+                    e.Appearance.BackColor = Color.Yellow;
+                    e.Appearance.ForeColor = Color.Black;
+                }
+                else if (e.CellValue.ToString().Contains("RED"))
+                {
+                    e.Appearance.BackColor = Color.Red;
+                    e.Appearance.ForeColor = Color.White;
+                }
+            }
+            catch { }
+        }
 
         private void CreateMail(string Subject, string htmlBody, DataTable dtEmail, string nameImg1, string nameImg2, string nameImg3, string nameImg4)
         {
@@ -498,12 +580,12 @@ namespace Send_Email
                             e.Appearance.BackColor = Color.Red;
                             e.Appearance.ForeColor = Color.White;
                         }
-                        else if (Convert.ToDouble(e.CellValue.ToString().Replace(",", "")) <= Convert.ToDouble(ex.GetRowCellValue(e.RowHandle, "Target").ToString().Replace(",", "")))
+                        else if (Convert.ToDouble(e.CellValue.ToString().Replace(",", "")) <= Convert.ToDouble(ex.GetRowCellValue(e.RowHandle, "Max").ToString().Replace(",", "")))
                         {
                             e.Appearance.BackColor = Color.Green;
                             e.Appearance.ForeColor = Color.White;
                         }
-                        else if (Convert.ToDouble(e.CellValue.ToString().Replace(",", "")) > Convert.ToDouble(ex.GetRowCellValue(e.RowHandle, "Target").ToString().Replace(",", "")))
+                        else if (Convert.ToDouble(e.CellValue.ToString().Replace(",", "")) > Convert.ToDouble(ex.GetRowCellValue(e.RowHandle, "Max").ToString().Replace(",", "")))
                         {
                             e.Appearance.BackColor = Color.Yellow;
                         }
