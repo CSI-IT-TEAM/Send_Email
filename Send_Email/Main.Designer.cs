@@ -3190,8 +3190,6 @@
             // button1Chk
             // 
             this.button1Chk.AutoSize = true;
-            this.button1Chk.Checked = true;
-            this.button1Chk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.button1Chk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1Chk.Location = new System.Drawing.Point(409, 142);
             this.button1Chk.Name = "button1Chk";
@@ -3266,8 +3264,6 @@
             // btnTimeContraintChk
             // 
             this.btnTimeContraintChk.AutoSize = true;
-            this.btnTimeContraintChk.Checked = true;
-            this.btnTimeContraintChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnTimeContraintChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTimeContraintChk.Location = new System.Drawing.Point(409, 245);
             this.btnTimeContraintChk.Name = "btnTimeContraintChk";
@@ -3382,8 +3378,6 @@
             // btnRunScadaChk
             // 
             this.btnRunScadaChk.AutoSize = true;
-            this.btnRunScadaChk.Checked = true;
-            this.btnRunScadaChk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.btnRunScadaChk.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold);
             this.btnRunScadaChk.Location = new System.Drawing.Point(889, 73);
             this.btnRunScadaChk.Name = "btnRunScadaChk";
